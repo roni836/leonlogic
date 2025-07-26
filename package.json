@@ -1,0 +1,38 @@
+{
+  "name": "greco-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next/eslint-plugin-next": "^15.3.3",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@tailwindcss/postcss": "^4.1.10",
+    "@types/node": "24.0.1",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "aos": "^2.3.4",
+    "eslint": "9.29.0",
+    "eslint-config-next": "15.3.3",
+    "next": "^15.3.3",
+    "postcss": "8.5.5",
+    "react": "19.1.0",
+    "react-animate-height": "^3.2.3",
+    "react-countup": "^6.5.3",
+    "react-dom": "19.1.0",
+    "react-redux": "^9.2.0",
+    "swiper": "^11.2.8",
+    "tailwindcss": "^4.1.10",
+    "typescript": "5.8.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/aos": "^3.0.7",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.12"
+  }
+}
