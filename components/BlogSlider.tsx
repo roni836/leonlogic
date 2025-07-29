@@ -86,7 +86,7 @@ const BlogSlider = () => {
                                     href="/blog"
                                     className="font-bold text-success hover:text-success-light dark:text-secondary dark:hover:text-success-light duration-200"
                                 >
-                                    Read More
+                                    Read More about this
                                 </Link>
                             </div>
                             <div className="sm:max-w-[375px] w-full">
@@ -94,7 +94,7 @@ const BlogSlider = () => {
                             </div>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    {/* <SwiperSlide>
                         <div className="sm:flex border border-[#9199B5]/[0.12] rounded-2xl overflow-hidden">
                             <div className="p-5 sm:p-10 dark:bg-[#9199B5]/[0.12]">
                                 <div className="flex gap-2.5">
@@ -168,7 +168,7 @@ const BlogSlider = () => {
                                 <Image src="/assets/images/blog-2.jpg" className="w-full h-full object-cover" alt="blog1" height={326} width={346} />
                             </div>
                         </div>
-                    </SwiperSlide>
+                    </SwiperSlide> */}
                 </Swiper>
             </div>
         </div>
