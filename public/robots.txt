@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: http://localhost:3001
+Host: https://leonlogic-pzjs.vercel.app/
 
 # Sitemaps
-Sitemap: http://localhost:3001/sitemap.xml
+Sitemap: https://leonlogic-pzjs.vercel.app/sitemap.xml
