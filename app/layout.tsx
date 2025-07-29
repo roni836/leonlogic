@@ -63,7 +63,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         }),
                     }}
                 />
-                <meta name="robots" content="index, follow" />
 
             </head>
             <body>
