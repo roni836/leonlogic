@@ -5,18 +5,18 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Terms-And-Conditions | Greco',
+    title: 'Terms-And-Conditions | Leonlogic',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Terms-And-Conditions | Greco',
+        title: 'Terms-And-Conditions | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
         url: process.env.NEXT_PUBLIC_APP_URL + '/terms-and-conditions',
         type: 'article',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Terms-And-Conditions | Greco',
+        title: 'Terms-And-Conditions | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
     },
     alternates: {

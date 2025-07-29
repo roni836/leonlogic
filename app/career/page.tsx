@@ -19,18 +19,18 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Career | Greco',
+    title: 'Career | Leonlogic',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Career | Greco',
+        title: 'Career | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
         url: process.env.NEXT_PUBLIC_APP_URL + '/career',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Career | Greco',
+        title: 'Career | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
     },
     alternates: {
@@ -124,7 +124,7 @@ const page = () => {
                                 </div>
                             </div>
                             <p className="text-lg md:text-2xl font-semibold mb-6 mt-9 text-center lg:rtl:text-right lg:ltr:text-left">
-                                We&apos;re building a culture at Greco where amazing people (like you) can do their best work. If you&apos;re ready to grow your
+                                We&apos;re building a culture at Leonlogic where amazing people (like you) can do their best work. If you&apos;re ready to grow your
                                 career, you&apos;ve come to the right place.
                             </p>
                             <Image
@@ -177,7 +177,7 @@ const page = () => {
             <section className="py-12 md:py-16">
                 <div className="container">
                     <h2 className="text-3xl font-extrabold md:text-[40px] md:leading-[54px]">
-                        Life at <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Greco</span>
+                        Life at <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Leonlogic</span>
                     </h2>
                 </div>
                 <div className="bg-[url('/assets/images/line.png')] bg-cover bg-center bg-no-repeat lg:mt-16">
@@ -267,7 +267,7 @@ const page = () => {
             <section className="py-12 md:py-16">
                 <div className="container">
                     <h2 className="text-[28px] font-bold leading-8">
-                        Perks in <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Greco</span>
+                        Perks in <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Leonlogic</span>
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8 sm:mt-12 gap-5 sm:gap-8 uppercase">
                         <div className="border-2 border-[#9199B5]/[0.12] dark:bg-[#9199B5]/[0.12] hover:border-secondary hover:bg-secondary/5 duration-200 rounded-2xl shadow-[0px_0px_80px_rgba(119,128,161,0.1)] py-[30px] px-2">

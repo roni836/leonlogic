@@ -11,18 +11,18 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Contact-Us | Greco',
+    title: 'Contact-Us | Leonlogic',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Contact-Us | Greco',
+        title: 'Contact-Us | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
         url: process.env.NEXT_PUBLIC_APP_URL + '/contact-us',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Contact-Us | Greco',
+        title: 'Contact-Us | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
     },
     alternates: {
@@ -72,8 +72,8 @@ const page = () => {
                                             <FilledEmailIcon className="w-10 h-[41px]" />
                                         </span>
                                         <p className="text-lg font-semibold text-gray dark:text-[#9199B5] mt-5">Email ID</p>
-                                        <Link href="mailto:hello@grecothemes.com" className="text-xl font-semibold mt-2. hover:text-secondary transition5">
-                                            hello@grecothemes.com
+                                        <Link href="mailto:hello@leonlogicthemes.com" className="text-xl font-semibold mt-2. hover:text-secondary transition5">
+                                            hello@leonlogicthemes.com
                                         </Link>
                                     </div>
                                 </div>

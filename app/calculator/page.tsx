@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import React, { useState } from 'react';
 
 interface Option {
@@ -141,7 +140,7 @@ export default function CalculatorPage() {
               <textarea className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5 min-h-[100px]" placeholder="Message" />
               <label className="flex items-center gap-2 text-sm mt-2">
                 <input type="checkbox" required className="accent-secondary" />
-                Yes, I agree to the <Link href="/privacy-policy" className="underline text-secondary">Privacy Policy</Link>.
+                Yes, I agree to the <a href="/privacy-policy" className="underline text-secondary">Privacy Policy</a>.
               </label>
               <button type="submit" className="btn w-full sm:w-auto sm:px-20 mt-5">Send Now</button>
             </form>
