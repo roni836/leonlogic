@@ -9,18 +9,18 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Service | Leonlogic',
+    title: 'Service | Greco',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Service | Leonlogic',
+        title: 'Service | Greco',
         description: 'Tailwind CSS Multipurpose Landing Templates',
         url: process.env.NEXT_PUBLIC_APP_URL + '/service',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Service | Leonlogic',
+        title: 'Service | Greco',
         description: 'Tailwind CSS Multipurpose Landing Templates',
     },
     alternates: {

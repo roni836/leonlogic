@@ -58,7 +58,7 @@ const Modal = forwardRef((props: any, ref) => {
                                 className={`relative mx-auto max-w-full overflow-hidden rounded-sm bg-white p-8 text-sm text-gray shadow-lg ${
                                     props.full ? 'my-0 sm:my-8' : 'my-8'
                                 } ${props.contentClass ? props.contentClass : ''}`}
-                                style={props.width ? { width: props.width + 'px' } : {}}
+                                style={props.width ? { width: typeof props.width === 'number' ? props.width + 'px' : props.width } : {}}
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <button

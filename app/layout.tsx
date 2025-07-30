@@ -9,10 +9,11 @@ import Footer from '@/components/Layouts/Footer';
 import type { Metadata } from 'next';
 import helper from '@/libs/helper';
 import { Space_Grotesk } from 'next/font/google';
+import ConditionalLayout from '@/components/ConditionalLayout';
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
-    title: 'Leonlogic',
+    title: 'Greco',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,
@@ -42,11 +43,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         __html: JSON.stringify({
                             '@context': 'https://schema.org',
                             '@type': 'Organization',
-                            name: 'Leonlogic',
+                            name: 'Greco',
                             url: process.env.NEXT_PUBLIC_APP_URL || '',
                             id: `${process.env.NEXT_PUBLIC_APP_URL}#organization`,
                             logo: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.png`,
-                            legalName: 'Leonlogic',
+                            legalName: 'Greco',
                             sameAs: [process.env.NEXT_PUBLIC_APP_URL || ''],
                         }),
                     }}
@@ -57,29 +58,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         __html: JSON.stringify({
                             '@context': 'https://schema.org',
                             '@type': 'WebSite',
-                            name: 'Leonlogic',
+                            name: 'Greco',
                             url: process.env.NEXT_PUBLIC_APP_URL || '',
                             id: `${process.env.NEXT_PUBLIC_APP_URL}#website`,
                         }),
                     }}
                 />
-
-                <meta name="robots" content="index, follow" />
-
-
             </head>
             <body>
                 <Providers>
                     <App />
-                    <div
-                        className={`flex min-h-screen flex-col bg-white dark:bg-primary font-gilroy text-base font-medium text-primary antialiased dark:text-white`}
-                    >
-                        <Header />
-                        <div>{children}</div>
-                        <Footer />
-                    </div>
+                    <ConditionalLayout>
+                        {children}
+                    </ConditionalLayout>
                 </Providers>
             </body>
         </html>
     );
-}
+} 

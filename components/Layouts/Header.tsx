@@ -138,47 +138,10 @@ const Header = () => {
                                 {/* Mobile dropdown for services */}
                                 {mobileServiceOpen && (
                                   <ul className="lg:hidden pl-6 pb-2 space-y-2 text-base">
-                                    <li><Link href="/service" className="block py-1">VŠETKY SLUŽBY</Link></li>
-                                    <li className="space-y-1">
-                                      <div className="block py-1 font-semibold text-secondary">RIEŠENIA</div>
-                                      <ul className="pl-4 space-y-1">
-                                        <li><Link href="/service#ecommerce" className="block py-1 text-sm">Ecommerce</Link></li>
-                                        <li><Link href="/service#male-stredne-podniky" className="block py-1 text-sm">Malé a stredné podniky</Link></li>
-                                        <li><Link href="/service#pravne-poradenstvo" className="block py-1 text-sm">Právne poradenstvo</Link></li>
-                                        <li><Link href="/service#enterprise-riesenia" className="block py-1 text-sm">Enterprise riešenia</Link></li>
-                                        <li><Link href="/service#profesionalne-sluzby" className="block py-1 text-sm">Profesionálne služby</Link></li>
-                                      </ul>
-                                    </li>
-                                    <li className="space-y-1">
-                                      <div className="block py-1 font-semibold text-secondary">DIZAJN</div>
-                                      <ul className="pl-4 space-y-1">
-                                        <li><Link href="/service#firemne-identity" className="block py-1 text-sm">Firemné identity</Link></li>
-                                        <li><Link href="/service#logo-dizajn" className="block py-1 text-sm">Logo dizajn</Link></li>
-                                        <li><Link href="/service#fotenia-produktove" className="block py-1 text-sm">Fotenia / Produktové fotenie</Link></li>
-                                        <li><Link href="/service#web-dizajn" className="block py-1 text-sm">Web dizajn</Link></li>
-                                        <li><Link href="/service#printove-sluzby" className="block py-1 text-sm">Printové služby</Link></li>
-                                      </ul>
-                                    </li>
-                                    <li className="space-y-1">
-                                      <div className="block py-1 font-semibold text-secondary">VÝVOJ</div>
-                                      <ul className="pl-4 space-y-1">
-                                        <li><Link href="/service#webstranky" className="block py-1 text-sm">Webstránky</Link></li>
-                                        <li><Link href="/service#e-shopy" className="block py-1 text-sm">E-shopy</Link></li>
-                                        <li><Link href="/service#aplikacie" className="block py-1 text-sm">Aplikácie</Link></li>
-                                        <li><Link href="/service#programovanie" className="block py-1 text-sm">Programovanie</Link></li>
-                                        <li><Link href="/service#sprava-webovych-stranok" className="block py-1 text-sm">Správa Webových stránok</Link></li>
-                                      </ul>
-                                    </li>
-                                    <li className="space-y-1">
-                                      <div className="block py-1 font-semibold text-secondary">MARKETING</div>
-                                      <ul className="pl-4 space-y-1">
-                                        <li><Link href="/service#seo-optimalizacia" className="block py-1 text-sm">SEO Optimalizácia</Link></li>
-                                        <li><Link href="/service#reklamne-kampane" className="block py-1 text-sm">Reklamné kampane</Link></li>
-                                        <li><Link href="/service#cenove-porovnavace" className="block py-1 text-sm">Cenové porovnávače</Link></li>
-                                        <li><Link href="/service#socialne-siete" className="block py-1 text-sm">Sociálne Siete</Link></li>
-                                        <li><Link href="/service#marketingove-strategie" className="block py-1 text-sm">Marketingové stratégie</Link></li>
-                                      </ul>
-                                    </li>
+                                    <li><Link href="/service" className="block py-1">Riešenia</Link></li>
+                                    <li><Link href="/service" className="block py-1">Dizajn</Link></li>
+                                    <li><Link href="/service" className="block py-1">Vývoj</Link></li>
+                                    <li><Link href="/service" className="block py-1">Marketing</Link></li>
                                   </ul>
                                 )}
                             </li>
@@ -268,7 +231,7 @@ const Header = () => {
                 </div>
                 {showServices && (
                     <div
-                        className="absolute z-50 bg-white/90 dark:bg-primary/70 shadow-2xl border border-white/30 dark:border-[#9199B5]/30 backdrop-blur-lg pt-10 pb-10 px-2 sm:px-6 flex flex-wrap gap-6 justify-center rounded-3xl transition-all duration-200 w-full"
+                        className="absolute z-50 bg-white/90 dark:bg-primary/70 shadow-2xl border border-white/30 dark:border-[#9199B5]/30 backdrop-blur-lg pt-10 pb-10 px-2 sm:px-6 flex flex-wrap gap-6 justify-center rounded-3xl transition-all duration-200 w-full hidden lg:block"
                         style={{
                             top: '100%',
                             left: '50%',

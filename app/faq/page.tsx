@@ -7,18 +7,18 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-    title: 'Faq | Leonlogic',
+    title: 'Faq | Greco',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Faq | Leonlogic',
+        title: 'Faq | Greco',
         description: 'Tailwind CSS Multipurpose Landing Templates',
         url: process.env.NEXT_PUBLIC_APP_URL + '/faq',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Faq | Leonlogic',
+        title: 'Faq | Greco',
         description: 'Tailwind CSS Multipurpose Landing Templates',
     },
     alternates: {

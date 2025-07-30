@@ -1,13 +1,12 @@
 {
-  "name": "leonlogic-next",
+  "name": "greco-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postbuild": "next-sitemap"
+    "lint": "next lint"
   },
   "dependencies": {
     "@next/eslint-plugin-next": "^15.3.3",
@@ -25,7 +24,6 @@
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
     "next": "^15.3.3",
-    "next-sitemap": "^4.2.3",
     "postcss": "8.5.5",
     "react": "19.1.0",
     "react-animate-height": "^3.2.3",

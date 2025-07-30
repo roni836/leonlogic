@@ -21,6 +21,17 @@ import { Chart, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, L
 import CalculatorModal from './CalculatorModal';
 Chart.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
+// Animated Dots Component
+const AnimatedDots = () => {
+  return (
+    <span className="inline-block">
+      <span className="inline-block animate-bounce" style={{ animationDuration: '1.4s', animationDelay: '0s' }}>.</span>
+      <span className="inline-block animate-bounce" style={{ animationDuration: '1.4s', animationDelay: '0.2s' }}>.</span>
+      <span className="inline-block animate-bounce" style={{ animationDuration: '1.4s', animationDelay: '0.4s' }}>.</span>
+    </span>
+  );
+};
+
 // Initialize Supabase client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -134,8 +145,8 @@ export default function WebsiteAuditModal({
     },
     {
       id: 6,
-      title: 'Growth Opportunities',
-      description: 'Identifying areas for improvement and expansion',
+      title: 'Social Media Presence',
+      description: 'Analyzing social media integration and presence',
       icon: <GrowthIcon className="w-6 h-6" />,
       status: 'pending'
     }
@@ -242,7 +253,7 @@ export default function WebsiteAuditModal({
     auditSteps[2].status = 'running';
     await delay(700);
     try {
-      results.usability = await analyzeUsability(formattedUrl);
+      results.usability = await analyzeMobile(formattedUrl);
       auditSteps[2].status = 'completed';
       await delay(300);
     } catch (error) {
@@ -254,7 +265,7 @@ export default function WebsiteAuditModal({
     auditSteps[3].status = 'running';
     await delay(900);
     try {
-      results.social = await analyzeUX(formattedUrl);
+      results.usability = await analyzeUX(formattedUrl);
       auditSteps[3].status = 'completed';
       await delay(300);
     } catch (error) {
@@ -266,19 +277,19 @@ export default function WebsiteAuditModal({
     auditSteps[4].status = 'running';
     await delay(750);
     try {
-      results.security = await analyzeTechnical(formattedUrl);
+      results.technical = await analyzeTechnical(formattedUrl);
       auditSteps[4].status = 'completed';
       await delay(300);
     } catch (error) {
       auditSteps[4].status = 'error';
     }
 
-    // Step 6: Growth Opportunities
+    // Step 6: Social Media Analysis
     setCurrentStep(5);
     auditSteps[5].status = 'running';
-    await delay(1000);
+    await delay(800);
     try {
-      results.technical = await analyzeGrowthOpportunities(formattedUrl, results);
+      results.social = await analyzeSocialMedia(formattedUrl);
       auditSteps[5].status = 'completed';
       await delay(500); // Longer pause before showing results
     } catch (error) {
@@ -290,23 +301,52 @@ export default function WebsiteAuditModal({
     setStep(3);
     setIsAnalyzing(false);
 
-    // After audit is complete
+    // After audit is complete - Save BEAST-level data to Supabase
     if (supabase) {
       try {
+        // Calculate overall score
+        const overallScore = Math.round(
+          (results.seo?.score || 0) + 
+          (results.performance?.score || 0) + 
+          (results.usability?.score || 0) + 
+          (results.social?.score || 0) + 
+          (results.technical?.score || 0)
+        ) / 5;
+
+        // Prepare detailed data for Supabase
+        const auditData = {
+          audit_results: results,
+          overall_score: overallScore,
+          seo_score: results.seo?.score || 0,
+          performance_score: results.performance?.score || 0,
+          usability_score: results.usability?.score || 0,
+          social_score: results.social?.score || 0,
+          technical_score: results.technical?.score || 0,
+          word_count: results.seo?.wordCount || 0,
+          content_quality: results.seo?.contentQuality || 'Unknown',
+          has_ssl: results.seo?.hasSSL || false,
+          has_schema: results.seo?.hasSchema || false,
+          has_robots_txt: results.seo?.hasRobotsTxt || false,
+          has_sitemap: results.seo?.hasSitemap || false,
+          technology_stack: results.seo?.technologyStack || [],
+          critical_issues_count: results.seo?.issues?.length || 0,
+          recommendations_count: results.seo?.recommendations?.length || 0,
+          audit_completed_at: new Date().toISOString()
+        };
+
         const { error: updateError } = await supabase
           .from('audit_leads')
-          .update({
-            audit_results: results
-          })
+          .update(auditData)
           .eq('email', userEmail);
 
         if (updateError) {
           console.error('Supabase update error:', updateError);
         } else {
-          console.log('Lead updated successfully with audit results.');
+          console.log('BEAST-level audit data saved successfully to Supabase.');
+          console.log('Saved data:', auditData);
         }
       } catch (error) {
-        console.error('Error updating lead with audit results:', error);
+        console.error('Error saving BEAST-level audit data:', error);
       }
     }
   };
@@ -331,6 +371,15 @@ export default function WebsiteAuditModal({
 
   const analyzePerformance = async (url: string) => {
     const response = await fetch('/api/audit/performance', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url })
+    });
+    return response.json();
+  };
+
+  const analyzeMobile = async (url: string) => {
+    const response = await fetch('/api/audit/mobile', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url })
@@ -374,24 +423,59 @@ export default function WebsiteAuditModal({
     return response.json();
   };
 
-  const generatePDF = async () => {
-    // Generate PDF report
-    const response = await fetch('/api/audit/pdf', {
+  const analyzeSocialMedia = async (url: string) => {
+    const response = await fetch('/api/audit/social', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        url: websiteUrl, 
-        company: companyName, 
-        results: auditResults 
-      })
+      body: JSON.stringify({ url })
     });
-    
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${companyName}-website-audit.pdf`;
-    a.click();
+    return response.json();
+  };
+
+  const generatePDF = async () => {
+    try {
+      // Generate PDF report
+      const response = await fetch('/api/audit/pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          url: websiteUrl, 
+          company: companyName, 
+          results: auditResults 
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error('PDF generation failed');
+      }
+
+      const result = await response.json();
+      
+      // Download the PDF
+      const blob = await fetch(result.pdfUrl).then(r => r.blob());
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${companyName}-website-audit.pdf`;
+      a.click();
+
+      // Save PDF URL to Supabase
+      if (supabase && result.pdfUrl) {
+        const { error: updateError } = await supabase
+          .from('audit_leads')
+          .update({ pdf_url: result.pdfUrl })
+          .eq('email', userEmail);
+
+        if (updateError) {
+          console.error('Error saving PDF URL to Supabase:', updateError);
+        } else {
+          console.log('PDF URL saved to Supabase successfully.');
+        }
+      }
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    }
   };
 
   const renderStep1 = () => (
@@ -401,7 +485,7 @@ export default function WebsiteAuditModal({
           Free Website Audit
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          Get a comprehensive analysis of your website`s performance, SEO, and growth opportunities
+          Get a comprehensive analysis of your website's performance, SEO, and growth opportunities
         </p>
       </div>
       
@@ -419,7 +503,7 @@ export default function WebsiteAuditModal({
             required
           />
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            Enter your domain (e.g., example.com) - we`ll add https:// automatically
+            Enter your domain (e.g., example.com) - we'll add https:// automatically
           </p>
         </div>
         
@@ -450,18 +534,15 @@ export default function WebsiteAuditModal({
 
   const renderStep2 = () => (
     <div className="space-y-8">
+
+      
       {/* Header with animated progress */}
       <div className="text-center">
-        <div className="mb-4">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-secondary to-secondary/80 rounded-full mb-4 animate-pulse">
-            <ThunderIcon className="w-8 h-8 text-white animate-bounce" />
-          </div>
-        </div>
         <h2 className="text-2xl font-bold text-primary dark:text-white mb-2">
           Analyzing Your Website
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          We`re running a comprehensive analysis of your website...
+          We're running a comprehensive analysis of your website...
         </p>
         
         {/* Progress Bar */}
@@ -476,21 +557,28 @@ export default function WebsiteAuditModal({
         </p>
       </div>
       
-      {/* Interactive Analysis Steps */}
-      <div className="space-y-4">
+      {/* Single Current Analysis Step with Transition */}
+      <div className="min-h-[200px] flex items-center justify-center">
         {auditSteps.map((auditStep, index) => (
           <div 
             key={auditStep.id} 
-            className={`relative overflow-hidden transition-all duration-500 ease-out transform ${
-              index <= currentStep ? 'opacity-100 translate-y-0' : 'opacity-50 translate-y-2'
+            className={`absolute transition-all duration-500 ease-in-out ${
+              index === currentStep 
+                ? 'opacity-100 translate-y-0 scale-100' 
+                : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
             }`}
+            style={{ 
+              transform: index === currentStep 
+                ? 'translateY(0) scale(1)' 
+                : 'translateY(20px) scale(0.95)'
+            }}
           >
             {/* Animated background for running step */}
             {auditStep.status === 'running' && (
               <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 to-secondary/10 rounded-xl animate-pulse"></div>
             )}
             
-            <div className={`relative flex items-center space-x-4 p-6 border-2 rounded-xl transition-all duration-300 ${
+            <div className={`relative flex items-center space-x-4 p-8 border-2 rounded-xl transition-all duration-300 w-96 ${
               auditStep.status === 'completed' ? 'border-green-200 bg-green-50 dark:bg-green-900/10 dark:border-green-800' :
               auditStep.status === 'running' ? 'border-secondary bg-secondary/5 dark:bg-secondary/10 dark:border-secondary/50' :
               auditStep.status === 'error' ? 'border-red-200 bg-red-50 dark:bg-red-900/10 dark:border-red-800' :
@@ -498,27 +586,27 @@ export default function WebsiteAuditModal({
             }`}>
               
               {/* Animated Icon Container */}
-              <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+              <div className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
                 auditStep.status === 'completed' ? 'bg-green-500 text-white scale-110' :
                 auditStep.status === 'running' ? 'bg-secondary text-white animate-pulse scale-110' :
                 auditStep.status === 'error' ? 'bg-red-500 text-white' :
                 'bg-gray-100 dark:bg-gray-700 text-gray-400'
               }`}>
                 {auditStep.status === 'completed' ? (
-                  <svg className="w-6 h-6 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-8 h-8 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                ) : auditStep.status === 'running' ? (
-                  <div className="animate-spin rounded-full h-6 w-6 border-2 border-current border-t-transparent"></div>
-                ) : (
-                  <div className="w-6 h-6">{auditStep.icon}</div>
+                                  ) : auditStep.status === 'running' ? (
+                    <div className="w-8 h-8">{auditStep.icon}</div>
+                  ) : (
+                  <div className="w-8 h-8">{auditStep.icon}</div>
                 )}
               </div>
               
               {/* Content */}
               <div className="flex-1">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className={`font-semibold transition-colors duration-300 ${
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className={`text-lg font-bold transition-colors duration-300 ${
                     auditStep.status === 'completed' ? 'text-green-700 dark:text-green-400' :
                     auditStep.status === 'running' ? 'text-secondary dark:text-secondary' :
                     auditStep.status === 'error' ? 'text-red-700 dark:text-red-400' :
@@ -534,24 +622,24 @@ export default function WebsiteAuditModal({
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <p className="text-base text-gray-600 dark:text-gray-300 mb-3">
                   {auditStep.description}
                 </p>
                 
                 {/* Status indicator */}
                 {auditStep.status === 'running' && (
-                  <div className="mt-2 flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
-                    <span className="text-xs text-secondary font-medium animate-pulse">
+                    <span className="text-sm text-secondary font-medium animate-pulse">
                       Analyzing...
                     </span>
                   </div>
                 )}
                 
                 {auditStep.status === 'completed' && (
-                  <div className="mt-2 flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-xs text-green-600 dark:text-green-400 font-medium">
+                    <span className="text-sm text-green-600 dark:text-green-400 font-medium">
                       Completed
                     </span>
                   </div>
@@ -571,7 +659,7 @@ export default function WebsiteAuditModal({
       <div className="text-center pt-4">
         <div className="inline-flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
           <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
-          <span>Processing your website data...</span>
+                          <span>Processing your website data<AnimatedDots /></span>
         </div>
       </div>
     </div>
@@ -588,21 +676,25 @@ export default function WebsiteAuditModal({
       );
     }
 
-    const seoScore = auditResults.seo.score || 0;
+    // Extract BEAST-level SEO data
+    const seoData = auditResults.seo;
+    const seoScore = seoData.score || 0;
     const performanceScore = auditResults.performance.score || 0;
     const usabilityScore = auditResults.usability.score || 0;
-    const growthScore = auditResults.growth?.score || 0;
-    const overallScore = Math.round((seoScore + performanceScore + usabilityScore) / 3);
+    const socialScore = auditResults.social?.score || 0;
+    const technicalScore = auditResults.technical?.score || 0;
+    const overallScore = Math.round((seoScore + performanceScore + usabilityScore + socialScore + technicalScore) / 5);
 
+    // Enhanced chart data with more categories
     const chartData = {
-      labels: ['SEO', 'Performance', 'Usability'],
+      labels: ['SEO', 'Performance', 'Usability', 'Social Media', 'Technical'],
       datasets: [{
         label: 'Website Score',
-        data: [seoScore, performanceScore, usabilityScore],
-        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-        borderColor: 'rgba(59, 130, 246, 1)',
+        data: [seoScore, performanceScore, usabilityScore, socialScore, technicalScore],
+        backgroundColor: 'rgba(34, 197, 94, 0.2)',
+        borderColor: 'rgba(34, 197, 94, 1)',
         borderWidth: 2,
-        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+        pointBackgroundColor: 'rgba(34, 197, 94, 1)',
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
         pointRadius: 4
@@ -670,7 +762,7 @@ export default function WebsiteAuditModal({
               </svg>
               <div>
                 <p className="font-semibold">Critical Issues Found - Action Required</p>
-                <p className="text-white/80 text-sm">Your competitors are likely outperforming you. Don`t lose potential customers!</p>
+                <p className="text-white/80 text-sm">Your competitors are likely outperforming you. Don't lose potential customers!</p>
               </div>
             </div>
           </div>
@@ -688,7 +780,8 @@ export default function WebsiteAuditModal({
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => setShowCalculator(true)}
-                className="bg-white text-[#22C55E] font-semibold px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 flex items-center justify-center shadow-lg"
+                className="bg-white text-[#22C55E] font-semibold px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 flex items-center justify-center shadow-lg animate-pulse"
+                style={{ animation: 'buttonPulse 2s ease-in-out infinite' }}
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
@@ -707,81 +800,100 @@ export default function WebsiteAuditModal({
             </div>
           </div>
 
-          {/* Score Overview Grid - Service page card styling */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-xl p-6 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
-              <div className="w-16 h-16 mx-auto mb-3">
+          {/* Enhanced Score Overview Grid - BEAST-level data */}
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
+              <div className="w-12 h-12 mx-auto mb-2">
                 <CircularProgressbar
                   value={seoScore}
                   text={`${seoScore}`}
                   styles={buildStyles({
-                    textSize: '16px',
+                    textSize: '14px',
                     pathColor: '#22C55E',
                     textColor: '#112C3C',
                     trailColor: '#F3F4F6',
                   })}
                 />
               </div>
-              <h3 className="font-semibold text-[#112C3C] text-base">SEO Score</h3>
+              <h3 className="font-semibold text-[#112C3C] text-sm">SEO</h3>
               <p className="text-gray-500 text-xs mt-1">
-                {seoScore >= 80 ? 'Excellent' : seoScore >= 60 ? 'Good' : seoScore >= 40 ? 'Needs Work' : 'Critical'}
+                {seoData.onPageScore || (seoScore >= 80 ? 'Excellent' : seoScore >= 60 ? 'Good' : seoScore >= 40 ? 'Needs Work' : 'Critical')}
               </p>
             </div>
 
-            <div className="bg-white rounded-xl p-6 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
-              <div className="w-16 h-16 mx-auto mb-3">
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
+              <div className="w-12 h-12 mx-auto mb-2">
                 <CircularProgressbar
                   value={performanceScore}
                   text={`${performanceScore}`}
                   styles={buildStyles({
-                    textSize: '16px',
+                    textSize: '14px',
                     pathColor: '#FBBF24',
                     textColor: '#112C3C',
                     trailColor: '#F3F4F6',
                   })}
                 />
               </div>
-              <h3 className="font-semibold text-[#112C3C] text-base">Performance</h3>
+              <h3 className="font-semibold text-[#112C3C] text-sm">Performance</h3>
               <p className="text-gray-500 text-xs mt-1">
                 {performanceScore >= 80 ? 'Fast' : performanceScore >= 60 ? 'Good' : performanceScore >= 40 ? 'Slow' : 'Very Slow'}
               </p>
             </div>
 
-            <div className="bg-white rounded-xl p-6 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
-              <div className="w-16 h-16 mx-auto mb-3">
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
+              <div className="w-12 h-12 mx-auto mb-2">
                 <CircularProgressbar
                   value={usabilityScore}
                   text={`${usabilityScore}`}
                   styles={buildStyles({
-                    textSize: '16px',
+                    textSize: '14px',
                     pathColor: '#EF4444',
                     textColor: '#112C3C',
                     trailColor: '#F3F4F6',
                   })}
                 />
               </div>
-              <h3 className="font-semibold text-[#112C3C] text-base">Usability</h3>
+              <h3 className="font-semibold text-[#112C3C] text-sm">Usability</h3>
               <p className="text-gray-500 text-xs mt-1">
                 {usabilityScore >= 80 ? 'Great UX' : usabilityScore >= 60 ? 'Good' : usabilityScore >= 40 ? 'Poor' : 'Critical'}
               </p>
             </div>
 
-            <div className="bg-white rounded-xl p-6 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
-              <div className="w-16 h-16 mx-auto mb-3">
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
+              <div className="w-12 h-12 mx-auto mb-2">
                 <CircularProgressbar
-                  value={growthScore}
-                  text={`${growthScore}`}
+                  value={socialScore}
+                  text={`${socialScore}`}
                   styles={buildStyles({
-                    textSize: '16px',
-                    pathColor: '#112C3C',
+                    textSize: '14px',
+                    pathColor: '#8B5CF6',
                     textColor: '#112C3C',
                     trailColor: '#F3F4F6',
                   })}
                 />
               </div>
-              <h3 className="font-semibold text-[#112C3C] text-base">Growth</h3>
+              <h3 className="font-semibold text-[#112C3C] text-sm">Social Media</h3>
               <p className="text-gray-500 text-xs mt-1">
-                {growthScore >= 80 ? 'High Potential' : growthScore >= 60 ? 'Good' : growthScore >= 40 ? 'Limited' : 'Critical'}
+                {socialScore >= 80 ? 'Excellent' : socialScore >= 60 ? 'Good' : socialScore >= 40 ? 'Limited' : 'None'}
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg transform hover:scale-105">
+              <div className="w-12 h-12 mx-auto mb-2">
+                <CircularProgressbar
+                  value={technicalScore}
+                  text={`${technicalScore}`}
+                  styles={buildStyles({
+                    textSize: '14px',
+                    pathColor: '#3B82F6',
+                    textColor: '#112C3C',
+                    trailColor: '#F3F4F6',
+                  })}
+                />
+              </div>
+              <h3 className="font-semibold text-[#112C3C] text-sm">Technical</h3>
+              <p className="text-gray-500 text-xs mt-1">
+                {technicalScore >= 80 ? 'Excellent' : technicalScore >= 60 ? 'Good' : technicalScore >= 40 ? 'Needs Work' : 'Critical'}
               </p>
             </div>
           </div>
@@ -811,7 +923,7 @@ export default function WebsiteAuditModal({
                     </div>
                     <div>
                       <p className="font-bold text-red-800 text-sm">🚨 CRITICAL: Poor User Experience</p>
-                      <p className="text-red-700 text-xs mt-1">{100 - usabilityScore}% of visitors likely leave due to poor UX - You`re losing customers!</p>
+                      <p className="text-red-700 text-xs mt-1">{100 - usabilityScore}% of visitors likely leave due to poor UX - You're losing customers!</p>
                     </div>
                   </div>
                 )}
@@ -867,7 +979,7 @@ export default function WebsiteAuditModal({
                     </div>
                     <div>
                       <p className="font-bold text-indigo-800 text-sm">💥 CRISIS: Weak Call-to-Actions</p>
-                      <p className="text-indigo-700 text-xs mt-1">Visitors don`t know what to do next - Low conversions killing your business!</p>
+                      <p className="text-indigo-700 text-xs mt-1">Visitors don't know what to do next - Low conversions killing your business!</p>
                     </div>
                   </div>
                 )}
@@ -886,7 +998,7 @@ export default function WebsiteAuditModal({
                   </div>
                 )}
 
-                {growthScore < 50 && (
+                {technicalScore < 50 && (
                   <div className="flex items-start p-4 bg-teal-100 rounded-lg border-l-4 border-teal-500 shadow-sm">
                     <div className="flex-shrink-0 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center mr-3">
                       <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -894,8 +1006,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-teal-800 text-sm">📉 CRASH: Low Conversion Rate</p>
-                      <p className="text-teal-700 text-xs mt-1">Poor user journey and conversion optimization - Revenue bleeding!</p>
+                      <p className="font-bold text-teal-800 text-sm">🔧 CRITICAL: Technical Issues</p>
+                      <p className="text-teal-700 text-xs mt-1">Missing schema markup, poor structure - Search engines can't understand your site!</p>
                     </div>
                   </div>
                 )}
@@ -916,6 +1028,180 @@ export default function WebsiteAuditModal({
               </div>
             </div>
           </div>
+
+          {/* BEAST-Level SEO Analysis Sections */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            {/* Content Analysis */}
+            <div className="bg-white rounded-xl p-6 border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg">
+              <h3 className="text-lg font-semibold text-[#112C3C] mb-4 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-[#22C55E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Content Analysis
+              </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Word Count:</span>
+                  <span className="font-semibold text-[#112C3C]">{seoData.wordCount || 0} words</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Content Quality:</span>
+                  <span className={`font-semibold ${seoData.contentQuality === 'Excellent' ? 'text-green-600' : seoData.contentQuality === 'Good' ? 'text-blue-600' : 'text-orange-600'}`}>
+                    {seoData.contentQuality || 'Good'}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">H1 Tags:</span>
+                  <span className="font-semibold text-[#112C3C]">{seoData.h1Count || 0}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">H2 Tags:</span>
+                  <span className="font-semibold text-[#112C3C]">{seoData.h2Count || 0}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Images with Alt:</span>
+                  <span className="font-semibold text-[#112C3C]">{seoData.imagesWithAlt || 0}/{seoData.imageCount || 0}</span>
+                </div>
+                {seoData.thinContent && (
+                  <div className="bg-red-50 border-l-4 border-red-500 p-3 rounded">
+                    <p className="text-red-800 text-sm font-semibold">⚠️ Thin Content Detected</p>
+                    <p className="text-red-700 text-xs">Content is too short for good SEO performance</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Technical SEO */}
+            <div className="bg-white rounded-xl p-6 border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg">
+              <h3 className="text-lg font-semibold text-[#112C3C] mb-4 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-[#3B82F6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                Technical SEO
+              </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">SSL Certificate:</span>
+                  <span className={`font-semibold ${seoData.hasSSL ? 'text-green-600' : 'text-red-600'}`}>
+                    {seoData.hasSSL ? '✅ Secure' : '❌ Missing'}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Robots.txt:</span>
+                  <span className={`font-semibold ${seoData.hasRobotsTxt ? 'text-green-600' : 'text-red-600'}`}>
+                    {seoData.hasRobotsTxt ? '✅ Found' : '❌ Missing'}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">XML Sitemap:</span>
+                  <span className={`font-semibold ${seoData.hasSitemap ? 'text-green-600' : 'text-red-600'}`}>
+                    {seoData.hasSitemap ? '✅ Found' : '❌ Missing'}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Schema Markup:</span>
+                  <span className={`font-semibold ${seoData.hasSchema ? 'text-green-600' : 'text-red-600'}`}>
+                    {seoData.hasSchema ? `✅ ${seoData.schemaQuality}` : '❌ Missing'}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Open Graph:</span>
+                  <span className={`font-semibold ${seoData.hasOpenGraph ? 'text-green-600' : 'text-red-600'}`}>
+                    {seoData.hasOpenGraph ? '✅ Found' : '❌ Missing'}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Favicon:</span>
+                  <span className={`font-semibold ${seoData.hasFavicon ? 'text-green-600' : 'text-red-600'}`}>
+                    {seoData.hasFavicon ? '✅ Found' : '❌ Missing'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* SEO Issues & Recommendations */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            {/* Critical Issues */}
+            <div className="bg-white rounded-xl p-6 border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg">
+              <h3 className="text-lg font-semibold text-[#112C3C] mb-4 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+                Critical Issues ({seoData.issues?.length || 0})
+              </h3>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {seoData.issues && seoData.issues.length > 0 ? (
+                  seoData.issues.map((issue: string, index: number) => (
+                    <div key={index} className="flex items-start p-3 bg-red-50 rounded-lg border-l-4 border-red-500">
+                      <svg className="w-4 h-4 text-red-500 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-sm text-red-800">{issue}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-4 text-green-600">
+                    <svg className="w-8 h-8 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <p className="font-semibold">No Critical Issues Found!</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Recommendations */}
+            <div className="bg-white rounded-xl p-6 border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg">
+              <h3 className="text-lg font-semibold text-[#112C3C] mb-4 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-[#22C55E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                Recommendations ({seoData.recommendations?.length || 0})
+              </h3>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {seoData.recommendations && seoData.recommendations.length > 0 ? (
+                  seoData.recommendations.map((rec: string, index: number) => (
+                    <div key={index} className="flex items-start p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                      <svg className="w-4 h-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-sm text-green-800">{rec}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-4 text-gray-500">
+                    <p>No recommendations available</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Technology Stack & Competitive Analysis */}
+          {seoData.technologyStack && seoData.technologyStack.length > 0 && (
+            <div className="bg-white rounded-xl p-6 border border-gray-50 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg mb-8">
+              <h3 className="text-lg font-semibold text-[#112C3C] mb-4 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+                Technology Stack
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {seoData.technologyStack.map((tech: string, index: number) => (
+                  <span key={index} className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              {seoData.cdnDetected && (
+                <div className="mt-4 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                  <p className="text-blue-800 text-sm font-semibold">✅ CDN Detected</p>
+                  <p className="text-blue-700 text-xs">Your site uses a Content Delivery Network for better performance</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -923,13 +1209,19 @@ export default function WebsiteAuditModal({
 
   return (
     <>
+      <style jsx>{`
+        @keyframes buttonPulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+      `}</style>
       <Modal
         ref={dialogRef}
         opened={isOpen}
         onClose={onClose}
         contentClass="p-0 bg-white dark:bg-gray-900 rounded-2xl overflow-hidden"
-        width="95vw"
-        maxWidth={1400}
+        width={step === 3 ? "95vw" : 500}
+        maxWidth={step === 3 ? 1400 : 500}
       >
         <div className="relative">
           {step === 1 && renderStep1()}
@@ -944,4 +1236,4 @@ export default function WebsiteAuditModal({
       />
     </>
   );
-} 
+}
