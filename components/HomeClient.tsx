@@ -60,7 +60,7 @@ export default function HomeClient() {
                         <div>
                             <span className="mb-7 inline-flex items-center gap-2.5 rounded-full bg-gray px-5 py-2 font-semibold uppercase text-white">
                                 <ThunderIcon className="h-6 w-3.5" />
-                                Welcome to Greco
+                                Welcome to Leonlogic
                             </span>
                             <h1
                                 className="mb-5 text-3xl font-black uppercase md:text-5xl 2xl:text-[70px] 2xl:leading-tight dark:text-white"
@@ -159,7 +159,7 @@ export default function HomeClient() {
                     <div className="grid gap-10 rounded-2xl bg-primary dark:bg-[#9199B5]/[0.12] px-4 md:px-10 lg:grid-cols-2 2xl:px-24">
                         <div className="pt-10 md:pt-20 lg:max-w-lg lg:pb-28">
                             <p className="mb-8 inline-flex items-center gap-1 text-xl font-bold uppercase italic text-secondary">
-                                <span className="inline-flex h-4 w-4 rounded-full border-[3px] border-success"></span>WE ARE Greco Theme
+                                <span className="inline-flex h-4 w-4 rounded-full border-[3px] border-success"></span>WE ARE Leonlogic Theme
                             </p>
 
                             <h2 className="mb-2.5 text-2xl font-extrabold leading-snug text-white md:text-[40px]">

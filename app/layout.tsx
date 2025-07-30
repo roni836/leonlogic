@@ -13,7 +13,7 @@ import ConditionalLayout from '@/components/ConditionalLayout';
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
-    title: 'Greco',
+    title: 'Leonlogic',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,
@@ -43,11 +43,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         __html: JSON.stringify({
                             '@context': 'https://schema.org',
                             '@type': 'Organization',
-                            name: 'Greco',
+                            name: 'Leonlogic',
                             url: process.env.NEXT_PUBLIC_APP_URL || '',
                             id: `${process.env.NEXT_PUBLIC_APP_URL}#organization`,
                             logo: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.png`,
-                            legalName: 'Greco',
+                            legalName: 'Leonlogic',
                             sameAs: [process.env.NEXT_PUBLIC_APP_URL || ''],
                         }),
                     }}
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         __html: JSON.stringify({
                             '@context': 'https://schema.org',
                             '@type': 'WebSite',
-                            name: 'Greco',
+                            name: 'Leonlogic',
                             url: process.env.NEXT_PUBLIC_APP_URL || '',
                             id: `${process.env.NEXT_PUBLIC_APP_URL}#website`,
                         }),

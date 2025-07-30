@@ -281,11 +281,11 @@ VALUES (
 INSERT INTO hero_content (title, subtitle, description, cta_text, cta_link, badge_text, badge_icon) 
 VALUES (
   'DIGITAL MARKETING. CREATIVE DESIGN.',
-  'Welcome to Greco',
+  'Welcome to Leonlogic',
   'Digital Agency offering unique solutions to create digital presence and increase your sales.',
   'Get Started',
   '/contact-us',
-  'Welcome to Greco',
+  'Welcome to Leonlogic',
   '⚡'
 ) ON CONFLICT DO NOTHING;
 

@@ -5,18 +5,18 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Privacy-Policy | Greco',
+    title: 'Privacy-Policy | Leonlogic',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Privacy-Policy | Greco',
+        title: 'Privacy-Policy | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
         url: process.env.NEXT_PUBLIC_APP_URL + '/privacy-policy',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Privacy-Policy | Greco',
+        title: 'Privacy-Policy | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
     },
     alternates: {
@@ -33,16 +33,16 @@ const page = () => {
                     <div>
                         <h1 className="text-[28px] font-bold leading-8">Privacy policy</h1>
                         <p className="text-gray dark:text-[#9199B5] mt-5 md:mt-8">
-                            At www.greco.com, accessible at www.greco.com, one of our main priorities is the privacy of our visitors. This Privacy Policy
-                            document contains types of information that is collected and recorded by www.greco.com and how we use it.
+                            At www.leonlogic.com, accessible at www.leonlogic.com, one of our main priorities is the privacy of our visitors. This Privacy Policy
+                            document contains types of information that is collected and recorded by www.leonlogic.com and how we use it.
                         </p>
                         <p className="text-gray dark:text-[#9199B5] mt-5">
                             If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us through email
-                            at hello@greco.com
+                            at hello@leonlogic.com
                         </p>
                         <p className="text-gray dark:text-[#9199B5] mt-5">
                             This privacy policy applies only to our online activities and is valid for visitors to our website with regards to the information
-                            that they shared and/or collect in www.greco. This policy is not applicable to any information collected offline or via channels
+                            that they shared and/or collect in www.leonlogic. This policy is not applicable to any information collected offline or via channels
                             other than this website.
                         </p>
                         <h2 className="text-[28px] font-bold leading-8 mt-12 md:mt-16">Consent</h2>
