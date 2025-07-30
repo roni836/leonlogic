@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/libs/supabase';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface BlogPost {
   id: string;
@@ -274,7 +275,9 @@ export default function BlogManagement() {
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-16 w-16">
                       {post.featured_image ? (
-                        <img
+                        <Image
+                          height={64}
+                          width={64}
                           className="h-16 w-16 rounded-lg object-cover"
                           src={post.featured_image}
                           alt={post.title}

@@ -485,7 +485,7 @@ export default function WebsiteAuditModal({
           Free Website Audit
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          Get a comprehensive analysis of your website's performance, SEO, and growth opportunities
+          Get a comprehensive analysis of your website`s performance, SEO, and growth opportunities
         </p>
       </div>
       
@@ -503,7 +503,7 @@ export default function WebsiteAuditModal({
             required
           />
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            Enter your domain (e.g., example.com) - we'll add https:// automatically
+            Enter your domain (e.g., example.com) - we`ll add https:// automatically
           </p>
         </div>
         
@@ -542,7 +542,7 @@ export default function WebsiteAuditModal({
           Analyzing Your Website
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          We're running a comprehensive analysis of your website...
+          We`re running a comprehensive analysis of your website...
         </p>
         
         {/* Progress Bar */}
@@ -762,7 +762,7 @@ export default function WebsiteAuditModal({
               </svg>
               <div>
                 <p className="font-semibold">Critical Issues Found - Action Required</p>
-                <p className="text-white/80 text-sm">Your competitors are likely outperforming you. Don't lose potential customers!</p>
+                <p className="text-white/80 text-sm">Your competitors are likely outperforming you. Don`t lose potential customers!</p>
               </div>
             </div>
           </div>
@@ -923,7 +923,7 @@ export default function WebsiteAuditModal({
                     </div>
                     <div>
                       <p className="font-bold text-red-800 text-sm">🚨 CRITICAL: Poor User Experience</p>
-                      <p className="text-red-700 text-xs mt-1">{100 - usabilityScore}% of visitors likely leave due to poor UX - You're losing customers!</p>
+                      <p className="text-red-700 text-xs mt-1">{100 - usabilityScore}% of visitors likely leave due to poor UX - You`re losing customers!</p>
                     </div>
                   </div>
                 )}
@@ -979,7 +979,7 @@ export default function WebsiteAuditModal({
                     </div>
                     <div>
                       <p className="font-bold text-indigo-800 text-sm">💥 CRISIS: Weak Call-to-Actions</p>
-                      <p className="text-indigo-700 text-xs mt-1">Visitors don't know what to do next - Low conversions killing your business!</p>
+                      <p className="text-indigo-700 text-xs mt-1">Visitors don`t know what to do next - Low conversions killing your business!</p>
                     </div>
                   </div>
                 )}
@@ -1007,7 +1007,7 @@ export default function WebsiteAuditModal({
                     </div>
                     <div>
                       <p className="font-bold text-teal-800 text-sm">🔧 CRITICAL: Technical Issues</p>
-                      <p className="text-teal-700 text-xs mt-1">Missing schema markup, poor structure - Search engines can't understand your site!</p>
+                      <p className="text-teal-700 text-xs mt-1">Missing schema markup, poor structure - Search engines can`t understand your site!</p>
                     </div>
                   </div>
                 )}

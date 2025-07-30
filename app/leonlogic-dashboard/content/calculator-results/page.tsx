@@ -236,7 +236,7 @@ export default function CalculatorResultsPage() {
                     </div>
                     {result.message && (
                       <div className="text-sm text-gray-500 mt-1 max-w-xs truncate">
-                        "{result.message}"
+                        `{result.message}``
                       </div>
                     )}
                   </td>
@@ -306,7 +306,7 @@ export default function CalculatorResultsPage() {
                        <div>
                          <p><strong>Message:</strong></p>
                          <div className="bg-gray-50 p-3 rounded mt-1 text-sm">
-                           "{selectedResult.message}"
+                           `{selectedResult.message}`
                          </div>
                        </div>
                      )}

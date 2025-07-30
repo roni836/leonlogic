@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/libs/supabase';
+import Link from 'next/link';
 
 interface Option {
   label: string;
@@ -330,7 +331,7 @@ export default function CalculatorPage() {
               <div className="text-6xl mb-4">🎉</div>
               <h2 className="text-2xl font-bold mb-4 text-primary dark:text-white">Thank You!</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Your quote request has been submitted successfully. We'll get back to you within 24 hours with a detailed proposal.
+                Your quote request has been submitted successfully. We`ll get back to you within 24 hours with a detailed proposal.
               </p>
               <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
                 <h3 className="font-semibold text-green-800 mb-2">Your Quote Summary:</h3>
@@ -436,7 +437,7 @@ export default function CalculatorPage() {
                   checked={formData.privacyConsent}
                   onChange={(e) => handleFormChange('privacyConsent', e.target.checked)}
                 />
-                Yes, I agree to the <a href="/privacy-policy" className="underline text-secondary">Privacy Policy</a>.
+                Yes, I agree to the <Link href="/privacy-policy" className="underline text-secondary">Privacy Policy</Link>.
               </label>
               <button 
                 type="submit" 

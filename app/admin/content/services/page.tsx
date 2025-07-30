@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -141,7 +142,9 @@ export default function ServicesManagement() {
               <div className="px-4 py-4 flex items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
-                    <img
+                    <Image
+                    height={40}
+                    width={40}
                       className="h-10 w-10 rounded-full object-cover"
                       src={service.icon_path || '/assets/images/icon-mail.svg'}
                       alt={service.icon_alt || service.title}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/libs/supabase';
+import Image from 'next/image';
 
 interface Testimonial {
   id: string;
@@ -278,7 +279,7 @@ export default function TestimonialsManagement() {
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0 h-12 w-12">
                       {testimonial.avatar_url ? (
-                        <img
+                        <Image
                           className="h-12 w-12 rounded-full object-cover"
                           src={testimonial.avatar_url}
                           alt={testimonial.client_name}
@@ -320,7 +321,7 @@ export default function TestimonialsManagement() {
                         </span>
                       </div>
                       <p className="text-sm text-gray-600 mt-2 italic">
-                        "{testimonial.content}"
+                        `{testimonial.content}`
                       </p>
                       <div className="flex items-center text-xs text-gray-400 mt-2 space-x-4">
                         <span>Sort Order: {testimonial.sort_order}</span>

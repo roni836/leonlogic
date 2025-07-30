@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/libs/supabase';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Service {
   id: string;
@@ -239,7 +240,9 @@ export default function ServicesManagement() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
                     {service.icon_path ? (
-                      <img
+                      <Image
+                        height={40}
+                        width={40}
                         className="h-10 w-10 rounded-full"
                         src={service.icon_path}
                         alt={service.icon_alt || service.title}
