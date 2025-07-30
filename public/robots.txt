@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://leonlogic-pzjs.vercel.app/
+
+# Sitemaps
+Sitemap: https://leonlogic-pzjs.vercel.app/sitemap.xml
