@@ -86,7 +86,7 @@ const BlogSlider = () => {
                                     href="/blog"
                                     className="font-bold text-success hover:text-success-light dark:text-secondary dark:hover:text-success-light duration-200"
                                 >
-                                    Read More
+                                    Read More abc
                                 </Link>
                             </div>
                             <div className="sm:max-w-[375px] w-full">
@@ -111,7 +111,7 @@ const BlogSlider = () => {
                                     href="/blog"
                                     className="font-bold text-success hover:text-success-light dark:text-secondary dark:hover:text-success-light duration-200"
                                 >
-                                    Read More
+                                    Read More bcd
                                 </Link>
                             </div>
                             <div className="sm:max-w-[375px] w-full">
@@ -136,7 +136,7 @@ const BlogSlider = () => {
                                     href="/blog"
                                     className="font-bold text-success hover:text-success-light dark:text-secondary dark:hover:text-success-light duration-200"
                                 >
-                                    Read More
+                                    Read More...
                                 </Link>
                             </div>
                             <div className="sm:max-w-[375px] w-full">
@@ -161,7 +161,7 @@ const BlogSlider = () => {
                                     href="/blog"
                                     className="font-bold text-success hover:text-success-light dark:text-secondary dark:hover:text-success-light duration-200"
                                 >
-                                    Read More
+                                    Read More t
                                 </Link>
                             </div>
                             <div className="sm:max-w-[375px] w-full">
