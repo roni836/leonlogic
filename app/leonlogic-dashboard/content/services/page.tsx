@@ -9,6 +9,7 @@ interface Service {
   id: string;
   title: string;
   description: string;
+  service_category_id: string;
   icon_path?: string;
   icon_alt?: string;
   link_url?: string;
@@ -17,9 +18,16 @@ interface Service {
   created_at: string;
   updated_at: string;
 }
+interface ServiceCategory {
+  id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
 
 export default function ServicesManagement() {
   const [services, setServices] = useState<Service[]>([]);
+  const [serviceCategory, setServiceCategory] = useState<ServiceCategory[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -30,9 +38,36 @@ export default function ServicesManagement() {
     icon_path: '',
     icon_alt: '',
     link_url: '',
+    service_category_id: '',
     sort_order: 0,
     is_active: true,
   });
+
+  useEffect(() => {
+      fetchServiceCategory();
+    }, []);
+  
+    const fetchServiceCategory = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('service_categories')
+          .select('*')
+          .order('created_at', { ascending: false });
+  
+        if (error) {
+          console.error('Error fetching blog posts:', error);
+          setError('Failed to load blog posts');
+          return;
+        }
+  
+        setServiceCategory(data || []);
+      } catch (err) {
+        console.error('Error:', err);
+        setError('Failed to load blog posts');
+      } finally {
+        setLoading(false);
+      }
+    };
 
   useEffect(() => {
     fetchServices();
@@ -112,6 +147,7 @@ export default function ServicesManagement() {
       description: service.description,
       icon_path: service.icon_path || '',
       icon_alt: service.icon_alt || '',
+      service_category_id: service.service_category_id || '',
       link_url: service.link_url || '',
       sort_order: service.sort_order,
       is_active: service.is_active,
@@ -151,6 +187,7 @@ export default function ServicesManagement() {
       icon_alt: '',
       link_url: '',
       sort_order: 0,
+      service_category_id: '',
       is_active: true,
     });
     setEditingService(null);
@@ -244,7 +281,7 @@ export default function ServicesManagement() {
                         height={40}
                         width={40}
                         className="h-10 w-10 rounded-full"
-                        src={service.icon_path || '/default-icon.png'}
+                        src={'/logo.png'}
                         alt={service.icon_alt || service.title}
                       />
                     ) : (
@@ -338,6 +375,26 @@ export default function ServicesManagement() {
                     className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   />
                 </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Category
+                    </label>
+                    <select
+                      value={formData.service_category_id}
+                      onChange={(e) =>
+                        setFormData({ ...formData, service_category_id: e.target.value })
+                      }
+                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                    >
+                      <option value="">Choose Category</option>
+                      {serviceCategory.map((data) => (
+                        <option key={data.id} value={data.id}>
+                          {data.title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">

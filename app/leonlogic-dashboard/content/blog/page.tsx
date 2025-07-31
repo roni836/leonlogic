@@ -12,7 +12,7 @@ interface BlogPost {
   excerpt: string;
   content: string;
   featured_image?: string;
-  category?: string;
+  blog_category_id?: string;
   tags?: string[];
   status: 'draft' | 'published' | 'archived';
   published_at?: string;
@@ -23,9 +23,16 @@ interface BlogPost {
   created_at: string;
   updated_at: string;
 }
+interface BlogCategory {
+  id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
 
 export default function BlogManagement() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [blogCategory, setBlogCategory] = useState<BlogCategory[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -36,7 +43,7 @@ export default function BlogManagement() {
     excerpt: '',
     content: '',
     featured_image: '',
-    category: '',
+    blog_category_id: '',
     tags: [] as string[],
     status: 'draft' as 'draft' | 'published' | 'archived',
     seo_title: '',
@@ -70,6 +77,32 @@ export default function BlogManagement() {
     }
   };
 
+  useEffect(() => {
+    fetchBlogCategory();
+  }, []);
+
+  const fetchBlogCategory = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_categories')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching blog posts:', error);
+        setError('Failed to load blog posts');
+        return;
+      }
+
+      setBlogCategory(data || []);
+    } catch (err) {
+      console.error('Error:', err);
+      setError('Failed to load blog posts');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const generateSlug = (title: string) => {
     return title
       .toLowerCase()
@@ -85,7 +118,7 @@ export default function BlogManagement() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const postData = {
         ...formData,
@@ -116,7 +149,7 @@ export default function BlogManagement() {
           }]);
 
         if (error) {
-          console.error('Error creating blog post:', error);
+          console.log('Error creating blog post:', error);
           setError('Failed to create blog post');
           return;
         }
@@ -139,7 +172,7 @@ export default function BlogManagement() {
       excerpt: post.excerpt,
       content: post.content,
       featured_image: post.featured_image || '',
-      category: post.category || '',
+      blog_category_id: post.blog_category_id || '',
       tags: post.tags || [],
       status: post.status,
       seo_title: post.seo_title || '',
@@ -180,7 +213,7 @@ export default function BlogManagement() {
       excerpt: '',
       content: '',
       featured_image: '',
-      category: '',
+      blog_category_id: '',
       tags: [],
       status: 'draft',
       seo_title: '',
@@ -304,7 +337,7 @@ export default function BlogManagement() {
                       <div className="flex items-center text-xs text-gray-400 mt-2 space-x-4">
                         <span>Slug: {post.slug}</span>
                         <span>Views: {post.view_count}</span>
-                        <span>Category: {post.category || 'Uncategorized'}</span>
+                        <span>Category: {post.blog_category_id || 'Uncategorized'}</span>
                         <span>Created: {new Date(post.created_at).toLocaleDateString()}</span>
                       </div>
                       {post.tags && post.tags.length > 0 && (
@@ -425,13 +458,20 @@ export default function BlogManagement() {
                     <label className="block text-sm font-medium text-gray-700">
                       Category
                     </label>
-                    <input
-                      type="text"
-                      value={formData.category}
-                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    <select
+                      value={formData.blog_category_id}
+                      onChange={(e) =>
+                        setFormData({ ...formData, blog_category_id: e.target.value })
+                      }
                       className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                      placeholder="e.g., Technology, Business, Design"
-                    />
+                    >
+                      <option value="">Choose Category</option>
+                      {blogCategory.map((data) => (
+                        <option key={data.id} value={data.id}>
+                          {data.title}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
