@@ -4,6 +4,7 @@ import GetInTouch from '@/components/GetInTouch';
 import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
+
 export const metadata: Metadata = {
     title: 'Blog | Leonlogic',
     description: 'Tailwind CSS Multipurpose Landing Templates',
@@ -44,7 +45,7 @@ const page = () => {
             </section>
 
             <section id="maindiv">
-                <BlogToggle />
+                <BlogToggle/>
             </section>
 
             <section className="py-10 md:py-16">

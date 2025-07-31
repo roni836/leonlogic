@@ -1,3 +1,4 @@
+"use client";
 import ClientsFeedbackSlider from '@/components/ClientsFeedbackSlider';
 import Link from 'next/link';
 import GetInTouch from '@/components/GetInTouch';
@@ -5,47 +6,122 @@ import CountsUp from '@/components/CountsUp';
 import PricebulletPointIcon from '@/components/Icons/PricebulletPointIcon';
 import SpecialistsDevelopers from '@/components/SpecialistsDevelopers';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/libs/supabase';
 import helper from '@/libs/helper';
 import type { Metadata } from 'next';
+import { useParams } from 'next/navigation';
 
-export const metadata: Metadata = {
-    title: 'Services-Detail | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
-    openGraph: {
-        ...helper.openGraphData,
-        title: 'Services-Detail | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
-        url: process.env.NEXT_PUBLIC_APP_URL + '/services-detail',
-        type: 'article',
-    },
-    twitter: {
-        ...helper.twitterData,
-        title: 'Services-Detail | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
-    },
-    alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_APP_URL}/services-detail`,
-        languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/services-detail` },
-    },
-};
+// export const metadata: Metadata = {
+//     title: 'Services-Detail | Leonlogic',
+//     description: 'Tailwind CSS Multipurpose Landing Templates',
+//     openGraph: {
+//         ...helper.openGraphData,
+//         title: 'Services-Detail | Leonlogic',
+//         description: 'Tailwind CSS Multipurpose Landing Templates',
+//         url: process.env.NEXT_PUBLIC_APP_URL + '/services-detail',
+//         type: 'article',
+//     },
+//     twitter: {
+//         ...helper.twitterData,
+//         title: 'Services-Detail | Leonlogic',
+//         description: 'Tailwind CSS Multipurpose Landing Templates',
+//     },
+//     alternates: {
+//         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/services-detail`,
+//         languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/services-detail` },
+//     },
+// };
+
+interface ServiceCategory {
+    id: string;
+    title: string;
+    created_at: string;
+    updated_at: string;
+}
+
+interface Service {
+    id: string;
+    title: string;
+    description: string;
+    service_category_id: string;
+    service_categories?: ServiceCategory;
+    icon_path?: string;
+    icon_alt?: string;
+    link_url?: string;
+    sort_order: number;
+    is_active: boolean;
+    created_at: string;
+    updated_at: string;
+}
 
 const page = () => {
+    const params = useParams();
+    const slug = params?.slug as string;
+
+    const [service, setService] = useState<Service | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (slug) fetchService();
+    }, [slug]);
+
+    const fetchService = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('services')
+                .select(
+                    `*,
+                        service_categories (
+                            id,
+                            title,
+                            created_at,
+                            updated_at
+                        )`
+                )
+                .eq('slug', slug)
+                .single();
+
+            if (error) {
+                console.log('Error fetching post:', error);
+                return;
+            }
+
+            setService(data);
+        } catch (err) {
+            console.log('Error:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-64">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600"></div>
+            </div>
+        );
+    }
+
+    if (!service) {
+        return (
+            <div className="text-center py-20 text-xl text-red-500">Service detail not found</div>
+        );
+    }
     return (
         <>
             <section className="mb-16 relative pb-20 pt-32 md:mb-32 md:pb-24 md:pt-52 dark:bg-primary">
                 <div className="bg-[#9199B5]/[0.12] absolute w-[calc(100vw-0px)] lg:w-[calc(100vw-30px)] h-[calc(100%+50px)] bottom-0 end-0 rtl:rounded-br-[50px] ltr:rounded-bl-[50px] rtl:-skew-y-2 ltr:skew-y-2"></div>
                 <div className="container relative">
                     <div>
-                        <h1
-                            className="text-3xl md:text-[50px] font-black uppercase md:leading-[59px] max-w-[1019px] italic"
-                            data-aos="zoom-in"
-                            data-aos-duration="1000"
-                        >
-                            Find the best solution for every stage of your <span className="text-secondary">business development</span>
-                        </h1>
+                       <h1 className="text-3xl md:text-[50px] font-black uppercase md:leading-[59px] max-w-[1019px] italic">
+    {service?.title || 'Find the best solution for every stage of your'} <span className="text-secondary">business development</span>
+</h1>
+
                         <p className="text-lg mt-5 text-[#4B5576] dark:text-[#9199B5] max-w-[582px]">
-                            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.
-                        </p>
+    {service?.description || 'Lorem ipsum, or lipsum as it is sometimes known...'}
+</p>
+
                     </div>
                 </div>
             </section>
@@ -54,7 +130,8 @@ const page = () => {
                 <div className="container">
                     <div className="max-w-[500px]">
                         <h2 className="text-3xl md:text-[40px] md:leading-[54px] font-extrabold mt-5">
-                            Digital <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Strategy</span> Services
+                            Digital <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Strategy</span> {service?.service_categories?.title || 'General'}
+
                         </h2>
                         <p className="font-semibold text-gray dark:text-[#9199B5] mt-5">
                             Find a team of digital marketers you can rely on. Every day, we build trust through communication, transparency, and results.

@@ -1,3 +1,4 @@
+"use client";
 import ClientsFeedbackSlider from '@/components/ClientsFeedbackSlider';
 import FAQuestions from '@/components/FAQuestions';
 import NoteManagementAccodian from '@/components/NoteManagementAccodian';
@@ -7,71 +8,126 @@ import ServicePageModal from '@/components/ServicePageModal';
 import Image from 'next/image';
 import helper from '@/libs/helper';
 import type { Metadata } from 'next';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/libs/supabase';
 
-export const metadata: Metadata = {
-    title: 'Service | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
-    openGraph: {
-        ...helper.openGraphData,
-        title: 'Service | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
-        url: process.env.NEXT_PUBLIC_APP_URL + '/service',
-        type: 'website',
-    },
-    twitter: {
-        ...helper.twitterData,
-        title: 'Service | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
-    },
-    alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_APP_URL}/service`,
-        languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/service` },
-    },
-};
+
+// export const metadata: Metadata = {
+//     title: 'Service | Leonlogic',
+//     description: 'Tailwind CSS Multipurpose Landing Templates',
+//     openGraph: {
+//         ...helper.openGraphData,
+//         title: 'Service | Leonlogic',
+//         description: 'Tailwind CSS Multipurpose Landing Templates',
+//         url: process.env.NEXT_PUBLIC_APP_URL + '/service',
+//         type: 'website',
+//     },
+//     twitter: {
+//         ...helper.twitterData,
+//         title: 'Service | Leonlogic',
+//         description: 'Tailwind CSS Multipurpose Landing Templates',
+//     },
+//     alternates: {
+//         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/service`,
+//         languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/service` },
+//     },
+// };
+interface Service {
+    id: string;
+    title: string;
+    slug: string;
+    description: string;
+    service_category_id: string;
+    icon_path?: string;
+    icon_alt?: string;
+    link_url?: string;
+    sort_order: number;
+    is_active: boolean;
+    created_at: string;
+    updated_at: string;
+}
 
 const page = () => {
-    const services = [
-        {
-            src: '/assets/images/icon-mail.svg',
-            title: 'Email Marketing',
-            descrption: 'Our design services starts and ends best in class experience.',
-        },
-        {
-            src: '/assets/images/icon-instagram.svg',
-            title: 'Social Media',
-            descrption: 'Our design services starts and ends best in class experience.',
-        },
-        {
-            src: '/assets/images/icon-fb-ads.svg',
-            title: 'Google/FB Ads',
-            descrption: 'Our design services starts and ends best in class experience.',
-        },
-        {
-            src: '/assets/images/icon-content.svg',
-            title: 'Content Strategy',
-            descrption: 'Our design services starts and ends best in class experience.',
-        },
-        {
-            src: '/assets/images/icon-mail.svg',
-            title: 'Email Marketing',
-            descrption: 'Our design services starts and ends best in class experience.',
-        },
-        {
-            src: '/assets/images/icon-instagram.svg',
-            title: 'Social Media',
-            descrption: 'Our design services starts and ends best in class experience.',
-        },
-        {
-            src: '/assets/images/icon-fb-ads.svg',
-            title: 'Google/FB Ads',
-            descrption: 'Our design services starts and ends best in class experience.',
-        },
-        {
-            src: '/assets/images/icon-content.svg',
-            title: 'Content Strategy',
-            descrption: 'Our design services starts and ends best in class experience.',
-        },
-    ];
+
+    const [services, setServices] = useState<Service[]>([]);
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+        fetchServices();
+    }, []);
+
+    const fetchServices = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('services')
+                .select('*')
+                .order('sort_order', { ascending: true });
+
+            if (error) {
+                console.error('Error fetching services:', error);
+                return;
+            }
+
+            setServices(data || []);
+        } catch (err) {
+            console.error('Error:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // const services = [
+    //     {
+    //         src: '/assets/images/icon-mail.svg',
+    //         title: 'Email Marketing',
+    //         descrption: 'Our design services starts and ends best in class experience.',
+    //     },
+    //     {
+    //         src: '/assets/images/icon-instagram.svg',
+    //         title: 'Social Media',
+    //         descrption: 'Our design services starts and ends best in class experience.',
+    //     },
+    //     {
+    //         src: '/assets/images/icon-fb-ads.svg',
+    //         title: 'Google/FB Ads',
+    //         descrption: 'Our design services starts and ends best in class experience.',
+    //     },
+    //     {
+    //         src: '/assets/images/icon-content.svg',
+    //         title: 'Content Strategy',
+    //         descrption: 'Our design services starts and ends best in class experience.',
+    //     },
+    //     {
+    //         src: '/assets/images/icon-mail.svg',
+    //         title: 'Email Marketing',
+    //         descrption: 'Our design services starts and ends best in class experience.',
+    //     },
+    //     {
+    //         src: '/assets/images/icon-instagram.svg',
+    //         title: 'Social Media',
+    //         descrption: 'Our design services starts and ends best in class experience.',
+    //     },
+    //     {
+    //         src: '/assets/images/icon-fb-ads.svg',
+    //         title: 'Google/FB Ads',
+    //         descrption: 'Our design services starts and ends best in class experience.',
+    //     },
+    //     {
+    //         src: '/assets/images/icon-content.svg',
+    //         title: 'Content Strategy',
+    //         descrption: 'Our design services starts and ends best in class experience.',
+    //     },
+    // ];
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-64">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600"></div>
+            </div>
+        );
+    }
+
 
     return (
         <>
@@ -107,7 +163,7 @@ const page = () => {
                 <div className="container">
                     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
                         {services.map((service, index) => {
-                            return <ServiceCard key={index} src={service.src} title={service.title} descrption={service.descrption} />;
+                            return <ServiceCard key={index} src={service.icon_path} title={service.title} description={service.description} slug={service.slug} />;
                         })}
                     </div>
                 </div>
