@@ -55,7 +55,7 @@ interface Service {
     updated_at: string;
 }
 
-const page = () => {
+const Page = () => {
     const params = useParams();
     const slug = params?.slug as string;
 
@@ -63,37 +63,38 @@ const page = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (slug) fetchService();
-    }, [slug]);
-
-    const fetchService = async () => {
-        try {
-            const { data, error } = await supabase
-                .from('services')
-                .select(
-                    `*,
+        const fetchService = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('services')
+                    .select(
+                        `*,
                         service_categories (
                             id,
                             title,
                             created_at,
                             updated_at
                         )`
-                )
-                .eq('slug', slug)
-                .single();
+                    )
+                    .eq('slug', slug)
+                    .single();
 
-            if (error) {
-                console.log('Error fetching post:', error);
-                return;
+                if (error) {
+                    console.log('Error fetching post:', error);
+                    return;
+                }
+
+                setService(data);
+            } catch (err) {
+                console.log('Error:', err);
+            } finally {
+                setLoading(false);
             }
+        };
 
-            setService(data);
-        } catch (err) {
-            console.log('Error:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
+        if (slug) fetchService();
+    }, [slug]);
+
 
     if (loading) {
         return (
@@ -114,13 +115,13 @@ const page = () => {
                 <div className="bg-[#9199B5]/[0.12] absolute w-[calc(100vw-0px)] lg:w-[calc(100vw-30px)] h-[calc(100%+50px)] bottom-0 end-0 rtl:rounded-br-[50px] ltr:rounded-bl-[50px] rtl:-skew-y-2 ltr:skew-y-2"></div>
                 <div className="container relative">
                     <div>
-                       <h1 className="text-3xl md:text-[50px] font-black uppercase md:leading-[59px] max-w-[1019px] italic">
-    {service?.title || 'Find the best solution for every stage of your'} <span className="text-secondary">business development</span>
-</h1>
+                        <h1 className="text-3xl md:text-[50px] font-black uppercase md:leading-[59px] max-w-[1019px] italic">
+                            {service?.title || 'Find the best solution for every stage of your'} <span className="text-secondary">business development</span>
+                        </h1>
 
                         <p className="text-lg mt-5 text-[#4B5576] dark:text-[#9199B5] max-w-[582px]">
-    {service?.description || 'Lorem ipsum, or lipsum as it is sometimes known...'}
-</p>
+                            {service?.description || 'Lorem ipsum, or lipsum as it is sometimes known...'}
+                        </p>
 
                     </div>
                 </div>
@@ -333,4 +334,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

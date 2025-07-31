@@ -47,7 +47,7 @@ interface Service {
     updated_at: string;
 }
 
-const page = () => {
+const Page = () => {
 
     const [services, setServices] = useState<Service[]>([]);
     const [loading, setLoading] = useState(true);
@@ -257,4 +257,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
