@@ -224,7 +224,7 @@ export default function ServicesManagement() {
         </div>
         <button
           onClick={() => setShowCreateModal(true)}
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
         >
           <span className="mr-2">+</span>
           Add New Service
@@ -244,7 +244,7 @@ export default function ServicesManagement() {
                         height={40}
                         width={40}
                         className="h-10 w-10 rounded-full"
-                        src={service.icon_path}
+                        src={service.icon_path || '/default-icon.png'}
                         alt={service.icon_alt || service.title}
                       />
                     ) : (
@@ -277,7 +277,7 @@ export default function ServicesManagement() {
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => toggleServiceStatus(service)}
-                    className={`inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md ${
+                    className={`inline-flex items-center px-3 py-1 border border-gray-700 text-xs font-medium rounded-md ${
                       service.is_active
                         ? 'text-red-700 bg-red-100 hover:bg-red-200'
                         : 'text-green-700 bg-green-100 hover:bg-green-200'
@@ -293,7 +293,7 @@ export default function ServicesManagement() {
                   </button>
                   <button
                     onClick={() => handleDelete(service.id)}
-                    className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200"
+                    className="inline-flex items-center px-3 py-1 border border-gray-700 text-xs font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200"
                   >
                     Delete
                   </button>
@@ -405,13 +405,13 @@ export default function ServicesManagement() {
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-green-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    className="inline-flex items-center px-4 py-2 border border-black text-sm font-medium rounded-md text-white bg-black hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                   >
                     {editingService ? 'Update Service' : 'Create Service'}
                   </button>

@@ -258,9 +258,9 @@ export default function BlogManagement() {
         </div>
         <button
           onClick={() => setShowCreateModal(true)}
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
         >
-          <span className="mr-2">+</span>
+          <span className="mr-2 bg-black">+</span>
           Add New Post
         </button>
       </div>
@@ -279,7 +279,8 @@ export default function BlogManagement() {
                           height={64}
                           width={64}
                           className="h-16 w-16 rounded-lg object-cover"
-                          src={post.featured_image}
+                          src={'/logo.svg'}
+                          // src={post.featured_image}
                           alt={post.title}
                         />
                       ) : (
@@ -329,7 +330,7 @@ export default function BlogManagement() {
                     </button>
                     <button
                       onClick={() => handleDelete(post.id)}
-                      className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200"
+                      className="inline-flex items-center px-3 py-1 border border-gray-700 text-xs font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200"
                     >
                       Delete
                     </button>
@@ -517,7 +518,7 @@ export default function BlogManagement() {
                   </button>
                   <button
                     type="submit"
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    className="inline-flex items-center px-4 py-2 border border-gray-700 text-sm font-medium rounded-md  text-gray-700 bg-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                   >
                     {editingPost ? 'Update Post' : 'Create Post'}
                   </button>
