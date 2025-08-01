@@ -23,6 +23,7 @@ interface BlogPost {
     content: string;
     featured_image?: string;
     blog_category_id?: string;
+    blog_categories?: BlogCategory;
     tags?: string[];
     status: 'draft' | 'published' | 'archived';
     published_at?: string;
@@ -50,7 +51,15 @@ const BlogToggle = () => {
         try {
             const { data, error } = await supabase
                 .from('blog_posts')
-                .select('*')
+                .select(
+                    `*,
+                        blog_categories (
+                            id,
+                            title,
+                            created_at,
+                            updated_at
+                        )`
+                )
                 .order('created_at', { ascending: false });
 
             if (error) {
@@ -130,7 +139,7 @@ const BlogToggle = () => {
                                     <div className="flex gap-2.5">
                                         {/* You can map real category name if available */}
                                         <span className="rounded-full bg-secondary px-5 py-3 text-sm font-bold uppercase leading-4 text-success">
-                                            {post.blog_category_id || 'Uncategorized'}
+                                            {post.blog_categories?.title || 'Uncategorized'}
                                         </span>
                                         <span className="rounded-full bg-[#9199B5]/[0.12] px-5 py-3 text-sm font-bold uppercase leading-4 text-gray dark:text-[#9199B5]">
                                             {new Date(post.created_at).toLocaleDateString()}
@@ -150,12 +159,13 @@ const BlogToggle = () => {
                                 </div>
                                 <div className="sm:max-w-[375px] w-full">
                                     <Image
-                                        src={"/logo.svg"}
+                                        src={post.featured_image || '/logo.svg'}
                                         className="w-full h-full object-cover"
                                         alt={post.title}
                                         width={339}
                                         height={346}
                                     />
+
                                 </div>
                             </div>
                         ))}

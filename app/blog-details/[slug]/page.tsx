@@ -154,7 +154,7 @@ const Page = () => {
                         <div className="lg:w-2/5">
                             <div className="rounded-[20px] overflow-hidden">
                                 <Image
-                                    src={'/logo.svg'}
+                                    src={blogPost.featured_image || '/logo.svg'}
                                     alt={blogPost.title}
                                     width={523}
                                     height={432}

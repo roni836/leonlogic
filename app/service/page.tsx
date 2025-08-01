@@ -32,15 +32,23 @@ import { supabase } from '@/libs/supabase';
 //         languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/service` },
 //     },
 // };
+interface ServiceCategory {
+    id: string;
+    title: string;
+    created_at: string;
+    updated_at: string;
+}
+
 interface Service {
     id: string;
     title: string;
-    slug: string;
     description: string;
     service_category_id: string;
+    service_categories?: ServiceCategory;
     icon_path?: string;
     icon_alt?: string;
     link_url?: string;
+    slug?: string;
     sort_order: number;
     is_active: boolean;
     created_at: string;
@@ -61,7 +69,15 @@ const Page = () => {
         try {
             const { data, error } = await supabase
                 .from('services')
-                .select('*')
+                .select(
+                    `*,
+                        service_categories (
+                            id,
+                            title,
+                            created_at,
+                            updated_at
+                        )`
+                )
                 .order('sort_order', { ascending: true });
 
             if (error) {
@@ -163,7 +179,7 @@ const Page = () => {
                 <div className="container">
                     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
                         {services.map((service, index) => {
-                            return <ServiceCard key={index} src={service.icon_path} title={service.title} description={service.description} slug={service.slug} />;
+                            return <ServiceCard key={index} icon_path={service.icon_path} title={service.title} description={service.description} slug={service.slug} />;
                         })}
                     </div>
                 </div>
