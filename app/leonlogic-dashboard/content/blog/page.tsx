@@ -51,6 +51,31 @@ export default function BlogManagement() {
     seo_keywords: [] as string[],
   });
 
+  const handleFileUpload = async (file: File) => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    const filePath = `icons/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('service-icons')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error('Error uploading file:', uploadError);
+      setError('Image upload failed');
+      return;
+    }
+
+    const { data: publicURLData } = supabase.storage
+      .from('service-icons')
+      .getPublicUrl(filePath);
+
+    setFormData(prev => ({
+      ...prev,
+      featured_image: publicURLData.publicUrl
+    }));
+  };
+
   useEffect(() => {
     fetchBlogPosts();
   }, []);
@@ -312,7 +337,7 @@ export default function BlogManagement() {
                           height={64}
                           width={64}
                           className="h-16 w-16 rounded-lg object-cover"
-                          src={'/logo.svg'}
+                          src={post.featured_image}
                           // src={post.featured_image}
                           alt={post.title}
                         />
@@ -445,12 +470,34 @@ export default function BlogManagement() {
                     <label className="block text-sm font-medium text-gray-700">
                       Featured Image URL
                     </label>
-                    <input
+                    {/* <input
                       type="url"
                       value={formData.featured_image}
                       onChange={(e) => setFormData({ ...formData, featured_image: e.target.value })}
                       className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                       placeholder="https://example.com/image.jpg"
+                    /> */}
+
+                    {formData.featured_image && (
+                      <Image
+                        src={formData.featured_image}
+                        alt={formData.featured_image || 'Uploaded icon'}
+                        width={40}
+                        height={40}
+                        className="mt-2"
+                      />
+                    )}
+
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          await handleFileUpload(file); // <-- Upload new file and update formData
+                        }
+                      }}
+                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                     />
                   </div>
 
