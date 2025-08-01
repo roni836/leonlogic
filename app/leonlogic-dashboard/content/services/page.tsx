@@ -43,31 +43,56 @@ export default function ServicesManagement() {
     is_active: true,
   });
 
+  const handleFileUpload = async (file: File) => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    const filePath = `icons/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('service-icons')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error('Error uploading file:', uploadError);
+      setError('Image upload failed');
+      return;
+    }
+
+    const { data: publicURLData } = supabase.storage
+      .from('service-icons')
+      .getPublicUrl(filePath);
+
+    setFormData(prev => ({
+      ...prev,
+      icon_path: publicURLData.publicUrl
+    }));
+  };
+
   useEffect(() => {
-      fetchServiceCategory();
-    }, []);
-  
-    const fetchServiceCategory = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('service_categories')
-          .select('*')
-          .order('created_at', { ascending: false });
-  
-        if (error) {
-          console.error('Error fetching blog posts:', error);
-          setError('Failed to load blog posts');
-          return;
-        }
-  
-        setServiceCategory(data || []);
-      } catch (err) {
-        console.error('Error:', err);
+    fetchServiceCategory();
+  }, []);
+
+  const fetchServiceCategory = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('service_categories')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching blog posts:', error);
         setError('Failed to load blog posts');
-      } finally {
-        setLoading(false);
+        return;
       }
-    };
+
+      setServiceCategory(data || []);
+    } catch (err) {
+      console.error('Error:', err);
+      setError('Failed to load blog posts');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchServices();
@@ -97,7 +122,7 @@ export default function ServicesManagement() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       if (editingService) {
         // Update existing service
@@ -281,7 +306,7 @@ export default function ServicesManagement() {
                         height={40}
                         width={40}
                         className="h-10 w-10 rounded-full"
-                        src={'/logo.png'}
+                        src={service.icon_path}
                         alt={service.icon_alt || service.title}
                       />
                     ) : (
@@ -295,11 +320,10 @@ export default function ServicesManagement() {
                       <h3 className="text-sm font-medium text-gray-900">
                         {service.title}
                       </h3>
-                      <span className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        service.is_active
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-red-100 text-red-800'
-                      }`}>
+                      <span className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${service.is_active
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                        }`}>
                         {service.is_active ? 'Active' : 'Inactive'}
                       </span>
                     </div>
@@ -314,11 +338,10 @@ export default function ServicesManagement() {
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => toggleServiceStatus(service)}
-                    className={`inline-flex items-center px-3 py-1 border border-gray-700 text-xs font-medium rounded-md ${
-                      service.is_active
-                        ? 'text-red-700 bg-red-100 hover:bg-red-200'
-                        : 'text-green-700 bg-green-100 hover:bg-green-200'
-                    }`}
+                    className={`inline-flex items-center px-3 py-1 border border-gray-700 text-xs font-medium rounded-md ${service.is_active
+                      ? 'text-red-700 bg-red-100 hover:bg-red-200'
+                      : 'text-green-700 bg-green-100 hover:bg-green-200'
+                      }`}
                   >
                     {service.is_active ? 'Deactivate' : 'Activate'}
                   </button>
@@ -377,36 +400,69 @@ export default function ServicesManagement() {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Category
-                    </label>
-                    <select
-                      value={formData.service_category_id}
-                      onChange={(e) =>
-                        setFormData({ ...formData, service_category_id: e.target.value })
-                      }
-                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                    >
-                      <option value="">Choose Category</option>
-                      {serviceCategory.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Category
+                  </label>
+                  <select
+                    value={formData.service_category_id}
+                    onChange={(e) =>
+                      setFormData({ ...formData, service_category_id: e.target.value })
+                    }
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required
+                  >
+                    <option value="">Choose Category</option>
+                    {serviceCategory.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Icon Path
                   </label>
-                  <input
-                    type="text"
+                  {/* <input
+                    type="file"
                     value={formData.icon_path}
                     onChange={(e) => setFormData({ ...formData, icon_path: e.target.value })}
                     className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                     placeholder="https://example.com/icon.png"
+                  /> */}
+
+                  {/* <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleFileUpload(file);
+                    }}
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  /> */}
+                  {formData.icon_path && (
+                    <Image
+                      src={formData.icon_path}
+                      alt={formData.icon_alt || 'Uploaded icon'}
+                      width={40}
+                      height={40}
+                      className="mt-2"
+                    />
+                  )}
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        await handleFileUpload(file); // <-- Upload new file and update formData
+                      }
+                    }}
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   />
+
+
                 </div>
 
                 <div>
@@ -426,7 +482,7 @@ export default function ServicesManagement() {
                     Link URL
                   </label>
                   <input
-                    type="url"
+                    type="text"
                     value={formData.link_url}
                     onChange={(e) => setFormData({ ...formData, link_url: e.target.value })}
                     className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
