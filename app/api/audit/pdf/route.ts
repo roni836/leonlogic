@@ -15,7 +15,8 @@ export async function POST(request: NextRequest) {
     // Upload PDF to Supabase Storage
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
+      // process.env.SUPABASE_SERVICE_ROLE_KEY!
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
 
     const fileName = `${company}-${Date.now()}.pdf`;

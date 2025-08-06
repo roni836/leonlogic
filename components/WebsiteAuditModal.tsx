@@ -61,13 +61,13 @@ interface AuditResult {
   growth?: any;
 }
 
-export default function WebsiteAuditModal({ 
-  isOpen, 
-  onClose, 
-  userEmail 
-}: { 
-  isOpen: boolean; 
-  onClose: () => void; 
+export default function WebsiteAuditModal({
+  isOpen,
+  onClose,
+  userEmail
+}: {
+  isOpen: boolean;
+  onClose: () => void;
   userEmail: string;
 }) {
   console.log('WebsiteAuditModal props:', { isOpen, userEmail });
@@ -84,15 +84,15 @@ export default function WebsiteAuditModal({
   // Helper function to validate and format URL
   const formatUrl = (url: string): string => {
     let formattedUrl = url.trim();
-    
+
     // Remove any whitespace
     formattedUrl = formattedUrl.replace(/\s/g, '');
-    
+
     // If URL doesn't start with http:// or https://, add https://
     if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
       formattedUrl = `https://${formattedUrl}`;
     }
-    
+
     return formattedUrl;
   };
 
@@ -154,20 +154,20 @@ export default function WebsiteAuditModal({
 
   const handleStartAudit = async () => {
     if (!websiteUrl || !companyName) return;
-    
+
     // Validate and format URL
     if (!isValidUrl(websiteUrl)) {
       alert('Please enter a valid website URL (e.g., example.com or https://example.com)');
       return;
     }
-    
+
     const formattedUrl = formatUrl(websiteUrl);
     console.log('Original URL:', websiteUrl);
     console.log('Formatted URL:', formattedUrl);
-    
+
     setIsAnalyzing(true);
     setStep(2);
-    
+
     // Save lead to Supabase
     if (supabase) {
       try {
@@ -178,7 +178,7 @@ export default function WebsiteAuditModal({
           company_name: companyName,
           status: 'audit_started'
         });
-        
+
         const { data, error } = await supabase
           .from('audit_leads')
           .insert([
@@ -190,7 +190,7 @@ export default function WebsiteAuditModal({
             }
           ])
           .select();
-        
+
         if (error) {
           console.error('Supabase error:', error);
         } else {
@@ -306,10 +306,10 @@ export default function WebsiteAuditModal({
       try {
         // Calculate overall score
         const overallScore = Math.round(
-          (results.seo?.score || 0) + 
-          (results.performance?.score || 0) + 
-          (results.usability?.score || 0) + 
-          (results.social?.score || 0) + 
+          (results.seo?.score || 0) +
+          (results.performance?.score || 0) +
+          (results.usability?.score || 0) +
+          (results.social?.score || 0) +
           (results.technical?.score || 0)
         ) / 5;
 
@@ -340,7 +340,7 @@ export default function WebsiteAuditModal({
           .eq('email', userEmail);
 
         if (updateError) {
-          console.error('Supabase update error:', updateError);
+          console.log('Supabase update error:', updateError);
         } else {
           console.log('BEAST-level audit data saved successfully to Supabase.');
           console.log('Saved data:', auditData);
@@ -437,39 +437,42 @@ export default function WebsiteAuditModal({
       // Generate PDF report
       const response = await fetch('/api/audit/pdf', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          url: websiteUrl, 
-          company: companyName, 
-          results: auditResults 
-        })
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          url: websiteUrl,
+          company: companyName,
+          results: auditResults,
+        }),
       });
-      
+
       if (!response.ok) {
         throw new Error('PDF generation failed');
       }
 
-      const result = await response.json();
-      
-      // Download the PDF
-      const blob = await fetch(result.pdfUrl).then(r => r.blob());
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${companyName}-website-audit.pdf`;
-      a.click();
+      // Read the PDF bytes directly
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
 
-      // Save PDF URL to Supabase
-      if (supabase && result.pdfUrl) {
-        const { error: updateError } = await supabase
+      // Trigger download
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `${companyName}-website-audit.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(downloadUrl);
+
+      // (Optional) Save the download URL back to Supabase
+      if (supabase) {
+        const { error } = await supabase
           .from('audit_leads')
-          .update({ pdf_url: result.pdfUrl })
+          .update({ pdf_url: downloadUrl })
           .eq('email', userEmail);
 
-        if (updateError) {
-          console.error('Error saving PDF URL to Supabase:', updateError);
-        } else {
-          console.log('PDF URL saved to Supabase successfully.');
+        if (error) {
+          console.error('Error saving PDF URL:', error);
         }
       }
     } catch (error) {
@@ -488,7 +491,7 @@ export default function WebsiteAuditModal({
           Get a comprehensive analysis of your website`s performance, SEO, and growth opportunities
         </p>
       </div>
-      
+
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-semibold text-primary dark:text-white mb-2">
@@ -506,7 +509,7 @@ export default function WebsiteAuditModal({
             Enter your domain (e.g., example.com) - we`ll add https:// automatically
           </p>
         </div>
-        
+
         <div>
           <label className="block text-sm font-semibold text-primary dark:text-white mb-2">
             Company Name *
@@ -521,7 +524,7 @@ export default function WebsiteAuditModal({
           />
         </div>
       </div>
-      
+
       <button
         onClick={handleStartAudit}
         disabled={!websiteUrl || !companyName}
@@ -535,7 +538,7 @@ export default function WebsiteAuditModal({
   const renderStep2 = () => (
     <div className="space-y-8">
 
-      
+
       {/* Header with animated progress */}
       <div className="text-center">
         <h2 className="text-2xl font-bold text-primary dark:text-white mb-2">
@@ -544,10 +547,10 @@ export default function WebsiteAuditModal({
         <p className="text-gray-600 dark:text-gray-300 mb-4">
           We`re running a comprehensive analysis of your website...
         </p>
-        
+
         {/* Progress Bar */}
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-4">
-          <div 
+          <div
             className="bg-gradient-to-r from-secondary to-secondary/80 h-2 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${((currentStep + 1) / auditSteps.length) * 100}%` }}
           ></div>
@@ -556,20 +559,19 @@ export default function WebsiteAuditModal({
           {currentStep + 1} of {auditSteps.length} steps completed
         </p>
       </div>
-      
+
       {/* Single Current Analysis Step with Transition */}
       <div className="min-h-[200px] flex items-center justify-center">
         {auditSteps.map((auditStep, index) => (
-          <div 
-            key={auditStep.id} 
-            className={`absolute transition-all duration-500 ease-in-out ${
-              index === currentStep 
-                ? 'opacity-100 translate-y-0 scale-100' 
-                : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
-            }`}
-            style={{ 
-              transform: index === currentStep 
-                ? 'translateY(0) scale(1)' 
+          <div
+            key={auditStep.id}
+            className={`absolute transition-all duration-500 ease-in-out ${index === currentStep
+              ? 'opacity-100 translate-y-0 scale-100'
+              : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
+              }`}
+            style={{
+              transform: index === currentStep
+                ? 'translateY(0) scale(1)'
                 : 'translateY(20px) scale(0.95)'
             }}
           >
@@ -577,41 +579,38 @@ export default function WebsiteAuditModal({
             {auditStep.status === 'running' && (
               <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 to-secondary/10 rounded-xl animate-pulse"></div>
             )}
-            
-            <div className={`relative flex items-center space-x-4 p-8 border-2 rounded-xl transition-all duration-300 w-96 ${
-              auditStep.status === 'completed' ? 'border-green-200 bg-green-50 dark:bg-green-900/10 dark:border-green-800' :
+
+            <div className={`relative flex items-center space-x-4 p-8 border-2 rounded-xl transition-all duration-300 w-96 ${auditStep.status === 'completed' ? 'border-green-200 bg-green-50 dark:bg-green-900/10 dark:border-green-800' :
               auditStep.status === 'running' ? 'border-secondary bg-secondary/5 dark:bg-secondary/10 dark:border-secondary/50' :
-              auditStep.status === 'error' ? 'border-red-200 bg-red-50 dark:bg-red-900/10 dark:border-red-800' :
-              'border-[#E1E6F5] dark:border-[#9199B5] bg-white dark:bg-[#112C3C]'
-            }`}>
-              
-              {/* Animated Icon Container */}
-              <div className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
-                auditStep.status === 'completed' ? 'bg-green-500 text-white scale-110' :
-                auditStep.status === 'running' ? 'bg-secondary text-white animate-pulse scale-110' :
-                auditStep.status === 'error' ? 'bg-red-500 text-white' :
-                'bg-gray-100 dark:bg-gray-700 text-gray-400'
+                auditStep.status === 'error' ? 'border-red-200 bg-red-50 dark:bg-red-900/10 dark:border-red-800' :
+                  'border-[#E1E6F5] dark:border-[#9199B5] bg-white dark:bg-[#112C3C]'
               }`}>
+
+              {/* Animated Icon Container */}
+              <div className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${auditStep.status === 'completed' ? 'bg-green-500 text-white scale-110' :
+                auditStep.status === 'running' ? 'bg-secondary text-white animate-pulse scale-110' :
+                  auditStep.status === 'error' ? 'bg-red-500 text-white' :
+                    'bg-gray-100 dark:bg-gray-700 text-gray-400'
+                }`}>
                 {auditStep.status === 'completed' ? (
                   <svg className="w-8 h-8 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                                  ) : auditStep.status === 'running' ? (
-                    <div className="w-8 h-8">{auditStep.icon}</div>
-                  ) : (
+                ) : auditStep.status === 'running' ? (
+                  <div className="w-8 h-8">{auditStep.icon}</div>
+                ) : (
                   <div className="w-8 h-8">{auditStep.icon}</div>
                 )}
               </div>
-              
+
               {/* Content */}
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className={`text-lg font-bold transition-colors duration-300 ${
-                    auditStep.status === 'completed' ? 'text-green-700 dark:text-green-400' :
+                  <h3 className={`text-lg font-bold transition-colors duration-300 ${auditStep.status === 'completed' ? 'text-green-700 dark:text-green-400' :
                     auditStep.status === 'running' ? 'text-secondary dark:text-secondary' :
-                    auditStep.status === 'error' ? 'text-red-700 dark:text-red-400' :
-                    'text-primary dark:text-white'
-                  }`}>
+                      auditStep.status === 'error' ? 'text-red-700 dark:text-red-400' :
+                        'text-primary dark:text-white'
+                    }`}>
                     {auditStep.title}
                   </h3>
                   {auditStep.status === 'running' && (
@@ -625,7 +624,7 @@ export default function WebsiteAuditModal({
                 <p className="text-base text-gray-600 dark:text-gray-300 mb-3">
                   {auditStep.description}
                 </p>
-                
+
                 {/* Status indicator */}
                 {auditStep.status === 'running' && (
                   <div className="flex items-center space-x-2">
@@ -635,7 +634,7 @@ export default function WebsiteAuditModal({
                     </span>
                   </div>
                 )}
-                
+
                 {auditStep.status === 'completed' && (
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -646,7 +645,7 @@ export default function WebsiteAuditModal({
                 )}
               </div>
             </div>
-            
+
             {/* Success animation overlay */}
             {auditStep.status === 'completed' && index === currentStep && (
               <div className="absolute inset-0 bg-green-500/10 rounded-xl animate-ping"></div>
@@ -654,12 +653,12 @@ export default function WebsiteAuditModal({
           </div>
         ))}
       </div>
-      
+
       {/* Bottom status */}
       <div className="text-center pt-4">
         <div className="inline-flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
           <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
-                          <span>Processing your website data<AnimatedDots /></span>
+          <span>Processing your website data<AnimatedDots /></span>
         </div>
       </div>
     </div>
@@ -753,7 +752,7 @@ export default function WebsiteAuditModal({
               </div>
             </div>
           </div>
-          
+
           {/* Urgency Banner - Service page styling */}
           <div className="bg-[#22C55E]/10 rounded-xl p-4 border border-[#22C55E]/20">
             <div className="flex items-center">
@@ -774,7 +773,7 @@ export default function WebsiteAuditModal({
           <div className="bg-gradient-to-r from-[#22C55E] to-[#16A34A] rounded-xl p-8 text-center mb-8">
             <h3 className="text-2xl font-bold text-white mb-3">🚨 Your Website is Costing You Money!</h3>
             <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-              Based on our analysis, your current website is likely costing you <span className="font-bold text-[#FBBF24]">$2,000-$5,000+ per month</span> in lost revenue. 
+              Based on our analysis, your current website is likely costing you <span className="font-bold text-[#FBBF24]">$2,000-$5,000+ per month</span> in lost revenue.
               A professional website could increase your conversions by <span className="font-bold text-[#FBBF24]">300-500%</span>.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -927,7 +926,7 @@ export default function WebsiteAuditModal({
                     </div>
                   </div>
                 )}
-                
+
                 {performanceScore < 70 && (
                   <div className="flex items-start p-4 bg-orange-100 rounded-lg border-l-4 border-orange-500 shadow-sm">
                     <div className="flex-shrink-0 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3">
@@ -1229,10 +1228,10 @@ export default function WebsiteAuditModal({
           {step === 3 && renderStep3()}
         </div>
       </Modal>
-      
-      <CalculatorModal 
-        open={showCalculator} 
-        onClose={() => setShowCalculator(false)} 
+
+      <CalculatorModal
+        open={showCalculator}
+        onClose={() => setShowCalculator(false)}
       />
     </>
   );
