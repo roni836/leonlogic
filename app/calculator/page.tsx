@@ -7,6 +7,7 @@ import Link from 'next/link';
 interface Option {
   label: string;
   description: string;
+  price?: number; // Optional price for options
 }
 
 interface Step {
@@ -18,61 +19,51 @@ const steps: Step[] = [
   {
     title: 'What kind of website do you need?',
     options: [
-      { label: 'Portfolio Website', description: 'Showcase your business.' },
-      { label: 'E-Commerce', description: 'Product management and online ordering' },
-      { label: 'E-Learning', description: 'Sell your knowledge with video courses.' },
-      { label: 'Online Booking', description: 'Ideal for accommodations, transportation or restaurants.' },
-    ],
-  },
-  {
-    title: 'Choose add-ons for your online store',
-    options: [
-      { label: 'Card Pay', description: 'Secure, fast and easy way to pay online.' },
-      { label: 'PDF Invoices', description: 'Automatically generate invoices for purchase orders.' },
-      { label: 'Multicurrency Switcher', description: 'Change currency for global transactions.' },
-      { label: 'Stock Manager', description: 'Easily manage product inventory.' },
-      { label: 'Shipping', description: 'Customers can choose between DPD, Packeta or GLS.' },
+      { label: 'Portfolio Website', description: 'Showcase your business.', price: 2500 },
+      { label: 'E-Commerce', description: 'Product management and online ordering', price: 1500 },
+      { label: 'E-Learning', description: 'Sell your knowledge with video courses.', price: 1200 },
+      { label: 'Online Booking', description: 'Ideal for accommodations, transportation or restaurants.', price: 1500 },
     ],
   },
   {
     title: 'How many pages do you need?',
     options: [
-      { label: 'Landing Page', description: 'All content on one page.' },
-      { label: '0-5 Pages', description: 'Home page with up to 4 additional subpages.' },
-      { label: '0-10 Pages', description: 'Home page with up to 9 additional subpages.' },
+      { label: 'Landing Page', description: 'All content on one page.', price: 1200 },
+      { label: '0-5 Pages', description: 'Home page with up to 4 additional subpages.', price: 1500 },
+      { label: '0-10 Pages', description: 'Home page with up to 9 additional subpages.', price: 2000 },
     ],
   },
   {
     title: 'Select the features to be added',
     options: [
-      { label: 'Google Analytics', description: 'Track website traffic and performance.' },
-      { label: 'Multi-language', description: 'Switch between languages. (translations not included)' },
-      { label: 'Online Chat Box', description: 'Allow visitors to chat directly from your website.' },
+      { label: 'Google Analytics', description: 'Track website traffic and performance.', price: 300 },
+      { label: 'Multi-language', description: 'Switch between languages. (translations not included)', price: 500 },
+      { label: 'Online Chat Box', description: 'Allow visitors to chat directly from your website.', price: 400 },
       { label: 'Search Field', description: 'Quickly find pages, posts or products.' },
-      { label: 'Contact Form', description: 'Simple name, phone, email and message entry form.' },
-      { label: 'Advanced Form', description: 'Form with special fields or features.' },
+      { label: 'Contact Form', description: 'Simple name, phone, email and message entry form.', price: 200 },
+      { label: 'Advanced Form', description: 'Form with special fields or features.', price: 400 },
     ],
   },
   {
     title: 'Get better Google search results',
     options: [
-      { label: 'Homepage SEO', description: 'Improves search rankings for homepage.' },
-      { label: 'I don\'t need this service', description: 'Your website will not be easily searchable in Google.' },
+      { label: 'Homepage SEO', description: 'Improves search rankings for homepage.', price: 300 },
+      { label: 'I don\'t need this service', description: 'Your website will not be easily searchable in Google.', price: 1500 },
     ],
   },
   {
     title: 'You will probably need these...',
     options: [
-      { label: 'Privacy Policy', description: 'Ensures that user data is protected.' },
-      { label: 'Cookie Policy', description: 'Tracks user preferences and browsing behavior.' },
+      { label: 'Privacy Policy', description: 'Ensures that user data is protected.', price: 200 },
+      { label: 'Cookie Policy', description: 'Tracks user preferences and browsing behavior.', price: 200 },
     ],
   },
   {
     title: 'When would you like to launch?',
     options: [
-      { label: 'Delivery in 4-8 weeks', description: 'Standard delivery.' },
-      { label: 'Delivery in 3-4 weeks', description: 'Expedited delivery.' },
-      { label: 'Delivery in 1-2 weeks', description: 'Express delivery.' },
+      { label: 'Delivery in 4-8 weeks', description: 'Standard delivery.', price: 100 },
+      { label: 'Delivery in 3-4 weeks', description: 'Expedited delivery.', price: 300 },
+      { label: 'Delivery in 1-2 weeks', description: 'Express delivery.', price: 500 },
     ],
   },
 ];
@@ -150,56 +141,23 @@ export default function CalculatorPage() {
   const nextStep = () => setStep((s) => Math.min(s + 1, steps.length));
   const prevStep = () => setStep((s) => Math.max(s - 1, 0));
 
-  // Calculate price based on selections
+  // Calculate price dynamically from steps data
   const calculatePrice = () => {
-    let basePrice = 1000;
-    
-    // Add price for each selection
+    let totalPrice = 0; // Start from zero or any base price if needed
+
     Object.keys(selected).forEach(stepKey => {
       const stepIndex = parseInt(stepKey);
       const optionIndex = selected[stepIndex];
-      
-      // Add different prices based on step
-      switch(stepIndex) {
-        case 0: // Website type
-          switch(optionIndex) {
-            case 0: basePrice += 500; break; // Portfolio
-            case 1: basePrice += 1200; break; // E-Commerce
-            case 2: basePrice += 800; break; // E-Learning
-            case 3: basePrice += 600; break; // Online Booking
-          }
-          break;
-        case 1: // Add-ons
-          basePrice += optionIndex * 200; // Each addon adds 200
-          break;
-        case 2: // Pages
-          switch(optionIndex) {
-            case 0: basePrice += 200; break; // Landing Page
-            case 1: basePrice += 400; break; // 0-5 Pages
-            case 2: basePrice += 600; break; // 0-10 Pages
-          }
-          break;
-        case 3: // Features
-          basePrice += optionIndex * 150; // Each feature adds 150
-          break;
-        case 4: // SEO
-          if (optionIndex === 0) basePrice += 300; // Homepage SEO
-          break;
-        case 5: // Legal
-          basePrice += optionIndex * 100; // Each legal doc adds 100
-          break;
-        case 6: // Delivery
-          switch(optionIndex) {
-            case 0: basePrice += 0; break; // Standard
-            case 1: basePrice += 500; break; // Expedited
-            case 2: basePrice += 1000; break; // Express
-          }
-          break;
+      const selectedOption = steps[stepIndex]?.options[optionIndex];
+
+      if (selectedOption && selectedOption.price) {
+        totalPrice += selectedOption.price;
       }
     });
-    
-    return basePrice;
+
+    return totalPrice;
   };
+
 
   const price = calculatePrice();
 
@@ -209,13 +167,13 @@ export default function CalculatorPage() {
 
   const getSelectionsData = () => {
     const selections: Record<string, any> = {};
-    
+
     Object.keys(selected).forEach(stepKey => {
       const stepIndex = parseInt(stepKey);
       const optionIndex = selected[stepIndex];
       const selectedOption = steps[stepIndex].options[optionIndex];
-      
-      switch(stepIndex) {
+
+      switch (stepIndex) {
         case 0:
           selections.website_type = selectedOption.label;
           break;
@@ -242,35 +200,35 @@ export default function CalculatorPage() {
           break;
       }
     });
-    
+
     return selections;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.privacyConsent) {
       alert('Please agree to the Privacy Policy');
       return;
     }
-    
+
     // Validate required fields
     if (!formData.name.trim()) {
       alert('Please enter your name');
       return;
     }
-    
+
     if (!formData.email.trim()) {
       alert('Please enter your email address');
       return;
     }
-    
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
-    
+
     try {
       const selections = getSelectionsData();
-      
+
       // Create the submission data with contact information and selections
       const submissionData = {
         name: formData.name.trim(),
@@ -290,13 +248,13 @@ export default function CalculatorPage() {
         utm_campaign: leadInfo.utmCampaign || null,
         source: 'calculator'
       };
-      
+
       console.log('Submitting calculator result with contact data:', submissionData);
-      
+
       const { error } = await supabase
         .from('calculator_results')
         .insert(submissionData);
-      
+
       if (error) {
         console.error('Error saving calculator result:', error);
         setSubmitStatus('error');
@@ -336,13 +294,13 @@ export default function CalculatorPage() {
               <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
                 <h3 className="font-semibold text-green-800 mb-2">Your Quote Summary:</h3>
                 <p className="text-green-700">
-                  <strong>Estimated Price:</strong> €{price.toLocaleString()}<br/>
-                  <strong>Website Type:</strong> {selected[0] !== undefined ? steps[0].options[selected[0]].label : 'Not selected'}<br/>
-                  <strong>Pages:</strong> {selected[2] !== undefined ? steps[2].options[selected[2]].label : 'Not selected'}<br/>
+                  <strong>Estimated Price:</strong> €{price.toLocaleString()}<br />
+                  <strong>Website Type:</strong> {selected[0] !== undefined ? steps[0].options[selected[0]].label : 'Not selected'}<br />
+                  <strong>Pages:</strong> {selected[2] !== undefined ? steps[2].options[selected[2]].label : 'Not selected'}<br />
                   <strong>Delivery:</strong> {selected[6] !== undefined ? steps[6].options[selected[6]].label : 'Not selected'}
                 </p>
               </div>
-              <button 
+              <button
                 onClick={() => setSubmitStatus('idle')}
                 className="btn"
               >
@@ -358,8 +316,8 @@ export default function CalculatorPage() {
                     key={opt.label}
                     className={`w-full flex items-center gap-4 p-6 rounded-2xl border transition-all duration-300 text-left shadow-sm text-primary dark:text-white font-semibold text-lg bg-white dark:bg-[#112C3C] relative
       ${selected[step] === idx
-        ? 'border-[3px] border-secondary shadow-lg'
-        : 'border-[3px] border-[#9199B5]/10 hover:border-secondary/60'}
+                        ? 'border-[3px] border-secondary shadow-lg'
+                        : 'border-[3px] border-[#9199B5]/10 hover:border-secondary/60'}
     `}
                     style={{ boxShadow: selected[step] === idx ? '0 4px 32px 0 rgba(7,214,115,0.10)' : undefined }}
                     onClick={() => handleSelect(idx)}
@@ -389,58 +347,58 @@ export default function CalculatorPage() {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
               <h2 className="text-2xl font-bold mb-2 text-primary dark:text-white">Get your free quote</h2>
-              
+
               {submitStatus === 'error' && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
                   There was an error submitting your request. Please try again.
                 </div>
               )}
-              
-              <input 
-                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" 
-                placeholder="Name *" 
-                required 
+
+              <input
+                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5"
+                placeholder="Name *"
+                required
                 value={formData.name}
                 onChange={(e) => handleFormChange('name', e.target.value)}
               />
-              <input 
-                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" 
-                placeholder="Company" 
+              <input
+                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5"
+                placeholder="Company"
                 value={formData.company}
                 onChange={(e) => handleFormChange('company', e.target.value)}
               />
-              <input 
-                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" 
-                placeholder="Email *" 
-                required 
-                type="email" 
+              <input
+                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5"
+                placeholder="Email *"
+                required
+                type="email"
                 value={formData.email}
                 onChange={(e) => handleFormChange('email', e.target.value)}
               />
-              <input 
-                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" 
-                placeholder="Phone" 
+              <input
+                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5"
+                placeholder="Phone"
                 value={formData.phone}
                 onChange={(e) => handleFormChange('phone', e.target.value)}
               />
-              <textarea 
-                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5 min-h-[100px]" 
-                placeholder="Message" 
+              <textarea
+                className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5 min-h-[100px]"
+                placeholder="Message"
                 value={formData.message}
                 onChange={(e) => handleFormChange('message', e.target.value)}
               />
               <label className="flex items-center gap-2 text-sm mt-2">
-                <input 
-                  type="checkbox" 
-                  required 
+                <input
+                  type="checkbox"
+                  required
                   className="accent-secondary"
                   checked={formData.privacyConsent}
                   onChange={(e) => handleFormChange('privacyConsent', e.target.checked)}
                 />
                 Yes, I agree to the <Link href="/privacy-policy" className="underline text-secondary">Privacy Policy</Link>.
               </label>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isSubmitting}
                 className="btn w-full sm:w-auto sm:px-20 mt-5 disabled:opacity-50"
               >
