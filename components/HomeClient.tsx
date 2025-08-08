@@ -30,9 +30,9 @@ export default function HomeClient() {
         const form = e.target as HTMLFormElement;
         const emailInput = form.querySelector('input[type="text"]') as HTMLInputElement;
         const email = emailInput.value.trim();
-        
+
         console.log('Email:', email);
-        
+
         if (email && email.includes('@')) {
             console.log('Valid email, opening modal...');
             setUserEmail(email);
@@ -44,15 +44,15 @@ export default function HomeClient() {
     };
 
     console.log('Modal state:', showAuditModal);
-    
+
     return (
         <>
-            <WebsiteAuditModal 
-                isOpen={showAuditModal} 
-                onClose={() => { setShowAuditModal(false); setUserEmail(''); }} 
+            <WebsiteAuditModal
+                isOpen={showAuditModal}
+                onClose={() => { setShowAuditModal(false); setUserEmail(''); }}
                 userEmail={userEmail}
             />
-            
+
             <section className="mb-16 relative pb-20 pt-32 md:mb-32 md:pb-24 md:pt-52 dark:bg-primary">
                 <div className="bg-[#9199B5]/[0.12] absolute w-[calc(100vw-0px)] 2xl:w-[calc(100vw-30px)] h-[calc(100%+50px)] bottom-0 end-0 rtl:rounded-br-[50px] ltr:rounded-bl-[50px] rtl:-skew-y-2 ltr:skew-y-2"></div>
                 <div className="container relative">
@@ -60,19 +60,19 @@ export default function HomeClient() {
                         <div>
                             <span className="mb-7 inline-flex items-center gap-2.5 rounded-full bg-gray px-5 py-2 font-semibold uppercase text-white">
                                 <ThunderIcon className="h-6 w-3.5" />
-                                Welcome to Leonlogic
+                                Digitálna agentúra pre váš rast
                             </span>
                             <h1
                                 className="mb-5 text-3xl font-black uppercase md:text-5xl 2xl:text-[70px] 2xl:leading-tight dark:text-white"
                                 data-aos="zoom-in"
                                 data-aos-duration="1000"
                             >
-                                DIGITAL MARKETING.
+                                Získajte bezplatný 
                                 <br />
-                                CREATIVE <span className="bg-[url('/assets/images/line.svg')] bg-bottom-left bg-no-repeat">DESIGN</span>.
+                                audit <span className="bg-[url('/assets/images/line.svg')] bg-bottom-left bg-no-repeat">webu</span>.
                             </h1>
                             <p className="mb-7 max-w-[590px] text-lg text-[#4B5576] dark:text-[#9199B5]">
-                                Digital Agency offering unique solutions to create digital presence and increase your sales.
+                               Získajte bezplatnú analýzu webu a SEO audit už za 3 minúty! Odhaľte skryté príležitosti na zvýšenie návštevnosti a predaja. Pomôžeme vám rásť a dosiahnuť úspech.
                             </p>
 
                             <div className="mb-2.5 w-full max-w-[350px]">
@@ -133,7 +133,7 @@ export default function HomeClient() {
                             height={139}
                         />
                         <div className="absolute -start-px -top-px border-b-30 rtl:border-r-30 ltr:border-l-30 border-b-transparent rtl:border-r-white ltr:border-l-white dark:rtl:border-r-primary dark:ltr:border-l-primary md:border-b-70 md:rtl:border-r-70 md:ltr:border-l-70"></div>
-                        <h2 className="mb-3 leading-tight text-secondary md:mb-6 md:text-[22px]">We working with world class partners.</h2>
+                        <h2 className="mb-3 leading-tight text-secondary md:mb-6 md:text-[22px]">Medzi našich klientov patria popredné firmy a lídri vo svojich odvetviach.</h2>
                         <PartnerSlider />
                     </div>
                 </div>
@@ -143,11 +143,11 @@ export default function HomeClient() {
                 <div className="container">
                     <div className="mb-6 text-center md:mb-12">
                         <p className="mb-7 inline-flex rounded-full dark:bg-success-light/10 bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                            what we create
+                            Najnovšie články
                         </p>
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                            We provide wide range of <br />
-                            <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">digital services</span>
+                           Široká škála digitálnych služieb<br />
+                            <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">pre váš úspech.</span>
                         </h2>
                     </div>
                     <DigitalServicesSlider />
@@ -159,18 +159,17 @@ export default function HomeClient() {
                     <div className="grid gap-10 rounded-2xl bg-primary dark:bg-[#9199B5]/[0.12] px-4 md:px-10 lg:grid-cols-2 2xl:px-24">
                         <div className="pt-10 md:pt-20 lg:max-w-lg lg:pb-28">
                             <p className="mb-8 inline-flex items-center gap-1 text-xl font-bold uppercase italic text-secondary">
-                                <span className="inline-flex h-4 w-4 rounded-full border-[3px] border-success"></span>WE ARE Leonlogic Theme
+                                <span className="inline-flex h-4 w-4 rounded-full border-[3px] border-success"></span>SME LEONLOGIC
                             </p>
 
                             <h2 className="mb-2.5 text-2xl font-extrabold leading-snug text-white md:text-[40px]">
-                                Great digital
+                                Naše hodnoty:
                                 <br />
-                                Agency <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat font-light italic">SINCE 1985</span>
+                                <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat font-light italic">Kreativita, kvalita a dôvera.</span>
                             </h2>
 
                             <p className="mb-7 text-white">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard
-                                dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                Naše hodnoty sú základom všetkého, čo robíme. Veríme v silu inovácií, dôvery a precíznosti, aby sme vám priniesli digitálne riešenia, ktoré nielen fungujú, ale aj inšpirujú.
                             </p>
 
                             <Link
@@ -193,10 +192,10 @@ export default function HomeClient() {
                 <div className="container">
                     <div className="mb-6 text-center md:mb-12">
                         <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                            SELECTED PROJECTS
+                            Nový projekt
                         </p>
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                            Digital <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">Case Studies</span>.
+                            Digital <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">Vybrané projekty</span>.
                         </h2>
                     </div>
                     <div className="grid gap-7 sm:grid-cols-2">

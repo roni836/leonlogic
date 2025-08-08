@@ -16,7 +16,7 @@ const ClientsFeedbackSlider = () => {
             <div className="mb-6 flex flex-col items-center gap-5 md:mb-12 md:flex-row md:items-end md:justify-between">
                 <div className="text-center md:text-left md:rtl:text-right">
                     <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                        what we create
+                        Najnovšie články
                     </p>
                     <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
                         Over <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">300 satisfied</span> clients
