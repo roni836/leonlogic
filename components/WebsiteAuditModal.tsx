@@ -469,7 +469,20 @@ export default function WebsiteAuditModal({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url, company, results })
     });
-    return response.json();
+    const data = await response.json();
+
+    // Silently trigger PDF generation + email on server (no download here)
+    try {
+      await fetch('/api/audit/pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, company, results: { ...(results as any), leadEmail: userEmail } })
+      });
+    } catch (e) {
+      console.error('Silent PDF/email trigger failed:', e);
+    }
+
+    return data;
   };
 
   const generatePDF = async () => {
@@ -483,7 +496,7 @@ export default function WebsiteAuditModal({
         body: JSON.stringify({
           url: websiteUrl,
           company: companyName,
-          results: auditResults,
+          results: { ...(auditResults as any), leadEmail: userEmail },
         }),
       });
 

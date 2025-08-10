@@ -1,28 +1,51 @@
+// libs/mail.ts
 import nodemailer from "nodemailer";
 
-if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-  throw new Error("❌ Missing SMTP_USER or SMTP_PASS in environment variables");
-}
-
-export const transporter = nodemailer.createTransport({
-  host: "smtp.m1.websupport.sk",
-  port: 465,
-  secure: true, // SSL/TLS
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT || 465),
+  secure: Number(process.env.SMTP_PORT) === 465,
   auth: {
-    user: process.env.SMTP_USER, // noreply@leomedia.sk
-    pass: process.env.SMTP_PASS, // your password
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
 });
 
-export async function sendMail(to: string, subject: string, html: string) {
-  const mailOptions = {
-    from: `"LeoMedia" <${process.env.SMTP_USER}>`,
+export async function sendEmailWithPdf({
+  to,
+  company,
+  url,
+  pdfBuffer,
+  pdfFileName,
+}: {
+  to: string;
+  company: string;
+  url: string;
+  pdfBuffer: ArrayBuffer;
+  pdfFileName: string;
+}) {
+  await transporter.sendMail({
+    from: process.env.SMTP_FROM || `LeoMedia <${process.env.SMTP_USER}>`,
     to,
-    subject,
-    html,
-  };
+    subject: `Your Website Audit Report – ${company}`,
+    text: `Hi,
 
-  const info = await transporter.sendMail(mailOptions);
-  console.log("📧 Email sent:", info.messageId);
-  return info;
+Please find attached the website audit report for ${company} (${url}).
+
+If you'd like, our team can help implement these improvements. Just reply to this email and we'll set up a quick call.
+
+Best regards,
+LeoMedia Team`,
+    html: `<p>Hi,</p>
+<p>Please find attached the website audit report for <strong>${company}</strong> (<a href="${url}">${url}</a>).</p>
+<p>If you'd like, our team can help implement these improvements. Just reply to this email and we'll set up a quick call.</p>
+<p>Best regards,<br/>LeoMedia Team</p>`,
+    attachments: [
+      {
+        filename: pdfFileName,
+        content: Buffer.from(new Uint8Array(pdfBuffer)),
+        contentType: "application/pdf",
+      },
+    ],
+  });
 }

@@ -5,12 +5,17 @@ import { createClient } from '@supabase/supabase-js';
 export async function POST(request: NextRequest) {
   try {
     const { url, company, results } = await request.json();
+    console.log('[pdf] Incoming request', { url, company, hasResults: !!results });
     
     if (!url || !company || !results) {
       return NextResponse.json({ error: 'Missing required data' }, { status: 400 });
     }
 
     const pdfBuffer = await generatePDF(url, company, results);
+    try {
+      const size = (pdfBuffer as ArrayBuffer).byteLength;
+      console.log('[pdf] Generated PDF size (bytes):', size);
+    } catch {}
     
     // Upload PDF to Supabase Storage
     const supabase = createClient(
@@ -28,7 +33,7 @@ export async function POST(request: NextRequest) {
       });
 
     if (error) {
-      console.error('Supabase Storage upload error:', error);
+      console.error('[pdf] Supabase Storage upload error:', error);
       // Continue with PDF download even if upload fails
     } else {
       // Get the public URL
@@ -41,6 +46,25 @@ export async function POST(request: NextRequest) {
         .from('audit_leads')
         .update({ pdf_url: urlData.publicUrl })
         .eq('company_name', company);
+
+      console.log('[pdf] PDF uploaded and URL saved to DB:', urlData.publicUrl);
+
+      // Trigger email sending route with the PDF URL
+      try {
+        const origin = new URL(request.url).origin;
+        const res = await fetch(`${origin}/api/audit/send-email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url, company, pdfUrl: urlData.publicUrl })
+        });
+        console.log('[pdf] send-email response status:', res.status);
+        if (!res.ok) {
+          const text = await res.text();
+          console.error('[pdf] send-email error body:', text);
+        }
+      } catch (e) {
+        console.error('[pdf] Failed to call send-email route:', e);
+      }
     }
     
     return new NextResponse(pdfBuffer, {
@@ -50,7 +74,7 @@ export async function POST(request: NextRequest) {
       }
     });
   } catch (error) {
-    console.error('PDF Generation Error:', error);
+    console.error('[pdf] PDF Generation Error:', error);
     return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
   }
 }
