@@ -296,6 +296,37 @@ export default function WebsiteAuditModal({
       auditSteps[5].status = 'error';
     }
 
+    // Get AI-powered recommendations from Gemini and merge into SEO issues/recommendations
+    try {
+      const aiRecs = await analyzeRecommendations(formattedUrl, companyName, results);
+      if (aiRecs) {
+        const criticalIssueTexts = (aiRecs.criticalIssues || []).map((ci: any) => `${ci.title}: ${ci.description}`);
+        results.seo.issues = [
+          ...(results.seo.issues || []),
+          ...criticalIssueTexts,
+        ];
+
+        const combinedRecs = [
+          ...((aiRecs.seoRecommendations as string[]) || []),
+          ...((aiRecs.uxRecommendations as string[]) || []),
+          ...((aiRecs.quickWins as string[]) || []),
+        ];
+        results.seo.recommendations = [
+          ...(results.seo.recommendations || []),
+          ...combinedRecs,
+        ];
+
+        if (aiRecs.indirectSuggestion) {
+          results.seo.indirectSuggestion = aiRecs.indirectSuggestion;
+        }
+        if (aiRecs.summary) {
+          results.seo.geminiSummary = aiRecs.summary;
+        }
+      }
+    } catch (err) {
+      console.error('AI recommendations error:', err);
+    }
+
     console.log('Audit completed, final results:', results);
     setAuditResults(results);
     setStep(3);
@@ -428,6 +459,15 @@ export default function WebsiteAuditModal({
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url })
+    });
+    return response.json();
+  };
+
+  const analyzeRecommendations = async (url: string, company: string, results: AuditResult) => {
+    const response = await fetch('/api/audit/recommendations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url, company, results })
     });
     return response.json();
   };
@@ -1174,6 +1214,11 @@ export default function WebsiteAuditModal({
                   </div>
                 )}
               </div>
+              {seoData.indirectSuggestion && (
+                <div className="mt-4 p-4 bg-[#112C3C] text-white rounded-xl">
+                  <p className="text-sm">{seoData.indirectSuggestion}</p>
+                </div>
+              )}
             </div>
           </div>
 
