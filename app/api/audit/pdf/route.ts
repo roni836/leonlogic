@@ -1,26 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import jsPDF from 'jspdf';
+import puppeteer from 'puppeteer';
 import { createClient } from '@supabase/supabase-js';
 
 export async function POST(request: NextRequest) {
   try {
     const { url, company, results } = await request.json();
     console.log('[pdf] Incoming request', { url, company, hasResults: !!results });
-    
+
     if (!url || !company || !results) {
       return NextResponse.json({ error: 'Missing required data' }, { status: 400 });
     }
 
     const pdfBuffer = await generatePDF(url, company, results);
     try {
-      const size = (pdfBuffer as ArrayBuffer).byteLength;
+      const size = Buffer.from(pdfBuffer).byteLength;
       console.log('[pdf] Generated PDF size (bytes):', size);
-    } catch {}
-    
+    } catch { }
+
     // Upload PDF to Supabase Storage
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      // process.env.SUPABASE_SERVICE_ROLE_KEY!
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
 
@@ -66,8 +65,8 @@ export async function POST(request: NextRequest) {
         console.error('[pdf] Failed to call send-email route:', e);
       }
     }
-    
-    return new NextResponse(pdfBuffer, {
+
+    return new NextResponse(Buffer.from(pdfBuffer), {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="${company}-website-audit.pdf"`
@@ -80,256 +79,415 @@ export async function POST(request: NextRequest) {
 }
 
 async function generatePDF(url: string, company: string, results: any) {
-  const doc = new jsPDF();
-  
-  // Set up colors
-  const primaryColor = [17, 44, 60]; // #112C3C
-  const accentColor = [34, 197, 94]; // #22C55E
-  const warningColor = [239, 68, 68]; // #EF4444
-  const successColor = [34, 197, 94]; // #22C55E
-  
-  // Header with branding
-  doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.rect(0, 0, 210, 30, 'F');
-  
-  // Draw LeonLogic Logo using SVG paths
-  doc.setFillColor(255, 255, 255);
-  
-  // Main triangle shape (L)
-  doc.rect(20, 8, 12, 15, 'F');
-  doc.rect(20, 8, 25, 4, 'F');
-  
-  // Inner square
-  doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.rect(22, 10, 8, 8, 'F');
-  
-  // Company name
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(16);
-  doc.setFont('helvetica', 'bold');
-  doc.text('LEONLOGIC', 50, 18);
-  
-  // Subtitle
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Professional Website Audit Report', 50, 25);
-  
-  // Main title
-  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.setFontSize(24);
-  doc.setFont('helvetica', 'bold');
-  doc.text('Website Audit Report', 20, 50);
-  
-  // Company info section - Fixed layout
-  doc.setFillColor(248, 250, 252); // Light gray background
-  doc.rect(20, 60, 170, 30, 'F');
-  
-  // Border for company info
-  doc.setDrawColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.setLineWidth(0.5);
-  doc.rect(20, 60, 170, 30, 'S');
-  
-  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.setFontSize(12);
-  doc.setFont('helvetica', 'bold');
-  doc.text('Company Information', 25, 72);
-  
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.text(`Company: ${company}`, 25, 82);
-  doc.text(`Website: ${url}`, 25, 90);
-  doc.text(`Date: ${new Date().toLocaleDateString()}`, 25, 98);
-  
-  // Executive Summary
   const seoScore = results.seo?.score || 0;
   const performanceScore = results.performance?.score || 0;
   const usabilityScore = results.usability?.score || 0;
   const technicalScore = results.technical?.score || 0;
-  
-  const overallScore = Math.round((seoScore + performanceScore + usabilityScore + technicalScore) / 4);
-  
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('Executive Summary', 20, 105);
-  
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(0, 0, 0);
-  
-  const summaryText = `Your website received an overall score of ${overallScore}/100. `;
-  const summaryText2 = overallScore >= 80 ? 'Your website is performing excellently with room for minor improvements.' :
-                      overallScore >= 60 ? 'Your website has good potential but needs optimization in several areas.' :
-                      'Your website requires significant improvements to compete effectively online.';
-  
-  // Split text to fit properly
-  const summaryLines = doc.splitTextToSize(summaryText + summaryText2, 170);
-  doc.text(summaryLines, 20, 115);
-  
-  // Scores Overview with design
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('Performance Scores', 20, 135);
-  
-  // Create styled table
-  const tableData = [
-    ['Category', 'Score', 'Status'],
-    ['SEO Performance', `${seoScore}/100`, getScoreStatus(seoScore)],
-    ['Page Speed', `${performanceScore}/100`, getScoreStatus(performanceScore)],
-    ['User Experience', `${usabilityScore}/100`, getScoreStatus(usabilityScore)],
-    ['Technical Health', `${technicalScore}/100`, getScoreStatus(technicalScore)]
-  ];
-  
-  let yPosition = 145;
-  tableData.forEach((row, rowIndex) => {
-    let xPosition = 20;
-    
-    // Header row styling
-    if (rowIndex === 0) {
-      doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-      doc.rect(xPosition - 2, yPosition - 5, 170, 8, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'bold');
-    } else {
-      doc.setFillColor(rowIndex % 2 === 0 ? 248 : 255, 248, 248);
-      doc.rect(xPosition - 2, yPosition - 5, 170, 8, 'F');
-      doc.setTextColor(0, 0, 0);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-    }
-    
-    row.forEach((cell, cellIndex) => {
-      let cellX = xPosition;
-      let cellWidth = cellIndex === 0 ? 80 : (cellIndex === 1 ? 40 : 50);
-      
-      // Color code the status
-      if (rowIndex > 0 && cellIndex === 2) {
-        const score = rowIndex === 1 ? seoScore : rowIndex === 2 ? performanceScore : rowIndex === 3 ? usabilityScore : technicalScore;
-        if (score >= 80) {
-          doc.setTextColor(successColor[0], successColor[1], successColor[2]);
-        } else if (score >= 60) {
-          doc.setTextColor(245, 158, 11); // Orange
-        } else {
-          doc.setTextColor(warningColor[0], warningColor[1], warningColor[2]);
-        }
-      }
-      
-      doc.text(cell, cellX, yPosition);
-      xPosition += cellWidth;
-    });
-    
-    yPosition += 8;
-  });
-  
-  // Critical Issues Section
-  yPosition += 10;
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('Critical Issues Found', 20, yPosition);
-  
-  yPosition += 10;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(0, 0, 0);
-  
-  const issues = [];
-  if (usabilityScore < 50) issues.push(`• Poor User Experience (${usabilityScore}/100) - ${100 - usabilityScore}% of visitors likely leave`);
-  if (performanceScore < 70) issues.push(`• Slow Loading Speed (${performanceScore}/100) - Page takes ${performanceScore < 50 ? '5+' : '3+'} seconds to load`);
-  if (seoScore < 80) issues.push(`• Missing SEO Elements (${seoScore}/100) - Not ranking for key terms`);
-  if (technicalScore < 60) issues.push(`• Technical Issues (${technicalScore}/100) - Server and code optimization needed`);
-  
-  if (issues.length === 0) {
-    doc.text('• No critical issues found - your website is performing well!', 20, yPosition);
-  } else {
-    issues.forEach((issue, index) => {
-      if (yPosition > 250) {
-        doc.addPage();
-        yPosition = 20;
-      }
-      doc.setTextColor(warningColor[0], warningColor[1], warningColor[2]);
-      doc.text(issue, 20, yPosition);
-      yPosition += 6;
-    });
-  }
-  
-  // Recommendations Section
-  yPosition += 10;
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('Recommendations', 20, yPosition);
-  
-  yPosition += 10;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(0, 0, 0);
-  
-  const recommendations = [
-    '• Implement responsive design for better mobile experience',
-    '• Optimize images and code for faster loading speeds',
-    '• Add proper meta tags and structured data for SEO',
-    '• Improve user interface and call-to-action placement',
-    '• Regular website maintenance and updates'
-  ];
-  
-  recommendations.forEach((rec, index) => {
-    if (yPosition > 250) {
-      doc.addPage();
-      yPosition = 20;
-    }
-    doc.setTextColor(successColor[0], successColor[1], successColor[2]);
-    doc.text(rec, 20, yPosition);
-    yPosition += 6;
-  });
-  
-  // CTA Section - Improved design
-  yPosition += 15;
-  
-  // Main CTA box with gradient effect
-  doc.setFillColor(accentColor[0], accentColor[1], accentColor[2]);
-  doc.rect(20, yPosition - 5, 170, 35, 'F');
-  
-  // Add border for better definition
-  doc.setDrawColor(accentColor[0], accentColor[1], accentColor[2]);
-  doc.setLineWidth(1);
-  doc.rect(20, yPosition - 5, 170, 35, 'S');
-  
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(16);
-  doc.setFont('helvetica', 'bold');
-  doc.text('Get Your Free Website Quote Now!', 25, yPosition + 8);
-  
-  doc.setFontSize(11);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Visit our website to get a professional quote:', 25, yPosition + 20);
-  
-  // Website link with underline effect
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.text('leonlogic.com', 25, yPosition + 30);
-  
-  // Add underline
-  doc.setLineWidth(0.5);
-  doc.line(25, yPosition + 32, 85, yPosition + 32);
-  
-  // Footer
-  doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.rect(0, 280, 210, 20, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(8);
-  doc.setFont('helvetica', 'normal');
-  doc.text('This audit was generated by LeonLogic Professional Website Analysis Tool', 20, 290);
-  doc.text('For professional web development services, contact our team at leonlogic.com', 20, 295);
-  
-  return doc.output('arraybuffer');
-}
 
-function getScoreStatus(score: number): string {
-  if (score >= 80) return 'Excellent';
-  if (score >= 60) return 'Good';
-  if (score >= 40) return 'Needs Work';
-  return 'Critical';
+  const overallScore = Math.round((seoScore + performanceScore + usabilityScore + technicalScore) / 4);
+
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return '#22c55e';
+    if (score >= 60) return '#f59e0b';
+    return '#ef4444';
+  };
+
+  const getScoreStatus = (score: number) => {
+    if (score >= 80) return 'Excellent';
+    if (score >= 60) return 'Good';
+    if (score >= 40) return 'Needs Work';
+    return 'Critical';
+  };
+
+  const getScoreBgColor = (score: number) => {
+    if (score >= 80) return '#dcfce7';
+    if (score >= 60) return '#fef3c7';
+    return '#fee2e2';
+  };
+
+  const issues = [];
+  if (usabilityScore < 50) issues.push(`Poor User Experience (${usabilityScore}/100) - ${100 - usabilityScore}% of visitors likely leave`);
+  if (performanceScore < 70) issues.push(`Slow Loading Speed (${performanceScore}/100) - Page takes ${performanceScore < 50 ? '5+' : '3+'} seconds to load`);
+  if (seoScore < 80) issues.push(`Missing SEO Elements (${seoScore}/100) - Not ranking for key terms`);
+  if (technicalScore < 60) issues.push(`Technical Issues (${technicalScore}/100) - Server and code optimization needed`);
+
+  const recommendations = [
+    'Implement responsive design for better mobile experience',
+    'Optimize images and code for faster loading speeds',
+    'Add proper meta tags and structured data for SEO',
+    'Improve user interface and call-to-action placement',
+    'Regular website maintenance and updates'
+  ];
+
+  // Create complete HTML document with Tailwind CSS
+  const fullHtml = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Website Audit Report - ${company}</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: '#112C3C',
+                accent: '#22C55E',
+              }
+            }
+          }
+        }
+      </script>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+          font-family: 'Inter', sans-serif;
+        }
+        @media print {
+          body { margin: 0; }
+          .page-break { page-break-before: always; }
+        }
+        .progress-bar {
+          background: linear-gradient(90deg, ${getScoreColor(overallScore)} 0%, ${getScoreColor(overallScore)} ${overallScore}%, #e5e7eb ${overallScore}%, #e5e7eb 100%);
+        }
+      </style>
+    </head>
+    <body class="min-h-screen bg-white">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-[#112C3C] to-[#1a3a4f] text-white p-8">
+        <div class="flex items-center mb-4">
+          <!-- LeonLogic Logo -->
+          <div class="relative w-16 h-16 mr-6">
+            <div class="absolute inset-0 bg-white rounded-lg shadow-lg"></div>
+            <div class="absolute top-2 left-2 w-12 h-12 bg-[#112C3C] rounded-lg"></div>
+            <div class="absolute top-4 left-4 w-8 h-8 bg-white rounded"></div>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold tracking-wide">LEONLOGIC</h1>
+            <p class="text-lg text-gray-300">Professional Website Audit Report</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="p-8">
+        <!-- Title -->
+        <div class="text-center mb-8">
+          <h2 class="text-4xl font-bold text-[#112C3C] mb-2">Website Audit Report</h2>
+          <p class="text-gray-600 text-lg">Comprehensive Analysis & Recommendations</p>
+        </div>
+
+        <!-- Overall Score Card -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-6 mb-8 text-center">
+          <h3 class="text-2xl font-bold text-[#112C3C] mb-4">Overall Performance Score</h3>
+          <div class="flex items-center justify-center mb-4">
+            <div class="relative w-32 h-32">
+              <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="54"
+                  fill="none"
+                  stroke="#e5e7eb"
+                  stroke-width="8"
+                />
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="54"
+                  fill="none"
+                  stroke="${getScoreColor(overallScore)}"
+                  stroke-width="8"
+                  stroke-dasharray="${(overallScore / 100) * 339.292} 339.292"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-3xl font-bold" style="color: ${getScoreColor(overallScore)}">
+                  ${overallScore}
+                </span>
+              </div>
+            </div>
+          </div>
+          <p class="text-lg text-gray-700">
+            ${overallScore >= 80 ? 'Excellent Performance' :
+      overallScore >= 60 ? 'Good Performance' :
+        overallScore >= 40 ? 'Needs Improvement' : 'Critical Issues'}
+          </p>
+        </div>
+
+        <!-- Company Information -->
+        <div class="bg-gray-50 border-2 border-[#112C3C] rounded-xl p-6 mb-8">
+          <h3 class="text-xl font-bold text-[#112C3C] mb-4 flex items-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            Company Information
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div class="bg-white p-4 rounded-lg border">
+              <span class="font-semibold text-[#112C3C]">Company:</span>
+              <p class="text-gray-800 mt-1">${company}</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border">
+              <span class="font-semibold text-[#112C3C]">Website:</span>
+              <p class="text-gray-800 mt-1 break-all">${url}</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border">
+              <span class="font-semibold text-[#112C3C]">Audit Date:</span>
+              <p class="text-gray-800 mt-1">${new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border">
+              <span class="font-semibold text-[#112C3C]">Report Generated:</span>
+              <p class="text-gray-800 mt-1">${new Date().toLocaleString('en-US')}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold text-[#112C3C] mb-4 flex items-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Executive Summary
+          </h3>
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 p-6 rounded-lg">
+            <p class="text-gray-800 text-lg leading-relaxed">
+              Your website received an overall score of <span class="font-bold text-[#112C3C]">${overallScore}/100</span>. 
+              ${overallScore >= 80 ? 'Your website is performing excellently with room for minor improvements. This strong foundation positions you well for continued online success.' :
+      overallScore >= 60 ? 'Your website has good potential but needs optimization in several areas. With targeted improvements, you can significantly enhance your online presence and user experience.' :
+        'Your website requires significant improvements to compete effectively online. Our comprehensive recommendations will help you transform your digital presence and achieve better results.'}
+            </p>
+          </div>
+        </div>
+
+        <!-- Performance Scores -->
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold text-[#112C3C] mb-6 flex items-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Detailed Performance Analysis
+          </h3>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- SEO Performance -->
+            <div class="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="text-lg font-semibold text-[#112C3C]">SEO Performance</h4>
+                <span class="text-2xl font-bold" style="color: ${getScoreColor(seoScore)}">${seoScore}/100</span>
+              </div>
+              <div class="mb-4">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                  <span>Score</span>
+                  <span>${seoScore}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    class="h-3 rounded-full"
+                    style="width: ${seoScore}%; background-color: ${getScoreColor(seoScore)}"
+                  ></div>
+                </div>
+              </div>
+              <div class="inline-flex px-3 py-1 text-sm font-semibold rounded-full" style="background-color: ${getScoreBgColor(seoScore)}; color: ${getScoreColor(seoScore)}">
+                ${getScoreStatus(seoScore)}
+              </div>
+            </div>
+
+            <!-- Page Speed -->
+            <div class="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="text-lg font-semibold text-[#112C3C]">Page Speed</h4>
+                <span class="text-2xl font-bold" style="color: ${getScoreColor(performanceScore)}">${performanceScore}/100</span>
+              </div>
+              <div class="mb-4">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                  <span>Score</span>
+                  <span>${performanceScore}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    class="h-3 rounded-full"
+                    style="width: ${performanceScore}%; background-color: ${getScoreColor(performanceScore)}"
+                  ></div>
+                </div>
+              </div>
+              <div class="inline-flex px-3 py-1 text-sm font-semibold rounded-full" style="background-color: ${getScoreBgColor(performanceScore)}; color: ${getScoreColor(performanceScore)}">
+                ${getScoreStatus(performanceScore)}
+              </div>
+            </div>
+
+            <!-- User Experience -->
+            <div class="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="text-lg font-semibold text-[#112C3C]">User Experience</h4>
+                <span class="text-2xl font-bold" style="color: ${getScoreColor(usabilityScore)}">${usabilityScore}/100</span>
+              </div>
+              <div class="mb-4">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                  <span>Score</span>
+                  <span>${usabilityScore}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    class="h-3 rounded-full"
+                    style="width: ${usabilityScore}%; background-color: ${getScoreColor(usabilityScore)}"
+                  ></div>
+                </div>
+              </div>
+              <div class="inline-flex px-3 py-1 text-sm font-semibold rounded-full" style="background-color: ${getScoreBgColor(usabilityScore)}; color: ${getScoreColor(usabilityScore)}">
+                ${getScoreStatus(usabilityScore)}
+              </div>
+            </div>
+
+            <!-- Technical Health -->
+            <div class="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="text-lg font-semibold text-[#112C3C]">Technical Health</h4>
+                <span class="text-2xl font-bold" style="color: ${getScoreColor(technicalScore)}">${technicalScore}/100</span>
+              </div>
+              <div class="mb-4">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                  <span>Score</span>
+                  <span>${technicalScore}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    class="h-3 rounded-full"
+                    style="width: ${technicalScore}%; background-color: ${getScoreColor(technicalScore)}"
+                  ></div>
+                </div>
+              </div>
+              <div class="inline-flex px-3 py-1 text-sm font-semibold rounded-full" style="background-color: ${getScoreBgColor(technicalScore)}; color: ${getScoreColor(technicalScore)}">
+                ${getScoreStatus(technicalScore)}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Critical Issues -->
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold text-[#112C3C] mb-4 flex items-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+            Critical Issues Found
+          </h3>
+          ${issues.length === 0 ? `
+            <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+              <div class="flex items-center">
+                <svg class="w-8 h-8 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-green-800 font-medium text-lg">No critical issues found - your website is performing well!</p>
+              </div>
+            </div>
+          ` : `
+            <div class="space-y-4">
+              ${issues.map((issue: string) => `
+                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                  <div class="flex items-start">
+                    <svg class="w-6 h-6 text-red-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                    <p class="text-red-800 text-lg">• ${issue}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
+        </div>
+
+        <!-- Recommendations -->
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold text-[#112C3C] mb-4 flex items-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            Strategic Recommendations
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${recommendations.map((rec: string) => `
+              <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                <div class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  <p class="text-green-800">• ${rec}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-[#22C55E] to-[#16a34a] text-white p-8 rounded-xl text-center shadow-lg">
+          <div class="max-w-2xl mx-auto">
+            <h3 class="text-3xl font-bold mb-4">Ready to Transform Your Website?</h3>
+            <p class="text-xl mb-6">Get a professional quote and start implementing these improvements today!</p>
+            <div class="bg-white bg-opacity-20 rounded-lg p-4 inline-block">
+              <p class="text-lg mb-2">Visit our website for a free consultation:</p>
+              <div class="inline-block">
+                <span class="text-3xl font-bold underline">leonlogic.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="bg-gradient-to-r from-[#112C3C] to-[#1a3a4f] text-white p-8 text-center">
+        <div class="max-w-4xl mx-auto">
+          <p class="text-lg mb-2">This audit was generated by LeonLogic Professional Website Analysis Tool</p>
+          <p class="text-sm text-gray-300">For professional web development services, contact our team at leonlogic.com</p>
+          <div class="mt-4 pt-4 border-t border-gray-600">
+            <p class="text-xs text-gray-400">
+              © ${new Date().getFullYear()} LeonLogic. All rights reserved. | Professional Web Development & Digital Solutions
+            </p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  // Launch Puppeteer
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
+  try {
+    const page = await browser.newPage();
+
+    // Set content and wait for Tailwind to load
+    await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
+
+    // Wait a bit more for any dynamic content
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Generate PDF with proper settings
+    const pdfBuffer = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+      margin: {
+        top: '0.5in',
+        right: '0.5in',
+        bottom: '0.5in',
+        left: '0.5in'
+      },
+      preferCSSPageSize: true
+    });
+
+    return pdfBuffer;
+  } finally {
+    await browser.close();
+  }
 } 
