@@ -74,7 +74,7 @@ const ClientsFeedbackSlider = () => {
                         <h3 className="mb-7 border-s-[3px] border-secondary ps-2.5 text-sm font-bold uppercase text-success dark:text-secondary">E-shop úspech
                         </h3>
                         <p className="mb-7 text-lg dark:text-white">
-                            "S LeonLogic máme len tie najlepšie skúsenosti. Vytvorili nám eshop, ktorý splnil všetky naše očakávania – a dokonca ich aj predčil. Mnoho vecí sami navrhli, priniesli kreatívne nápady a počas celého procesu nám ochotne radili. Boli nielen technicky zdatní, ale aj veľmi profesionálni."
+                            S LeonLogic máme len tie najlepšie skúsenosti. Vytvorili nám eshop, ktorý splnil všetky naše očakávania – a dokonca ich aj predčil. Mnoho vecí sami navrhli, priniesli kreatívne nápady a počas celého procesu nám ochotne radili. Boli nielen technicky zdatní, ale aj veľmi profesionálni.
                         </p>
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
@@ -99,7 +99,7 @@ const ClientsFeedbackSlider = () => {
                             AI aplikácia
                         </h3>
                         <p className="mb-7 text-lg dark:text-white">
-                            "Potreboval som vytvoriť webovú aplikáciu na mieru, na generovanie fotografií pomocou AI a s realizáciou mi perfektne pomohli. Tím preukázal, že sa v problematike naozaj vyzná. Vždy ochotne odpovedali na moje otázky a dokonale pochopili moju víziu. Výsledkom je skvelá a plne funkčná webová aplikácia."
+                            Potreboval som vytvoriť webovú aplikáciu na mieru, na generovanie fotografií pomocou AI a s realizáciou mi perfektne pomohli. Tím preukázal, že sa v problematike naozaj vyzná. Vždy ochotne odpovedali na moje otázky a dokonale pochopili moju víziu. Výsledkom je skvelá a plne funkčná webová aplikácia.
                         </p>
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
@@ -124,7 +124,7 @@ const ClientsFeedbackSlider = () => {
                             Virtuálne sídlo
                         </h3>
                         <p className="mb-7 text-lg dark:text-white">
-                            "Potrebovali sme systém pre správu virtuálnych sídiel s online evidenciou pošty. Leonlogic nám vytvoril web, kde klienti môžu sledovať doručené zásielky a prezerať dokumenty 24/7. Predtým sme museli každému volať o novej pošte, teraz sa všetko eviduje automaticky. Ušetrilo nám to množstvo času a klienti sú spokojní s prehľadom."
+                            Potrebovali sme systém pre správu virtuálnych sídiel s online evidenciou pošty. Leonlogic nám vytvoril web, kde klienti môžu sledovať doručené zásielky a prezerať dokumenty 24/7. Predtým sme museli každému volať o novej pošte, teraz sa všetko eviduje automaticky. Ušetrilo nám to množstvo času a klienti sú spokojní s prehľadom.
                         </p>
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
