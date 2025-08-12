@@ -21,7 +21,7 @@ const NoteManagementAccodian = () => {
                         className="ac-trigger relative flex! items-center justify-between gap-2 font-semibold! text-black dark:text-white! after:hidden! focus:text-current! py-5! rtl:text-right ltr:text-left"
                         onClick={() => togglePara('1')}
                     >
-                        <div>Create And Save Your Notes With Multi-Media</div>
+                        <div>Vývoj webstránok na mieru</div>
                         <div
                             className={`trigger-icon grid h-6 w-6 place-content-center text-black! dark:text-white! transition ${
                                 active === '1' ? 'rotate-180' : ''
@@ -34,8 +34,7 @@ const NoteManagementAccodian = () => {
                 <div className="ac-panel">
                     <AnimateHeight duration={600} height={active === '1' ? 'auto' : 0}>
                         <p className="ac-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit.
+                            Vytvárame responzívne webstránky šité na mieru vašich obchodných potrieb. Od firemných prezentácií po komplexné webové aplikácie - moderné technológie a čistý kód garantovaný.
                         </p>
                     </AnimateHeight>
                 </div>
@@ -47,7 +46,7 @@ const NoteManagementAccodian = () => {
                         className="ac-trigger relative flex! items-center justify-between gap-2 font-semibold! text-black dark:text-white! after:hidden! focus:text-current! py-5!"
                         onClick={() => togglePara('2')}
                     >
-                        <div>Web Clipper Extension</div>
+                        <div>E-commerce riešenia</div>
                         <div
                             className={`trigger-icon grid h-6 w-6 place-content-center text-black! dark:text-white! transition ${
                                 active === '2' ? 'rotate-180' : ''
@@ -60,7 +59,7 @@ const NoteManagementAccodian = () => {
                 <div className="ac-panel">
                     <AnimateHeight duration={600} height={active === '2' ? 'auto' : 0}>
                         <p className="ac-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                           Vytvoríme e-shop, kde ľudia radi nakupujú. S integráciu platobnej brány, doručovaním a všetkým, čo k tomu patrí.
                         </p>
                     </AnimateHeight>
                 </div>
@@ -72,7 +71,7 @@ const NoteManagementAccodian = () => {
                         className="ac-trigger relative flex! items-center justify-between gap-2 font-semibold! text-black dark:text-white! after:hidden! focus:text-current! py-5!"
                         onClick={() => togglePara('3')}
                     >
-                        <div>Protect Your Note With Lock</div>
+                        <div>Údržba a podpora</div>
                         <div
                             className={`trigger-icon grid h-6 w-6 place-content-center text-black! dark:text-white! transition ${
                                 active === '3' ? 'rotate-180' : ''
@@ -85,8 +84,7 @@ const NoteManagementAccodian = () => {
                 <div className="ac-panel">
                     <AnimateHeight duration={600} height={active === '3' ? 'auto' : 0}>
                         <p className="ac-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                           Vaša webstránka zostáva rýchla, bezpečná a aktuálna. Pravidelné zálohy, bezpečnostné aktualizácie, správa obsahu a technická podpora zahrnuté v našich servisných balíkoch.
                         </p>
                     </AnimateHeight>
                 </div>

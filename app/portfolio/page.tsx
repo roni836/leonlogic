@@ -48,17 +48,17 @@ const page = () => {
                         </div>
                         <div className="text-center relative z-1">
                             <h1 className="text-3xl sm:text-[70px] font-black sm:leading-[82px] italic uppercase" data-aos="zoom-in" data-aos-duration="1000">
-                                Digital
+                                REALIZOVANÉ PROJEKTY
                             </h1>
                             <h2
                                 className="text-3xl sm:text-[70px] font-black sm:leading-[82px] italic uppercase text-secondary"
                                 data-aos="zoom-in"
                                 data-aos-duration="1000"
                             >
-                                Case Studies.
+                                Z NAŠEJ DIELNE
                             </h2>
                             <p className="text-lg mt-2.5 text-gray dark:text-[#9199B5]">
-                                Lorem ipsum, or lipsum as it is sometimes known, is dummy used in laying out print, graphic or web designs.
+                               Prezentujeme úspešné webstránky, e-shopy a digitálne riešenia vytvorené pre slovenské firmy. Inšpirujte sa našimi projektmi a pozrite si kvalitu našej práce.
                             </p>
                             <a href="#portfolio-section" aria-label="Email">
                                 <div className="mt-7 max-w-[122px] mx-auto relative">
@@ -152,7 +152,7 @@ const page = () => {
                 </div>
             </section>
 
-            <SpecialistsDevelopers />
+            {/* <SpecialistsDevelopers /> */}
 
             <section className="py-10 md:py-16">
                 <ClientsFeedbackSlider />

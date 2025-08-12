@@ -5,7 +5,7 @@ const OurValuesCard = (props: any) => {
                 <span>{props.icon}</span>
                 <h3 className="text-xl font-semibold mt-5">{props.title}</h3>
                 <p className="text-lg text-gray dark:text-[#9199B5] mt-2.5">
-                    Our design services starts and ends best in class experience.
+                   {props.description}
                 </p>
             </div>
         </div>

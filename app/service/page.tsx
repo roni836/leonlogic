@@ -161,7 +161,7 @@ const Page = () => {
                             data-aos="zoom-in"
                             data-aos-duration="1000"
                         >
-                            WE PROVIDE WIDE RANGE OF <span className="text-secondary">DIGITAL SERVICES</span>
+                            POSKYTUJEME KOMPLEXNÉ <span className="text-secondary">DIGITÁLNE SLUŽBY</span>
                         </h1>
                         <span className="">
                             <svg width="30" height="33" viewBox="0 0 30 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,17 +190,17 @@ const Page = () => {
                     <div className="flex flex-col items-center gap-12 border-y-2 border-[#9199B5]/10 py-12 md:py-[126px] lg:flex-row 2xl:gap-[175px]">
                         <div>
                             <span className="rounded-[50px] bg-success-light/[0.08] dark:bg-secondary/[0.08] px-5 py-3 text-base font-bold text-success-light dark:text-secondary uppercase">
-                                Better Note Management
+                                KOMPLEXNÉ WEBOVÉ RIEŠENIA
                             </span>
                             <h2 className="mt-[30px] text-3xl font-extrabold md:text-[40px] md:leading-[54px]">
-                                Your <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat"> Notes Security</span>
+                                Váš  <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat"> digitálny úspech</span>
                             </h2>
                             <p className="mt-5 max-w-[505px] text-base font-semibold text-gray dark:text-[#9199B5]">
-                                Automatically syncs across all your devices. You can also access and write notes without internet connection.
+                               Vytvárame moderné webstránky a e-shopy, ktoré pomáhajú vášmu biznesu rásť online. Profesionálny vývoj s pokračujúcou podporou.
                             </p>
                             <NoteManagementAccodian />
                             <button type="button" className="mt-8 btn md:mt-[50px]">
-                                FREE REGISTER
+                                ZAČAŤ SPOLUPRÁCU
                             </button>
                         </div>
                         <div className="w-full max-w-[654px]" data-aos="flip-left" data-aos-duration="1000">
@@ -210,7 +210,7 @@ const Page = () => {
                 </div>
             </section>
 
-            <section className="py-12 md:py-20 lg:py-[167px] overflow-hidden">
+            {/* <section className="py-12 md:py-20 lg:py-[167px] overflow-hidden">
                 <div className="container">
                     <div className="flex flex-col items-center gap-20 lg:flex-row lg:gap-[176px]">
                         <div className="w-full max-w-[650px] flex-1" data-aos="fade-right" data-aos-duration="1000">
@@ -246,7 +246,7 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="py-10 md:py-16">
                 <ClientsFeedbackSlider />
@@ -256,10 +256,10 @@ const Page = () => {
                 <div className="container">
                     <div className="mb-12 text-center">
                         <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                            FAq
+                            ČASTO KLADENÉ OTÁZKY
                         </p>
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                            Frequently Asked <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Questions</span>
+                            Často kladené <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">otázky</span>
                         </h2>
                     </div>
                     <FAQuestions />
