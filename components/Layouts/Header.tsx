@@ -116,7 +116,7 @@ const Header = () => {
                                     href="/"
                                     className={`inline-flex px-1.5 py-4 lg:py-8 w-full  ${pathName === '/' ? 'text-secondary font-bold' : 'hover:text-secondary'}`}
                                 >
-                                    Home
+                                    Domov
                                 </Link>
                             </li>
                             <li
@@ -132,7 +132,7 @@ const Header = () => {
                                     aria-haspopup="true"
                                     aria-expanded={mobileServiceOpen}
                                 >
-                                    Service
+                                    Služby
                                     <svg className={`ml-1 w-4 h-4 transition-transform duration-200 lg:hidden ${mobileServiceOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
                                 {/* Mobile dropdown for services */}
@@ -151,7 +151,7 @@ const Header = () => {
                                     className={`inline-flex px-1.5 py-4 lg:py-8 w-full ${pathName === '/portfolio' || pathName === '/portfolio-detail' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                         }`}
                                 >
-                                    Portfolio
+                                    Portfólio
                                 </Link>
                             </li>
                             <li onClick={toggleMenu}>
@@ -160,10 +160,10 @@ const Header = () => {
                                     className={`inline-flex px-1.5 py-4 lg:py-8 w-full ${pathName === '/about-us' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                         }`}
                                 >
-                                    About Us
+                                    O nás
                                 </Link>
                             </li>
-                            <li onClick={toggleMenu}>
+                            {/* <li onClick={toggleMenu}>
                                 <Link
                                     href="/career"
                                     className={`inline-flex px-1.5 py-4 lg:py-8 w-full ${pathName === '/career' ? 'text-secondary font-bold' : 'hover:text-secondary'
@@ -171,7 +171,7 @@ const Header = () => {
                                 >
                                     Career
                                 </Link>
-                            </li>
+                            </li> */}
 
                             <li>
                                 <button onClick={toggleMenu} type="button" className="lg:hidden absolute -top-20 rtl:left-5 ltr:right-5">
@@ -205,7 +205,7 @@ const Header = () => {
                             onClick={() => setShowCalculator(true)}
                             className="btn hidden lg:inline-flex"
                         >
-                            Get a free quote online
+                            Získať bezplatnú cenovú ponuku
                         </button>
                         <button
                             type="button"

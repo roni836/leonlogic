@@ -4,25 +4,25 @@ import ReviewCard from './ReviewCard';
 
 const reviews = [
   {
-    title: 'LOREM IPSUM',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    title: 'AI aplikácia',
+    text: 'Potreboval som vytvoriť webovú aplikáciu na mieru, na generovanie fotografií pomocou AI a s realizáciou mi perfektne pomohli...',
     img: '/assets/images/profile-pic1.jpg',
-    name: 'Marty Blum',
-    role: 'Founder of Alpha Design',
+    name: 'Thom S.',
+    role: 'SnapShots',
   },
   {
-    title: 'LOREM IPSUM',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    title: 'E-shop úspech',
+    text: 'S LeonLogic máme len tie najlepšie skúsenosti. Vytvorili nám eshop, ktorý splnil všetky naše očakávania – a dokonca ich aj predčil...',
     img: '/assets/images/profile-pic2.jpg',
-    name: 'Lena Gonzalez',
-    role: 'Founder of Lion Studio',
+    name: 'Monika O.',
+    role: 'Majiteľka cukrárne Torty M.',
   },
   {
-    title: 'LOREM IPSUM',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    title: 'Virtuálne sídlo',
+    text: 'Potrebovali sme systém pre správu virtuálnych sídiel s online evidenciou pošty. Leonlogic nám vytvoril web, kde klienti môžu sledovať doručené zásielky...',
     img: '/assets/images/profile-pic3.jpg',
-    name: 'Eileen Givens',
-    role: 'Founder of Galaxy Infotech',
+    name: 'Matej B.',
+    role: 'Majiteľ FlexiSídlo',
   },
 ];
 

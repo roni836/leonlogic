@@ -21,7 +21,7 @@ const BlogSlider = () => {
                         blog
                     </p>
                     <h2 className="text-2xl font-extrabold leading-tight md:text-[40px]">
-                        Latest <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Articles</span>
+                        Najnovšie  <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat"> články</span>
                     </h2>
                 </div>
                 <div className="flex items-center gap-8">

@@ -16,10 +16,10 @@ const ClientsFeedbackSlider = () => {
             <div className="mb-6 flex flex-col items-center gap-5 md:mb-12 md:flex-row md:items-end md:justify-between">
                 <div className="text-center md:text-left md:rtl:text-right">
                     <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                        Najnovšie články
+                        REFERENCIE
                     </p>
                     <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                        Over <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">300 satisfied</span> clients
+                        Prinášame <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat"> výsledky, ktoré </span> hovoria za nás
                     </h2>
                 </div>
                 <div className="flex items-center gap-8">
@@ -71,12 +71,10 @@ const ClientsFeedbackSlider = () => {
             >
                 <SwiperSlide>
                     <div className="rounded-2xl border-[3px] border-[#9199B5]/10 bg-white dark:bg-[#9199B5]/[0.12] p-8">
-                        <h3 className="mb-7 border-s-[3px] border-secondary ps-2.5 text-sm font-bold uppercase text-success dark:text-secondary">
-                            Lorem ipsum
+                        <h3 className="mb-7 border-s-[3px] border-secondary ps-2.5 text-sm font-bold uppercase text-success dark:text-secondary">E-shop úspech
                         </h3>
                         <p className="mb-7 text-lg dark:text-white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna
-                            eget est lorem ipsum.
+                            "S LeonLogic máme len tie najlepšie skúsenosti. Vytvorili nám eshop, ktorý splnil všetky naše očakávania – a dokonca ich aj predčil. Mnoho vecí sami navrhli, priniesli kreatívne nápady a počas celého procesu nám ochotne radili. Boli nielen technicky zdatní, ale aj veľmi profesionálni."
                         </p>
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
@@ -89,8 +87,8 @@ const ClientsFeedbackSlider = () => {
                                 />
                             </div>
                             <div className="font-semibold">
-                                <h4 className="text-lg text-success dark:text-secondary">Marty Blum</h4>
-                                <p className="text-gray dark:text-[#9199B5]">Founder of Alpha Design</p>
+                                <h4 className="text-lg text-success dark:text-secondary">Monika O.</h4>
+                                <p className="text-gray dark:text-[#9199B5]">Majiteľka cukrárne Torty M.</p>
                             </div>
                         </div>
                     </div>
@@ -98,11 +96,10 @@ const ClientsFeedbackSlider = () => {
                 <SwiperSlide>
                     <div className="rounded-2xl border-[3px] border-[#9199B5]/10 bg-white dark:bg-[#9199B5]/[0.12] p-8">
                         <h3 className="mb-7 border-s-[3px] border-secondary ps-2.5 text-sm font-bold uppercase text-success dark:text-secondary">
-                            Lorem ipsum
+                            AI aplikácia
                         </h3>
                         <p className="mb-7 text-lg dark:text-white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna
-                            eget est lorem ipsum.
+                            "Potreboval som vytvoriť webovú aplikáciu na mieru, na generovanie fotografií pomocou AI a s realizáciou mi perfektne pomohli. Tím preukázal, že sa v problematike naozaj vyzná. Vždy ochotne odpovedali na moje otázky a dokonale pochopili moju víziu. Výsledkom je skvelá a plne funkčná webová aplikácia."
                         </p>
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
@@ -115,8 +112,8 @@ const ClientsFeedbackSlider = () => {
                                 />
                             </div>
                             <div className="font-semibold">
-                                <h4 className="text-lg text-success dark:text-secondary">Lena Gonzalez</h4>
-                                <p className="text-gray dark:text-[#9199B5]">Founder of Lion Studio</p>
+                                <h4 className="text-lg text-success dark:text-secondary">Thom S.</h4>
+                                <p className="text-gray dark:text-[#9199B5]">SnapShots</p>
                             </div>
                         </div>
                     </div>
@@ -124,11 +121,10 @@ const ClientsFeedbackSlider = () => {
                 <SwiperSlide>
                     <div className="rounded-2xl border-[3px] border-[#9199B5]/10 bg-white dark:bg-[#9199B5]/[0.12] p-8">
                         <h3 className="mb-7 border-s-[3px] border-secondary ps-2.5 text-sm font-bold uppercase text-success dark:text-secondary">
-                            Lorem ipsum
+                            Virtuálne sídlo
                         </h3>
                         <p className="mb-7 text-lg dark:text-white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna
-                            eget est lorem ipsum.
+                            "Potrebovali sme systém pre správu virtuálnych sídiel s online evidenciou pošty. Leonlogic nám vytvoril web, kde klienti môžu sledovať doručené zásielky a prezerať dokumenty 24/7. Predtým sme museli každému volať o novej pošte, teraz sa všetko eviduje automaticky. Ušetrilo nám to množstvo času a klienti sú spokojní s prehľadom."
                         </p>
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
@@ -141,86 +137,8 @@ const ClientsFeedbackSlider = () => {
                                 />
                             </div>
                             <div className="font-semibold">
-                                <h4 className="text-lg text-success dark:text-secondary">Eileen Givens</h4>
-                                <p className="text-gray dark:text-[#9199B5]">Founder of Galaxy Infotech</p>
-                            </div>
-                        </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="rounded-2xl border-[3px] border-[#9199B5]/10 bg-white dark:bg-[#9199B5]/[0.12] p-8">
-                        <h3 className="mb-7 border-s-[3px] border-secondary ps-2.5 text-sm font-bold uppercase text-success dark:text-secondary">
-                            Lorem ipsum
-                        </h3>
-                        <p className="mb-7 text-lg dark:text-white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna
-                            eget est lorem ipsum.
-                        </p>
-                        <div className="flex gap-2.5">
-                            <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
-                                <Image
-                                    src="/assets/images/profile-pic1.jpg"
-                                    alt="profile pic1"
-                                    className="h-full w-full object-cover rtl:rotate-y-180"
-                                    width={48}
-                                    height={48}
-                                />
-                            </div>
-                            <div className="font-semibold">
-                                <h4 className="text-lg text-success dark:text-secondary">Marty Blum</h4>
-                                <p className="text-gray dark:text-[#9199B5]">Founder of Alpha Design</p>
-                            </div>
-                        </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="rounded-2xl border-[3px] border-[#9199B5]/10 bg-white dark:bg-[#9199B5]/[0.12] p-8">
-                        <h3 className="mb-7 border-s-[3px] border-secondary ps-2.5 text-sm font-bold uppercase text-success dark:text-secondary">
-                            Lorem ipsum
-                        </h3>
-                        <p className="mb-7 text-lg dark:text-white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna
-                            eget est lorem ipsum.
-                        </p>
-                        <div className="flex gap-2.5">
-                            <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
-                                <Image
-                                    src="/assets/images/profile-pic2.jpg"
-                                    alt="profile pic2"
-                                    className="h-full w-full object-cover rtl:rotate-y-180"
-                                    width={48}
-                                    height={48}
-                                />
-                            </div>
-                            <div className="font-semibold">
-                                <h4 className="text-lg text-success dark:text-secondary">Lena Gonzalez</h4>
-                                <p className="text-gray dark:text-[#9199B5]">Founder of Lion Studio</p>
-                            </div>
-                        </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="rounded-2xl border-[3px] border-[#9199B5]/10 bg-white dark:bg-[#9199B5]/[0.12] p-8">
-                        <h3 className="mb-7 border-s-[3px] border-secondary ps-2.5 text-sm font-bold uppercase text-success dark:text-secondary">
-                            Lorem ipsum
-                        </h3>
-                        <p className="mb-7 text-lg dark:text-white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna
-                            eget est lorem ipsum.
-                        </p>
-                        <div className="flex gap-2.5">
-                            <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
-                                <Image
-                                    src="/assets/images/profile-pic3.jpg"
-                                    alt="profile pic3"
-                                    className="h-full w-full object-cover rtl:rotate-y-180"
-                                    width={48}
-                                    height={48}
-                                />
-                            </div>
-                            <div className="font-semibold">
-                                <h4 className="text-lg text-success dark:text-secondary">Eileen Givens</h4>
-                                <p className="text-gray dark:text-[#9199B5]">Founder of Galaxy Infotech</p>
+                                <h4 className="text-lg text-success dark:text-secondary">Matej B.</h4>
+                                <p className="text-gray dark:text-[#9199B5]">Majiteľ FlexiSídlo</p>
                             </div>
                         </div>
                     </div>

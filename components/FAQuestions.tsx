@@ -11,43 +11,43 @@ const FAQuestions = () => {
     const queries = [
         {
             id: 1,
-            question: 'Why do I need free Instagram followers?',
-            answer: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            question: 'Ako zvyčajne prebieha spolupráca?',
+            answer: `Prvým krokom je úvodná konzultácia s naším expertom pre pochopenie vašich potrieb a pre prípravu presného riešenia. Nasleduje prezentácia a definovanie riešenia projektu a po odsúhlasení sa začne na samotnom vývoji systému. Klient je v procese neustále zahrnutý aby sa dosiahlo všetko podľa vašich predstáv. Na záver vám ukážeme, ako s hotovým projektom pracovať a diskutujeme, ako bude naša spolupráca fungovať v priebehu roka.`,
         },
         {
             id: 2,
-            question: 'How long does it take to receive my free Instagram followers?',
-            answer: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            question: 'Môžem si stránku editovať aj sám? Pomôžete mi s dodatočnými úpravami?',
+            answer: `Áno, vytvárame stránky s jednoducho ovládateľným administračným rozhraním. Poskytneme vám základné školenie a sme k dispozícii pre akékolväk dodatočné úpravy alebo rozšírenia.`,
         },
         {
             id: 3,
-            question: 'Are these free Instagram followers real?',
-            answer: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            question: 'Ako prebieha proces návrhu firemnej identity?',
+            answer: `Začíname workshopom pre pochopenie vašej vízie a hodnôt, vytvoríme niekoľko konceptov loga a firemného štýlu, po výbere dopracujeme finálnu verziu a dodáme kompletný brand manuál s aplikáciami na rôzne materiály.`,
         },
         {
             id: 4,
-            question: 'How do I keep my free Instagram followers?',
-            answer: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            question: 'Poskytujete podporu po spustení projektu?',
+            answer: `Áno, poskytujeme technickú podporu a údržbu všetkých našich projektov. Môžeme sa dohodnúť na rôznych typoch podpory podľa vašich potrieb - od základnej technickej podpory až po kompletnú správu a údržbu.`,
         },
         {
             id: 5,
-            question: 'Is it safe to use your free service?',
-            answer: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            question: 'Čo zahŕňa vytvorenie webovej stránky?',
+            answer: `Kompletný návrh a vývoj responzívnej webstránky, optimalizáciu pre vyhľadávače (SEO), nastavenie analytiky, základné školenie na správu obsahu a technickú podporu po spustení.`,
         },
         {
             id: 6,
-            question: 'Why is this service free?',
-            answer: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            question: 'Čo zahŕňa správa reklamných kampaní? Ako meriате úspešnosť?',
+            answer: `Nastavenie a optimalizáciu Google Ads a Facebook kampaní, pravidelnú analýzu výkonnosti, A/B testovanie reklám a mesačné reporty s kľúčovými metrikami ako sú konverzie, CTR a náklady na akvizíciu.`,
         },
         {
             id: 7,
-            question: 'How do I make money on my Instagram?',
-            answer: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            question: 'Ako dlho trvá vytvorenie webovej stránky?',
+            answer: `Čas vývoja závisí od zložitosti projektu. Jednoduché stránky môžeme vytvoriť za 2-3 týždne, komplexnejšie projekty trvajú 4-8 týždňov. Vždy vás informujeme o presnom časovom harmonograme na začiatku spolupráce.`,
         },
         {
             id: 8,
-            question: 'What if I need to contact you about my account?',
-            answer: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+            question: 'Ako si môžem objednať vaše služby?',
+            answer: `Môžete nás kontaktovať cez náš kontaktný formulár, telefonicky alebo emailom. Prvým krokom je vždy bezplatná konzultácia, kde si povieme o vašich potrebách a navrhneme najlepšie riešenie pre váš biznis.`,
         },
     ];
 

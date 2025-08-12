@@ -18,7 +18,7 @@ const PartnerSlider = () => {
             loop={true}
             autoplay={{ delay: 0, disableOnInteraction: false }}
             breakpoints={{
-                320: {
+                310: {
                     slidesPerView: 2,
                 },
                 600: {
@@ -35,34 +35,34 @@ const PartnerSlider = () => {
             key={isRtl ? 'true' : 'false'}
         >
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo1.png" width={100} height={20} alt="logo1" />
+                <Image src="/assets/images/hero/logo1.png" width={100} height={10} alt="logo1" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo2.png" width={100} height={20} alt="logo2" />
+                <Image src="/assets/images/hero/logo2.png" width={100} height={10} alt="logo2" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo3.png" width={100} height={20} alt="logo3" />
+                <Image src="/assets/images/hero/logo3.png" width={100} height={10} alt="logo3" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo4.png" width={100} height={20} alt="logo4" />
+                <Image src="/assets/images/hero/logo4.png" width={100} height={10} alt="logo4" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo5.png" width={100} height={20} alt="logo5" />
+                <Image src="/assets/images/hero/logo5.png" width={100} height={10} alt="logo5" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo6.png" width={100} height={20} alt="logo6" />
+                <Image src="/assets/images/hero/logo6.png" width={100} height={10} alt="logo6" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo7.png" width={100} height={20} alt="logo7" />
+                <Image src="/assets/images/hero/logo7.png" width={100} height={10} alt="logo7" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo8.png" width={100} height={20} alt="logo8" />
+                <Image src="/assets/images/hero/logo8.png" width={100} height={10} alt="logo8" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo9.png" width={100} height={20} alt="logo9" />
+                <Image src="/assets/images/hero/logo9.png" width={100} height={10} alt="logo9" />
             </SwiperSlide>
             <SwiperSlide>
-                <Image src="/assets/images/hero/logo10.png" width={100} height={20} alt="logo10" />
+                <Image src="/assets/images/hero/logo10.png" width={100} height={10} alt="logo10" />
             </SwiperSlide>
         </Swiper>
     );

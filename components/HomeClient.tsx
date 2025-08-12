@@ -69,10 +69,10 @@ export default function HomeClient() {
                             >
                                 Získajte bezplatný 
                                 <br />
-                                audit <span className="bg-[url('/assets/images/line.svg')] bg-bottom-left bg-no-repeat">webu</span>.
+                                 <span className="bg-[url('/assets/images/line.svg')] bg-bottom-left bg-no-repeat">audit </span> webu
                             </h1>
                             <p className="mb-7 max-w-[590px] text-lg text-[#4B5576] dark:text-[#9199B5]">
-                               Získajte bezplatnú analýzu webu a SEO audit už za 3 minúty! Odhaľte skryté príležitosti na zvýšenie návštevnosti a predaja. Pomôžeme vám rásť a dosiahnuť úspech.
+                              Zistite, ako zlepšiť výkonnosť vášho webu a SEO. Analýza trvá 3 minúty, výsledky dostanete okamžite.
                             </p>
 
                             <div className="mb-2.5 w-full max-w-[350px]">
@@ -83,7 +83,7 @@ export default function HomeClient() {
                                         </span>
                                         <input
                                             type="text"
-                                            placeholder="Enter your email"
+                                            placeholder="Zadajte váš email a začnite rásť"
                                             className="form-input border-2 border-[#E1E6F5] dark:text-white dark:border-[#9199B5] pe-14 ps-12 placeholder:text-primary dark:placeholder:text-white peer"
                                             required
                                         />
@@ -133,7 +133,7 @@ export default function HomeClient() {
                             height={139}
                         />
                         <div className="absolute -start-px -top-px border-b-30 rtl:border-r-30 ltr:border-l-30 border-b-transparent rtl:border-r-white ltr:border-l-white dark:rtl:border-r-primary dark:ltr:border-l-primary md:border-b-70 md:rtl:border-r-70 md:ltr:border-l-70"></div>
-                        <h2 className="mb-3 leading-tight text-secondary md:mb-6 md:text-[22px]">Medzi našich klientov patria popredné firmy a lídri vo svojich odvetviach.</h2>
+                        <h2 className="mb-3 leading-tight text-secondary md:mb-6 md:text-[22px]">Medzi našich klientov patria lídri svojich odvetví</h2>
                         <PartnerSlider />
                     </div>
                 </div>
@@ -143,11 +143,11 @@ export default function HomeClient() {
                 <div className="container">
                     <div className="mb-6 text-center md:mb-12">
                         <p className="mb-7 inline-flex rounded-full dark:bg-success-light/10 bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                            Najnovšie články
+                            ČO VYTVÁRAME
                         </p>
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                           Široká škála digitálnych služieb<br />
-                            <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">pre váš úspech.</span>
+                           Poskytujeme komplexné<br />
+                            <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">digitálne riešenia</span>
                         </h2>
                     </div>
                     <DigitalServicesSlider />
@@ -163,20 +163,20 @@ export default function HomeClient() {
                             </p>
 
                             <h2 className="mb-2.5 text-2xl font-extrabold leading-snug text-white md:text-[40px]">
-                                Naše hodnoty:
-                                <br />
-                                <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat font-light italic">Kreativita, kvalita a dôvera.</span>
+                                Digitálna agentúra
+                                <br />pre
+                                <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat font-light italic"> moderné firmy</span>
                             </h2>
 
                             <p className="mb-7 text-white">
-                                Naše hodnoty sú základom všetkého, čo robíme. Veríme v silu inovácií, dôvery a precíznosti, aby sme vám priniesli digitálne riešenia, ktoré nielen fungujú, ale aj inšpirujú.
+                               Pomáhame firmám zlepšiť ich online prítomnosť a digitálny marketing. Špecializujeme sa na efektívne riešenia, ktoré prinášajú merateľné výsledky. Každý projekt riešime s dôrazom na váš biznis a konkrétne ciele.
                             </p>
 
                             <Link
                                 href="/contact-us"
                                 className="inline-flex items-center gap-2.5 rounded-2xl bg-secondary px-5 py-4 font-bold uppercase duration-500 hover:bg-white dark:text-black"
                             >
-                                Get Started
+                                ZAČAŤ SPOLUPRÁCU
                                 <RightArrowIcon />
                             </Link>
                         </div>
@@ -192,10 +192,10 @@ export default function HomeClient() {
                 <div className="container">
                     <div className="mb-6 text-center md:mb-12">
                         <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                            Nový projekt
+                            VYBRANÉ PROJEKTY
                         </p>
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                            Digital <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">Vybrané projekty</span>.
+                            Digitálne  <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">prípadové štúdie </span> úspechov
                         </h2>
                     </div>
                     <div className="grid gap-7 sm:grid-cols-2">
@@ -251,10 +251,10 @@ export default function HomeClient() {
                 <div className="container">
                     <div className="mb-12 text-center">
                         <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                            FAq
+                            ČASTO KLADENÉ OTÁZKY
                         </p>
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                            Frequently Asked <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Questions</span>
+                            Často kladené <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat"> otázky</span>
                         </h2>
                     </div>
                     <FAQuestions />

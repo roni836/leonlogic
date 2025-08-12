@@ -20,7 +20,7 @@ const Footer = () => {
                             <Image src="/Leonlogic-light.svg" width={180} height={44} alt="Logo" />
                         </Link>
                         <p className="text-xl text-white">
-                            Be creative, <span className="text-secondary">Be global</span>
+                            Buďte kreatívni, <span className="text-secondary"> buďte globálni</span>
                         </p>
                     </div>
                     <div className="mx-auto w-full max-w-[350px] md:me-0">
@@ -31,14 +31,14 @@ const Footer = () => {
                                 </span>
                                 <input
                                     type="text"
-                                    placeholder="Enter your email"
+                                    placeholder="Zadajte váš email"
                                     className="form-input border-white/10 py-3.5 pe-28 ps-12 text-sm text-white placeholder:text-white"
                                 />
                                 <button
                                     type="button"
                                     className="absolute inset-y-0 rounded-e-full bg-secondary px-[30px] font-bold uppercase text-success hover:bg-secondary/80 ltr:right-0 rtl:left-0"
                                 >
-                                    send
+                                    odoslať
                                 </button>
                             </div>
                         </form>
@@ -52,43 +52,31 @@ const Footer = () => {
                                 className={`inline-flex p-2 md:p-1.5 ${pathName === '/' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                     }`}
                             >
-                                Home
+                                Domov
                             </Link>
                         </li>
                         <li>
                             <Link href="/service" className={`inline-flex p-2 md:p-1.5 ${pathName === '/service' || pathName === '/services-detail' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                 }`}>
-                                Service
+                                Služby
                             </Link>
                         </li>
                         <li>
                             <Link href="/portfolio" className={`inline-flex p-2 md:p-1.5 ${pathName === '/portfolio' || pathName === '/portfolio-detail' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                 }`}>
-                                Portfolio
+                                Portfólio
                             </Link>
                         </li>
                         <li>
                             <Link href="/about-us" className={`inline-flex p-2 md:p-1.5 ${pathName === '/about-us' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                 }`}>
-                                About Us
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/career" className={`inline-flex p-2 md:p-1.5 ${pathName === '/career' ? 'text-secondary font-bold' : 'hover:text-secondary'
-                                }`}>
-                                Career
+                                O nás
                             </Link>
                         </li>
                         <li>
                             <Link href="/contact-us" className={`inline-flex p-2 md:p-1.5 ${pathName === '/contact-us' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                 }`}>
-                                Contact us
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/team" className={`inline-flex p-2 md:p-1.5 ${pathName === '/team' ? 'text-secondary font-bold' : 'hover:text-secondary'
-                                }`}>
-                                Team
+                                Kontakt
                             </Link>
                         </li>
                         <li>
@@ -110,8 +98,8 @@ const Footer = () => {
                                 <span className="text-secondary">
                                     <TelePhoneIcon className="h-6 w-6" />
                                 </span>
-                                <a href="tel:+6172542333" className="hover:text-success-light">
-                                    +(617) 254-2333
+                                <a href="tel:+421915376588" className="hover:text-success-light">
+                                    +(421) 915 376 588
                                 </a>
                             </li>
                             <li className="inline-flex items-center gap-2">
@@ -119,14 +107,14 @@ const Footer = () => {
                                     <EmailIcon className="h-6 w-6" />
                                 </span>
                                 <a href="mailto:appstore@gmail.com" className="hover:text-success-light">
-                                    appstore@gmail.com
+                                    leonlogic@leonlogic.com
                                 </a>
                             </li>
                             <li className="inline-flex items-center gap-2">
                                 <span className="text-secondary">
                                     <LocationIcon className="h-6 w-6" />
                                 </span>
-                                164 Brighton Ave, Allston, Maine, U.S. - 02134
+                               Kostolná 299, 991 26 Nenince
                             </li>
                         </ul>
                         <ul className="flex items-center gap-5 text-white lg:ms-auto">
@@ -160,13 +148,13 @@ const Footer = () => {
                         </a>
                         <p>
                             <Link href="/terms-and-conditions" className="hover:text-secondary">
-                                Terms
+                                Podmienky
                             </Link>
                             <span className="px-2 text-gray-dark dark:text-[#9199B5]/[0.12]">|</span>
                             <Link href="/privacy-policy" className="hover:text-secondary">
-                                Privacy
+                                Ochrana súkromia
                             </Link>
-                            <span className="px-2 text-gray-dark dark:text-[#9199B5]/[0.12]">|</span>©{new Date().getFullYear()} - Leonlogic, All rights reserved.
+                            <span className="px-2 text-gray-dark dark:text-[#9199B5]/[0.12]">|</span>©{new Date().getFullYear()} - OREM VENTURES s.r.o., ©2025 - Leonlogic, Všetky práva vyhradené.
                         </p>
                     </div>
                 </div>
