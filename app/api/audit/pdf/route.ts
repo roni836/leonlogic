@@ -6,7 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 // Save it to /pages/api/generate-pdf.ts or /app/api/generate-pdf/route.ts depending on your Next.js setup.
 
 export async function POST(request: NextRequest) {
-  try {
+  // try {
     const { url, company, results } = await request.json();
     console.log('[pdf] Incoming request', { url, company, hasResults: !!results });
 
@@ -77,10 +77,10 @@ export async function POST(request: NextRequest) {
         'Content-Disposition': `attachment; filename="${company}-website-audit.pdf"`
       }
     });
-  } catch (error) {
-    console.error('[pdf] PDF Generation Error:', error);
-    return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
-  }
+  // } catch (error) {
+  //   console.error('[pdf] PDF Generation Error:', error);
+  //   return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
+  // }
 }
 
 // Helper - safely read nested numeric score
