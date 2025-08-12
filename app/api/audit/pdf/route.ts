@@ -2,11 +2,75 @@ import { NextRequest, NextResponse } from 'next/server';
 import puppeteer from 'puppeteer';
 import { createClient } from '@supabase/supabase-js';
 
+// Fallback PDF generation using jsPDF
+async function generatePDFFallback(url: string, company: string, results: any): Promise<Buffer> {
+  try {
+    // Dynamic import to avoid bundling issues
+    const { jsPDF } = await import('jspdf');
+    
+    const doc = new jsPDF();
+    
+    // Add title
+    doc.setFontSize(20);
+    doc.text('Website Audit Report', 20, 20);
+    
+    // Add company and URL
+    doc.setFontSize(12);
+    doc.text(`Company: ${company}`, 20, 35);
+    doc.text(`URL: ${url}`, 20, 45);
+    
+    // Add scores
+    const seoScore = results?.seo?.score || 0;
+    const performanceScore = results?.performance?.score || 0;
+    const usabilityScore = results?.usability?.score || 0;
+    const technicalScore = results?.technical?.score || 0;
+    const overallScore = Math.round((seoScore + performanceScore + usabilityScore + technicalScore) / 4);
+    
+    doc.setFontSize(14);
+    doc.text('Scores:', 20, 65);
+    doc.setFontSize(10);
+    doc.text(`SEO: ${seoScore}/100`, 20, 75);
+    doc.text(`Performance: ${performanceScore}/100`, 20, 85);
+    doc.text(`Usability: ${usabilityScore}/100`, 20, 95);
+    doc.text(`Technical: ${technicalScore}/100`, 20, 105);
+    doc.text(`Overall: ${overallScore}/100`, 20, 115);
+    
+    // Add recommendations
+    doc.setFontSize(14);
+    doc.text('Recommendations:', 20, 135);
+    doc.setFontSize(10);
+    
+    const recommendations = [
+      'Implement responsive design for better mobile experience',
+      'Optimize images and code for faster loading speeds',
+      'Add proper meta tags and structured data for SEO',
+      'Improve user interface and call-to-action placement',
+      'Set up regular monitoring and maintenance'
+    ];
+    
+    let yPos = 145;
+    recommendations.forEach((rec, index) => {
+      if (yPos > 250) {
+        doc.addPage();
+        yPos = 20;
+      }
+      doc.text(`${index + 1}. ${rec}`, 20, yPos);
+      yPos += 10;
+    });
+    
+    const pdfArrayBuffer = doc.output('arraybuffer');
+    return Buffer.from(pdfArrayBuffer);
+  } catch (error) {
+    console.error('[pdf] Fallback PDF generation failed:', error);
+    throw new Error('PDF generation failed');
+  }
+}
+
 // NOTE: This file is a drop-in improved version of your API route.
 // Save it to /pages/api/generate-pdf.ts or /app/api/generate-pdf/route.ts depending on your Next.js setup.
 
 export async function POST(request: NextRequest) {
-  // try {
+  try {
     const { url, company, results } = await request.json();
     console.log('[pdf] Incoming request', { url, company, hasResults: !!results });
 
@@ -14,7 +78,28 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required data' }, { status: 400 });
     }
 
-    const pdfBuffer = await generatePDF(url, company, results);
+    let pdfBuffer: Buffer;
+    
+    try {
+      // Try Puppeteer first
+      const puppeteerResult = await generatePDF(url, company, results);
+      pdfBuffer = Buffer.from(puppeteerResult);
+      console.log('[pdf] Puppeteer PDF generation successful');
+    } catch (puppeteerError) {
+      console.error('[pdf] Puppeteer failed, trying fallback:', puppeteerError);
+      
+      try {
+        // Fallback to jsPDF
+        pdfBuffer = await generatePDFFallback(url, company, results);
+        console.log('[pdf] Fallback PDF generation successful');
+      } catch (fallbackError) {
+        console.error('[pdf] Both PDF generation methods failed:', fallbackError);
+        return NextResponse.json({ 
+          error: 'PDF generation failed in production environment',
+          details: 'Both Puppeteer and fallback methods failed'
+        }, { status: 500 });
+      }
+    }
 
     // Log size for debugging
     try {
@@ -77,10 +162,10 @@ export async function POST(request: NextRequest) {
         'Content-Disposition': `attachment; filename="${company}-website-audit.pdf"`
       }
     });
-  // } catch (error) {
-  //   console.error('[pdf] PDF Generation Error:', error);
-  //   return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
-  // }
+  } catch (error) {
+    console.error('[pdf] PDF Generation Error:', error);
+    return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
+  }
 }
 
 // Helper - safely read nested numeric score
@@ -483,17 +568,38 @@ async function generatePDF(url: string, company: string, results: any) {
     </html>
   `;
 
-  // Launch puppeteer
+  // Launch puppeteer with production-optimized settings
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--single-process',
+      '--disable-gpu',
+      '--disable-background-timer-throttling',
+      '--disable-backgrounding-occluded-windows',
+      '--disable-renderer-backgrounding',
+      '--disable-features=TranslateUI',
+      '--disable-ipc-flooding-protection'
+    ],
+    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined
   });
 
   try {
     const page = await browser.newPage();
+    
+    // Set viewport and user agent for consistent rendering
+    await page.setViewport({ width: 1200, height: 800 });
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    
     await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
-    // small wait to ensure fonts/render
-    await new Promise(r => setTimeout(r, 600));
+    
+    // Wait for fonts and rendering to complete
+    await new Promise(r => setTimeout(r, 1000));
 
     const contactUrl = 'https://leonlogic.com/contact-us';
     const pdfBuffer = await page.pdf({
