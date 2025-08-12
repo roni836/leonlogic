@@ -266,9 +266,9 @@ const Page = () => {
                 </div>
             </section>
 
-            <section className="py-12 md:py-16">
+            {/* <section className="py-12 md:py-16">
                 <PricingPlansChart />
-            </section>
+            </section> */}
         </>
     );
 };
