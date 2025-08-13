@@ -48,6 +48,57 @@ interface ServiceColumn {
     services: Service[];
 }
 
+const serviceColumns = [
+    {
+        icon: '/assets/images/ryvenia-riesenia.svg',
+        iconAlt: 'Ryvenia Riešenia',
+        title: 'RIEŠENIA',
+        items: [
+            { name: 'E-commerce', url: '/sluzby/e-commerce' },
+            { name: 'Malé a stredné podniky', url: '/sluzby/male-stredne-podniky' },
+            { name: 'Riešenia pre veľké firmy', url: '/sluzby/enterprise-riesenia' },
+            { name: 'Chatboty s umelou inteligenciou', url: '/sluzby/ai-chatboty' },
+            { name: 'Automatizácie s umelou inteligenciou', url: '/sluzby/ai-automatizacie' },
+        ],
+    },
+    {
+        icon: '/assets/images/ryvenia-dizajn.svg',
+        iconAlt: 'Ryvenia Dizajn',
+        title: 'DIZAJN',
+        items: [
+            { name: 'Firemná identita', url: '/sluzby/firemna-identita' },
+            { name: 'Logo dizajn', url: '/sluzby/logo-dizajn' },
+            { name: 'Digitálny obsah a grafika', url: '/sluzby/digitalny-obsah-grafika' },
+            { name: 'Webový dizajn', url: '/sluzby/webovy-dizajn' },
+            { name: 'Tlačové služby', url: '/sluzby/tlacove-sluzby' },
+        ],
+    },
+    {
+        icon: '/assets/images/ryvenia-vyvoj.svg',
+        iconAlt: 'Ryvenia Vývoj',
+        title: 'VÝVOJ',
+        items: [
+            { name: 'Tvorba webstránok', url: '/sluzby/tvorba-webstranok' },
+            { name: 'Vývoj online obchodov', url: '/sluzby/vyvoj-online-obchodov' },
+            { name: 'Vývoj mobilných aplikácií', url: '/sluzby/vyvoj-mobilnych-aplikacii' },
+            { name: 'Programovanie na mieru', url: '/sluzby/programovanie-na-mieru' },
+            { name: 'Správa webových stránok', url: '/sluzby/sprava-webovych-stranok' },
+        ],
+    },
+    {
+        icon: '/assets/images/ryvenia-marketing.svg',
+        iconAlt: 'Ryvenia Marketing',
+        title: 'MARKETING',
+        items: [
+            { name: 'SEO optimalizácia', url: '/sluzby/seo-optimalizacia' },
+            { name: 'Reklamné kampane', url: '/sluzby/reklamne-kampane' },
+            { name: 'Cenové porovnávače', url: '/sluzby/cenove-porovnavace' },
+            { name: 'Sociálne siete', url: '/sluzby/socialne-siete' },
+            { name: 'Influencer marketing', url: '/sluzby/influencer-marketing' },
+        ],
+    },
+];
+
 const Header = () => {
     const dispatch = useDispatch();
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
@@ -68,63 +119,63 @@ const Header = () => {
     const [showCalculator, setShowCalculator] = useState(false);
     const [mobileServiceOpen, setMobileServiceOpen] = useState(false);
 
-    const [serviceColumns, setServiceColumns] = useState<ServiceColumn[]>([]);
+    // const [serviceColumns, setServiceColumns] = useState<ServiceColumn[]>([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchServices = async () => {
-            try {
-                const { data, error } = await supabase
-                    .from('services')
-                    .select(
-                        `*,
-                        service_categories (
-                            id,
-                            title,
-                            created_at,
-                            updated_at
-                        )`
-                    )
-                    .eq('is_active', true)
-                    .order('sort_order', { ascending: true });
+    // useEffect(() => {
+    //     const fetchServices = async () => {
+    //         try {
+    //             const { data, error } = await supabase
+    //                 .from('services')
+    //                 .select(
+    //                     `*,
+    //                     service_categories (
+    //                         id,
+    //                         title,
+    //                         created_at,
+    //                         updated_at
+    //                     )`
+    //                 )
+    //                 .eq('is_active', true)
+    //                 .order('sort_order', { ascending: true });
 
-                if (error) {
-                    console.log('Error fetching services:', error);
-                    return;
-                }
+    //             if (error) {
+    //                 console.log('Error fetching services:', error);
+    //                 return;
+    //             }
 
-                // Group services by category
-                const servicesByCategory = new Map<string, ServiceColumn>();
-                
-                data?.forEach((service: Service) => {
-                    const categoryId = service.service_category_id;
-                    const categoryTitle = service.service_categories?.title || 'Other';
-                    
-                    if (!servicesByCategory.has(categoryId)) {
-                        servicesByCategory.set(categoryId, {
-                            id: categoryId,
-                            title: categoryTitle,
-                            services: []
-                        });
-                    }
-                    
-                    servicesByCategory.get(categoryId)?.services.push(service);
-                });
+    //             // Group services by category
+    //             const servicesByCategory = new Map<string, ServiceColumn>();
 
-                // Convert to array and sort by category title
-                const columns = Array.from(servicesByCategory.values())
-                    .sort((a, b) => a.title.localeCompare(b.title));
+    //             data?.forEach((service: Service) => {
+    //                 const categoryId = service.service_category_id;
+    //                 const categoryTitle = service.service_categories?.title || 'Other';
 
-                setServiceColumns(columns);
-            } catch (err) {
-                console.log('Error:', err);
-            } finally {
-                setLoading(false);
-            }
-        };
+    //                 if (!servicesByCategory.has(categoryId)) {
+    //                     servicesByCategory.set(categoryId, {
+    //                         id: categoryId,
+    //                         title: categoryTitle,
+    //                         services: []
+    //                     });
+    //                 }
 
-        fetchServices();
-    }, []);
+    //                 servicesByCategory.get(categoryId)?.services.push(service);
+    //             });
+
+    //             // Convert to array and sort by category title
+    //             const columns = Array.from(servicesByCategory.values())
+    //                 .sort((a, b) => a.title.localeCompare(b.title));
+
+    //             setServiceColumns(columns);
+    //         } catch (err) {
+    //             console.log('Error:', err);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+
+    //     fetchServices();
+    // }, []);
 
     const handleServicesEnter = () => {
         if (servicesTimeout.current) clearTimeout(servicesTimeout.current);
@@ -174,24 +225,26 @@ const Header = () => {
                                 </button>
                                 {/* Mobile dropdown for services */}
                                 {mobileServiceOpen && (
-                                  <ul className="lg:hidden pl-6 pb-2 space-y-2 text-base">
-                                    {serviceColumns.map((category) => (
-                                      <li key={category.id}>
-                                        <Link href={`/service?category=${category.id}`} className="block py-1 font-semibold text-secondary">
-                                          {category.title}
-                                        </Link>
-                                        <ul className="pl-4 space-y-1 mt-1">
-                                          {category.services.map((service) => (
-                                            <li key={service.id}>
-                                              <Link href={`/services-detail/${service.id}`} className="block py-1 text-sm">
-                                                {service.title}
-                                              </Link>
-                                            </li>
-                                          ))}
-                                        </ul>
-                                      </li>
-                                    ))}
-                                  </ul>
+                                    <div className="lg:hidden pl-6 pb-2 space-y-4">
+                                        {serviceColumns.map((col, idx) => (
+                                            <div key={idx} className="space-y-2">
+                                                <h4 className="font-semibold text-secondary text-sm uppercase">{col.title}</h4>
+                                                <ul className="space-y-1 text-base">
+                                                    {col.items.map((item, i) => (
+                                                        <li key={i}>
+                                                            <Link
+                                                                href={item.url || '#'}
+                                                                className="block py-1 hover:text-secondary transition-colors duration-150"
+                                                                onClick={() => setMobileServiceOpen(false)}
+                                                            >
+                                                                {item.name}
+                                                            </Link>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        ))}
+                                    </div>
                                 )}
                             </li>
                             <li onClick={toggleMenu}>
@@ -293,20 +346,10 @@ const Header = () => {
                         onMouseLeave={handleServicesLeave}
                     >
                         <div className="flex flex-col w-full gap-8 sm:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 sm:gap-0 max-w-7xl mx-auto">
-                            {loading ? (
-                                <div className="col-span-full text-center py-8">
-                                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-secondary mx-auto"></div>
-                                    <p className="mt-2 text-primary dark:text-white">Načítavam služby...</p>
-                                </div>
-                            ) : serviceColumns.length === 0 ? (
-                                <div className="col-span-full text-center py-8">
-                                    <p className="text-primary dark:text-white">Žiadne služby nie sú dostupné</p>
-                                </div>
-                            ) : (
-                                serviceColumns.map((col, idx) => (
+                            {serviceColumns.map((col, idx) => (
                                 <div
                                     key={idx}
-                                    className={`flex flex-col items-start w-full px-4 py-4 sm:px-8 sm:py-2 ${idx !== 0 ? 'sm:border-l border-gray-100 dark:border-[#9199B5]/20' : ''}`}
+                                    className={`flex flex-col items-start w-full px-4 py-4 sm:px-8 sm:py-2 ${idx !== 0 ? 'sm:border-l border-[#9199B5]/10' : ''}`}
                                 >
                                     <div className="mb-3">
                                         <span className="inline-flex items-center gap-2 rounded-full bg-success-light/[0.08] dark:bg-secondary/[0.08] px-5 py-2 text-lg font-extrabold uppercase text-success dark:text-secondary mb-2">
@@ -314,22 +357,22 @@ const Header = () => {
                                             {col.title}
                                         </span>
                                     </div>
-                                    <hr className="w-full border-t border-gray-100 dark:border-[#9199B5]/20 mb-5 hidden sm:block" />
+                                    <hr className="w-full border-t border-[#9199B5]/10 mb-5 hidden sm:block" />
                                     <ul className="space-y-2 w-full">
-                                        {col.services.map((service, i) => (
-                                            <li
-                                                key={service.id}
-                                                className="text-lg font-normal text-primary dark:text-white hover:text-secondary hover:underline cursor-pointer transition-colors duration-150 px-1 py-1 rounded"
-                                            >
-                                                <Link href={`/services-detail/${service.slug}`}>
-                                                    {service.title}
+                                        {col.items.map((item, i) => (
+                                            <li key={i}>
+                                                <Link
+                                                    href={item.url || '#'}
+                                                    className="text-lg font-normal text-primary dark:text-white hover:text-secondary hover:underline cursor-pointer transition-colors duration-150 px-1 py-1 rounded block"
+                                                    onClick={() => setShowServices(false)}
+                                                >
+                                                    {item.name}
                                                 </Link>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
-                            ))
-                            )}
+                            ))}
                         </div>
                     </div>
                 )}
