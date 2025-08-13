@@ -38,8 +38,8 @@ const page = () => {
                         <h1
                             className="text-3xl md:text-[50px] font-black uppercase md:leading-[59px] max-w-[1019px] italic"
                         >
-                                                    <span className="text-gray-900 dark:text-white">Tvorba <span className="text-secondary">eshopov</span> a riešenia </span>
-                        
+                            <span className="text-gray-900 dark:text-white">Tvorba <span className="text-secondary">eshopov</span> a riešenia </span>
+
                         </h1>
                         <p className="text-lg mt-5 text-[#4B5576] dark:text-[#9199B5] max-w-[582px]">
                             E-commerce riešenie je komplexná platforma umožňujúca firmám predávať produkty a služby cez internet. Moderný e-shop zahŕňa webový obchod, platobný systém, správu skladových zásob, CRM systém a marketingové nástroje pre efektívny online predaj.
@@ -60,7 +60,7 @@ const page = () => {
                         </p>
                     </div>
                     <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-8 mt-12">
-                        
+
                         <div className="py-5 px-[17px] dark:bg-[#9199B5]/[0.12] rounded-2xl" data-aos="fade-up" data-aos-duration="1000">
                             <div className="flex items-center gap-5">
                                 <p className="text-[28px] font-bold leading-8 text-secondary">01</p>
@@ -71,7 +71,7 @@ const page = () => {
                                 Responzívny dizajn zameraný na konverzie a používateľskú prívetivosť
                             </p>
                         </div>
-                        
+
                         <div className="py-5 px-[17px] dark:bg-[#9199B5]/[0.12] rounded-2xl" data-aos="fade-up" data-aos-duration="1000">
                             <div className="flex items-center gap-5">
                                 <p className="text-[28px] font-bold leading-8 text-secondary">02</p>
@@ -82,7 +82,7 @@ const page = () => {
                                 Kompletné nastavenie online obchodu s produktmi, kategóriami a platobným systémom
                             </p>
                         </div>
-                        
+
                         <div className="py-5 px-[17px] dark:bg-[#9199B5]/[0.12] rounded-2xl" data-aos="fade-up" data-aos-duration="1000">
                             <div className="flex items-center gap-5">
                                 <p className="text-[28px] font-bold leading-8 text-secondary">03</p>
@@ -93,7 +93,7 @@ const page = () => {
                                 SEO optimalizácia, napojenie na porovnávače cien a remarketing kampane
                             </p>
                         </div>
-                        
+
                         <div className="py-5 px-[17px] dark:bg-[#9199B5]/[0.12] rounded-2xl" data-aos="fade-up" data-aos-duration="1000">
                             <div className="flex items-center gap-5">
                                 <p className="text-[28px] font-bold leading-8 text-secondary">04</p>
@@ -104,7 +104,7 @@ const page = () => {
                                 Sledovanie predajov, Google Analytics a 24/7 technická podpora
                             </p>
                         </div>
-                        
+
                     </div>
                 </div>
             </section>
@@ -124,42 +124,42 @@ const page = () => {
                                     Nájdite tím e-commerce expertov, na ktorých sa môžete spoľahnúť. Každý deň budujeme úspešné online obchody prostredníctvom pokročilých technológií a overených stratégií.
                                 </p>
                                 <ul className="mt-7 md:mt-12 space-y-3 text-lg text-primary dark:text-white font-semibold">
-                                    
+
                                     <li className="flex items-center gap-2.5">
                                         <span>
                                             <PricebulletPointIcon className="text-[#07D673]" />
                                         </span>
                                         <p>5+ rokov skúseností s tvorbou e-shopov</p>
                                     </li>
-                                    
+
                                     <li className="flex items-center gap-2.5">
                                         <span>
                                             <PricebulletPointIcon className="text-[#07D673]" />
                                         </span>
                                         <p>Napojenie na platobné brány a služby</p>
                                     </li>
-                                    
+
                                     <li className="flex items-center gap-2.5">
                                         <span>
                                             <PricebulletPointIcon className="text-[#07D673]" />
                                         </span>
                                         <p>Responzívny dizajn optimalizovaný pre mobilné zariadenia</p>
                                     </li>
-                                    
+
                                     <li className="flex items-center gap-2.5">
                                         <span>
                                             <PricebulletPointIcon className="text-[#07D673]" />
                                         </span>
                                         <p>SEO optimalizácia už od začiatku</p>
                                     </li>
-                                    
+
                                     <li className="flex items-center gap-2.5">
                                         <span>
                                             <PricebulletPointIcon className="text-[#07D673]" />
                                         </span>
                                         <p>Technická podpora</p>
                                     </li>
-                                    
+
                                 </ul>
                                 <Link href="/contact-us" className="btn mt-7 md:mt-12">
                                     Začať spoluprácu
@@ -190,7 +190,7 @@ const page = () => {
                             Cena e-shopu zahŕňa dizajn, programovanie a podporu - bez skrytých poplatkov.
                         </p>
                     </div>
-                    
+
                     <div className="max-w-6xl mx-auto">
                         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
                             {/* Table Header */}
@@ -205,7 +205,7 @@ const page = () => {
                                     <span className="bg-[#9199B5]/20 pt-0.5 w-full block"></span>
                                 </div>
                             </div>
-                            
+
                             {/* Table Rows */}
                             <div>
                                 {/* Basic Package */}
@@ -222,7 +222,7 @@ const page = () => {
                                         <span className="bg-[#9199B5]/20 pt-0.5 w-full block"></span>
                                     </div>
                                 </div>
-                                
+
                                 {/* Advanced Package */}
                                 <div className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                                     <div className="grid grid-cols-4 gap-4 items-center">
@@ -237,7 +237,7 @@ const page = () => {
                                         <span className="bg-[#9199B5]/20 pt-0.5 w-full block"></span>
                                     </div>
                                 </div>
-                                
+
                                 {/* Enterprise Package */}
                                 <div className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
                                     <div className="grid grid-cols-4 gap-4 items-center">
@@ -250,7 +250,7 @@ const page = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             {/* CTA Button */}
                             <div className="p-6 bg-gray-50 dark:bg-gray-800 text-center">
                                 <Link href="/contact-us" className="btn">
@@ -259,7 +259,7 @@ const page = () => {
                             </div>
                         </div>
                     </div>
-                    
+
                     {/* Disclaimer */}
                     <div className="mt-6 text-center">
                         <p className="text-sm text-[#5d6c74] italic">
