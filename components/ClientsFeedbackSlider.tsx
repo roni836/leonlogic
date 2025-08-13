@@ -79,7 +79,7 @@ const ClientsFeedbackSlider = () => {
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
                                 <Image
-                                    src="/assets/images/profile-pic1.jpg"
+                                    src="/assets/images/profile-pic5.jpg"
                                     alt="profile pic1"
                                     className="h-full w-full object-cover rtl:rotate-y-180"
                                     width={48}
@@ -104,7 +104,7 @@ const ClientsFeedbackSlider = () => {
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
                                 <Image
-                                    src="/assets/images/profile-pic2.jpg"
+                                    src="/assets/images/profile-pic4.jpg"
                                     alt="profile pic2"
                                     className="h-full w-full object-cover rtl:rotate-y-180"
                                     width={48}
@@ -129,7 +129,7 @@ const ClientsFeedbackSlider = () => {
                         <div className="flex gap-2.5">
                             <div className="h-12 w-12 flex-none overflow-hidden rounded-full">
                                 <Image
-                                    src="/assets/images/profile-pic3.jpg"
+                                    src="/assets/images/profile-pic5.jpg"
                                     alt="profile pic3"
                                     className="h-full w-full object-cover rtl:rotate-y-180"
                                     width={48}

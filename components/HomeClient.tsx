@@ -182,7 +182,7 @@ export default function HomeClient() {
                         </div>
 
                         <div className="flex items-end md:pt-14 max-w-[652px] w-full" data-aos="fade-up" data-aos-duration="1000">
-                            <Image src="/assets/images/we-img.png" alt="we img" width={652} height={460} />
+                            <Image src="/assets/images/we-img.svg" alt="we img" width={652} height={460} />
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@ export default function HomeClient() {
                     <div className="grid gap-7 sm:grid-cols-2">
                         <div className="overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/images/project1.jpg"
+                                src="/assets/images/1.png"
                                 className="h-full w-full object-cover hover:scale-110 duration-300"
                                 alt="project1"
                                 width={754}
@@ -210,7 +210,7 @@ export default function HomeClient() {
                         </div>
                         <div className="overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/images/project2.jpg"
+                                src="/assets/images/2.png"
                                 className="h-full w-full object-cover hover:scale-110 duration-300"
                                 alt="project2"
                                 width={754}
@@ -219,7 +219,7 @@ export default function HomeClient() {
                         </div>
                         <div className="overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/images/project3.jpg"
+                                src="/assets/images/3.png"
                                 className="h-full w-full object-cover hover:scale-110 duration-300"
                                 alt="project3"
                                 width={754}
@@ -228,7 +228,7 @@ export default function HomeClient() {
                         </div>
                         <div className="overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/images/project4.jpg"
+                                src="/assets/images/4.png"
                                 className="h-full w-full object-cover hover:scale-110 duration-300"
                                 alt="project4"
                                 width={754}
