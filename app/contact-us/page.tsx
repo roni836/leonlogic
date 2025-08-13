@@ -42,10 +42,10 @@ const page = () => {
                         data-aos="zoom-in"
                         data-aos-duration="1000"
                     >
-                        Have questions? <span className="text-secondary">Reach out!</span>
+                        Máte otázky? <span className="text-secondary">Napíšte nám!</span>
                     </h1>
                     <p className="text-lg text-gray dark:text-[#9199B5] mt-5 text-center">
-                        Were tired complex spreadsheets visibility and fees every time made transaction.
+                        Sme tu pre vás a radi vám pomôžeme s vašimi projektmi. Kontaktujte nás kedykoľvek.
                     </p>
                 </div>
             </section>
@@ -60,9 +60,9 @@ const page = () => {
                                         <span>
                                             <FilledPhoneIcon className="w-10 h-[41px]" />
                                         </span>
-                                        <p className="text-lg font-semibold text-gray dark:text-[#9199B5] mt-5">Phone Number</p>
-                                        <Link href="tel:++1 (202) 555-0131" className="text-xl font-semibold mt-2.5 hover:text-secondary transition">
-                                            +1 (202) 555-0131
+                                        <p className="text-lg font-semibold text-gray dark:text-[#9199B5] mt-5">Telefónne číslo</p>
+                                        <Link href="tel:+421915376588" className="text-xl font-semibold mt-2.5 hover:text-secondary transition">
+                                            +421 915 376 588
                                         </Link>
                                     </div>
                                 </div>
@@ -72,8 +72,8 @@ const page = () => {
                                             <FilledEmailIcon className="w-10 h-[41px]" />
                                         </span>
                                         <p className="text-lg font-semibold text-gray dark:text-[#9199B5] mt-5">Email ID</p>
-                                        <Link href="mailto:hello@leonlogicthemes.com" className="text-xl font-semibold mt-2. hover:text-secondary transition5">
-                                            hello@leonlogicthemes.com
+                                        <Link href="mailto:leonlogic@leonlogic.com" className="text-xl font-semibold mt-2. hover:text-secondary transition5">
+                                            leonlogic@leonlogic.com
                                         </Link>
                                     </div>
                                 </div>
@@ -82,20 +82,20 @@ const page = () => {
                                         <span>
                                             <FilledLocationIcon className="w-[41px] h-[41px]" />
                                         </span>
-                                        <p className="text-lg font-semibold text-gray dark:text-[#9199B5] mt-5">Location</p>
-                                        <p className="text-xl font-semibold mt-2.5">live:appstonelab.technologies</p>
+                                        <p className="text-lg font-semibold text-gray dark:text-[#9199B5] mt-5">Adresa</p>
+                                        <p className="text-xl font-semibold mt-2.5">Kostolná 299, 991 26 Nenince</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className="pb-10 md:pb-16">
                             <ContactUsForm />
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section className="pb-16 pt-[120px]">
+            {/* <section className="pb-16 pt-[120px]">
                 <div className="container">
                     <div className="max-w-[459px] mx-auto text-center">
                         <h2 className="mt-[30px] pb-4 text-3xl font-extrabold md:text-[40px] md:leading-[54px]">
@@ -146,11 +146,11 @@ const page = () => {
 
             <section className="py-12 md:py-16">
                 <BlogSlider />
-            </section>
+            </section> */}
 
-            <section className="py-10 md:py-16">
+            {/* <section className="py-10 md:py-16">
                 <ClientsFeedbackSlider />
-            </section>
+            </section> */}
         </>
     );
 };

@@ -3,11 +3,11 @@
 import { useState } from 'react';
 
 const ContactUsForm = () => {
-    const [placeholder, setPlaceholder] = useState('First Name');
-    const [placeholder1, setPlaceholder1] = useState('Last Name');
+    const [placeholder, setPlaceholder] = useState('Meno');
+    const [placeholder1, setPlaceholder1] = useState('Priezvisko');
     const [placeholder2, setPlaceholder2] = useState('Email');
-    const [placeholder3, setPlaceholder3] = useState('Subject');
-    const [placeholder4, setPlaceholder4] = useState('Type your messages');
+    const [placeholder3, setPlaceholder3] = useState('Predmet');
+    const [placeholder4, setPlaceholder4] = useState('Napíšte vašu správu');
     return (
         <form
             action=""
@@ -20,14 +20,14 @@ const ContactUsForm = () => {
                         name="name"
                         placeholder={placeholder}
                         onFocus={() => setPlaceholder('')}
-                        onBlur={() => setPlaceholder('First Name')}
+                        onBlur={() => setPlaceholder('Meno')}
                         className="border-2 border-[#9199B5]/[0.12] dark:bg-[#112C3C] p-5 rounded-2xl text-base font-semibold focus:border-secondary outline-hidden w-full peer duration-700 leading-5"
                     />
                     <label
                         htmlFor=""
                         className="absolute -top-3 bg-white dark:bg-[#112C3C] dark:text-white px-2 font-semibold ltr:left-6 rtl:right-6 text-success opacity-0 peer-focus:opacity-100 duration-300"
                     >
-                        First Name
+                        Meno
                     </label>
                 </div>
                 <div className="relative">
@@ -36,14 +36,14 @@ const ContactUsForm = () => {
                         name="name"
                         placeholder={placeholder1}
                         onFocus={() => setPlaceholder1('')}
-                        onBlur={() => setPlaceholder1('Last Name')}
+                        onBlur={() => setPlaceholder1('Priezvisko')}
                         className="border-2 border-[#9199B5]/[0.12] dark:bg-[#112C3C] p-5 rounded-2xl text-base font-semibold focus:border-secondary outline-hidden w-full peer duration-700 leading-5"
                     />
                     <label
                         htmlFor=""
                         className="absolute -top-3 bg-white dark:bg-[#112C3C] dark:text-white px-2 font-semibold ltr:left-6 rtl:right-6 text-success opacity-0 peer-focus:opacity-100 duration-300"
                     >
-                        Last Name
+                        Priezvisko
                     </label>
                 </div>
             </div>
@@ -70,14 +70,14 @@ const ContactUsForm = () => {
                         name="name"
                         placeholder={placeholder3}
                         onFocus={() => setPlaceholder3('')}
-                        onBlur={() => setPlaceholder3('Subject')}
+                        onBlur={() => setPlaceholder3('Predmet')}
                         className="border-2 border-[#9199B5]/[0.12] dark:bg-[#112C3C] p-5 rounded-2xl text-base font-semibold focus:border-secondary outline-hidden w-full peer duration-700 leading-5"
                     />
                     <label
                         htmlFor=""
                         className="absolute -top-3 bg-white dark:bg-[#112C3C] dark:text-white px-2 font-semibold ltr:left-6 rtl:right-6 text-success opacity-0 peer-focus:opacity-100 duration-300"
                     >
-                        Subject
+                        Predmet
                     </label>
                 </div>
             </div>
@@ -87,7 +87,7 @@ const ContactUsForm = () => {
                         name="name"
                         placeholder={placeholder4}
                         onFocus={() => setPlaceholder4('')}
-                        onBlur={() => setPlaceholder4('Type your messages')}
+                        onBlur={() => setPlaceholder4('Napíšte vašu správu')}
                         rows={5}
                         className="border-2 border-[#9199B5]/[0.12] dark:bg-[#112C3C] p-5 rounded-2xl text-base font-semibold focus:border-secondary outline-hidden w-full peer duration-700 leading-5"
                     />
@@ -95,12 +95,12 @@ const ContactUsForm = () => {
                         htmlFor=""
                         className="absolute -top-3 bg-white dark:bg-[#112C3C] dark:text-white px-2 font-semibold ltr:left-6 rtl:right-6 text-success opacity-0 peer-focus:opacity-100 duration-300"
                     >
-                        Type your messages
+                        Napíšte vašu správu
                     </label>
                 </div>
             </div>
             <button type="button" className="btn mt-5 sm:mt-8 w-full sm:w-auto sm:px-20">
-                send message
+                Odoslať správu
             </button>
         </form>
     );
