@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import path from "path";
 import fs from "fs";
+import ClientsFeedbackSlider from "@/components/ClientsFeedbackSlider";
+import GetInTouch from "@/components/GetInTouch";
+import Image from "next/image";
 
 // --- Types ---
 type Service = {
@@ -178,18 +181,64 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 </>
             )}
 
-            {/* CTA */}
-            {service.cta && (
-                <section className="text-center">
-                    <div className="bg-blue-600 text-white p-12 rounded-lg">
-                        <h2 className="text-3xl font-bold mb-4">{service.cta.title}</h2>
-                        <p className="text-xl mb-8">{service.cta.description}</p>
-                        <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                            {service.cta.button}
-                        </button>
+            <section className="py-12 md:py-16">
+                <div className="container">
+                    <div className="mb-6 text-center md:mb-12">
+                        <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-secondary/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
+                            REALIZOVANÉ PROJEKTY
+                        </p>
+                        <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
+                            Z NAŠEJ <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">DIELNE</span>
+                        </h2>
                     </div>
-                </section>
-            )}
+                    <div className="grid gap-7 sm:grid-cols-2">
+                        <div className="overflow-hidden rounded-2xl">
+                            <Image
+                                src="/assets/images/1.png"
+                                className="h-full w-full object-cover hover:scale-110 duration-300"
+                                alt="E-commerce riešenie 1"
+                                width={754}
+                                height={521}
+                            />
+                        </div>
+                        <div className="overflow-hidden rounded-2xl">
+                            <Image
+                                src="/assets/images/2.png"
+                                className="h-full w-full object-cover hover:scale-110 duration-300"
+                                alt="E-commerce riešenie 2"
+                                width={754}
+                                height={521}
+                            />
+                        </div>
+                        <div className="overflow-hidden rounded-2xl">
+                            <Image
+                                src="/assets/images/3.png"
+                                className="h-full w-full object-cover hover:scale-110 duration-300"
+                                alt="E-commerce riešenie 3"
+                                width={754}
+                                height={401}
+                            />
+                        </div>
+                        <div className="overflow-hidden rounded-2xl">
+                            <Image
+                                src="/assets/images/4.png"
+                                className="h-full w-full object-cover hover:scale-110 duration-300"
+                                alt="E-commerce riešenie 4"
+                                width={754}
+                                height={401}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="py-10 md:py-16">
+                <ClientsFeedbackSlider />
+            </section>
+
+            <section className="bg-[url('/assets/images/newsletter.png')] bg-cover bg-bottom bg-no-repeat bg-success py-12 relative">
+                <GetInTouch />
+            </section>
         </main>
     );
 }

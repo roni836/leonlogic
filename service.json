@@ -1,14 +1,38 @@
 [
-  {
-    "slug": "e-commerce-tes",
-    "title": "E-Commerce Riešenia",
-    "description": "Komplexné e-commerce platformy na mieru...",
-    "features": ["Moderný dizajn","Bezpečné platby","Integrácia skladov","SEO optimalizácia"],
-    "pricing": [
-      { "name": "Základný balík", "price": "2 000 €", "details": ["Jednoduchý e-shop", "Podpora do 100 produktov"] },
-      { "name": "Pokročilý balík", "price": "5 000 €", "details": ["Viacjazyčnosť","Integrácia ERP","Podpora do 10 000 produktov"] }
-    ],
-    "faqs": [{ "question": "Ako dlho trvá vývoj e-shopu?", "answer": "Štandardne 4-8 týždňov podľa rozsahu." }],
-    "cta": { "title": "Začnite s e-commerce už dnes", "description": "Kontaktujte nás a zistite, ako môžeme rozbehnúť váš online obchod.", "button": "Kontaktovať nás" }
-  }
+    {
+        "slug": "e-commerce-tes",
+        "title": "E-Commerce Riešenia",
+        "description": "Komplexné e-commerce platformy na mieru...",
+        "features": [
+            "Moderný dizajn",
+            "Bezpečné platby",
+            "Integrácia skladov",
+            "SEO optimalizácia"
+        ],
+        "pricing": [
+            {
+                "name": "Základný balík",
+                "price": "2 000 €",
+                "details": [
+                    "Jednoduchý e-shop",
+                    "Podpora do 100 produktov"
+                ]
+            },
+            {
+                "name": "Pokročilý balík",
+                "price": "5 000 €",
+                "details": [
+                    "Viacjazyčnosť",
+                    "Integrácia ERP",
+                    "Podpora do 10 000 produktov"
+                ]
+            }
+        ],
+        "faqs": [
+            {
+                "question": "Ako dlho trvá vývoj e-shopu?",
+                "answer": "Štandardne 4-8 týždňov podľa rozsahu."
+            }
+        ]
+    }
 ]
