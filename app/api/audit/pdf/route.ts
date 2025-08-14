@@ -1,178 +1,22 @@
+// /app/api/generate-pdf/route.ts  (App Router)
+// or /pages/api/generate-pdf.ts   (Pages Router — remove the `export const runtime` line)
+
 import { NextRequest, NextResponse } from 'next/server';
-import puppeteer from 'puppeteer';
 import { createClient } from '@supabase/supabase-js';
+import fs from 'fs/promises';
+import path from 'path';
 
-// Fallback PDF generation using jsPDF
-async function generatePDFFallback(url: string, company: string, results: any): Promise<Buffer> {
-  try {
-    // Dynamic import to avoid bundling issues
-    const { jsPDF } = await import('jspdf');
-    
-    const doc = new jsPDF();
-    
-    // Add title
-    doc.setFontSize(20);
-    doc.text('Website Audit Report', 20, 20);
-    
-    // Add company and URL
-    doc.setFontSize(12);
-    doc.text(`Company: ${company}`, 20, 35);
-    doc.text(`URL: ${url}`, 20, 45);
-    
-    // Add scores
-    const seoScore = results?.seo?.score || 0;
-    const performanceScore = results?.performance?.score || 0;
-    const usabilityScore = results?.usability?.score || 0;
-    const technicalScore = results?.technical?.score || 0;
-    const overallScore = Math.round((seoScore + performanceScore + usabilityScore + technicalScore) / 4);
-    
-    doc.setFontSize(14);
-    doc.text('Scores:', 20, 65);
-    doc.setFontSize(10);
-    doc.text(`SEO: ${seoScore}/100`, 20, 75);
-    doc.text(`Performance: ${performanceScore}/100`, 20, 85);
-    doc.text(`Usability: ${usabilityScore}/100`, 20, 95);
-    doc.text(`Technical: ${technicalScore}/100`, 20, 105);
-    doc.text(`Overall: ${overallScore}/100`, 20, 115);
-    
-    // Add recommendations
-    doc.setFontSize(14);
-    doc.text('Recommendations:', 20, 135);
-    doc.setFontSize(10);
-    
-    const recommendations = [
-      'Implement responsive design for better mobile experience',
-      'Optimize images and code for faster loading speeds',
-      'Add proper meta tags and structured data for SEO',
-      'Improve user interface and call-to-action placement',
-      'Set up regular monitoring and maintenance'
-    ];
-    
-    let yPos = 145;
-    recommendations.forEach((rec, index) => {
-      if (yPos > 250) {
-        doc.addPage();
-        yPos = 20;
-      }
-      doc.text(`${index + 1}. ${rec}`, 20, yPos);
-      yPos += 10;
-    });
-    
-    const pdfArrayBuffer = doc.output('arraybuffer');
-    return Buffer.from(pdfArrayBuffer);
-  } catch (error) {
-    console.error('[pdf] Fallback PDF generation failed:', error);
-    throw new Error('PDF generation failed');
-  }
-}
+// App Router only; delete this line if using Pages Router
+export const runtime = 'nodejs';
 
-// NOTE: This file is a drop-in improved version of your API route.
-// Save it to /pages/api/generate-pdf.ts or /app/api/generate-pdf/route.ts depending on your Next.js setup.
+// ---------- Types & small helpers ----------
+type Num = number | null | undefined;
+const toNum = (n: Num, fb = 0) => (typeof n === 'number' && Number.isFinite(n) ? n : fb);
 
-export async function POST(request: NextRequest) {
-  try {
-    const { url, company, results } = await request.json();
-    console.log('[pdf] Incoming request', { url, company, hasResults: !!results });
-
-    if (!url || !company || !results) {
-      return NextResponse.json({ error: 'Missing required data' }, { status: 400 });
-    }
-
-    let pdfBuffer: Buffer;
-    
-    try {
-      // Try Puppeteer first
-      const puppeteerResult = await generatePDF(url, company, results);
-      pdfBuffer = Buffer.from(puppeteerResult);
-      console.log('[pdf] Puppeteer PDF generation successful');
-    } catch (puppeteerError) {
-      console.error('[pdf] Puppeteer failed, trying fallback:', puppeteerError);
-      
-      try {
-        // Fallback to jsPDF
-        pdfBuffer = await generatePDFFallback(url, company, results);
-        console.log('[pdf] Fallback PDF generation successful');
-      } catch (fallbackError) {
-        console.error('[pdf] Both PDF generation methods failed:', fallbackError);
-        return NextResponse.json({ 
-          error: 'PDF generation failed in production environment',
-          details: 'Both Puppeteer and fallback methods failed'
-        }, { status: 500 });
-      }
-    }
-
-    // Log size for debugging
-    try {
-      const size = Buffer.from(pdfBuffer).byteLength;
-      console.log('[pdf] Generated PDF size (bytes):', size);
-    } catch { }
-
-    // Upload PDF to Supabase Storage
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
-
-    const fileName = `${company.replace(/[^a-z0-9\-_.]/gi, '_')}-${Date.now()}.pdf`;
-
-    const { data: uploadData, error: uploadError } = await supabase.storage
-      .from('audit-pdfs')
-      .upload(fileName, pdfBuffer, {
-        contentType: 'application/pdf',
-        upsert: true,
-      });
-
-    if (uploadError) {
-      console.error('[pdf] Supabase Storage upload error:', uploadError);
-    } else {
-      const { data: urlData } = supabase.storage.from('audit-pdfs').getPublicUrl(fileName);
-      const publicUrl = (urlData as any)?.publicUrl ?? (urlData as any)?.public_url ?? null;
-
-      if (publicUrl) {
-        // Save the URL to audit_leads table (update if exists)
-        try {
-          await supabase
-            .from('audit_leads')
-            .update({ pdf_url: publicUrl })
-            .eq('company_name', company);
-
-          console.log('[pdf] PDF uploaded and URL saved to DB:', publicUrl);
-
-          // Trigger email sending route with the PDF URL (best-effort)
-          try {
-            const origin = new URL(request.url).origin;
-            const res = await fetch(`${origin}/api/audit/send-email`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ url, company, pdfUrl: publicUrl })
-            });
-            console.log('[pdf] send-email response status:', res.status);
-          } catch (e) {
-            console.error('[pdf] Failed to call send-email route:', e);
-          }
-        } catch (dbErr) {
-          console.error('[pdf] Failed to update audit_leads:', dbErr);
-        }
-      }
-    }
-
-    return new NextResponse(Buffer.from(pdfBuffer), {
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="${company}-website-audit.pdf"`
-      }
-    });
-  } catch (error) {
-    console.error('[pdf] PDF Generation Error:', error);
-    return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
-  }
-}
-
-// Helper - safely read nested numeric score
-function getScoreFromPath(obj: any, path: string[], fallback: number | null = 0): number | null {
+function getScoreFromPath(obj: any, pathArr: string[], fallback: number | null = 0): number | null {
   try {
     let cur = obj;
-    for (const p of path) {
+    for (const p of pathArr) {
       if (cur == null) return fallback;
       cur = cur[p];
     }
@@ -184,431 +28,586 @@ function getScoreFromPath(obj: any, path: string[], fallback: number | null = 0)
   }
 }
 
-async function generatePDF(url: string, company: string, results: any) {
-  // derive scores (flexible paths)
-  const seoScoreRaw = getScoreFromPath(results, ['seo', 'score'], getScoreFromPath(results, ['seoScore'], 0));
-  const performanceScoreRaw = getScoreFromPath(results, ['performance', 'score'], getScoreFromPath(results, ['performanceScore'], 0));
-  const desktopScoreRaw = getScoreFromPath(results, ['performance', 'desktop', 'score'], null);
-  const mobileScoreRaw = getScoreFromPath(results, ['performance', 'mobile', 'score'], null);
-  const usabilityScoreRaw = getScoreFromPath(results, ['usability', 'score'], getScoreFromPath(results, ['usabilityScore'], 0));
-  const technicalScoreRaw = getScoreFromPath(results, ['technical', 'score'], getScoreFromPath(results, ['technicalScore'], 0));
+const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
+const colorForScore = (s: number) => (s >= 80 ? '#22c55e' : s >= 60 ? '#f59e0b' : '#ef4444');
 
-  const toNum = (n: number | null | undefined, fb = 0) => (typeof n === 'number' && Number.isFinite(n) ? n : fb);
-  const seoScore = toNum(seoScoreRaw);
-  const performanceScore = toNum(performanceScoreRaw);
-  const desktopScore = desktopScoreRaw;
-  const mobileScore = mobileScoreRaw;
-  const usabilityScore = toNum(usabilityScoreRaw);
-  const technicalScore = toNum(technicalScoreRaw);
+const todayStr = () => {
+  const d = new Date();
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  return `${dd}.${mm}.${d.getFullYear()}`;
+};
 
-  const overallScore = Math.round((seoScore + performanceScore + usabilityScore + technicalScore) / 4);
+// ---------- jsPDF-only generator ----------
+async function generatePDF(url: string, company: string, results: any): Promise<Buffer> {
+  // Dynamic import to avoid including in edge bundles
+  const { jsPDF } = await import('jspdf');
+  const doc = new jsPDF({ unit: 'pt', format: 'a4', compress: true });
 
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return '#22c55e'; // green
-    if (score >= 60) return '#f59e0b'; // amber
-    return '#ef4444'; // red
+  // Embed a Unicode font (fixes diacritics like "Ř")
+  let fontName = 'NotoSans';
+  try {
+    const fontPath = path.join(process.cwd(), 'public', 'fonts', 'NotoSans-Regular.ttf');
+    const fontBuf = await fs.readFile(fontPath);
+    (doc as any).addFileToVFS('NotoSans-Regular.ttf', fontBuf.toString('base64'));
+    (doc as any).addFont('NotoSans-Regular.ttf', 'NotoSans', 'normal');
+    doc.setFont('NotoSans', 'normal');
+  } catch (e) {
+    console.warn('[pdf] Unicode font not found — falling back to Helvetica.', e);
+    fontName = 'helvetica';
+    doc.setFont('helvetica', 'normal');
+  }
+
+  // Page & theme
+  const W = doc.internal.pageSize.getWidth();
+  const H = doc.internal.pageSize.getHeight();
+  const theme = {
+    bg: '#03060a',
+    card: '#0b1116',
+    muted: '#9aa4af',
+    text: '#e6eef5',
+    gray: '#1f2937',
   };
 
-  const getScoreStatus = (score: number) => {
-    if (score >= 80) return 'Excellent';
-    if (score >= 60) return 'Good';
-    if (score >= 40) return 'Needs Work';
-    return 'Critical';
+  // --- helpers (no setLineDash used anywhere) ---
+  const rrect = (x: number, y: number, w: number, h: number, r = 12, fill = theme.card) => {
+    doc.setFillColor(fill);
+    if ((doc as any).roundedRect) (doc as any).roundedRect(x, y, w, h, r, r, 'F');
+    else doc.rect(x, y, w, h, 'F');
   };
 
-  const getScoreBgColor = (score: number) => {
-    if (score >= 80) return '#052e14';
-    if (score >= 60) return '#341c03';
-    return '#3b0202';
+  // Draw a dotted horizontal line (replaces setLineDash)
+  const dottedH = (
+    x1: number,
+    y: number,
+    x2: number,
+    seg = 2,
+    gap = 3,
+    color = '#1a2630'
+  ) => {
+    doc.setDrawColor(color);
+    doc.setLineWidth(0.5);
+    let x = x1;
+    while (x < x2) {
+      const nx = Math.min(x + seg, x2);
+      doc.line(x, y, nx, y);
+      x = nx + gap;
+    }
   };
 
-  // Build issues and recommendations from input if provided, else create defaults
-  const issues: string[] = Array.isArray(results.issues) && results.issues.length ? results.issues : [];
-  if (usabilityScore < 50) issues.push(`Poor User Experience (${usabilityScore}/100)`);
-  if (performanceScore < 70) issues.push(`Slow Loading Speed (${performanceScore}/100)`);
-  if (seoScore < 80) issues.push(`Missing SEO Elements (${seoScore}/100)`);
-  if (technicalScore < 60) issues.push(`Technical Issues (${technicalScore}/100)`);
-
-  const recommendations: string[] = Array.isArray(results.recommendations) && results.recommendations.length
-    ? results.recommendations
-    : [
-      'Implement responsive design for better mobile experience',
-      'Optimize images and code for faster loading speeds',
-      'Add proper meta tags and structured data for SEO',
-      'Improve user interface and call-to-action placement',
-      'Set up regular monitoring and maintenance'
-    ];
-
-  // SVG circle math
-  const r = 16; // radius used in SVG
-  const circumference = 2 * Math.PI * r; // ~100.53
-  const dashArray = circumference.toFixed(3);
-  const scoreToOffset = (score: number) => ((1 - (score / 100)) * circumference).toFixed(3);
-
-  // Fallbacks for desktop/mobile display
-  const pcDisplay = desktopScore !== null && desktopScore !== undefined ? desktopScore : Math.round((performanceScore + (usabilityScore || 0)) / 2);
-  const phoneDisplay = mobileScore !== null && mobileScore !== undefined ? mobileScore : Math.round((performanceScore + (usabilityScore || 0)) / 2);
-
-  // Sanitize company and url for HTML
-  const esc = (s: any) => {
-    const map: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-    return String(s ?? '').replace(/[&<>"']/g, (c) => map[c] || c);
+  const text = (
+    s: string,
+    x: number,
+    y: number,
+    fs = 12,
+    color = theme.text,
+    bold = false
+  ) => {
+    doc.setTextColor(color);
+    doc.setFontSize(fs);
+    doc.setFont(fontName, bold ? 'bold' : 'normal');
+    doc.text(s, x, y);
   };
 
-  // Build a compact dark CSS (keeps Tailwind optional but relies mostly on our CSS so PDF is consistent)
-  const fullHtml = `
-    <!doctype html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <title>Website Audit - ${esc(company)}</title>
-      <style>
-        :root{
-          --bg:#03060a; --card:#0b1116; --muted:#9aa4af; --accent:#22c55e; --primary:#112C3C; --text:#e6eef5;
-        }
-        html,body{height:100%;margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
-        .wrap{max-width:920px;margin:18px auto;padding:20px}
-        .header{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px}
-        .brand{font-weight:700;color:var(--text);letter-spacing:0.6px}
-        .tag{color:var(--muted);font-size:12px}
-        .hero{display:flex;gap:22px;align-items:center;padding:28px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;margin-top:14px}
-        .hero-left{flex:1}
-        .headline{font-size:34px;line-height:1;letter-spacing:0.6px;margin:0 0 8px}
-        .url-card{background:#fff;padding:8px 12px;border-radius:8px;color:#0b1220;display:inline-block;font-weight:600}
-        .cta{border:1px solid rgba(255,255,255,0.08);padding:10px 16px;border-radius:8px;color:var(--text);display:inline-block}
-        .scores{display:flex;gap:24px;align-items:center}
-        .circle{width:84px;height:84px;position:relative}
-        .circle svg{display:block}
-        .circle .center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700}
-        .section{margin-top:18px;padding:18px;background:var(--card);border-radius:12px}
-        .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-        .progress{height:12px;background:#0f1720;border-radius:999px;overflow:hidden}
-        .progress > i{display:block;height:100%;border-radius:999px}
-        .list li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
-        .muted{color:var(--muted)}
-        .small{font-size:12px}
-        .tag-pill{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:600}
-        .issue{background:#2b0f0f;padding:12px;border-radius:8px;color:#ffd7d7}
-        .rec{background:#072812;padding:12px;border-radius:8px;color:#d7ffe6}
-        .page-break{page-break-after: always}
-        @media print{ .wrap{margin:8px} }
-      </style>
-    </head>
-    <body>
-      <div class="wrap">
-        <div class="header">
-          <div>
-            <div class="brand">LeonLogic</div>
-            <div class="muted small">KONZULTACE ZDARMA</div>
-          </div>
-          <div class="tag-pill small">Audit • ${new Date().toLocaleDateString()}</div>
-        </div>
+  const wrap = (
+    s: string,
+    x: number,
+    y: number,
+    maxW: number,
+    lh = 16,
+    fs = 12,
+    color = theme.text,
+    bold = false
+  ) => {
+    doc.setTextColor(color);
+    doc.setFontSize(fs);
+    doc.setFont(fontName, bold ? 'bold' : 'normal');
+    const lines = doc.splitTextToSize(s, maxW);
+    let yy = y;
+    for (const ln of lines as string[]) {
+      doc.text(ln, x, yy);
+      yy += lh;
+    }
+    return yy;
+  };
 
-        <div class="hero">
-          <div class="hero-left">
-            <h1 class="headline">VÝSLEDEK ANALÝZY WEBU</h1>
-            <div class="url-card">${esc(url)}</div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
-            <div class="scores">
-              <div class="circle" title="PC">
-                <svg viewBox="0 0 36 36">
-                  <circle cx="18" cy="18" r="${r}" stroke="#1f2937" stroke-width="4" fill="transparent"></circle>
-                  <circle cx="18" cy="18" r="${r}" stroke="${getScoreColor(pcDisplay)}" stroke-width="4" stroke-linecap="round" fill="transparent"
-                    stroke-dasharray="${dashArray}" stroke-dashoffset="${scoreToOffset(pcDisplay)}" transform="rotate(-90 18 18)" />
-                </svg>
-                <div class="center">${pcDisplay}%</div>
-              </div>
+  const progress = (x: number, y: number, w: number, h: number, pct: number, color: string) => {
+    // track
+    doc.setFillColor('#0f1720');
+    rrect(x, y, w, h, h / 2, '#0f1720');
+    // bar
+    const ww = (clamp(pct, 0, 100) / 100) * w;
+    doc.setFillColor(color);
+    rrect(x, y, ww, h, h / 2, color);
+  };
 
-              <div class="circle" title="Mobile">
-                <svg viewBox="0 0 36 36">
-                  <circle cx="18" cy="18" r="${r}" stroke="#1f2937" stroke-width="4" fill="transparent"></circle>
-                  <circle cx="18" cy="18" r="${r}" stroke="${getScoreColor(phoneDisplay)}" stroke-width="4" stroke-linecap="round" fill="transparent"
-                    stroke-dasharray="${dashArray}" stroke-dashoffset="${scoreToOffset(phoneDisplay)}" transform="rotate(-90 18 18)" />
-                </svg>
-                <div class="center">${phoneDisplay}%</div>
-              </div>
+  const arc = (
+    cx: number,
+    cy: number,
+    r: number,
+    startDeg: number,
+    endDeg: number,
+    lw = 6,
+    color = theme.text
+  ) => {
+    const steps = 64;
+    const s = (startDeg * Math.PI) / 180;
+    const e = (endDeg * Math.PI) / 180;
+    const len = Math.max(4, Math.floor((steps * Math.abs(e - s)) / (2 * Math.PI)));
+    doc.setDrawColor(color);
+    doc.setLineWidth(lw);
+    let px = cx + r * Math.cos(s);
+    let py = cy + r * Math.sin(s);
+    for (let i = 1; i <= len; i++) {
+      const t = s + ((e - s) * i) / len;
+      const x = cx + r * Math.cos(t);
+      const y = cy + r * Math.sin(t);
+      doc.line(px, py, x, y);
+      px = x;
+      py = y;
+    }
+  };
 
-              <div class="circle" title="Overall">
-                <svg viewBox="0 0 36 36">
-                  <circle cx="18" cy="18" r="${r}" stroke="#1f2937" stroke-width="4" fill="transparent"></circle>
-                  <circle cx="18" cy="18" r="${r}" stroke="${getScoreColor(overallScore)}" stroke-width="4" stroke-linecap="round" fill="transparent"
-                    stroke-dasharray="${dashArray}" stroke-dashoffset="${scoreToOffset(overallScore)}" transform="rotate(-90 18 18)" />
-                </svg>
-                <div class="center" style="color:${getScoreColor(overallScore)}">${overallScore}</div>
-              </div>
-            </div>
+  const ring = (
+    x: number,
+    y: number,
+    size: number,
+    pct: number,
+    color: string,
+    label?: string
+  ) => {
+    const cx = x + size / 2;
+    const cy = y + size / 2;
+    const rr = size / 2 - 6;
 
-            <div style="text-align:right">
-              <div class="muted small">Generated for</div>
-              <div style="font-weight:700">${esc(company)}</div>
-            </div>
-          </div>
-        </div>
+    // background ring
+    arc(cx, cy, rr, -90, 270, 6, theme.gray);
+    // progress
+    const endAngle = -90 + (clamp(pct, 0, 100) / 100) * 360;
+    arc(cx, cy, rr, -90, endAngle, 6, color);
 
-        <div class="section">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-            <h3 style="margin:0">PŘEHLED SKÓRE</h3>
-            <div class="tag-pill small">Overall • ${overallScore}/100</div>
-          </div>
+    text(`${Math.round(clamp(pct, 0, 100))}${label ? '' : '%'}`, cx, cy + 5, 12, theme.text, true);
+    if (label) text(label, cx, cy + 18, 9, theme.muted);
+  };
 
-          <ul class="list">
-            <li><span>Clarity</span><strong>${results.clarityScore ?? 80}%</strong></li>
-            <li><span>Visual Hierarchy</span><strong>${results.hierarchyScore ?? 70}%</strong></li>
-            <li><span>Navigation</span><strong>${results.navigationScore ?? 75}%</strong></li>
-            <li><span>Design Consistency</span><strong>${results.consistencyScore ?? 65}%</strong></li>
-            <li><span>Responsiveness</span><strong>${results.responsiveScore ?? 60}%</strong></li>
-            <li><span>SEO Tags</span><strong>${seoScore}%</strong></li>
-            <li><span>CTAs</span><strong>${results.ctaScore ?? 70}%</strong></li>
-          </ul>
-        </div>
+  // ---------- data from results ----------
+  const seo = toNum(getScoreFromPath(results, ['seo', 'score'], getScoreFromPath(results, ['seoScore'], 0)));
+  const perf = toNum(getScoreFromPath(results, ['performance', 'score'], getScoreFromPath(results, ['performanceScore'], 0)));
+  const desktop = getScoreFromPath(results, ['performance', 'desktop', 'score'], null);
+  const mobile = getScoreFromPath(results, ['performance', 'mobile', 'score'], null);
+  const usab = toNum(getScoreFromPath(results, ['usability', 'score'], getScoreFromPath(results, ['usabilityScore'], 0)));
+  const tech = toNum(getScoreFromPath(results, ['technical', 'score'], getScoreFromPath(results, ['technicalScore'], 0)));
 
-        <div class="grid" style="margin-top:18px">
-          <div class="section">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-              <div><strong>SEO Performance</strong><div class="muted small">On-page & metadata</div></div>
-              <div style="font-weight:700;color:${getScoreColor(seoScore)}">${seoScore}/100</div>
-            </div>
-            <div class="progress"><i style="width:${seoScore}%;background:${getScoreColor(seoScore)}"></i></div>
-          </div>
+  const overall = Math.round((seo + perf + usab + tech) / 4);
+  const pcDisplay = desktop ?? Math.round((perf + usab) / 2);
+  const mobDisplay = mobile ?? Math.round((perf + usab) / 2);
 
-          <div class="section">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-              <div><strong>Page Speed</strong><div class="muted small">Load times & asset optimization</div></div>
-              <div style="font-weight:700;color:${getScoreColor(performanceScore)}">${performanceScore}/100</div>
-            </div>
-            <div class="progress"><i style="width:${performanceScore}%;background:${getScoreColor(performanceScore)}"></i></div>
-          </div>
+  const issues: string[] =
+    Array.isArray(results?.issues) && results.issues.length ? [...results.issues] : [];
+  if (usab < 50) issues.push(`Poor User Experience (${usab}/100)`);
+  if (perf < 70) issues.push(`Slow Loading Speed (${perf}/100)`);
+  if (seo < 80) issues.push(`Missing SEO Elements (${seo}/100)`);
+  if (tech < 60) issues.push(`Technical Issues (${tech}/100)`);
 
-          <div class="section">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-              <div><strong>User Experience</strong><div class="muted small">Usability & accessibility</div></div>
-              <div style="font-weight:700;color:${getScoreColor(usabilityScore)}">${usabilityScore}/100</div>
-            </div>
-            <div class="progress"><i style="width:${usabilityScore}%;background:${getScoreColor(usabilityScore)}"></i></div>
-          </div>
+  const recs: string[] =
+    Array.isArray(results?.recommendations) && results.recommendations.length
+      ? results.recommendations
+      : [
+          'Implement responsive design for better mobile experience',
+          'Optimize images and code for faster loading speeds',
+          'Add proper meta tags and structured data for SEO',
+          'Improve user interface and call-to-action placement',
+          'Set up regular monitoring and maintenance',
+        ];
 
-          <div class="section">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-              <div><strong>Technical Health</strong><div class="muted small">Server, security & code</div></div>
-              <div style="font-weight:700;color:${getScoreColor(technicalScore)}">${technicalScore}/100</div>
-            </div>
-            <div class="progress"><i style="width:${technicalScore}%;background:${getScoreColor(technicalScore)}"></i></div>
-          </div>
-        </div>
+  // ---------- PAGE 1 ----------
+  doc.setFillColor(theme.bg);
+  doc.rect(0, 0, W, H, 'F');
 
-        <div class="section" style="margin-top:18px">
-          <h3 style="margin:0 0 10px">Executive Summary</h3>
-          <p class="muted small">Your website received an overall score of <strong style="color:${getScoreColor(overallScore)}">${overallScore}/100</strong>. ${overallScore >= 80 ? 'Performing excellently.' : overallScore >= 60 ? 'Good, needs targeted improvement.' : 'Significant improvements recommended.'}</p>
-        </div>
+  // Header
+  rrect(36, 36, W - 72, 56, 12, '#0e151c');
+  text('LeonLogic', 52, 68, 16, theme.text, true);
+  text('KONZULTACE ZDARMA', 52, 86, 10, theme.muted);
+  rrect(W - 196, 48, 160, 28, 14, '#111827');
+  text(`Audit • ${todayStr()}`, W - 184, 67, 10, theme.muted);
 
-        <div class="section" style="margin-top:18px">
-          <h3 style="margin:0 0 10px">Critical Issues</h3>
-          ${issues.length === 0 ? `<div class="issue" style="background:#07320b;color:#c7f6d0">No critical issues found — website looks healthy.</div>` : issues.map(i => `<div style="margin-bottom:8px" class="issue">• ${esc(i)}</div>`).join('')}
-        </div>
+  // Hero
+  rrect(36, 106, W - 72, 120, 12, '#0e151c');
+  text('VÝSLEDEK ANALÝZY WEBU', 52, 140, 22, theme.text, true);
+  rrect(52, 152, Math.min(420, W - 104), 26, 8, '#ffffff');
+  text(url, 60, 170, 11, '#0b1220', true);
 
-        <div class="section" style="margin-top:18px">
-          <h3 style="margin:0 0 10px">Recommendations</h3>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
-            ${recommendations.map(r => `<div class="rec">• ${esc(r)}</div>`).join('')}
-          </div>
-        </div>
+  // Rings + "Generated for"
+  const rightX = W - 36 - 300;
+  ring(rightX, 120, 70, pcDisplay, colorForScore(pcDisplay), 'PC');
+  ring(rightX + 90, 120, 70, mobDisplay, colorForScore(mobDisplay), 'Mobile');
+  ring(rightX + 180, 120, 70, overall, colorForScore(overall), 'Overall');
+  text('Generated for', rightX + 180, 212, 9, theme.muted);
+  text(company, rightX + 180, 226, 12, theme.text, true);
 
-        <!-- New Page: SEO Deep Dive -->
-        <div class="page-break"></div>
-        <div class="section">
-          <h3 style="margin:0 0 12px">SEO Deep Dive</h3>
-          <div class="muted small" style="margin-bottom:8px">On-page factors, metadata, content signals</div>
-          <div class="grid">
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Critical Issues</div>
-              ${(results?.seo?.issues || issues).slice(0, 10).map((i: any) => `<div class="issue" style="margin-bottom:8px">• ${esc(i)}</div>`).join('') || '<div class="muted">No critical SEO issues detected.</div>'}
-            </div>
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Recommendations</div>
-              ${(results?.seo?.recommendations || recommendations).slice(0, 10).map((r: any) => `<div class="rec" style="margin-bottom:8px">• ${esc(r)}</div>`).join('')}
-            </div>
-          </div>
-        </div>
+  // PŘEHLED SKÓRE
+  const top = 240;
+  rrect(36, top, W - 72, 150);
+  text('PŘEHLED SKÓRE', 52, top + 24, 14, theme.text, true);
+  rrect(W - 36 - 130, top + 10, 130, 26, 12, '#111827');
+  text(`Overall • ${overall}/100`, W - 36 - 118, top + 27, 10, theme.muted);
 
-        <!-- New Page: Performance Deep Dive -->
-        <div class="page-break"></div>
-        <div class="section">
-          <h3 style="margin:0 0 12px">Performance Deep Dive</h3>
-          <div class="muted small" style="margin-bottom:8px">Page speed, images, scripts, Core Web Vitals</div>
-          <div class="grid">
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Desktop Score</div>
-              <div class="progress" style="margin-bottom:10px"><i style="width:${pcDisplay}%;background:${getScoreColor(pcDisplay)}"></i></div>
-              <ul class="list" style="list-style:none;padding:0;margin:0">
-                ${(results?.performance?.desktop?.notes || [
-      'Optimize render-blocking resources',
-      'Use HTTP/2 for asset multiplexing',
-      'Enable text compression (gzip/brotli)'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">Actionable</span></li>`).join('')}
-              </ul>
-            </div>
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Mobile Score</div>
-              <div class="progress" style="margin-bottom:10px"><i style="width:${phoneDisplay}%;background:${getScoreColor(phoneDisplay)}"></i></div>
-              <ul class="list" style="list-style:none;padding:0;margin:0">
-                ${(results?.performance?.mobile?.notes || [
-      'Defer non-critical JS',
-      'Compress and resize images for mobile',
-      'Reduce main-thread work'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">Actionable</span></li>`).join('')}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- New Page: UX & Conversion -->
-        <div class="page-break"></div>
-        <div class="section">
-          <h3 style="margin:0 0 12px">User Experience & Conversion</h3>
-          <div class="grid">
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">UX Findings</div>
-              <ul class="list" style="list-style:none;padding:0;margin:0">
-                ${(results?.uxFindings || [
-      'Improve visual hierarchy on landing sections',
-      'Add above-the-fold primary CTA',
-      'Increase contrast for accessibility'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">Priority</span></li>`).join('')}
-              </ul>
-            </div>
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Conversion Ideas</div>
-              <ul class="list" style="list-style:none;padding:0;margin:0">
-                ${(results?.conversionIdeas || [
-      'Add social proof (testimonials, logos)',
-      'Introduce risk reversals (guarantee, free trial)',
-      'Create a lead magnet to grow email list'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">High Impact</span></li>`).join('')}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- New Page: Technical Health -->
-        <div class="page-break"></div>
-        <div class="section">
-          <h3 style="margin:0 0 12px">Technical Health</h3>
-          <div class="grid">
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Infrastructure</div>
-              <ul class="list" style="list-style:none;padding:0;margin:0">
-                ${(results?.technical?.notes || [
-      'Ensure SSL and HTTPS redirect',
-      'Add/validate robots.txt and sitemap.xml',
-      'Implement structured data where applicable'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">Check</span></li>`).join('')}
-              </ul>
-            </div>
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Stack & Integrations</div>
-              <div class="muted small" style="margin-bottom:8px">Detected: ${(Array.isArray(results?.seo?.technologyStack) ? results.seo.technologyStack : []).join(', ') || 'n/a'}</div>
-              <ul class="list" style="list-style:none;padding:0;margin:0">
-                ${(results?.stackIdeas || [
-      'Use a CDN for global delivery',
-      'Adopt image CDN with AVIF/WebP',
-      'Set up server-side logging and monitoring'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">Suggestion</span></li>`).join('')}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- New Page: 90-Day Action Plan -->
-        <div class="page-break"></div>
-        <div class="section">
-          <h3 style="margin:0 0 12px">90-Day Action Plan</h3>
-          <div class="grid">
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Phase 1 (Weeks 1-3)</div>
-              <ul class="list" style="list-style:none;padding:0;margin:0">
-                ${(results?.planPhase1 || [
-      'Fix critical SEO/meta issues',
-      'Compress and lazy-load images',
-      'Implement primary CTA and above-the-fold improvements'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">Do Now</span></li>`).join('')}
-              </ul>
-            </div>
-            <div>
-              <div style="font-weight:700;margin-bottom:6px">Phase 2 (Weeks 4-8)</div>
-              <ul class="list" style="list-style:none;padding:0;margin:0">
-                ${(results?.planPhase2 || [
-      'Improve mobile performance (reduce JS)',
-      'Add social proof and case studies',
-      'Strengthen internal linking and content depth'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">Next</span></li>`).join('')}
-              </ul>
-            </div>
-          </div>
-          <div class="section" style="margin-top:12px">
-            <div style="font-weight:700;margin-bottom:6px">Phase 3 (Weeks 9-12)</div>
-            <ul class="list" style="list-style:none;padding:0;margin:0">
-              ${(results?.planPhase3 || [
-      'Implement schema and advanced tracking',
-      'Iterate on UX via A/B testing',
-      'Launch content calendar for SEO growth'
-    ]).map((n: any) => `<li><span>${esc(n)}</span><span class="muted small">Then</span></li>`).join('')}
-            </ul>
-          </div>
-        </div>
-
-        <div style="margin-top:18px;text-align:center">
-          <div style="display:inline-block;padding:14px 18px;border-radius:12px;background:linear-gradient(90deg,var(--accent),#16a34a);color:#04140a;font-weight:700">Ready to transform your website? Visit leonlogic.com</div>
-        </div>
-
-        <div style="margin-top:18px;text-align:center;color:var(--muted);font-size:12px">This audit was generated by LeonLogic • © ${new Date().getFullYear()} LeonLogic</div>
-      </div>
-    </body>
-    </html>
-  `;
-
-  // Launch puppeteer with production-optimized settings
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  const infoItems: [string, string][] = [
+    ['Clarity', `${results.clarityScore ?? 80}%`],
+    ['Visual Hierarchy', `${results.hierarchyScore ?? 70}%`],
+    ['Navigation', `${results.navigationScore ?? 75}%`],
+    ['Design Consistency', `${results.consistencyScore ?? 65}%`],
+    ['Responsiveness', `${results.responsiveScore ?? 60}%`],
+    ['SEO Tags', `${seo}%`],
+    ['CTAs', `${results.ctaScore ?? 70}%`],
+  ];
+  let yy = top + 48;
+  const listLeft = 52;
+  infoItems.forEach(([k, v]: [string, string]) => {
+    text(k, listLeft, yy, 11, theme.text);
+    text(v, W - 86, yy, 11, theme.text, true);
+    dottedH(listLeft, yy + 4, W - 96);
+    yy += 18;
   });
 
-  try {
-    const page = await browser.newPage();
-    
-    // Set viewport and user agent for consistent rendering
-    await page.setViewport({ width: 1200, height: 800 });
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-    
-    await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
-    
-    // Wait for fonts and rendering to complete
-    await new Promise(r => setTimeout(r, 1000));
+  // Metric cards (2x2)
+  const gridTop = top + 170;
+  const colW = (W - 72 - 16) / 2;
+  const rowH = 84;
+  const metrics: { title: string; desc: string; score: number }[] = [
+    { title: 'SEO Performance', desc: 'On-page & metadata', score: seo },
+    { title: 'Page Speed', desc: 'Load times & asset optimization', score: perf },
+    { title: 'User Experience', desc: 'Usability & accessibility', score: usab },
+    { title: 'Technical Health', desc: 'Server, security & code', score: tech },
+  ];
+  metrics.forEach((m: { title: string; desc: string; score: number }, i: number) => {
+    const row = Math.floor(i / 2);
+    const col = i % 2;
+    const x = 36 + col * (colW + 16);
+    const y = gridTop + row * (rowH + 12);
+    rrect(x, y, colW, rowH);
+    text(m.title, x + 16, y + 22, 12, theme.text, true);
+    text(m.desc, x + 16, y + 38, 10, theme.muted);
+    text(`${m.score}/100`, x + colW - 16, y + 22, 12, colorForScore(m.score), true);
+    progress(x + 16, y + 52, colW - 32, 12, m.score, colorForScore(m.score));
+  });
 
-    const contactUrl = 'https://leonlogic.com/contact-us';
-    const pdfBuffer = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-      margin: { top: '28mm', right: '12mm', bottom: '20mm', left: '12mm' },
-      displayHeaderFooter: true,
-      headerTemplate: `
-        <div style="font-size:10px;width:100%;padding:6px 12px;display:flex;align-items:center;justify-content:space-between;">
-          <div style="color:#64748b;">Website Audit • ${esc(company)}</div>
-          <a href="${contactUrl}" style="background:#22c55e;color:#04140a;text-decoration:none;padding:6px 10px;border-radius:999px;font-weight:700;">I need advise</a>
-        </div>
-      `,
-      footerTemplate: `
-        <div style="font-size:10px;width:100%;padding:6px 12px;display:flex;align-items:center;justify-content:space-between;color:#64748b;">
-          <div>${esc(url)}</div>
-          <div>Page <span class="pageNumber"></span> of <span class="totalPages"></span></div>
-        </div>
-      `,
-      preferCSSPageSize: true
+  // Executive Summary
+  const afterGridY = gridTop + 2 * (rowH + 12);
+  rrect(36, afterGridY, W - 72, 64);
+  text('Executive Summary', 52, afterGridY + 22, 12, theme.text, true);
+  wrap(
+    `Your website received an overall score of ${overall}/100. ` +
+      (overall >= 80
+        ? 'Performing excellently.'
+        : overall >= 60
+        ? 'Good, needs targeted improvement.'
+        : 'Significant improvements recommended.'),
+    52,
+    afterGridY + 40,
+    W - 104,
+    14,
+    10,
+    theme.muted
+  );
+
+  // Critical Issues
+  const issuesTop = afterGridY + 80;
+  rrect(36, issuesTop, W - 72, 160);
+  text('Critical Issues', 52, issuesTop + 22, 12, theme.text, true);
+  if (!issues.length) {
+    rrect(52, issuesTop + 32, W - 104, 32, 8, '#07320b');
+    text('No critical issues found — website looks healthy.', 62, issuesTop + 52, 10, '#c7f6d0');
+  } else {
+    let iy = issuesTop + 42;
+    issues.slice(0, 6).forEach((iTxt: string) => {
+      rrect(52, iy, W - 104, 26, 8, '#2b0f0f');
+      wrap(`• ${iTxt}`, 62, iy + 18, W - 124, 14, 10, '#ffd7d7');
+      iy += 30;
+    });
+  }
+
+  // Recommendations
+  const recTop = issuesTop + 172;
+  rrect(36, recTop, W - 72, 160);
+  text('Recommendations', 52, recTop + 22, 12, theme.text, true);
+  const recW = (W - 104 - 10) / 2;
+  let rx = 52;
+  let ry = recTop + 36;
+  recs.slice(0, 8).forEach((r: string, idx: number) => {
+    rrect(rx, ry, recW, 40, 8, '#072812');
+    wrap(`• ${r}`, rx + 10, ry + 24, recW - 20, 14, 10, '#d7ffe6');
+    if (idx % 2 === 0) rx = 52 + recW + 10;
+    else {
+      rx = 52;
+      ry += 48;
+    }
+  });
+
+  // ---------- PAGE 2: SEO Deep Dive ----------
+  doc.addPage();
+  doc.setFillColor(theme.bg);
+  doc.rect(0, 0, W, H, 'F');
+  rrect(36, 36, W - 72, 40);
+  text('SEO Deep Dive', 52, 62, 14, theme.text, true);
+  text('On-page factors, metadata, content signals', 52, 80, 10, theme.muted);
+
+  const colW2 = (W - 72 - 16) / 2;
+  const c1 = 36;
+  const c2 = 36 + colW2 + 16;
+  let c1y = 100;
+  let c2y = 100;
+
+  text('Critical Issues', c1 + 16, c1y, 12, theme.text, true);
+  c1y += 10;
+  (results?.seo?.issues?.length ? (results.seo.issues as string[]) : issues).slice(0, 10).forEach((it: string) => {
+    rrect(c1 + 12, c1y + 8, colW2 - 24, 26, 8, '#2b0f0f');
+    wrap(`• ${it}`, c1 + 20, c1y + 26, colW2 - 40, 14, 10, '#ffd7d7');
+    c1y += 32;
+  });
+
+  text('Recommendations', c2 + 16, c2y, 12, theme.text, true);
+  c2y += 10;
+  (results?.seo?.recommendations?.length ? (results.seo.recommendations as string[]) : recs)
+    .slice(0, 10)
+    .forEach((rt: string) => {
+      rrect(c2 + 12, c2y + 8, colW2 - 24, 26, 8, '#072812');
+      wrap(`• ${rt}`, c2 + 20, c2y + 26, colW2 - 40, 14, 10, '#d7ffe6');
+      c2y += 32;
     });
 
-    return pdfBuffer;
-  } finally {
-    await browser.close();
+  // ---------- PAGE 3: Performance Deep Dive ----------
+  doc.addPage();
+  doc.setFillColor(theme.bg);
+  doc.rect(0, 0, W, H, 'F');
+  text('Performance Deep Dive', 52, 62, 14, theme.text, true);
+  text('Page speed, images, scripts, Core Web Vitals', 52, 80, 10, theme.muted);
+
+  rrect(36, 96, W - 72, 92);
+  text('Desktop Score', 52, 118, 12, theme.text, true);
+  progress(52, 130, W - 104, 14, pcDisplay, colorForScore(pcDisplay));
+  const dNotes: string[] =
+    results?.performance?.desktop?.notes ??
+    ['Optimize render-blocking resources', 'Use HTTP/2 for asset multiplexing', 'Enable text compression (gzip/brotli)'];
+  let dy = 158;
+  dNotes.forEach((n: string) => {
+    text('•', 52, dy, 10, theme.text);
+    dy = wrap(n, 64, dy, W - 116, 14, 10, theme.muted) + 6;
+  });
+
+  const mt = dy + 12;
+  rrect(36, mt, W - 72, 92);
+  text('Mobile Score', 52, mt + 22, 12, theme.text, true);
+  progress(52, mt + 34, W - 104, 14, mobDisplay, colorForScore(mobDisplay));
+  const mNotes: string[] =
+    results?.performance?.mobile?.notes ??
+    ['Defer non-critical JS', 'Compress and resize images for mobile', 'Reduce main-thread work'];
+  let my = mt + 62;
+  mNotes.forEach((n: string) => {
+    text('•', 52, my, 10, theme.text);
+    my = wrap(n, 64, my, W - 116, 14, 10, theme.muted) + 6;
+  });
+
+  // ---------- PAGE 4: UX & Conversion ----------
+  doc.addPage();
+  doc.setFillColor(theme.bg);
+  doc.rect(0, 0, W, H, 'F');
+  text('User Experience & Conversion', 52, 62, 14, theme.text, true);
+
+  const ux: string[] =
+    results?.uxFindings ?? [
+      'Improve visual hierarchy on landing sections',
+      'Add above-the-fold primary CTA',
+      'Increase contrast for accessibility',
+    ];
+  const conv: string[] =
+    results?.conversionIdeas ?? [
+      'Add social proof (testimonials, logos)',
+      'Introduce risk reversals (guarantee, free trial)',
+      'Create a lead magnet to grow email list',
+    ];
+
+  const boxW = (W - 72 - 16) / 2;
+  rrect(36, 90, boxW, 200);
+  text('UX Findings', 52, 112, 12, theme.text, true);
+  let uy = 132;
+  ux.forEach((n: string) => {
+    text('•', 52, uy, 10, theme.text);
+    uy = wrap(n, 64, uy, boxW - 28, 14, 10, theme.muted) + 6;
+  });
+
+  const bx2 = 36 + boxW + 16;
+  rrect(bx2, 90, boxW, 200);
+  text('Conversion Ideas', bx2 + 16, 112, 12, theme.text, true);
+  let cy = 132;
+  conv.forEach((n: string) => {
+    text('•', bx2 + 16, cy, 10, theme.text);
+    cy = wrap(n, bx2 + 28, cy, boxW - 28, 14, 10, theme.muted) + 6;
+  });
+
+  // ---------- PAGE 5: Technical Health & 90-Day Plan ----------
+  doc.addPage();
+  doc.setFillColor(theme.bg);
+  doc.rect(0, 0, W, H, 'F');
+  text('Technical Health', 52, 62, 14, theme.text, true);
+
+  const techNotes: string[] =
+    results?.technical?.notes ?? [
+      'Ensure SSL and HTTPS redirect',
+      'Add/validate robots.txt and sitemap.xml',
+      'Implement structured data where applicable',
+    ];
+  const stackIdeas: string[] =
+    results?.stackIdeas ?? [
+      'Use a CDN for global delivery',
+      'Adopt image CDN with AVIF/WebP',
+      'Set up server-side logging and monitoring',
+    ];
+  const techStack: string[] = Array.isArray(results?.seo?.technologyStack)
+    ? (results.seo.technologyStack as string[])
+    : [];
+
+  rrect(36, 90, W - 72, 110);
+  text('Infrastructure', 52, 112, 12, theme.text, true);
+  let ty = 132;
+  techNotes.forEach((n: string) => {
+    text('•', 52, ty, 10, theme.text);
+    ty = wrap(n, 64, ty, W - 116, 14, 10, theme.muted) + 6;
+  });
+
+  const t2 = ty + 16;
+  rrect(36, t2, W - 72, 120);
+  text('Stack & Integrations', 52, t2 + 22, 12, theme.text, true);
+  text(`Detected: ${techStack.join(', ') || 'n/a'}`, 52, t2 + 40, 10, theme.muted);
+  let sy = t2 + 58;
+  stackIdeas.forEach((n: string) => {
+    text('•', 52, sy, 10, theme.text);
+    sy = wrap(n, 64, sy, W - 116, 14, 10, theme.muted) + 6;
+  });
+
+  // 90-Day Action Plan
+  text('90-Day Action Plan', 52, sy + 30, 14, theme.text, true);
+  const plan1: string[] =
+    results?.planPhase1 ?? [
+      'Fix critical SEO/meta issues',
+      'Compress and lazy-load images',
+      'Implement primary CTA and above-the-fold improvements',
+    ];
+  const plan2: string[] =
+    results?.planPhase2 ?? [
+      'Improve mobile performance (reduce JS)',
+      'Add social proof and case studies',
+      'Strengthen internal linking and content depth',
+    ];
+  const plan3: string[] =
+    results?.planPhase3 ?? [
+      'Implement schema and advanced tracking',
+      'Iterate on UX via A/B testing',
+      'Launch content calendar for SEO growth',
+    ];
+
+  const p1Top = sy + 50;
+  rrect(36, p1Top, W - 72, 100);
+  text('Phase 1 (Weeks 1–3)', 52, p1Top + 22, 12, theme.text, true);
+  let p1y = p1Top + 42;
+  plan1.forEach((n: string) => {
+    text('•', 52, p1y, 10, theme.text);
+    p1y = wrap(n, 64, p1y, W - 116, 14, 10, theme.muted) + 6;
+  });
+
+  const p2Top = p1y + 16;
+  rrect(36, p2Top, W - 72, 110);
+  text('Phase 2 (Weeks 4–8)', 52, p2Top + 22, 12, theme.text, true);
+  let p2y = p2Top + 42;
+  plan2.forEach((n: string) => {
+    text('•', 52, p2y, 10, theme.text);
+    p2y = wrap(n, 64, p2y, W - 116, 14, 10, theme.muted) + 6;
+  });
+
+  const p3Top = p2y + 16;
+  rrect(36, p3Top, W - 72, 110);
+  text('Phase 3 (Weeks 9–12)', 52, p3Top + 22, 12, theme.text, true);
+  let p3y = p3Top + 42;
+  plan3.forEach((n: string) => {
+    text('•', 52, p3y, 10, theme.text);
+    p3y = wrap(n, 64, p3y, W - 116, 14, 10, theme.muted) + 6;
+  });
+
+  // Footer on each page
+  const pages = doc.getNumberOfPages();
+  for (let i = 1; i <= pages; i++) {
+    doc.setPage(i);
+    doc.setTextColor('#64748b');
+    doc.setFontSize(9);
+    doc.text(url, 36, H - 18);
+    doc.text(`Page ${i} of ${pages}`, W - 36, H - 18, { align: 'right' as any });
+  }
+
+  const arr = doc.output('arraybuffer') as ArrayBuffer;
+  return Buffer.from(arr);
+}
+
+// ---------- API route ----------
+export async function POST(request: NextRequest) {
+  try {
+    const { url, company, results } = await request.json();
+    if (!url || !company || !results) {
+      return NextResponse.json({ error: 'Missing required data' }, { status: 400 });
+    }
+
+    // jsPDF-only path
+    let pdfBuffer: Buffer;
+    try {
+      pdfBuffer = await generatePDF(url, company, results);
+    } catch (e) {
+      console.error('[pdf] jsPDF generation failed:', e);
+      return NextResponse.json({ error: 'PDF generation failed' }, { status: 500 });
+    }
+
+    // Upload to Supabase Storage
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
+    const safeName = String(company).replace(/[^a-z0-9\-_.]/gi, '_');
+    const fileName = `${safeName}-${Date.now()}.pdf`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('audit-pdfs')
+      .upload(fileName, pdfBuffer, { contentType: 'application/pdf', upsert: true });
+    if (uploadError) console.error('[pdf] Supabase upload error:', uploadError);
+
+    const { data: urlData } = supabase.storage.from('audit-pdfs').getPublicUrl(fileName);
+    const publicUrl: string | null =
+      (urlData as any)?.publicUrl ?? (urlData as any)?.public_url ?? null;
+
+    if (publicUrl) {
+      try {
+        await supabase.from('audit_leads').update({ pdf_url: publicUrl }).eq('company_name', company);
+
+        // Best-effort email trigger
+        try {
+          const origin = new URL(request.url).origin;
+          fetch(`${origin}/api/audit/send-email`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url, company, pdfUrl: publicUrl }),
+          }).catch(() => {});
+        } catch {}
+      } catch (dbErr) {
+        console.error('[pdf] audit_leads update failed:', dbErr);
+      }
+    }
+
+    return new NextResponse(Buffer.from(pdfBuffer), {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${company}-website-audit.pdf"`,
+      },
+    });
+  } catch (error) {
+    console.error('[pdf] PDF Generation Error:', error);
+    return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
   }
 }
