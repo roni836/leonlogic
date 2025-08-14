@@ -301,10 +301,11 @@ export default function Page({ params }: Params) {
                 {service.pricing.map((p, idx) => (
                   <div
                     key={p.type}
-                    className={`p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${idx === service.pricing.length - 1
+                    className={`p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
+                      idx === service.pricing.length - 1
                         ? 'bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800'
                         : ''
-                      }`}
+                    }`}
                   >
                     <div className="grid grid-cols-4 gap-4 items-center">
                       <div className="font-semibold text-gray-900 dark:text-white">{p.type}</div>
@@ -358,8 +359,9 @@ export default function Page({ params }: Params) {
           </div>
 
           {/* If your FAQuestions supports props, pass the data: */}
-          <FAQuestions items={service.faqs} />
+          {/* <FAQuestions items={service.faqs} /> */}
           {/* If it doesn't, keep as-is and just rely on JSON-LD for rich results: */}
+          <FAQuestions />
         </div>
       </section>
 

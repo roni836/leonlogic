@@ -78,7 +78,7 @@ const serviceColumns = [
         iconAlt: 'Ryvenia Vývoj',
         title: 'VÝVOJ',
         items: [
-            { name: 'Tvorba webstránok', url: '/sluzby/tvorba-webstranok' },
+            { name: 'Tvorba webstránok', url: '/sluzby/vyvoj-webovych-aplikacii' },
             { name: 'Vývoj online obchodov', url: '/sluzby/vyvoj-online-obchodov' },
             { name: 'Vývoj mobilných aplikácií', url: '/sluzby/vyvoj-mobilnych-aplikacii' },
             { name: 'Programovanie na mieru', url: '/sluzby/programovanie-na-mieru' },
