@@ -1,4 +1,3 @@
-// app/sluzby/[slug]/page.tsx
 import ClientsFeedbackSlider from '@/components/ClientsFeedbackSlider';
 import Link from 'next/link';
 import GetInTouch from '@/components/GetInTouch';
@@ -7,7 +6,14 @@ import Image from 'next/image';
 import helper from '@/libs/helper';
 import FAQuestions from '@/components/FAQuestions';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import servicesData from '@/service.json';
+
+type Pricing =
+  | { type: string; price_range: string; features?: string[]; delivery_time?: string }
+  | { type: string; price_range: string; features?: string[]; monthly_cost?: string }
+  | { type: string; price_range: string; features?: string[]; roi?: string }
+  | { type: string; price_range: string; features?: string[]; duration?: string };
 
 type Service = {
   id: number;
@@ -19,25 +25,36 @@ type Service = {
   url: string;
   description: string;
   benefits: string[];
-  process: string[]; // "Step - Detail"
-  pricing: { type: string; price_range: string; features?: string[]; delivery_time?: string; monthly_cost?: string; roi?: string; duration?: string }[];
+  process: string[]; // "Title - Detail"
+  pricing: Pricing[];
   faqs: { question: string; answer: string }[];
 };
 
-type Params = { params: { slug: string } };
+type ServicesJson = { services: Service[] };
 
 function getServiceBySlug(slug: string): Service | undefined {
-  const s = (servicesData as { services: Service[] }).services.find(x => x.slug === slug);
-  return s;
+  const { services } = servicesData as ServicesJson;
+  return services?.find((s) => s.slug === slug);
 }
 
-// Dynamic metadata from JSON
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const service = getServiceBySlug(params.slug);
+/** IMPORTANT: in Next 15 sync dynamic APIs, both params and searchParams are Promises */
+export type PageProps = {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export function generateStaticParams(): { slug: string }[] {
+  const { services } = servicesData as ServicesJson;
+  return (services ?? []).map((s) => ({ slug: s.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params; // ✅ await
+  const service = getServiceBySlug(slug);
 
   const title = service?.title_tag ?? 'Služba';
   const description = service?.meta_description ?? '';
-  const url = `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${params.slug}`;
+  const url = `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${slug}`;
 
   return {
     title,
@@ -47,36 +64,36 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title,
       description,
       url,
-      type: 'article'
+      type: 'article',
     },
     twitter: {
       ...helper.twitterData,
       title,
-      description
+      description,
     },
     alternates: {
       canonical: url,
-      languages: { 'x-default': url }
-    }
+      languages: { 'x-default': url },
+    },
   };
 }
 
-export default function Page({ params }: Params) {
-  const service = getServiceBySlug(params.slug);
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params; // ✅ await
+  const service = getServiceBySlug(slug);
+  if (!service) return notFound();
 
-  if (!service) {
-    // You can render a 404 or redirect
-    return null;
-  }
-
-  // Map first 4 process steps into your four cards
-  // Each process item uses "Title - Text" format in your JSON
-  const processCards = service.process.slice(0, 4).map((step, i) => {
-    const [title, text] = step.split(' - ');
-    return { no: (i + 1).toString().padStart(2, '0'), title: title?.trim() || step, text: text?.trim() || '' };
-  });
-
-  // Build JSON-LD dynamically (Breadcrumbs, Service, FAQPage)
+  const processCards = (Array.isArray(service.process) ? service.process : [])
+    .slice(0, 4)
+    .map((step, i) => {
+      const [title, text] = step.split(' - ');
+      return {
+        no: (i + 1).toString().padStart(2, '0'),
+        title: (title ?? step).trim(),
+        text: (text ?? '').trim(),
+      };
+    });
+  // JSON-LD
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -85,87 +102,51 @@ export default function Page({ params }: Params) {
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Domov', item: process.env.NEXT_PUBLIC_APP_URL },
           { '@type': 'ListItem', position: 2, name: 'Služby', item: `${process.env.NEXT_PUBLIC_APP_URL}/sluzby` },
-          { '@type': 'ListItem', position: 3, name: service.name, item: `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}` }
-        ]
+          { '@type': 'ListItem', position: 3, name: service.name, item: `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}` },
+        ],
       },
       {
         '@type': 'Service',
-        name: `${service.name} a tvorba e-shopov`,
+        name: service.name,
         description: service.meta_description || service.description,
         provider: {
           '@type': 'Organization',
           name: 'Leonlogic',
           url: process.env.NEXT_PUBLIC_APP_URL,
-          description: 'Digitálna agentúra špecializujúca sa na e-commerce riešenia'
+          description: 'Digitálna agentúra špecializujúca sa na e-commerce riešenia',
         },
-        serviceType: 'E-commerce Development',
+        serviceType: service.category,
         areaServed: 'Slovakia',
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
-          name: 'E-commerce balíčky',
-          itemListElement: service.pricing.map(p => ({
+          name: 'Balíčky',
+          itemListElement: service.pricing.map((p) => ({
             '@type': 'Offer',
-            itemOffered: { '@type': 'Service', name: p.type, description: (p.features || []).join(', ') },
+            itemOffered: {
+              '@type': 'Service',
+              name: p.type,
+              description: Array.isArray((p as any).features) ? (p as any).features.join(', ') : '',
+            },
             price: (p.price_range || '').replace(/[^\d]/g, '') || undefined,
             priceCurrency: 'EUR',
-            priceValidUntil: '2025-12-31'
-          }))
+            priceValidUntil: '2025-12-31',
+          })),
         },
-        serviceOutput: [
-          'Webový obchod',
-          'Platobný systém',
-          'Správa skladových zásob',
-          'CRM systém',
-          'Marketingové nástroje',
-          'SEO optimalizácia',
-          'Integrácia s porovnávačmi cien',
-          'Remarketing kampane',
-          'Google Analytics',
-          '24/7 technická podpora'
-        ],
-        keywords: [
-          'e-commerce',
-          'e-shop',
-          'online obchod',
-          'webový obchod',
-          'platobný systém',
-          'SEO optimalizácia',
-          'porovnávače cien',
-          'CRM systém',
-          'digitálna agentúra',
-          'Slovakia'
-        ]
       },
       {
         '@type': 'FAQPage',
-        mainEntity: service.faqs.map(f => ({
+        mainEntity: service.faqs.map((f) => ({
           '@type': 'Question',
           name: f.question,
-          acceptedAnswer: { '@type': 'Answer', text: f.answer }
-        }))
+          acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        })),
       },
-      {
-        '@type': 'Organization',
-        name: 'Leonlogic',
-        url: process.env.NEXT_PUBLIC_APP_URL,
-        logo: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/leonlogic.svg`,
-        description:
-          'Digitálna agentúra špecializujúca sa na e-commerce riešenia, webový dizajn a digitálny marketing',
-        address: { '@type': 'PostalAddress', addressCountry: 'SK', addressLocality: 'Slovakia' },
-        contactPoint: {
-          '@type': 'ContactPoint',
-          telephone: '+421915376588',
-          contactType: 'customer service',
-          availableLanguage: ['Slovak', 'English']
-        },
-        sameAs: ['https://www.facebook.com/leonlogic', 'https://www.instagram.com/leonlogic']
-      }
-    ]
+    ],
   };
 
   return (
     <>
-      {/* ——— HERO (unchanged design, dynamic content) ——— */}
+      {/* HERO (design preserved) */}
       <section className="mb-16 relative pb-20 pt-32 md:mb-32 md:pb-24 md:pt-52 dark:bg-primary">
         <div className="bg-[#9199B5]/[0.12] absolute w-[calc(100vw-0px)] lg:w-[calc(100vw-30px)] h-[calc(100%+50px)] bottom-0 end-0 rtl:rounded-br-[50px] ltr:rounded-bl-[50px] rtl:-skew-y-2 ltr:skew-y-2"></div>
         <div className="container relative">
@@ -182,7 +163,7 @@ export default function Page({ params }: Params) {
         </div>
       </section>
 
-      {/* ——— WHY/PROCESS CARDS (unchanged design) ——— */}
+      {/* WHY/PROCESS CARDS */}
       <section className="pb-12 md:pb-[60px]">
         <div className="container">
           <div className="max-w-[500px]">
@@ -197,7 +178,7 @@ export default function Page({ params }: Params) {
           </div>
 
           <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-8 mt-12">
-            {processCards.map(card => (
+            {processCards.map((card) => (
               <div
                 key={card.no}
                 className="py-5 px-[17px] dark:bg-[#9199B5]/[0.12] rounded-2xl"
@@ -216,7 +197,7 @@ export default function Page({ params }: Params) {
         </div>
       </section>
 
-      {/* ——— “ČO ROBÍME” SECTION (unchanged design, dynamic bullet list) ——— */}
+      {/* WHAT WE DO */}
       <section>
         <div className="container">
           <div className="border-y-2 border-[#9199B5]/10 py-12 md:py-[100px]">
@@ -263,7 +244,7 @@ export default function Page({ params }: Params) {
         </div>
       </section>
 
-      {/* ——— PRICING TABLE (unchanged design, dynamic rows) ——— */}
+      {/* PRICING TABLE */}
       <section className="py-16">
         <div className="container">
           <div className="mb-12 text-center">
@@ -302,8 +283,8 @@ export default function Page({ params }: Params) {
                   <div
                     key={p.type}
                     className={`p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${idx === service.pricing.length - 1
-                        ? 'bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800'
-                        : ''
+                      ? 'bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800'
+                      : ''
                       }`}
                   >
                     <div className="grid grid-cols-4 gap-4 items-center">
@@ -312,10 +293,14 @@ export default function Page({ params }: Params) {
                         <span className="text-2xl font-bold text-secondary">{p.price_range}</span>
                       </div>
                       <div className="text-gray-600 dark:text-gray-400">
-                        {(p.features || []).join(', ')}
+                        {Array.isArray((p as any).features) ? (p as any).features.join(', ') : '—'}
                       </div>
                       <div className="text-center text-gray-600 dark:text-gray-400">
-                        {p.delivery_time || p.duration || p.roi || p.monthly_cost || '—'}
+                        {(p as any).delivery_time ||
+                          (p as any).duration ||
+                          (p as any).roi ||
+                          (p as any).monthly_cost ||
+                          '—'}
                       </div>
                     </div>
                     {idx !== service.pricing.length - 1 && (
@@ -345,7 +330,7 @@ export default function Page({ params }: Params) {
         </div>
       </section>
 
-      {/* ——— FAQ ——— */}
+      {/* FAQ */}
       <section className="bg-[#9199B5]/10 py-16">
         <div className="container">
           <div className="mb-12 text-center">
@@ -356,14 +341,13 @@ export default function Page({ params }: Params) {
               Často kladené <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">otázky</span>
             </h2>
           </div>
-
-          {/* If your FAQuestions supports props, pass the data: */}
-          <FAQuestions items={service.faqs} />
-          {/* If it doesn't, keep as-is and just rely on JSON-LD for rich results: */}
+          {/* If your FAQuestions accepts props, pass them; otherwise keep as-is */}
+          {/* <FAQuestions items={service.faqs} /> */}
+          <FAQuestions />
         </div>
       </section>
 
-      {/* ——— Portfolio, Testimonials, CTA (unchanged) ——— */}
+      {/* Portfolio, Testimonials, CTA */}
       <section className="py-12 md:py-16">
         <div className="container">
           <div className="mb-6 text-center md:mb-12">
@@ -376,16 +360,40 @@ export default function Page({ params }: Params) {
           </div>
           <div className="grid gap-7 sm:grid-cols-2">
             <div className="overflow-hidden rounded-2xl">
-              <Image src="/assets/images/1.png" className="h-full w-full object-cover hover:scale-110 duration-300" alt="E-commerce riešenie 1" width={754} height={521} />
+              <Image
+                src="/assets/images/1.png"
+                className="h-full w-full object-cover hover:scale-110 duration-300"
+                alt="E-commerce riešenie 1"
+                width={754}
+                height={521}
+              />
             </div>
             <div className="overflow-hidden rounded-2xl">
-              <Image src="/assets/images/2.png" className="h-full w-full object-cover hover:scale-110 duration-300" alt="E-commerce riešenie 2" width={754} height={521} />
+              <Image
+                src="/assets/images/2.png"
+                className="h-full w-full object-cover hover:scale-110 duration-300"
+                alt="E-commerce riešenie 2"
+                width={754}
+                height={521}
+              />
             </div>
             <div className="overflow-hidden rounded-2xl">
-              <Image src="/assets/images/3.png" className="h-full w-full object-cover hover:scale-110 duration-300" alt="E-commerce riešenie 3" width={754} height={401} />
+              <Image
+                src="/assets/images/3.png"
+                className="h-full w-full object-cover hover:scale-110 duration-300"
+                alt="E-commerce riešenie 3"
+                width={754}
+                height={401}
+              />
             </div>
-            <div className="overflow-hidden rounded-2xl">
-              <Image src="/assets/images/4.png" className="h-full w-full object-cover hover:scale-110 duration-300" alt="E-commerce riešenie 4" width={754} height={401} />
+            <div className="overflow-hidden rounded-2l">
+              <Image
+                src="/assets/images/4.png"
+                className="h-full w-full object-cover hover:scale-110 duration-300"
+                alt="E-commerce riešenie 4"
+                width={754}
+                height={401}
+              />
             </div>
           </div>
         </div>
@@ -399,7 +407,7 @@ export default function Page({ params }: Params) {
         <GetInTouch />
       </section>
 
-      {/* JSON-LD (app router friendly) */}
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         // @ts-ignore
