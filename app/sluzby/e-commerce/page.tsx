@@ -42,7 +42,8 @@ const page = () => {
 
                         </h1>
                         <p className="text-lg mt-5 text-[#4B5576] dark:text-[#9199B5] max-w-[582px]">
-                            E-commerce riešenie je komplexná platforma umožňujúca firmám predávať produkty a služby cez internet. Moderný e-shop zahŕňa webový obchod, platobný systém, správu skladových zásob, CRM systém a marketingové nástroje pre efektívny online predaj.
+                            E-commerce riešenie je komplexná platforma umožňujúca firmám predávať produkty a služby cez internet. Moderný e-shop zahŕňa webový obchod, platobný systém, správu skladových zásob, CRM systém a marketingové nástroje pre efektívny online predaj na slovenskom trhu.
+
                         </p>
                     </div>
                 </div>

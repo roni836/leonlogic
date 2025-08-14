@@ -43,7 +43,7 @@ const page = () => {
                             Chatboty s umelou inteligenciou | Automatizácia <span className="text-secondary">zákazníckej podpory</span> 24/7
                         </h1>
                         <p className="text-lg mt-5 text-[#4B5576] dark:text-[#9199B5] max-w-[582px]">
-                            Chatboty s umelou inteligenciou sú inteligentní virtuálni asistenti poháňaní AI technológiami, ktorí automaticky odpovedajú na otázky zákazníkov 24 hodín denne. Využívajú spracovanie prirodzeného jazyka na pochopenie otázok a poskytujú relevantné odpovede.
+                            Chatboty s umelou inteligenciou sú inteligentní virtuálni asistenti poháňaní AI technológiami, ktorí automaticky odpovedajú na otázky zákazníkov 24 hodín denne. Využívajú spracovanie prirodzeného jazyka na pochopenie otázok a poskytujú relevantné odpovede v slovenskom jazyku.
                         </p>
                     </div>
                 </div>
@@ -163,16 +163,113 @@ const page = () => {
                 </div>
             </section>
 
-            <section className="py-12 md:py-16">
+            {/* Pricing Table Section */}
+            <section className="py-16">
                 <div className="container">
-                    <div className="mb-6 text-center md:mb-12">
+                    <div className="mb-12 text-center">
+                        <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
+                            CENNÍK E-SHOPOV
+                        </p>
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                            Často kladené otázky
+                            Koľko stojí vytvorenie <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">eshopu?</span>
+                        </h2>
+                        <p className="mt-5 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                            Tvorba e-shopu na kľúč od 1 980€ s kompletným riešením.
+                        </p>
+                        <p className="mt-3 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                            Cena e-shopu zahŕňa dizajn, programovanie a podporu - bez skrytých poplatkov.
+                        </p>
+                    </div>
+
+                    <div className="max-w-6xl mx-auto">
+                        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                            {/* Table Header */}
+                            <div className="bg-gray-100 dark:bg-gray-700 p-6">
+                                <div className="grid grid-cols-4 gap-4 text-gray-900 dark:text-white font-bold text-center">
+                                    <div className="text-left">Typ chatbotu</div>
+                                    <div>Cena</div>
+                                    <div>Funkcie</div>
+                                    <div>Mesačné náklady</div>
+                                </div>
+                                <div className="mt-4">
+                                    <span className="bg-[#9199B5]/20 pt-0.5 w-full block"></span>
+                                </div>
+                            </div>
+
+                            {/* Table Rows */}
+                            <div>
+                                {/* Basic Package */}
+                                <div className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    <div className="grid grid-cols-4 gap-4 items-center">
+                                        <div className="font-semibold text-gray-900 dark:text-white">Základný chatbot</div>
+                                        <div className="text-center">
+                                            <span className="text-2xl font-bold text-secondary">1 380 - 3 680 €</span>
+                                        </div>
+                                        <div className="text-gray-600 dark:text-gray-400">Jednoduché Q&A, slovenský jazyk</div>
+                                        <div className="text-center text-gray-600 dark:text-gray-400">46-140 €</div>
+                                    </div>
+                                    <div className="mt-4">
+                                        <span className="bg-[#9199B5]/20 pt-0.5 w-full block"></span>
+                                    </div>
+                                </div>
+
+                                {/* Advanced Package */}
+                                <div className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    <div className="grid grid-cols-4 gap-4 items-center">
+                                        <div className="font-semibold text-gray-900 dark:text-white">Pokročilý AI chatbot</div>
+                                        <div className="text-center">
+                                            <span className="text-2xl font-bold text-secondary">3 680 - 11 040 €</span>
+                                        </div>
+                                        <div className="text-gray-600 dark:text-gray-400">NLP, integrácie, učenie</div>
+                                        <div className="text-center text-gray-600 dark:text-gray-400">140-275 €</div>
+                                    </div>
+                                    <div className="mt-4">
+                                        <span className="bg-[#9199B5]/20 pt-0.5 w-full block"></span>
+                                    </div>
+                                </div>
+
+                                {/* Enterprise Package */}
+                                <div className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
+                                    <div className="grid grid-cols-4 gap-4 items-center">
+                                        <div className="font-semibold text-gray-900 dark:text-white">Podnikové riešenie</div>
+                                        <div className="text-center">
+                                            <span className="text-2xl font-bold text-secondary">11 040+ €</span>
+                                        </div>
+                                        <div className="text-gray-600 dark:text-gray-400">Multijazyčnosť, analytika</div>
+                                        <div className="text-center text-gray-600 dark:text-gray-400">275-460 €</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* CTA Button */}
+                            <div className="p-6 bg-gray-50 dark:bg-gray-800 text-center">
+                                <Link href="/contact-us" className="btn">
+                                    Získať cenovú ponuku
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Disclaimer */}
+                    <div className="mt-6 text-center">
+                        <p className="text-sm text-[#5d6c74] italic">
+                            *Uvedené ceny sú orientačné a finálna cena sa určuje na základe konkrétnych požiadaviek a náročnosti projektu.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section className="bg-[#9199B5]/10 py-16">
+                <div className="container">
+                    <div className="mb-12 text-center">
+                        <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-success-light/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
+                            ČASTO KLADENÉ OTÁZKY
+                        </p>
+                        <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
+                            Často kladené <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">otázky</span>
                         </h2>
                     </div>
-                    <div className="max-w-4xl mx-auto">
-                        <FAQuestions />
-                    </div>
+                    <FAQuestions />
                 </div>
             </section>
 
@@ -180,45 +277,45 @@ const page = () => {
                 <div className="container">
                     <div className="mb-6 text-center md:mb-12">
                         <p className="mb-7 inline-flex rounded-full bg-success-light/10 dark:bg-secondary/[0.08] dark:text-secondary px-5 py-2.5 font-bold uppercase leading-[18px] text-success-light">
-                            SELECTED PROJECTS
+                            REALIZOVANÉ PROJEKTY
                         </p>
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] dark:text-white">
-                            Digital <span className="bg-[url(/assets/images/line1.svg)] bg-bottom-right bg-no-repeat">Case Studies</span>.
+                            Z NAŠEJ <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">DIELNE</span>
                         </h2>
                     </div>
                     <div className="grid gap-7 sm:grid-cols-2">
                         <div className="overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/images/project1.jpg"
+                                src="/assets/images/1.png"
                                 className="h-full w-full object-cover hover:scale-110 duration-300"
-                                alt="project1"
+                                alt="E-commerce riešenie 1"
                                 width={754}
                                 height={521}
                             />
                         </div>
                         <div className="overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/images/project2.jpg"
-                                className="h-full h-full object-cover hover:scale-110 duration-300"
-                                alt="project2"
+                                src="/assets/images/2.png"
+                                className="h-full w-full object-cover hover:scale-110 duration-300"
+                                alt="E-commerce riešenie 2"
                                 width={754}
                                 height={521}
                             />
                         </div>
                         <div className="overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/images/project3.jpg"
+                                src="/assets/images/3.png"
                                 className="h-full w-full object-cover hover:scale-110 duration-300"
-                                alt="project3"
+                                alt="E-commerce riešenie 3"
                                 width={754}
                                 height={401}
                             />
                         </div>
                         <div className="overflow-hidden rounded-2xl">
                             <Image
-                                src="/assets/images/project4.jpg"
+                                src="/assets/images/4.png"
                                 className="h-full w-full object-cover hover:scale-110 duration-300"
-                                alt="project4"
+                                alt="E-commerce riešenie 4"
                                 width={754}
                                 height={401}
                             />
