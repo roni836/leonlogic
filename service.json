@@ -751,379 +751,373 @@
         {
             "id": 11,
             "category": "Vývoj",
-            "name": "Vývoj webových aplikácií",
-            "slug": "vyvoj-webovych-aplikacii",
-            "title_tag": "Vývoj webových aplikácií Slovensko | React, Laravel, Node.js",
-            "meta_description": "Vývoj webových aplikácií na mieru. Moderné technológie: React, Laravel, Node.js. Bezpečné a škálovateľné riešenia pre firmy.",
-            "url": "/sluzby/vyvoj-webovych-aplikacii/",
-            "description": "Vývoj webových aplikácií zahŕňa tvorbu komplexných online systémov, portálov a softvérov na mieru. Používame moderné technológie ako React, Laravel, Node.js, PostgreSQL či MongoDB. Naše riešenia sú bezpečné, rýchle a pripravené na škálovanie podľa potrieb klienta.",
+            "name": "Tvorba webstránok",
+            "slug": "tvorba-webstranok",
+            "title_tag": "Tvorba webstránok Piešťany | WordPress, React | Web development Trnava",
+            "meta_description": "Profesionálna tvorba webstránok Piešťany a okolie. Responzívne weby, WordPress, rýchle načítanie, SEO optimalizácia. Webstránky od 1500€.",
+            "url": "/sluzby/tvorba-webstranok/",
+            "description": "Tvorba webstránok je proces vývoja funkčných a responzívnych webových stránok pomocou moderných technológií. Zahŕňa frontend a backend programovanie, databázové riešenia, CMS integráciu, SEO optimalizáciu a testovanie pre dosiahnutie maximálneho výkonu a bezpečnosti.",
             "benefits": [
-                "Vývoj na mieru podľa požiadaviek",
-                "Bezpečné a optimalizované riešenia",
-                "Škálovateľná architektúra",
-                "Integrácie s API a externými systémami",
-                "Moderný a responzívny frontend",
-                "Podpora a údržba po spustení"
+                "Moderné technológie (React, Vue, WordPress)",
+                "Responzívny dizajn zameraný na mobily",
+                "Page Speed skóre 90+ bodov",
+                "SEO optimalizácia už od začiatku",
+                "Bezpečné a škálovateľné riešenia",
+                "GDPR compliance"
             ],
             "process": [
-                "Analýza - Zber požiadaviek a návrh architektúry",
-                "Prototyp - UX/UI návrh kľúčových modulov",
-                "Vývoj - Implementácia backendu a frontendu",
-                "Testovanie - Automatizované a manuálne testy",
-                "Nasadenie - Migrácia na produkčné prostredie"
+                "Technické plánovanie – Výber technológií a architektúry webstránky",
+                "Frontend vývoj – Kódovanie responzívneho dizajnu a interakcií",
+                "Backend a CMS – Vývoj backend funkcionalít a CMS integrácia",
+                "Testovanie a spustenie – Komplexné testovanie a spustenie webstránky"
             ],
             "pricing": [
                 {
-                    "type": "Jednoduchá webová aplikácia",
-                    "price_range": "2 300 - 4 600 €",
+                    "type": "Vstupná stránka",
+                    "price_range": "505 - 830 €",
                     "features": [
-                        "Do 3 modulov",
-                        "Základná funkcionalita"
+                        "Technológie: WordPress, Webflow, Framer",
+                        "Funkcie: Responzívny dizajn, základné animácie"
                     ],
-                    "delivery_time": "4-6 týždňov"
+                    "delivery_time": "Projektovo"
                 },
                 {
-                    "type": "Podniková aplikácia",
-                    "price_range": "6 900 - 13 800 €",
+                    "type": "Podnikový web (4 stránky)",
+                    "price_range": "1 060 - 1 795 €",
                     "features": [
-                        "Viacero modulov",
-                        "Integrácie s API"
+                        "Technológie: WordPress, Webflow, Framer",
+                        "Funkcie: CMS, SEO, pokročilé animácie"
                     ],
-                    "delivery_time": "8-12 týždňov"
+                    "delivery_time": "Projektovo"
                 },
                 {
-                    "type": "Komplexný systém",
-                    "price_range": "od 18 400 €",
+                    "type": "E-commerce/Booking (10 stránok)",
+                    "price_range": "1 980 - 3 680 €",
                     "features": [
-                        "Veľké projekty",
-                        "Vysoká škálovateľnosť"
+                        "Technológie: WordPress, Webflow + e-commerce",
+                        "Funkcie: Platby, rezervácie, CMS, SEO"
                     ],
-                    "delivery_time": "16+ týždňov"
+                    "delivery_time": "Projektovo"
                 }
             ],
             "faqs": [
                 {
-                    "question": "V akých technológiách vyvíjate webové aplikácie?",
-                    "answer": "Používame moderné technológie ako React, Vue.js, Laravel, Node.js, PostgreSQL, MySQL, MongoDB a Docker pre nasadenie."
+                    "question": "Tvoríte webstránky pre firmy v Piešťanoch?",
+                    "answer": "Áno, sídlime v Piešťanoch a špecializujeme sa na tvorbu webstránok pre miestne firmy v Trnava regióne. Máme referencie od klientov z Piešťan, Trnavy, Skalice a okolia."
                 },
                 {
-                    "question": "Ako zabezpečujete bezpečnosť aplikácií?",
-                    "answer": "Implementujeme SSL/TLS, ochranu proti CSRF a XSS, šifrovanie hesiel, dvojfaktorovú autentifikáciu a pravidelné bezpečnostné testy."
+                    "question": "Ako dlho trvá vytvorenie webstránky?",
+                    "answer": "Jednoduchá prezentačka: 3-4 týždne. Podnikový web: 6-8 týždňov. Komplexná aplikácia: 3-6 mesiacov. Doba závisí od rozsahu funkcií a obsahu."
                 },
                 {
-                    "question": "Poskytujete aj údržbu aplikácií?",
-                    "answer": "Áno, poskytujeme SLA balíky s pravidelnými aktualizáciami, monitoringom a rýchlym riešením incidentov."
+                    "question": "Sú webstránky optimalizované pre vyhľadávače?",
+                    "answer": "Áno, všetky webstránky optimalizujeme pre Google: technické SEO, meta tagy, štruktúrované dáta, rýchlosť načítania, mobilnú optimalizáciu a keyword optimalizáciu."
                 },
                 {
-                    "question": "Integrujete aplikácie s inými systémami?",
-                    "answer": "Áno, integrujeme s platobnými bránami, ERP, CRM, skladovými systémami a inými API."
+                    "question": "Môžeme upravovať obsah sami?",
+                    "answer": "Áno, implementujeme CMS (najčastejšie WordPress) s jednoduchým administrátorským panelom pre správu obsahu, obrázkov, blogov a základných nastavení."
                 },
                 {
-                    "question": "Koľko trvá vývoj webovej aplikácie?",
-                    "answer": "Od 4 týždňov pre malé aplikácie do 6 mesiacov a viac pre komplexné systémy."
+                    "question": "Aká je technická podpora?",
+                    "answer": "3 mesiace bezplatná podpora, potom mesačné maintenance balíky (100-300€) zahŕňajúce aktualizácie, zálohovanie, monitoring a menšie úpravy."
+                },
+                {
+                    "question": "Aké technológie používate?",
+                    "answer": "Používame WordPress, React, Vue.js, Node.js, PHP, Laravel, HTML5, CSS3, JavaScript ES6+, MySQL, PostgreSQL a moderné nástroje nasadenia."
                 }
             ]
         },
         {
             "id": 12,
             "category": "Vývoj",
-            "name": "Vývoj mobilných aplikácií",
-            "slug": "vyvoj-mobilnych-aplikacii",
-            "title_tag": "Vývoj mobilných aplikácií Slovensko | iOS & Android",
-            "meta_description": "Vývoj mobilných aplikácií pre iOS a Android. Flutter a React Native riešenia. Publikácia na App Store a Google Play.",
-            "url": "/sluzby/vyvoj-mobilnych-aplikacii/",
-            "description": "Vývoj mobilných aplikácií zahŕňa tvorbu natívnych a multiplatformových riešení pre iOS a Android. Používame Flutter a React Native pre rýchly vývoj a jednotný kód. Aplikácie optimalizujeme pre výkon, UX a jednoduchú správu.",
+            "name": "Vývoj online obchodov",
+            "slug": "vyvoj-online-obchodov",
+            "title_tag": "Vývoj e-shopov Slovensko | WooCommerce, Shopify | E-commerce",
+            "meta_description": "Profesionálny vývoj e-shopov a online obchodov. WooCommerce, Shopify, platobné brány, integrácie. Zvýšte predaje o 40%.",
+            "url": "/sluzby/vyvoj-online-obchodov/",
+            "description": "Vývoj online obchodov je špecializovaný proces tvorby e-shopov s kompletnými e-commerce funkcionalitami. Zahŕňa správu produktov, nákupný košík, platobné brány, správu objednávok, riadenie skladov, integrácie s dopravcami a účtovnými systémami.",
             "benefits": [
-                "Vývoj pre iOS aj Android z jedného kódu",
-                "Rýchle dodanie MVP",
-                "Moderný dizajn a UX",
-                "Integrácie s backendom a API",
-                "Možnosť offline režimu",
-                "Publikácia na App Store a Google Play"
+                "5+ rokov skúseností s e-commerce na Slovensku",
+                "Integrácie so všetkými slovenskými službami",
+                "Optimalizácia konverzií a používateľských ciest",
+                "Multi-channel predaj (web, mobil, sociálne siete)",
+                "Pokročilé analytiky a reporting",
+                "Automatizácia marketingu"
             ],
             "process": [
-                "Analýza - Definovanie funkcií a cieľovej skupiny",
-                "UX/UI návrh - Prototypovanie obrazoviek",
-                "Vývoj - Implementácia funkcií a integrácií",
-                "Testovanie - QA a používateľské testy",
-                "Publikácia - Nasadenie do obchodov"
+                "Nastavenie e-commerce – Nastavenie produktov, kategórií a platobných metód",
+                "Optimalizácia konverzií – Optimalizácia nákupného procesu pre vyššie konverzie",
+                "Platby a doprava – Integrácia platobných brán a dopravcov",
+                "Marketingové nástroje – Napojenie na Heureka, analytiky a remarketing"
             ],
             "pricing": [
                 {
-                    "type": "Jednoduchá aplikácia",
-                    "price_range": "2 300 - 4 600 €",
+                    "type": "Základný e-shop",
+                    "price_range": "1 980 - 2 345 €",
                     "features": [
-                        "Do 5 obrazoviek",
-                        "Základná funkcionalita"
+                        "Funkcie: Do 50 produktov, základné platby",
+                        "Technológie: WordPress, WooCommerce"
                     ],
-                    "delivery_time": "4-6 týždňov"
+                    "delivery_time": "Projektovo"
                 },
                 {
-                    "type": "Podniková aplikácia",
-                    "price_range": "6 900 - 13 800 €",
+                    "type": "Štandardný e-shop",
+                    "price_range": "2 900 - 3 220 €",
                     "features": [
-                        "Viac obrazoviek",
-                        "Integrácie s API"
+                        "Funkcie: Neobmedzené produkty, CMS, SEO",
+                        "Technológie: Webflow, Shopify"
                     ],
-                    "delivery_time": "8-12 týždňov"
+                    "delivery_time": "Projektovo"
                 },
                 {
-                    "type": "Komplexná aplikácia",
-                    "price_range": "od 18 400 €",
+                    "type": "Prémiový e-shop",
+                    "price_range": "3 680 - 4 600 €",
                     "features": [
-                        "Rozsiahla funkcionalita",
-                        "Offline režim"
+                        "Funkcie: Pokročilé funkcie, integrácie",
+                        "Technológie: Custom riešenia, API"
                     ],
-                    "delivery_time": "16+ týždňov"
+                    "delivery_time": "Projektovo"
                 }
             ],
             "faqs": [
                 {
-                    "question": "V akých technológiách vyvíjate mobilné aplikácie?",
-                    "answer": "Používame Flutter a React Native pre multiplatformový vývoj a Swift/Kotlin pre natívny vývoj."
+                    "question": "Aké e-commerce platformy používate?",
+                    "answer": "Používame WooCommerce, Shopify, Magento, PrestaShop a vytvárame riešenia na mieru podľa špecifických požiadaviek vašeho podnikania."
                 },
                 {
-                    "question": "Ako zabezpečujete výkon aplikácií?",
-                    "answer": "Optimalizujeme kód, používame lazy loading, caching a testujeme na rôznych zariadeniach."
+                    "question": "Aké platobné metódy integrujete?",
+                    "answer": "Integrujeme všetky populárne platobné brány: PayPal, Stripe, CardPay, GP webpay, Comgate, Tatrapay, ČSOB, bankové prevody a dobierky."
                 },
                 {
-                    "question": "Pomáhate aj s publikáciou aplikácií?",
-                    "answer": "Áno, pripravíme podklady a zrealizujeme publikáciu na App Store a Google Play."
+                    "question": "Robíte integrácie s externými systémami?",
+                    "answer": "Áno, integrujeme s účtovnými systémami (Money S3, Pohoda), skladovými systémami, dopravcami (GLS, DPD, Pošta), a marketplace (Heureka, Pricemania)."
                 },
                 {
-                    "question": "Poskytujete údržbu aplikácií?",
-                    "answer": "Áno, ponúkame aktualizácie, opravy chýb a nové funkcie podľa požiadaviek."
+                    "question": "Ako optimalizujete e-shop pre konverzie?",
+                    "answer": "Optimalizujeme checkout proces, loading speed, mobilné používanie, fotografie produktov, popisky, reviews systém, súvisiace produkty a abandoned cart recovery."
                 },
                 {
-                    "question": "Koľko trvá vývoj mobilnej aplikácie?",
-                    "answer": "Od 4 týždňov pre jednoduché aplikácie do 6 mesiacov pre komplexné riešenia."
+                    "question": "Poskytujete školenie pre správu e-shopu?",
+                    "answer": "Áno, poskytujeme kompletné školenie pre administráciu: pridávanie produktov, správa objednávok, inventory management, analytiky a marketing tools."
                 }
             ]
         },
         {
             "id": 13,
             "category": "Vývoj",
-            "name": "E-commerce riešenia",
-            "slug": "e-commerce-riesenia",
-            "title_tag": "E-commerce riešenia Slovensko | Tvorba e-shopov",
-            "meta_description": "Komplexné e-commerce riešenia na mieru. Integrácie platieb, skladov a logistiky. Optimalizácia konverzií.",
-            "url": "/sluzby/e-commerce-riesenia/",
-            "description": "E-commerce riešenia zahŕňajú vývoj internetových obchodov a online predajných platforiem. Poskytujeme integrácie s platobnými bránami, skladovými systémami, logistickými službami a analytikou. Naše riešenia sú optimalizované pre SEO, rýchlosť a konverzie.",
+            "name": "Vývoj mobilných aplikácií",
+            "slug": "vyvoj-mobilnych-aplikacii",
+            "title_tag": "Vývoj aplikácií Slovensko | iOS, Android | React Native",
+            "meta_description": "Profesionálny vývoj mobilných aplikácií pre iOS a Android. React Native, Flutter, custom apps, App Store optimization. Aplikácie od 8000€.",
+            "url": "/sluzby/vyvoj-mobilnych-aplikacii/",
+            "description": "Vývoj mobilných aplikácií je proces tvorby softvérových riešení pre smartfóny a tablety. Zahŕňa natívny vývoj pre iOS a Android, cross-platform riešenia, backend APIs, databázové systémy, push notifikácie, in-app purchases a App Store optimalizáciu.",
             "benefits": [
-                "Komplexný e-shop na mieru",
-                "Integrácie platieb a skladov",
-                "Optimalizácia rýchlosti a SEO",
-                "Responzívny dizajn",
-                "Správa produktov a objednávok",
-                "Podpora marketingových kampaní"
+                "Priamy kanál ku zákazníkom",
+                "Push notifikácie pre engagement",
+                "Offline funkcionalita",
+                "Natívne funkcie zariadenia (GPS, kamera)",
+                "Brand presence na mobile",
+                "Lepšie používateľské skúsenosti"
             ],
             "process": [
-                "Analýza - Definovanie cieľov a sortimentu",
-                "UX/UI návrh - Dizajn e-shopu",
-                "Vývoj - Implementácia funkcií a integrácií",
-                "Testovanie - QA a UX testy",
-                "Spustenie - Nasadenie a školenie"
+                "Architektúra aplikácie – Návrh architektúry a výber technológií (iOS, Android, Cross-platform)",
+                "UI/UX vývoj – Vývoj používateľského rozhrania a skúseností",
+                "Integrácia backend – API vývoj a integrácia s backend systémami",
+                "Spustenie v App Store – Testovanie, optimalizácia a publikovanie v obchodoch"
             ],
             "pricing": [
                 {
-                    "type": "Základný e-shop",
-                    "price_range": "2 300 - 4 600 €",
-                    "features": [
-                        "Do 50 produktov",
-                        "Základné funkcie"
-                    ],
-                    "delivery_time": "4-6 týždňov"
-                },
-                {
-                    "type": "Pokročilý e-shop",
+                    "type": "Jednoduchá aplikácia",
                     "price_range": "6 900 - 13 800 €",
                     "features": [
-                        "Do 1 000 produktov",
-                        "Integrácie"
+                        "Platformy: iOS alebo Android"
                     ],
-                    "delivery_time": "8-12 týždňov"
+                    "delivery_time": "2-4 mesiace"
                 },
                 {
-                    "type": "Komplexná platforma",
-                    "price_range": "od 18 400 €",
+                    "type": "Komplexná aplikácia",
+                    "price_range": "13 800 - 34 500 €",
                     "features": [
-                        "Neobmedzené produkty",
-                        "Custom funkcie"
+                        "Platformy: iOS + Android"
                     ],
-                    "delivery_time": "16+ týždňov"
+                    "delivery_time": "4-8 mesiacov"
+                },
+                {
+                    "type": "Podnikové riešenie",
+                    "price_range": "34 500+ €",
+                    "features": [
+                        "Platformy: Multi-platform + backend"
+                    ],
+                    "delivery_time": "6-12 mesiacov"
                 }
             ],
             "faqs": [
                 {
-                    "question": "Aké platformy používate pre e-shopy?",
-                    "answer": "Vyvíjame na WooCommerce, Shopify, Magento alebo na mieru v Laraveli."
+                    "question": "Aké typy aplikácií vyvíjate?",
+                    "answer": "Vyvíjame podnikové aplikácie, e-commerce aplikácie, sociálne platformy, booking systémy, loyalty programy, fitness aplikácie, vzdelávacie nástroje a podnikové riešenia."
                 },
                 {
-                    "question": "Integrujete platobné brány?",
-                    "answer": "Áno, integrujeme Stripe, PayPal, GoPay, TatraPay a ďalšie."
+                    "question": "Používate natívny alebo cross-platform vývoj?",
+                    "answer": "Ponúkame obe možnosti: natívny vývoj (Swift/iOS, Kotlin/Android) pre maximálny výkon, alebo cross-platform (React Native, Flutter) pre cost-effective riešenia."
                 },
                 {
-                    "question": "Optimalizujete e-shop pre SEO?",
-                    "answer": "Áno, implementujeme SEO-friendly URL, meta tagy, optimalizujeme rýchlosť a mobilnú použiteľnosť."
+                    "question": "Aký je proces vývoja aplikácie?",
+                    "answer": "Proces zahŕňa: analýzu požiadaviek (1-2 týždne), UX/UI dizajn (2-4 týždne), vývoj (8-20 týždňov), testovanie (2-3 týždne), App Store submission (1-2 týždne)."
                 },
                 {
-                    "question": "Ako riešite bezpečnosť e-shopov?",
-                    "answer": "Používame HTTPS, ochranu proti útokom a pravidelné aktualizácie."
+                    "question": "Pomáhate s publikovaním do App Store?",
+                    "answer": "Áno, zabezpečujeme kompletnú App Store a Google Play submission, optimalizáciu store listings, screenshots, descriptions a marketing materials."
                 },
                 {
-                    "question": "Poskytujete školenie pre správu e-shopu?",
-                    "answer": "Áno, po spustení školíme tím klienta na správu produktov, objednávok a kampaní."
+                    "question": "Poskytujete údržbu po spustení?",
+                    "answer": "Poskytujeme kontinuálnu údržbu: bug fixes, OS compatibility updates, feature enhancements, performance monitoring a technical support."
                 }
             ]
         },
         {
             "id": 14,
             "category": "Vývoj",
-            "name": "Integrácia API",
-            "slug": "integracia-api",
-            "title_tag": "Integrácia API Slovensko | Prepojenie systémov",
-            "meta_description": "Integrácia API pre prepojenie systémov a automatizáciu procesov. REST, GraphQL a SOAP API riešenia.",
-            "url": "/sluzby/integracia-api/",
-            "description": "Integrácia API umožňuje prepojenie rôznych systémov a aplikácií. Realizujeme integrácie REST, GraphQL a SOAP API. Automatizujeme procesy, synchronizujeme dáta a vytvárame vlastné API rozhrania.",
+            "name": "Programovanie na mieru",
+            "slug": "programovanie-na-mieru",
+            "title_tag": "Programovanie na mieru Slovensko | Custom softvér development",
+            "meta_description": "Profesionálne programovanie na mieru. Custom softvér, API development, integrácie, podnikové riešenia. Softvér šitý presne na vaše potreby.",
+            "url": "/sluzby/programovanie-na-mieru/",
+            "description": "Programovanie na mieru je vývoj softvérových riešení presne navrhnutých pre špecifické podnikové potreby klienta. Zahŕňa analýzu procesov, návrh architektúry systému, databázové modelovanie, API development, integrácie, testovanie a nasadenie aplikácií.",
             "benefits": [
-                "Efektívne prepojenie systémov",
-                "Automatizácia procesov",
-                "Zníženie chybovosti",
-                "Úspora času a nákladov",
-                "Možnosť rozšírenia funkcionality",
-                "Bezpečné prenosy dát"
+                "Riešenie presne podľa vašich potrieb",
+                "Plná kontrola nad funkcionalitou",
+                "Škálovateľná architektúra",
+                "Konkurenčná výhoda na trhu",
+                "Žiadne licenčné poplatky",
+                "Integrácia s existujúcimi systémami"
             ],
             "process": [
-                "Analýza - Identifikácia systémov a API",
-                "Návrh - Architektúra integrácie",
-                "Vývoj - Implementácia prepojenia",
-                "Testovanie - Overenie funkčnosti",
-                "Nasadenie - Spustenie do prevádzky"
+                "Analýza požiadaviek – Detailná analýza požiadaviek a špecifikácia funkcionalít",
+                "Architektúra systému – Návrh architektúry a technológií pre optimálny výkon",
+                "Agilný vývoj – Iteratívny vývoj s pravidelnými demo a testovaním",
+                "Nasadenie a školenie – Nasadenie systému a školenie používateľov"
             ],
             "pricing": [
                 {
-                    "type": "Jednoduchá integrácia",
-                    "price_range": "460 - 920 €",
+                    "type": "Malé utility nástroje",
+                    "price_range": "1 840 - 7 360 €",
                     "features": [
-                        "Prepojenie dvoch systémov"
+                        "Zložitosť: Jednoduché nástroje"
                     ],
-                    "delivery_time": "1-2 týždne"
+                    "delivery_time": "1-3 mesiace"
                 },
                 {
-                    "type": "Pokročilá integrácia",
-                    "price_range": "1 380 - 2 760 €",
+                    "type": "Podniková aplikácia",
+                    "price_range": "7 360 - 27 600 €",
                     "features": [
-                        "Viac systémov",
-                        "Automatizácia"
+                        "Zložitosť: Stredná zložitosť"
                     ],
-                    "delivery_time": "3-5 týždňov"
+                    "delivery_time": "3-8 mesiacov"
                 },
                 {
-                    "type": "Komplexná integrácia",
-                    "price_range": "od 4 600 €",
+                    "type": "Podnikový systém",
+                    "price_range": "27 600+ €",
                     "features": [
-                        "Custom riešenia",
-                        "Bezpečnostné opatrenia"
+                        "Zložitosť: Vysoká zložitosť"
                     ],
-                    "delivery_time": "6+ týždňov"
+                    "delivery_time": "6-18 mesiacov"
                 }
             ],
             "faqs": [
                 {
-                    "question": "S akými API pracujete?",
-                    "answer": "Pracujeme s REST, GraphQL, SOAP a proprietárnymi API."
+                    "question": "Aké programovacie jazyky používate?",
+                    "answer": "Používame Python, JavaScript/Node.js, PHP, Java, C#, Go, React, Vue.js, Angular pre frontend, SQL/NoSQL databázy a cloud technologies (AWS, Azure)."
                 },
                 {
-                    "question": "Ako zabezpečujete integrácie?",
-                    "answer": "Používame autentifikáciu OAuth2, šifrovanie dát a kontrolu prístupov."
+                    "question": "Ako prebieha development proces?",
+                    "answer": "Používame Agile methodology: requirements gathering, technical specification, iteratívny vývoj s 2-týždňovými sprintmi, continuous testing a regular client reviews."
                 },
                 {
-                    "question": "Vytvárate aj vlastné API?",
-                    "answer": "Áno, navrhujeme a implementujeme vlastné API rozhrania."
+                    "question": "Poskytujete API development?",
+                    "answer": "Áno, vyvíjame RESTful APIs, GraphQL endpoints, microservices architektúru, webhook integrácie a third-party API connectors pre seamless systémové integrácie."
                 },
                 {
-                    "question": "Môžete integrovať ERP/CRM?",
-                    "answer": "Áno, integrujeme ERP, CRM, skladové systémy, platobné brány a marketingové nástroje."
+                    "question": "Aké testovanie robíte pred nasadením?",
+                    "answer": "Robíme unit testing, integration testing, performance testing, security audits, user acceptance testing a load testing pre podnikové aplikácie."
                 },
                 {
-                    "question": "Ako testujete integrácie?",
-                    "answer": "Používame automatizované testy, sandbox prostredia a manuálne overenie."
+                    "question": "Je možná postupná implementácia?",
+                    "answer": "Áno, odporúčame postupné nasadenie: MVP development, user feedback collection, iterative improvements a postupné pridávanie pokročilých funkcií."
                 }
             ]
         },
         {
             "id": 15,
-            "category": "Vývoj",
-            "name": "Údržba a podpora",
-            "slug": "udrzba-a-podpora",
-            "title_tag": "Údržba a podpora webov Slovensko | SLA balíky",
-            "meta_description": "Údržba a podpora webových stránok a aplikácií. Aktualizácie, monitoring, opravy chýb. SLA balíky.",
-            "url": "/sluzby/udrzba-a-podpora/",
-            "description": "Údržba a podpora zahŕňa pravidelné aktualizácie, monitoring, opravy chýb a optimalizáciu webov a aplikácií. Ponúkame SLA balíky s garantovanou dobou reakcie a pravidelnými reportmi.",
+            "category": "Správa",
+            "name": "Správa webových stránok",
+            "slug": "sprava-webovych-stranok",
+            "title_tag": "Správa webstránok Slovensko | Website maintenance | Údržba webov",
+            "meta_description": "Profesionálna správa a údržba webstránok. Security monitoring, aktualizácie, zálohovanie, performance optimization. 24/7 podpora.",
+            "url": "/sluzby/sprava-webovych-stranok/",
+            "description": "Správa webových stránok je kontinuálna údržba a optimalizácia webstránok pre bezpečnosť, výkon a aktuálnosť. Zahŕňa pravidelné aktualizácie, security monitoring, backup systémy, performance optimization, content updates a technical support.",
             "benefits": [
-                "Zabezpečenie bezproblémovej prevádzky",
-                "Pravidelné aktualizácie",
-                "Rýchle riešenie problémov",
-                "Monitoring 24/7",
-                "Optimalizácia výkonu",
-                "Bezpečnostné opatrenia"
+                "Zabezpečenie pred hackermi a malvérom",
+                "Pravidelné zálohovanie dát",
+                "Optimálny výkon a rýchlosť stránky",
+                "Aktuálny obsah a technológie",
+                "24/7 monitoring a podpora",
+                "GDPR compliance"
             ],
             "process": [
-                "Audit - Kontrola aktuálneho stavu",
-                "Plán - Nastavenie harmonogramu údržby",
-                "Realizácia - Pravidelné úlohy a monitoring",
-                "Report - Mesačné správy o stave",
-                "Podpora - Riešenie incidentov"
+                "Monitorovanie bezpečnosti – Kontinuálne sledovanie bezpečnosti a ochrana pred útokmi",
+                "Optimalizácia výkonu – Optimalizácia rýchlosti a výkonu webstránky",
+                "Pravidelné aktualizácie – Pravidelné aktualizácie systému, pluginov a obsahu",
+                "Zálohovanie a podpora – Automatické zálohovanie a technická podpora 24/7"
             ],
             "pricing": [
                 {
-                    "type": "Základný balík",
-                    "price_range": "115 - 230 € / mesiac",
+                    "type": "Základná údržba",
+                    "price_range": "75 - 185 € / mesiac",
                     "features": [
-                        "Monitoring",
-                        "Základné aktualizácie"
+                        "Zahŕňa: Updates, backup, monitoring",
+                        "Response time: 24 hodín"
                     ],
                     "delivery_time": "Mesačne"
                 },
                 {
-                    "type": "Pokročilý balík",
-                    "price_range": "345 - 690 € / mesiac",
+                    "type": "Rozšírená správa",
+                    "price_range": "185 - 460 € / mesiac",
                     "features": [
-                        "Monitoring 24/7",
-                        "Optimalizácia"
+                        "Zahŕňa: + content updates, optimalizácia",
+                        "Response time: 4 hodiny"
                     ],
                     "delivery_time": "Mesačne"
                 },
                 {
-                    "type": "Komplexný balík",
-                    "price_range": "od 1 150 € / mesiac",
+                    "type": "Podniková podpora",
+                    "price_range": "460+ € / mesiac",
                     "features": [
-                        "Full SLA",
-                        "Rýchla reakcia"
+                        "Zahŕňa: 24/7 podpora, SLA garancie",
+                        "Response time: 1 hodina"
                     ],
                     "delivery_time": "Mesačne"
                 }
             ],
             "faqs": [
                 {
-                    "question": "Čo zahŕňa údržba webu?",
-                    "answer": "Aktualizácie systému, pluginov, bezpečnostné záplaty, monitoring a opravy chýb."
+                    "question": "Čo zahŕňa mesačná správa webu?",
+                    "answer": "Mesačná správa zahŕňa: pravidelné aktualizácie (WordPress, plugins), security scans, malware removal, performance monitoring, backup management a minor content changes."
                 },
                 {
-                    "question": "Poskytujete podporu aj mimo pracovných hodín?",
-                    "answer": "Áno, v rámci SLA balíkov poskytujeme podporu 24/7."
+                    "question": "Ako často robíte zálohy webu?",
+                    "answer": "Robíme denné automatické zálohy s 30-dňovou históriou. Pre kritické weby zabezpečujeme real-time backup s okamžitým recovery options."
                 },
                 {
-                    "question": "Ako rýchlo reagujete na incidenty?",
-                    "answer": "Podľa SLA balíka od 1 hodiny do 24 hodín."
+                    "question": "Aký je response time pre problémy?",
+                    "answer": "Critical issues (web down): do 1 hodiny. High priority: do 4 hodín. Standard issues: do 24 hodín. Komunikujeme cez email, telefón a ticketing systém."
                 },
                 {
-                    "question": "Robíte aj optimalizáciu výkonu?",
-                    "answer": "Áno, optimalizujeme rýchlosť načítania, databázy a serverové nastavenia."
+                    "question": "Monitorujete výkon webu?",
+                    "answer": "Áno, monitorujeme uptime, loading speed, core web vitals, broken links, 404 errors a poskytujeme mesačné performance reports s odporúčaniami."
                 },
                 {
-                    "question": "Je údržba povinná po dodaní webu?",
-                    "answer": "Nie, ale odporúčame ju pre zachovanie bezpečnosti a funkčnosti."
+                    "question": "Môžete upravovať obsah webu?",
+                    "answer": "Áno, minor content updates sú súčasťou údržby. Väčšie zmeny (nové stránky, redesign sekcií) sa fakturujú podľa hodinovej sadzby."
                 }
             ]
         },
@@ -1132,378 +1126,377 @@
             "category": "Marketing",
             "name": "SEO optimalizácia",
             "slug": "seo-optimalizacia",
-            "title_tag": "SEO optimalizácia Slovensko | Zvýšenie návštevnosti",
-            "meta_description": "SEO optimalizácia pre lepšie pozície vo vyhľadávačoch. On-page, off-page a technické SEO. Zvýšte organickú návštevnosť.",
+            "title_tag": "SEO optimalizácia Piešťany | Top pozície Google | Organický traffic Trnava",
+            "meta_description": "Profesionálna SEO optimalizácia Piešťany a okolie. Zvýšte organický traffic o 200%, TOP 3 pozície Google, keyword research, link building.",
             "url": "/sluzby/seo-optimalizacia/",
-            "description": "SEO optimalizácia zahŕňa úpravu webu a obsahu pre zlepšenie pozícií vo vyhľadávačoch ako Google. Pracujeme na on-page, off-page a technickom SEO. Naše služby vedú k vyššej organickej návštevnosti a lepším konverziám.",
+            "description": "SEO optimalizácia je proces zlepšovania pozícií webstránky vo vyhľadávačoch pre relevantné kľúčové slová. Moderné SEO zahŕňa technickú optimalizáciu, tvorbu kvalitného obsahu, výskum kľúčových slov, budovanie odkazov, lokálne SEO a kontinuálnu analýzu výkonnosti.",
             "benefits": [
-                "Vyššie pozície vo vyhľadávačoch",
-                "Zvýšenie organickej návštevnosti",
-                "Lepšia použiteľnosť webu",
-                "Cielený obsah pre zákazníkov",
-                "Dlhodobé výsledky",
-                "Analýza a reporty"
+                "Zvýšenie organickej návštevnosti o 100-300%",
+                "TOP 3 pozície pre cielené kľúčové slová",
+                "Vyššia konverzná miera z organického trafficu",
+                "Dlhodobá viditeľnosť bez platených reklám",
+                "Návratnosť investície 300-500%",
+                "Budovanie authority a dôveryhodnosti"
             ],
             "process": [
-                "Audit - Kontrola SEO stavu webu",
-                "On-page - Optimalizácia obsahu a štruktúry",
-                "Off-page - Budovanie spätných odkazov",
-                "Technické SEO - Rýchlosť, mobilná verzia",
-                "Monitoring - Priebežné sledovanie výsledkov"
+                "SEO analýza – Komplexná analýza webstránky a konkurenčný výskum",
+                "Stratégia kľúčových slov – Výskum kľúčových slov a SEO stratégia",
+                "On-page optimalizácia – Optimalizácia obsahu, meta tagov a technického SEO",
+                "Budovanie odkazov – Budovanie kvalitných spätných odkazov a monitoring pozícií"
             ],
             "pricing": [
                 {
-                    "type": "Základný balík",
-                    "price_range": "345 - 690 € / mesiac",
+                    "type": "Lokálne SEO",
+                    "price_range": "275 - 735 € / mesiac",
                     "features": [
-                        "On-page SEO",
-                        "Základné odkazy"
+                        "Vhodné pre: Miestne firmy",
+                        "Očakávané výsledky: 3-6 mesiacov"
                     ],
                     "delivery_time": "Mesačne"
                 },
                 {
-                    "type": "Pokročilý balík",
-                    "price_range": "1 150 - 2 300 € / mesiac",
+                    "type": "Národné SEO",
+                    "price_range": "735 - 1 840 € / mesiac",
                     "features": [
-                        "Komplexné SEO",
-                        "Analýza konkurencie"
+                        "Vhodné pre: E-shopy, služby",
+                        "Očakávané výsledky: 4-8 mesiacov"
                     ],
                     "delivery_time": "Mesačne"
                 },
                 {
-                    "type": "Komplexný balík",
-                    "price_range": "od 3 450 € / mesiac",
+                    "type": "Podnikové SEO",
+                    "price_range": "od 1 840 € / mesiac",
                     "features": [
-                        "Full SEO",
-                        "Medzinárodné kampane"
+                        "Vhodné pre: Veľké firmy",
+                        "Očakávané výsledky: 6-12 mesiacov"
                     ],
                     "delivery_time": "Mesačne"
                 }
             ],
             "faqs": [
                 {
-                    "question": "Ako dlho trvá, kým sa prejavia výsledky SEO?",
-                    "answer": "Prvé výsledky sú viditeľné zvyčajne do 3 mesiacov, plný efekt do 6-12 mesiacov."
+                    "question": "Ako dlho trvá, kým uvidím výsledky SEO?",
+                    "answer": "Prvé zlepšenia sú viditeľné za 2-3 mesiace, významný rast za 4-6 mesiacov. SEO je dlhodobá stratégia s najlepšími výsledkami po 6-12 mesiacoch kontinuálnej práce."
                 },
                 {
-                    "question": "Robíte aj lokálne SEO?",
-                    "answer": "Áno, optimalizujeme pre Google My Business a lokálne vyhľadávania."
+                    "question": "Poskytujete služby aj v Piešťanoch a okolí?",
+                    "answer": "Áno, naše hlavné sídlo je v Piešťanoch a poskytujeme komplexné SEO služby pre firmy v Trnava regióne vrátane Piešťany, Trnavy, Skalice, Senice a celého západného Slovenska."
                 },
                 {
-                    "question": "Budujete spätné odkazy?",
-                    "answer": "Áno, zabezpečujeme kvalitné a relevantné odkazy."
+                    "question": "Aké SEO služby poskytujete?",
+                    "answer": "Keyword research, technický SEO audit, on-page optimalizáciu, tvorbu obsahu, link building, lokálne SEO, konkurenčnú analýzu a mesačné reporty."
                 },
                 {
-                    "question": "Poskytujete reporty o výsledkoch?",
-                    "answer": "Áno, každý mesiac zasielame detailné reporty."
+                    "question": "Garantujete konkrétne pozície?",
+                    "answer": "Nezaručujeme konkrétne pozície (žiadna seriózna SEO agentúra nemôže), ale garantujeme merateľné zlepšenia v organickom trafficu a pozíciách kľúčových slov."
                 },
                 {
-                    "question": "Optimalizujete aj e-shopy?",
-                    "answer": "Áno, SEO riešime aj pre e-commerce platformy."
+                    "question": "Robíte SEO audit?",
+                    "answer": "Áno, začíname komplexným SEO auditom identifikujúcim technické problémy, content gaps, keyword príležitosti a konkurenčnú analýzu s akčným plánom."
+                },
+                {
+                    "question": "Aké nástroje používate pre SEO?",
+                    "answer": "Používame Ahrefs, SEMrush, Google Search Console, Google Analytics, Screaming Frog, PageSpeed Insights a vlastné monitoring tools pre tracking progress."
                 }
             ]
         },
         {
             "id": 17,
             "category": "Marketing",
-            "name": "PPC kampane",
-            "slug": "ppc-kampane",
-            "title_tag": "PPC kampane Slovensko | Google Ads, Facebook Ads",
-            "meta_description": "Správa PPC kampaní pre okamžitý nárast návštevnosti. Google Ads, Facebook Ads, Instagram Ads.",
-            "url": "/sluzby/ppc-kampane/",
-            "description": "PPC kampane prinášajú okamžitý nárast návštevnosti a predajov. Spravujeme kampane na Google Ads, Facebook Ads a Instagram Ads. Optimalizujeme rozpočty a cielenie pre maximálnu návratnosť investícií.",
+            "name": "Reklamné kampane",
+            "slug": "reklamne-kampane",
+            "title_tag": "Google Ads Slovensko | Facebook reklamy | PPC kampane",
+            "meta_description": "Profesionálne Google Ads a Facebook kampane. PPC reklama s garantovaným ROI, A/B testing, conversion tracking. Certified experts.",
+            "url": "/sluzby/reklamne-kampane/",
+            "description": "Online reklamné kampane sú platené marketingové aktivity na digitálnych platformách zamerané na získavanie kvalifikovaných zákazníkov. Zahŕňajú Google Ads, Facebook/Instagram reklamy, LinkedIn campaigns, remarketing a display advertising s pokročilým targetingom.",
             "benefits": [
-                "Okamžitý nárast návštevnosti",
-                "Presné cielenie na zákazníkov",
-                "Merateľné výsledky",
-                "Flexibilný rozpočet",
-                "Zvýšenie konverzií",
-                "Priebežná optimalizácia"
+                "Okamžité výsledky a traffic",
+                "Presný targeting audience",
+                "Merateľný ROI a konverzie",
+                "Kompletná kontrola nad budgetom",
+                "Kontinuálna optimalizácia",
+                "Škálovateľnosť podľa výsledkov"
             ],
             "process": [
-                "Analýza - Cieľová skupina a konkurencia",
-                "Nastavenie - Vytvorenie kampaní",
-                "Optimalizácia - Úprava cielenia a ponúk",
-                "Reporty - Výsledky a odporúčania",
-                "Rozšírenie - Škálovanie úspešných kampaní"
+                "Stratégia kampaní – Stratégia kampaní a výber najvhodnejších platforiem",
+                "Vývoj reklámnych kreativít – Tvorba reklamných kreativít a copywritingu",
+                "Targeting a spustenie – Nastavenie targetingu a spustenie kampaní",
+                "Optimalizácia a reportovanie – A/B testovanie, optimalizácia a mesačné reporty"
             ],
             "pricing": [
                 {
-                    "type": "Základný balík",
-                    "price_range": "230 - 460 € / mesiac + rozpočet",
+                    "type": "Startup kampane",
+                    "price_range": "Mesačný budget: 460 - 1 380 €",
                     "features": [
-                        "Správa 1-2 kampaní",
-                        "Základná optimalizácia"
+                        "Management fee: 15-20%",
+                        "ROI target: 200%+"
                     ],
                     "delivery_time": "Mesačne"
                 },
                 {
-                    "type": "Pokročilý balík",
-                    "price_range": "690 - 1 380 € / mesiac + rozpočet",
+                    "type": "Podnikové kampane",
+                    "price_range": "Mesačný budget: 1 380 - 4 600 €",
                     "features": [
-                        "Viacero kampaní",
-                        "A/B testovanie"
+                        "Management fee: 15-20%",
+                        "ROI target: 300%+"
                     ],
                     "delivery_time": "Mesačne"
                 },
                 {
-                    "type": "Komplexný balík",
-                    "price_range": "od 2 300 € / mesiac + rozpočet",
+                    "type": "Podnikové advertising",
+                    "price_range": "Mesačný budget: 4 600 €+",
                     "features": [
-                        "Full správa",
-                        "Medzinárodné kampane"
+                        "Management fee: 10-15%",
+                        "ROI target: 400%+"
                     ],
                     "delivery_time": "Mesačne"
                 }
             ],
             "faqs": [
                 {
-                    "question": "Ktoré platformy spravujete?",
-                    "answer": "Google Ads, Facebook Ads, Instagram Ads, LinkedIn Ads."
+                    "question": "Aké platformy používate pre reklamy?",
+                    "answer": "Spravujeme kampane na Google Ads (Search, Display, YouTube), Facebook/Instagram Ads, LinkedIn Ads, Sklik.cz a ďalších relevantných platformách."
                 },
                 {
-                    "question": "Ako často optimalizujete kampane?",
-                    "answer": "Optimalizujeme minimálne raz týždenne."
+                    "question": "Ako meriate úspešnosť kampaní?",
+                    "answer": "Meráme key metrics: CTR, CPC, conversion rate, cost per acquisition, ROAS, lifetime value a poskytujeme detailné monthly reports s insights."
                 },
                 {
-                    "question": "Poskytujete reporty?",
-                    "answer": "Áno, mesačné aj týždenné reporty podľa potreby."
+                    "question": "Robíte A/B testing reklám?",
+                    "answer": "Áno, kontinuálne testujeme ad creative, headlines, descriptions, vstupné stránky, targeting options a bidding strategies pre optimalizáciu výkonnosti."
                 },
                 {
-                    "question": "Koľko stojí PPC reklama?",
-                    "answer": "Cena závisí od rozpočtu a konkurencie, účtujeme správu a samotný rozpočet."
+                    "question": "Aký je minimálny reklamný budget?",
+                    "answer": "Odporúčame minimálne 300-500 €/mesiac pre Google Ads a 200-400 €/mesiac pre Facebook Ads, aby bolo možné zbierať relevantné dáta."
                 },
                 {
-                    "question": "Testujete rôzne kreatívy?",
-                    "answer": "Áno, používame A/B testovanie textov a vizuálov."
+                    "question": "Poskytujete optimalizáciu vstupných stránok?",
+                    "answer": "Áno, optimalizujeme alebo vytvárame nové vstupné stránky špecificky pre reklamné kampane s dôrazom na conversion rate optimization."
                 }
             ]
         },
         {
             "id": 18,
             "category": "Marketing",
-            "name": "Email marketing",
-            "slug": "email-marketing",
-            "title_tag": "Email marketing Slovensko | Newsletter kampane",
-            "meta_description": "Email marketing pre udržanie zákazníkov a zvýšenie predajov. Automatizované kampane a segmentácia.",
-            "url": "/sluzby/email-marketing/",
-            "description": "Email marketing pomáha udržať zákazníkov a zvyšovať predaje. Vytvárame newsletter kampane, automatizované sekvencie a segmentáciu kontaktov pre maximálnu relevanciu obsahu.",
+            "name": "Cenové porovnávače",
+            "slug": "cenove-porovnavace",
+            "title_tag": "Cenové porovnávače Slovensko | Heureka, Pricemania integrácia",
+            "meta_description": "Integrácia e-shopov s cenovými porovnávačmi. Heureka, Pricemania, Glami. XML feeds, product optimization, zvýšte predaje o 40%.",
+            "url": "/sluzby/cenove-porovnavace/",
+            "description": "Integrácia s cenovými porovnávačmi je proces napojenia e-shopu na platformy ako Heureka, Pricemania, Glami pre automatické zdieľanie produktových dát, cien a dostupnosti. Zahŕňa XML feed optimization, product mapping a performance tracking.",
             "benefits": [
-                "Priamy kontakt so zákazníkmi",
-                "Automatizácia kampaní",
-                "Segmentácia databázy",
-                "Merateľné výsledky",
-                "Nízke náklady",
-                "Zvýšenie vernosti zákazníkov"
+                "Zvýšenie viditeľnosti produktov o 200%",
+                "Nový traffic channel s vysokým úmyslom kúpy",
+                "Konkurenčné porovnávanie cien",
+                "Trust building cez customer reviews",
+                "Mobile-first audience reach",
+                "Automatizácia price monitoring"
             ],
             "process": [
-                "Analýza - Ciele a cieľová skupina",
-                "Návrh - Obsah a dizajn emailov",
-                "Implementácia - Nastavenie nástroja",
-                "Spustenie - Odoslanie kampaní",
-                "Vyhodnotenie - Reporty a optimalizácia"
+                "Nastavenie feedov – Nastavenie XML feedov a mapovanie produktov",
+                "Optimalizácia produktov – Optimalizácia názvov, popisov a kategórií produktov",
+                "Správa staviek – Správa staviek a cenových stratégií",
+                "Sledovanie výkonnosti – Sledovanie ROI a optimalizácia na základe dát"
             ],
             "pricing": [
                 {
-                    "type": "Základný balík",
-                    "price_range": "115 - 230 € / mesiac",
+                    "type": "Základná integrácia",
+                    "price_range": "Setup: 460 - 920 €",
                     "features": [
-                        "1 newsletter mesačne",
-                        "Základná automatizácia"
+                        "Mesačný management: 185 - 370 €",
+                        "Platform fees: CPC 0.5 - 2 €"
                     ],
-                    "delivery_time": "Mesačne"
+                    "delivery_time": "Setup + mesačný management"
                 },
                 {
-                    "type": "Pokročilý balík",
-                    "price_range": "345 - 690 € / mesiac",
+                    "type": "Pokročilá optimalizácia",
+                    "price_range": "Setup: 920 - 1 840 €",
                     "features": [
-                        "Viac kampaní",
-                        "Pokročilá segmentácia"
+                        "Mesačný management: 370 - 735 €",
+                        "Platform fees: CPC 0.3 - 1.5 €"
                     ],
-                    "delivery_time": "Mesačne"
+                    "delivery_time": "Setup + mesačný management"
                 },
                 {
-                    "type": "Komplexný balík",
-                    "price_range": "od 1 150 € / mesiac",
+                    "type": "Podnikové riešenie",
+                    "price_range": "Setup: 1 840 €+",
                     "features": [
-                        "Full správa",
-                        "Personalizácia"
+                        "Mesačný management: 735 €+",
+                        "Platform fees: Individuálne"
                     ],
-                    "delivery_time": "Mesačne"
+                    "delivery_time": "Setup + mesačný management"
                 }
             ],
             "faqs": [
                 {
-                    "question": "S akými nástrojmi pracujete?",
-                    "answer": "Mailchimp, Sendinblue, ActiveCampaign, Klaviyo."
+                    "question": "S akými porovnávačmi robíte integrácie?",
+                    "answer": "Integrujeme s Heureka.sk, Pricemania.sk, Glami.sk, Najnakup.sk, Google Shopping a ďalšími relevantnými platformami pre slovenský a český trh."
                 },
                 {
-                    "question": "Viete automatizovať kampane?",
-                    "answer": "Áno, nastavíme automatické sekvencie na základe správania používateľov."
+                    "question": "Ako optimalizujete produktové feeds?",
+                    "answer": "Optimalizujeme názvy produktov, kategorizáciu, descriptions, obrázky, ceny, availability a parametre pre maximálnu viditeľnosť a click-through rates."
                 },
                 {
-                    "question": "Robíte aj dizajn emailov?",
-                    "answer": "Áno, pripravíme profesionálne šablóny."
+                    "question": "Spravujete aj bidding na porovnávačoch?",
+                    "answer": "Áno, kontinuálne optimalizujeme bids pre jednotlivé produkty na základe performance dát, konkurenčných cien a profitability margins."
                 },
                 {
-                    "question": "Ako meriame úspešnosť?",
-                    "answer": "Sledujeme open rate, click rate a konverzie."
+                    "question": "Pomáhate so získavaním reviews?",
+                    "answer": "Áno, implementujeme automatizované review request systémy a pomáhame s review management pre building trust a improving rankings."
                 },
                 {
-                    "question": "Je email marketing vhodný pre e-shopy?",
-                    "answer": "Áno, je veľmi efektívny na remarketing a opakované nákupy."
+                    "question": "Aké reporting poskytujete?",
+                    "answer": "Poskytujeme monthly reports s metrics: impressions, clicks, conversions, CTR, avg. CPC, revenue attribution a competitive positioning analysis."
                 }
             ]
         },
         {
             "id": 19,
             "category": "Marketing",
-            "name": "Správa sociálnych sietí",
-            "slug": "sprava-socialne-sieti",
-            "title_tag": "Správa sociálnych sietí Slovensko | Facebook, Instagram",
-            "meta_description": "Správa sociálnych sietí pre budovanie značky a komunikáciu so zákazníkmi. Facebook, Instagram, LinkedIn.",
-            "url": "/sluzby/sprava-socialne-sieti/",
-            "description": "Správa sociálnych sietí pomáha budovať značku a komunikovať so zákazníkmi. Tvoríme obsah, plánujeme príspevky a komunikujeme s komunitou. Pracujeme s Facebookom, Instagramom a LinkedIn.",
+            "name": "Sociálne siete",
+            "slug": "socialne-siete",
+            "title_tag": "Social media marketing Piešťany | Správa sociálnych sietí Trnava",
+            "meta_description": "Profesionálna správa sociálnych sietí Piešťany a okolie. Facebook, Instagram marketing, content tvorba, community management. Zvýšte engagement o 300%.",
+            "url": "/sluzby/socialne-siete/",
+            "description": "Správa sociálnych sietí je komplexné riadenie online prítomnosti značky na platformách ako Facebook, Instagram, LinkedIn, TikTok. Zahŕňa content creation, community management, paid advertising, influencer collaborations a performance analytics.",
             "benefits": [
-                "Budovanie značky",
-                "Pravidelný obsah",
-                "Komunikácia s publikom",
-                "Zvýšenie angažovanosti",
-                "Podpora predaja",
-                "Analýza a reporty"
+                "Priama komunikácia so zákazníkmi",
+                "Brand awareness building",
+                "Viral marketing potential",
+                "Customer service channel",
+                "Lead generation a predaje",
+                "Cost-effective marketing"
             ],
             "process": [
-                "Analýza - Cieľová skupina a konkurencia",
-                "Plán - Obsahová stratégia",
-                "Tvorba - Príprava textov a grafiky",
-                "Publikovanie - Plánovanie príspevkov",
-                "Monitoring - Sledovanie interakcií"
+                "Stratégia sociálnych sietí – Stratégia obsahu a výber vhodných platforiem",
+                "Tvorba obsahu – Tvorba grafického a video obsahu pre jednotlivé siete",
+                "Správa komunity – Správa komunity, odpovedanie na komentáre a správy",
+                "Analytika a rast – Sledovanie metrík, A/B testovanie a optimalizácia"
             ],
             "pricing": [
                 {
-                    "type": "Základný balík",
-                    "price_range": "230 - 460 € / mesiac",
+                    "type": "Základný package",
+                    "price_range": "370 - 920 € / mesiac",
                     "features": [
-                        "4 príspevky mesačne",
-                        "Základná komunikácia"
+                        "Zahŕňa: 2 platformy, základný content",
+                        "Posty/mesiac: 12-20"
                     ],
                     "delivery_time": "Mesačne"
                 },
                 {
-                    "type": "Pokročilý balík",
-                    "price_range": "690 - 1 380 € / mesiac",
+                    "type": "Profesionálny management",
+                    "price_range": "920 - 2 760 € / mesiac",
                     "features": [
-                        "8+ príspevkov",
-                        "Komplexná komunikácia"
+                        "Zahŕňa: 3-4 platformy, video content",
+                        "Posty/mesiac: 20-40"
                     ],
                     "delivery_time": "Mesačne"
                 },
                 {
-                    "type": "Komplexný balík",
-                    "price_range": "od 2 300 € / mesiac",
+                    "type": "Podnikové sociálne siete",
+                    "price_range": "od 2 760 € / mesiac",
                     "features": [
-                        "Full správa",
-                        "Reklamné kampane"
+                        "Zahŕňa: Všetky platformy, full service",
+                        "Posty/mesiac: 40+"
                     ],
                     "delivery_time": "Mesačne"
                 }
             ],
             "faqs": [
                 {
-                    "question": "Na ktorých sieťach pracujete?",
-                    "answer": "Facebook, Instagram, LinkedIn, TikTok."
+                    "question": "Aké sociálne siete spravujete?",
+                    "answer": "Spravujeme Facebook, Instagram, LinkedIn, TikTok, YouTube, Twitter a emerging platforms. Stratégiu prispôsobujeme target audience a business goals."
                 },
                 {
-                    "question": "Vytvárate aj reklamy?",
-                    "answer": "Áno, kombinujeme organický obsah s platenými reklamami."
+                    "question": "Ako často publikujete content?",
+                    "answer": "Štandardne 3-5 postov týždenne, ale frekvenciu prispôsobujeme platform algorithms a audience engagement patterns. Kvalita nad kvantitou."
                 },
                 {
-                    "question": "Ako často publikujete?",
-                    "answer": "Podľa balíka od 1x týždenne po každodenný obsah."
+                    "question": "Vytvárate aj grafický content?",
+                    "answer": "Áno, máme in-house creative tím pre graphic design, video production, animations, stories templates a branded visual content optimalizovaný pre každú platformu."
                 },
                 {
-                    "question": "Robíte aj fotenie?",
-                    "answer": "Áno, vieme zabezpečiť foto a video produkciu."
+                    "question": "Ako meriate social media ROI?",
+                    "answer": "Meráme engagement rates, reach, impressions, website traffic z social, lead generation, conversion tracking a brand sentiment analysis."
                 },
                 {
-                    "question": "Poskytujete analýzy výkonu?",
-                    "answer": "Áno, mesačné reporty s odporúčaniami."
+                    "question": "Zabezpečujete krízový manažment?",
+                    "answer": "Áno, poskytujeme 24/7 monitoring, rapid response protocols, reputation management a proactive community management pre maintaining positive brand image."
                 }
             ]
         },
         {
             "id": 20,
             "category": "Marketing",
-            "name": "Tvorba obsahu",
-            "slug": "tvorba-obsahu",
-            "title_tag": "Tvorba obsahu Slovensko | Copywriting, grafika, video",
-            "meta_description": "Tvorba obsahu pre web, sociálne siete a marketingové kampane. Copywriting, grafika, video produkcia.",
-            "url": "/sluzby/tvorba-obsahu/",
-            "description": "Tvorba obsahu zahŕňa copywriting, grafický dizajn a video produkciu pre webové stránky, sociálne siete a marketingové kampane. Obsah je prispôsobený cieľovej skupine a cieľom kampane.",
+            "name": "Influencer marketing",
+            "slug": "influencer-marketing",
+            "title_tag": "Influencer marketing Slovensko | Partnerstvá so značkami | Influenceri",
+            "meta_description": "Profesionálny influencer marketing na Slovensku. Micro/macro influenceri, partnerstvá so značkami, manažment kampaní, merateľné výsledky.",
+            "url": "/sluzby/influencer-marketing/",
+            "description": "Influencer marketing je spolupráca značiek s online osobnosťami, ktoré majú zavedené publikum a dôveryhodnosť vo svojej oblasti. Zahŕňa výskum influencerov, plánovanie kampaní, spoluprácu na obsahu, sledovanie výkonnosti a meranie ROI pre autentickú propagáciu značky.",
             "benefits": [
-                "Kvalitný a relevantný obsah",
-                "Zvýšenie angažovanosti",
-                "Podpora SEO",
-                "Budovanie značky",
-                "Rôzne formáty obsahu",
-                "Kreatívne spracovanie"
+                "Autentická propagácia značky",
+                "Vysoké miery zapojenia (3-6%)",
+                "Cielené oslovenie publika",
+                "Budovanie dôvery cez odporúčania",
+                "Potenciál virálneho obsahu",
+                "Nákladovo efektívnejšie ako tradičná reklama"
             ],
             "process": [
-                "Analýza - Ciele a publikum",
-                "Návrh - Koncept obsahu",
-                "Tvorba - Text, grafika, video",
-                "Schválenie - Revizie a úpravy",
-                "Publikovanie - Nasadenie obsahu"
+                "Výskum influencerov – Výskum a výber vhodných influencerov pre vašu značku",
+                "Plánovanie kampaní – Plánovanie kampane, obsahu a časového harmonogramu",
+                "Správa partnerstiev – Riadenie spolupráce a koordinácia tvorby obsahu",
+                "Analýza výkonnosti – Meranie dosahu, zapojenia a ROI kampane"
             ],
             "pricing": [
                 {
-                    "type": "Základný balík",
-                    "price_range": "115 - 230 € / mesiac",
+                    "type": "Micro-influenceri",
+                    "price_range": "185 - 920 € / kampaň",
                     "features": [
-                        "Texty a grafika",
-                        "Do 4 príspevkov"
+                        "Sledovatelia: 1K-100K",
+                        "Engagement rate: 3-8%"
                     ],
-                    "delivery_time": "Mesačne"
+                    "delivery_time": "Kampaň"
                 },
                 {
-                    "type": "Pokročilý balík",
-                    "price_range": "345 - 690 € / mesiac",
+                    "type": "Macro-influenceri",
+                    "price_range": "920 - 4 600 € / kampaň",
                     "features": [
-                        "Texty, grafika, video",
-                        "8+ príspevkov"
+                        "Sledovatelia: 100K-1M",
+                        "Engagement rate: 2-5%"
                     ],
-                    "delivery_time": "Mesačne"
+                    "delivery_time": "Kampaň"
                 },
                 {
-                    "type": "Komplexný balík",
-                    "price_range": "od 1 150 € / mesiac",
+                    "type": "Celebrity partnerstvá",
+                    "price_range": "od 4 600 € / kampaň",
                     "features": [
-                        "Full produkcia",
-                        "Reklamné kampane"
+                        "Sledovatelia: 1M+",
+                        "Engagement rate: 1-3%"
                     ],
-                    "delivery_time": "Mesačne"
+                    "delivery_time": "Kampaň"
                 }
             ],
             "faqs": [
                 {
-                    "question": "Aký obsah vytvárate?",
-                    "answer": "Texty, blogy, grafiku, videá, animácie."
+                    "question": "Ako vyberáte vhodných influencerov?",
+                    "answer": "Analyzujeme demografiu publika, kvalitu zapojenia, súlad so značkou, štýl obsahu, predchádzajúce spolupráce a metriky autenticity pre perfektný súlad značky a influencera."
                 },
                 {
-                    "question": "Robíte aj obsah pre SEO?",
-                    "answer": "Áno, optimalizujeme obsah pre vyhľadávače."
+                    "question": "Aké typy kampaní vytvárate?",
+                    "answer": "Vytvárame recenzie produktov, unboxing videá, tutoriály, integráciu do životného štýlu, súťaže, takeover kampane, dlhodobé ambasádorstvá značky a event spolupráce."
                 },
                 {
-                    "question": "Koľko revízií je v cene?",
-                    "answer": "Štandardne 2 revízie, viac podľa dohody."
+                    "question": "Ako meriate úspešnosť influencer kampaní?",
+                    "answer": "Sledujeme dosah, počet zobrazení, mieru zapojenia, click-through rates, použitie promo kódov, návštevnosť webstránky, konverzie a analýzu sentimentu zmienok o značke."
                 },
                 {
-                    "question": "Zabezpečujete foto a video produkciu?",
-                    "answer": "Áno, spolupracujeme s profesionálnymi tvorcami."
+                    "question": "Spolupracujete s mikro alebo makro influencermi?",
+                    "answer": "Spolupracujeme s oboma typmi. Mikro-influenceri (1K-100K followers) majú vyššie zapojenie, makro-influenceri (100K+ followers) majú širší dosah."
                 },
                 {
-                    "question": "Pracujete aj s obsahovým kalendárom?",
-                    "answer": "Áno, pripravíme mesačný plán obsahu."
+                    "question": "Zabezpečujete právne aspekty partnerstiev?",
+                    "answer": "Áno, pripravujeme zmluvy o partnerstve, pravidlá súladu, práva na používanie obsahu, klauzuly exkluzivity a ochranu platobných podmienok."
                 }
             ]
         }
