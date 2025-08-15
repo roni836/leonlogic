@@ -5,6 +5,7 @@ import { IRootState } from '@/store/index';
 import { toggleDirection, toggleTheme } from '@/store/themeConfigSlice';
 import ScreenLoaderIcon from '@/components/Icons/ScreenLoaderIcon';
 import AOS from 'aos';
+import WhatsAppButton from './components/WhatsAppButton';
 
 function App({ children }: PropsWithChildren) {
     const [showLoader, setShowLoader] = useState(true);
@@ -76,6 +77,7 @@ function App({ children }: PropsWithChildren) {
                     </span>
                 </button>
             </div>
+            <WhatsAppButton />
         </>
     );
 }
