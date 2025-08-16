@@ -153,8 +153,11 @@ export default async function Page({ params }: PageProps) {
           <div>
             <h1 className="text-3xl md:text-[50px] font-black uppercase md:leading-[59px] max-w-[1019px] italic">
               <span className="text-gray-900 dark:text-white">
-                Tvorba <span className="text-secondary">eshopov</span> a riešenia
+                {service.name}
               </span>
+              {/*<span className="text-gray-900 dark:text-white">
+                Tvorba <span className="text-secondary">eshopov</span> a riešenia
+              </span> */}
             </h1>
             <p className="text-lg mt-5 text-[#4B5576] dark:text-[#9199B5] max-w-[582px]">
               {service.description}
