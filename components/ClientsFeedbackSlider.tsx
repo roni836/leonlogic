@@ -23,9 +23,9 @@ const ClientsFeedbackSlider = () => {
                     </h2>
                 </div>
                 <div className="flex items-center gap-8">
-                    <a href="#" className="font-bold hover:text-secondary duration-200">
+                    {/* <a href="#" className="font-bold hover:text-secondary duration-200">
                         view all
-                    </a>
+                    </a> */}
                     <div className="flex items-center gap-2.5 rtl:flex-row-reverse">
                         <button
                             type="button"

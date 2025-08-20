@@ -62,11 +62,11 @@ const DigitalServicesSlider = () => {
                     <SwiperSlide>
                         <div className="mb-7 rounded-2xl border-[3px] border-[#9199B5]/10 dark:bg-linear-to-b dark:from-[#002738] dark:to-transparent p-8">
                             <div className="mb-7 w-[60px] h-[60px]">
-                                <Image src="/assets/images/icon-mail.svg" className="w-full h-full object-cover" alt="icon mail" width={60} height={60} />
+                                <Image src="/assets/images/icon-mail.svg" className="w-full h-full object-cover" alt="ikona mail" width={60} height={60} />
                             </div>
                             <div className="space-y-1.5">
                                 <h3 className="text-xl font-semibold dark:text-white">Email Marketing</h3>
-                                <p className="text-lg text-gray">Our design services starts and ends best in class experience.</p>
+                                <p className="text-lg text-gray">Naše dizajnové služby začínajú a končia najlepším možným zážitkom.</p>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -76,47 +76,47 @@ const DigitalServicesSlider = () => {
                                 <Image
                                     src="/assets/images/icon-instagram.svg"
                                     className="w-full h-full object-cover"
-                                    alt="icon instagram"
+                                    alt="ikona instagram"
                                     width={60}
                                     height={60}
                                 />
                             </div>
                             <div className="space-y-1.5">
-                                <h3 className="text-xl font-semibold dark:text-white">Social Media</h3>
-                                <p className="text-lg text-gray">Our design services starts and ends best in class experience.</p>
+                                <h3 className="text-xl font-semibold dark:text-white">Sociálne Médiá</h3>
+                                <p className="text-lg text-gray">Naše dizajnové služby začínajú a končia najlepším možným zážitkom.</p>
                             </div>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="mb-7 rounded-2xl border-[3px] border-[#9199B5]/10 dark:bg-linear-to-b dark:from-[#002738] dark:to-transparent p-8">
                             <div className="mb-7 w-[60px] h-[60px]">
-                                <Image src="/assets/images/icon-fb-ads.svg" className="w-full h-full object-cover" alt="icon fb ads" width={60} height={60} />
+                                <Image src="/assets/images/icon-fb-ads.svg" className="w-full h-full object-cover" alt="ikona fb reklamy" width={60} height={60} />
                             </div>
                             <div className="space-y-1.5">
-                                <h3 className="text-xl font-semibold dark:text-white">Google/FB Ads</h3>
-                                <p className="text-lg text-gray">Our design services starts and ends best in class experience.</p>
+                                <h3 className="text-xl font-semibold dark:text-white">Google/FB Reklamy</h3>
+                                <p className="text-lg text-gray">Naše dizajnové služby začínajú a končia najlepším možným zážitkom.</p>
                             </div>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="mt-7 rounded-2xl border-[3px] border-[#9199B5]/10 dark:bg-linear-to-b dark:from-[#002738] dark:to-transparent p-8">
                             <div className="mb-7 w-[60px] h-[60px]">
-                                <Image src="/assets/images/icon-content.svg" className="w-full h-full object-cover" alt="icon content" width={60} height={60} />
+                                <Image src="/assets/images/icon-content.svg" className="w-full h-full object-cover" alt="ikona obsah" width={60} height={60} />
                             </div>
                             <div className="space-y-1.5">
-                                <h3 className="text-xl font-semibold dark:text-white">Content Strategy</h3>
-                                <p className="text-lg text-gray">Our design services starts and ends best in class experience.</p>
+                                <h3 className="text-xl font-semibold dark:text-white">Obsahová Stratégia</h3>
+                                <p className="text-lg text-gray">Naše dizajnové služby začínajú a končia najlepším možným zážitkom.</p>
                             </div>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="mb-7 rounded-2xl border-[3px] border-[#9199B5]/10 dark:bg-linear-to-b dark:from-[#002738] dark:to-transparent p-8">
                             <div className="mb-7 w-[60px] h-[60px]">
-                                <Image src="/assets/images/icon-mail.svg" className="w-full h-full object-cover" alt="icon mail" width={60} height={60} />
+                                <Image src="/assets/images/icon-mail.svg" className="w-full h-full object-cover" alt="ikona mail" width={60} height={60} />
                             </div>
                             <div className="space-y-1.5">
                                 <h3 className="text-xl font-semibold dark:text-white">Email Marketing</h3>
-                                <p className="text-lg text-gray">Our design services starts and ends best in class experience.</p>
+                                <p className="text-lg text-gray">Naše dizajnové služby začínajú a končia najlepším možným zážitkom.</p>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -126,36 +126,36 @@ const DigitalServicesSlider = () => {
                                 <Image
                                     src="/assets/images/icon-instagram.svg"
                                     className="w-full h-full object-cover"
-                                    alt="icon instagram"
+                                    alt="ikona instagram"
                                     width={60}
                                     height={60}
                                 />
                             </div>
                             <div className="space-y-1.5">
-                                <h3 className="text-xl font-semibold dark:text-white">Social Media</h3>
-                                <p className="text-lg text-gray">Our design services starts and ends best in class experience.</p>
+                                <h3 className="text-xl font-semibold dark:text-white">Sociálne Médiá</h3>
+                                <p className="text-lg text-gray">Naše dizajnové služby začínajú a končia najlepším možným zážitkom.</p>
                             </div>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="mb-7 rounded-2xl border-[3px] border-[#9199B5]/10 dark:bg-linear-to-b dark:from-[#002738] dark:to-transparent p-8">
                             <div className="mb-7 w-[60px] h-[60px]">
-                                <Image src="/assets/images/icon-fb-ads.svg" className="w-full h-full object-cover" alt="icon fb ads" width={60} height={60} />
+                                <Image src="/assets/images/icon-fb-ads.svg" className="w-full h-full object-cover" alt="ikona fb reklamy" width={60} height={60} />
                             </div>
                             <div className="space-y-1.5">
-                                <h3 className="text-xl font-semibold dark:text-white">Google/FB Ads</h3>
-                                <p className="text-lg text-gray">Our design services starts and ends best in class experience.</p>
+                                <h3 className="text-xl font-semibold dark:text-white">Google/FB Reklamy</h3>
+                                <p className="text-lg text-gray">Naše dizajnové služby začínajú a končia najlepším možným zážitkom.</p>
                             </div>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="mt-7 rounded-2xl border-[3px] border-[#9199B5]/10 dark:bg-linear-to-b dark:from-[#002738] dark:to-transparent p-8">
                             <div className="mb-7 w-[60px] h-[60px]">
-                                <Image src="/assets/images/icon-content.svg" className="w-full h-full object-cover" alt="icon content" width={60} height={60} />
+                                <Image src="/assets/images/icon-content.svg" className="w-full h-full object-cover" alt="ikona obsah" width={60} height={60} />
                             </div>
                             <div className="space-y-1.5">
-                                <h3 className="text-xl font-semibold dark:text-white">Content Strategy</h3>
-                                <p className="text-lg text-gray">Our design services starts and ends best in class experience.</p>
+                                <h3 className="text-xl font-semibold dark:text-white">Obsahová Stratégia</h3>
+                                <p className="text-lg text-gray">Naše dizajnové služby začínajú a končia najlepším možným zážitkom.</p>
                             </div>
                         </div>
                     </SwiperSlide>

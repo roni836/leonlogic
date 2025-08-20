@@ -195,7 +195,7 @@ const page = () => {
                 </div>
             </section>
 
-            <section className="py-12 md:py-16">
+            {/* <section className="py-12 md:py-16">
                 <div className="container">
                     <div className="text-center">
                         <h2 className="text-2xl font-extrabold leading-tight md:text-[40px] max-w-[396px] mx-auto">Spolupracujeme s firmami po
@@ -206,7 +206,7 @@ const page = () => {
                         <AboutUsPartnersSlider />
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* <SpecialistsDevelopers /> */}
 

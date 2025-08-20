@@ -82,7 +82,7 @@ export default function HomeClient() {
                                             <EmailIcon className="h-6 w-6" />
                                         </span>
                                         <input
-                                            type="text"
+                                            type="email"
                                             placeholder="Zadajte váš email a začnite rásť"
                                             className="form-input border-2 border-[#E1E6F5] dark:text-white dark:border-[#9199B5] pe-14 ps-12 placeholder:text-primary dark:placeholder:text-white peer"
                                             required
@@ -260,9 +260,9 @@ export default function HomeClient() {
                     <FAQuestions />
                 </div>
             </section>
-            <section className="py-12 md:py-16">
+            {/* <section className="py-12 md:py-16">
                 <BlogSlider />
-            </section>
+            </section> */}
             <section className="relative bg-[#08544F] py-12">
                 <GetInTouch />
             </section>

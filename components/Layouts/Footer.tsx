@@ -85,12 +85,12 @@ const Footer = () => {
                                 Blog
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link href="/faq" className={`inline-flex p-2 md:p-1.5 ${pathName === '/faq' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                 }`}>
                                 faq
                             </Link>
-                        </li>
+                        </li> */}
                     </ul>
                     <div className="flex flex-col items-center justify-center gap-4 border-t-2 border-white/10 pt-6 lg:flex-row lg:justify-between">
                         <ul className="flex flex-col items-center gap-4 font-semibold text-white md:flex-row lg:gap-7">
@@ -144,7 +144,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="flex flex-col items-center gap-4 text-center font-semibold text-gray dark:text-[#9199B5] md:flex-row md:text-left">
                         <a href="#" className="hover:text-secondary md:order-2 md:ms-auto">
-                            Cookie Policy
+                            Zásady používania súborov cookies
                         </a>
                         <p>
                             <Link href="/terms-and-conditions" className="hover:text-secondary">

@@ -538,17 +538,17 @@ export default function WebsiteAuditModal({
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-primary dark:text-white mb-2">
-          Free Website Audit
+          Bezplatná audit webovej stránky
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          Get a comprehensive analysis of your website`s performance, SEO, and growth opportunities
+          Získajte komplexnú analýzu výkonu vašej webovej stránky, SEO a príležitostí na rast.
         </p>
       </div>
 
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-semibold text-primary dark:text-white mb-2">
-            Website URL *
+            Webová adresa *
           </label>
           <input
             type="text"
@@ -559,19 +559,19 @@ export default function WebsiteAuditModal({
             required
           />
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            Enter your domain (e.g., example.com) - we`ll add https:// automatically
+            Zadajte svoju doménu (napr.example.com) - automaticky pridáme https://
           </p>
         </div>
 
         <div>
           <label className="block text-sm font-semibold text-primary dark:text-white mb-2">
-            Company Name *
+            Názov spoločnosti *
           </label>
           <input
             type="text"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
-            placeholder="Your Company Name"
+            placeholder="Názov vašej spoločnosti"
             className="w-full form-input border-2 border-[#E1E6F5] dark:border-[#9199B5] rounded-xl px-4 py-3 dark:bg-[#112C3C] dark:text-white"
             required
           />
@@ -583,7 +583,7 @@ export default function WebsiteAuditModal({
         disabled={!websiteUrl || !companyName}
         className="w-full btn bg-secondary hover:bg-secondary/80 text-white font-semibold py-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Start Free Audit
+        Začať bezplatnú kontrolu
       </button>
     </div>
   );
@@ -595,10 +595,10 @@ export default function WebsiteAuditModal({
       {/* Header with animated progress */}
       <div className="text-center">
         <h2 className="text-2xl font-bold text-primary dark:text-white mb-2">
-          Analyzing Your Website
+          Analyzovanie vašej webovej stránky
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          We`re running a comprehensive analysis of your website...
+          Robíme komplexnú analýzu vašich webových stránok...
         </p>
 
         {/* Progress Bar */}
@@ -609,7 +609,7 @@ export default function WebsiteAuditModal({
           ></div>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          {currentStep + 1} of {auditSteps.length} steps completed
+          {currentStep + 1} z {auditSteps.length} krokov dokončených
         </p>
       </div>
 
@@ -683,7 +683,7 @@ export default function WebsiteAuditModal({
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
                     <span className="text-sm text-secondary font-medium animate-pulse">
-                      Analyzing...
+                      Analyzovanie...
                     </span>
                   </div>
                 )}
@@ -692,7 +692,7 @@ export default function WebsiteAuditModal({
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span className="text-sm text-green-600 dark:text-green-400 font-medium">
-                      Completed
+                      Dokončené
                     </span>
                   </div>
                 )}
@@ -711,7 +711,7 @@ export default function WebsiteAuditModal({
       <div className="text-center pt-4">
         <div className="inline-flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
           <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
-          <span>Processing your website data<AnimatedDots /></span>
+          <span>Spracovanie údajov z vášho webu<AnimatedDots /></span>
         </div>
       </div>
     </div>
@@ -723,7 +723,7 @@ export default function WebsiteAuditModal({
       return (
         <div className="flex flex-col items-center justify-center min-h-[400px]">
           <div className="w-12 h-12 mb-4 animate-spin border-4 border-secondary border-t-transparent rounded-full"></div>
-          <div className="text-secondary font-semibold">Preparing your results...</div>
+          <div className="text-secondary font-semibold">Pripravujem vaše výsledky...</div>
         </div>
       );
     }
@@ -782,8 +782,8 @@ export default function WebsiteAuditModal({
                 </svg>
               </div>
               <div>
-                <h2 className="text-3xl font-bold">Website Audit Results</h2>
-                <p className="text-white/90 mt-1">Comprehensive analysis of {websiteUrl}</p>
+                <h2 className="text-3xl font-bold">Výsledky auditu webových stránok</h2>
+                <p className="text-white/90 mt-1">Komplexná analýza {websiteUrl}</p>
               </div>
             </div>
             {/* Overall Score Circle - Top Right */}
@@ -801,7 +801,7 @@ export default function WebsiteAuditModal({
                 />
               </div>
               <div className="text-white mt-2">
-                <div className="text-sm font-medium">Overall Score</div>
+                <div className="text-sm font-medium">Celkové hodnotenie</div>
               </div>
             </div>
           </div>
@@ -813,8 +813,8 @@ export default function WebsiteAuditModal({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
               <div>
-                <p className="font-semibold">Critical Issues Found - Action Required</p>
-                <p className="text-white/80 text-sm">Your competitors are likely outperforming you. Don`t lose potential customers!</p>
+                <p className="font-semibold">Kritické problémy nájdené - Vyžaduje sa akcia</p>
+                <p className="text-white/80 text-sm">Vaši konkurenti vás pravdepodobne prekonávajú. Nestrácajte potenciálnych zákazníkov!</p>
               </div>
             </div>
           </div>
@@ -824,10 +824,10 @@ export default function WebsiteAuditModal({
         <div className="p-8">
           {/* CTA Section - Service page button styling */}
           <div className="bg-gradient-to-r from-[#22C55E] to-[#16A34A] rounded-xl p-8 text-center mb-8">
-            <h3 className="text-2xl font-bold text-white mb-3">🚨 Your Website is Costing You Money!</h3>
+            <h3 className="text-2xl font-bold text-white mb-3">🚨 Vaša webová stránka vás stojí peniaze!</h3>
             <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-              Based on our analysis, your current website is likely costing you <span className="font-bold text-[#FBBF24]">$2,000-$5,000+ per month</span> in lost revenue.
-              A professional website could increase your conversions by <span className="font-bold text-[#FBBF24]">300-500%</span>.
+              Na základe našej analýzy vaša súčasná webová stránka pravdepodobne stojí vás<span className="font-bold text-[#FBBF24]">2 000€ - 5 000€ a viac mesačne</span> v stratách na príjmoch.
+              Profesionálna webová stránka by mohla zvýšiť vaše konverzie o <span className="font-bold text-[#FBBF24]">300-500%</span>.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -838,7 +838,7 @@ export default function WebsiteAuditModal({
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
-                Get New Website Quote
+                Získať novú cenovú ponuku na webovú stránku
               </button>
               <button
                 onClick={generatePDF}
@@ -847,7 +847,7 @@ export default function WebsiteAuditModal({
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Download Full Report
+                Stiahnuť celú správu
               </button>
             </div>
           </div>
@@ -869,7 +869,7 @@ export default function WebsiteAuditModal({
               </div>
               <h3 className="font-semibold text-[#112C3C] text-sm">SEO</h3>
               <p className="text-gray-500 text-xs mt-1">
-                {seoData.onPageScore || (seoScore >= 80 ? 'Excellent' : seoScore >= 60 ? 'Good' : seoScore >= 40 ? 'Needs Work' : 'Critical')}
+                {seoData.onPageScore || (seoScore >= 80 ? 'Vynikajúci' : seoScore >= 60 ? 'Dobrý' : seoScore >= 40 ? 'Potrebné opravy' : 'Kritický')}
               </p>
             </div>
 
@@ -886,9 +886,9 @@ export default function WebsiteAuditModal({
                   })}
                 />
               </div>
-              <h3 className="font-semibold text-[#112C3C] text-sm">Performance</h3>
+              <h3 className="font-semibold text-[#112C3C] text-sm">Výkon</h3>
               <p className="text-gray-500 text-xs mt-1">
-                {performanceScore >= 80 ? 'Fast' : performanceScore >= 60 ? 'Good' : performanceScore >= 40 ? 'Slow' : 'Very Slow'}
+                {performanceScore >= 80 ? 'Rýchlo' : performanceScore >= 60 ? 'Dobrý' : performanceScore >= 40 ? 'Pomaly' : 'Veľmi pomaly'}
               </p>
             </div>
 
@@ -905,9 +905,9 @@ export default function WebsiteAuditModal({
                   })}
                 />
               </div>
-              <h3 className="font-semibold text-[#112C3C] text-sm">Usability</h3>
+              <h3 className="font-semibold text-[#112C3C] text-sm">Použiteľnosť</h3>
               <p className="text-gray-500 text-xs mt-1">
-                {usabilityScore >= 80 ? 'Great UX' : usabilityScore >= 60 ? 'Good' : usabilityScore >= 40 ? 'Poor' : 'Critical'}
+                {usabilityScore >= 80 ? 'Skvelé používateľské skúsenosti' : usabilityScore >= 60 ? 'Dobrý' : usabilityScore >= 40 ? 'Chudobný' : 'Kritický'}
               </p>
             </div>
 
@@ -924,9 +924,9 @@ export default function WebsiteAuditModal({
                   })}
                 />
               </div>
-              <h3 className="font-semibold text-[#112C3C] text-sm">Social Media</h3>
+              <h3 className="font-semibold text-[#112C3C] text-sm">Sociálne médiá</h3>
               <p className="text-gray-500 text-xs mt-1">
-                {socialScore >= 80 ? 'Excellent' : socialScore >= 60 ? 'Good' : socialScore >= 40 ? 'Limited' : 'None'}
+                {socialScore >= 80 ? 'Vynikajúci' : socialScore >= 60 ? 'Dobrý' : socialScore >= 40 ? 'Obmedzený' : 'Žiadny'}
               </p>
             </div>
 
@@ -943,9 +943,9 @@ export default function WebsiteAuditModal({
                   })}
                 />
               </div>
-              <h3 className="font-semibold text-[#112C3C] text-sm">Technical</h3>
+              <h3 className="font-semibold text-[#112C3C] text-sm">Technický</h3>
               <p className="text-gray-500 text-xs mt-1">
-                {technicalScore >= 80 ? 'Excellent' : technicalScore >= 60 ? 'Good' : technicalScore >= 40 ? 'Needs Work' : 'Critical'}
+                {technicalScore >= 80 ? 'Vynikajúci' : technicalScore >= 60 ? 'Dobrý' : technicalScore >= 40 ? 'Potrebné opravy' : 'Kritický'}
               </p>
             </div>
           </div>
@@ -954,7 +954,7 @@ export default function WebsiteAuditModal({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             {/* Radar Chart */}
             <div className="bg-white rounded-xl p-6 border-[3px] border-[#9199B5]/10 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg">
-              <h3 className="text-lg font-semibold text-[#112C3C] mb-4">Performance Overview</h3>
+              <h3 className="text-lg font-semibold text-[#112C3C] mb-4">Prehľad výkonu</h3>
               <div className="flex justify-center">
                 <div className="w-[500px] h-[500px]">
                   <Radar data={chartData} options={chartOptions} />
@@ -964,7 +964,7 @@ export default function WebsiteAuditModal({
 
             {/* Key Issues */}
             <div className="bg-white rounded-xl p-6 border-[3px] border-[#9199B5]/10 hover:border-[#22C55E] transition-all duration-300 hover:shadow-lg">
-              <h3 className="text-lg font-semibold text-[#112C3C] mb-4">🚨 Critical Issues Found</h3>
+              <h3 className="text-lg font-semibold text-[#112C3C] mb-4">🚨 Zistené kritické problémy</h3>
               <div className="space-y-3">
                 {usabilityScore < 50 && (
                   <div className="flex items-start p-4 bg-red-100 rounded-lg border-l-4 border-red-500 shadow-sm">
@@ -974,8 +974,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-red-800 text-sm">🚨 CRITICAL: Poor User Experience</p>
-                      <p className="text-red-700 text-xs mt-1">{100 - usabilityScore}% of visitors likely leave due to poor UX - You`re losing customers!</p>
+                      <p className="font-bold text-red-800 text-sm">🚨 Kritické: Nízka používateľská skúsenosť</p>
+                      <p className="text-red-700 text-xs mt-1">{100 - usabilityScore}% návštevníkov pravdepodobne odíde kvôli zlému používateľskému zážitku - prichádzate o zákazníkov!</p>
                     </div>
                   </div>
                 )}
@@ -988,8 +988,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-orange-800 text-sm">⚠️ WARNING: Slow Loading Speed</p>
-                      <p className="text-orange-700 text-xs mt-1">Page takes {performanceScore < 50 ? '5+ seconds' : '3+ seconds'} to load - Customers are leaving!</p>
+                      <p className="font-bold text-orange-800 text-sm">⚠️ UPOZORNENIE: Pomalá rýchlosť načítania</p>
+                      <p className="text-orange-700 text-xs mt-1">Stránka trvá {performanceScore < 50 ? '5+ seconds' : '3+ seconds'} na načítanie - Zákazníci odchádzajú!</p>
                     </div>
                   </div>
                 )}
@@ -1002,8 +1002,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-yellow-800 text-sm">🔍 ALERT: Missing SEO Elements</p>
-                      <p className="text-yellow-700 text-xs mt-1">Not ranking for key terms - Missing organic traffic and leads!</p>
+                      <p className="font-bold text-yellow-800 text-sm">🔍 UPOZORNENIE: Chýbajúce SEO elementy</p>
+                      <p className="text-yellow-700 text-xs mt-1">Nerankuje pre kľúčové slová - chýbajúci organický traffic a potenciálni zákazníci!</p>
                     </div>
                   </div>
                 )}
@@ -1016,8 +1016,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-purple-800 text-sm">📱 URGENT: Poor Mobile Experience</p>
-                      <p className="text-purple-700 text-xs mt-1">60%+ of your traffic is mobile - Site not optimized for mobile users!</p>
+                      <p className="font-bold text-purple-800 text-sm">📱 NALIEHAVÉ: Slabý mobilný zážitok</p>
+                      <p className="text-purple-700 text-xs mt-1">Viac ako 60 % vašej návštevnosti pochádza z mobilných zariadení - Web nie je optimalizovaný pre mobilných používateľov!</p>
                     </div>
                   </div>
                 )}
@@ -1030,8 +1030,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-indigo-800 text-sm">💥 CRISIS: Weak Call-to-Actions</p>
-                      <p className="text-indigo-700 text-xs mt-1">Visitors don`t know what to do next - Low conversions killing your business!</p>
+                      <p className="font-bold text-indigo-800 text-sm">💥 KRÍZA: Slabé výzvy k akcii</p>
+                      <p className="text-indigo-700 text-xs mt-1">Návštevníci nevedia, čo robiť ďalej - Nízke konverzie zabíjajú váš biznis!</p>
                     </div>
                   </div>
                 )}
@@ -1044,8 +1044,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-pink-800 text-sm">💀 DISASTER: Outdated Design</p>
-                      <p className="text-pink-700 text-xs mt-1">Website looks {new Date().getFullYear() - 3}+ years old - Trust issues destroying credibility!</p>
+                      <p className="font-bold text-pink-800 text-sm">💀 KATASTROFA: Zastaralý dizajn</p>
+                      <p className="text-pink-700 text-xs mt-1">Webstránka vyzerá {new Date().getFullYear() - 3}+ roky - Problémy s dôverou ničia dôveryhodnosť!</p>
                     </div>
                   </div>
                 )}
@@ -1058,8 +1058,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-teal-800 text-sm">🔧 CRITICAL: Technical Issues</p>
-                      <p className="text-teal-700 text-xs mt-1">Missing schema markup, poor structure - Search engines can`t understand your site!</p>
+                      <p className="font-bold text-teal-800 text-sm">🔧 KRITICKÉ: Technické problémy</p>
+                      <p className="text-teal-700 text-xs mt-1">Chýbajúce schéma značkovania, slabá štruktúra - Vyhľadávače nerozumejú vášmu webu!</p>
                     </div>
                   </div>
                 )}
@@ -1072,8 +1072,8 @@ export default function WebsiteAuditModal({
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-red-800 text-sm">💸 EMERGENCY: Revenue Impact</p>
-                      <p className="text-red-700 text-xs mt-1">These issues are costing you customers and revenue DAILY - Action required NOW!</p>
+                      <p className="font-bold text-red-800 text-sm">💸 NÚDZOVÁ SITUÁCIA: Dopad na príjmy</p>
+                      <p className="text-red-700 text-xs mt-1">Tieto problémy vás dennodenne prichádzajú o zákazníkov a príjmy - Akcia je teraz potrebná!</p>
                     </div>
                   </div>
                 )}
@@ -1089,35 +1089,35 @@ export default function WebsiteAuditModal({
                 <svg className="w-5 h-5 mr-2 text-[#22C55E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Content Analysis
+                Analýza obsahu
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Word Count:</span>
-                  <span className="font-semibold text-[#112C3C]">{seoData.wordCount || 0} words</span>
+                  <span className="text-sm text-gray-600">Počet slov:</span>
+                  <span className="font-semibold text-[#112C3C]">{seoData.wordCount || 0} slová</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Content Quality:</span>
-                  <span className={`font-semibold ${seoData.contentQuality === 'Excellent' ? 'text-green-600' : seoData.contentQuality === 'Good' ? 'text-blue-600' : 'text-orange-600'}`}>
-                    {seoData.contentQuality || 'Good'}
+                  <span className="text-sm text-gray-600">Kvalita obsahu:</span>
+                  <span className={`font-semibold ${seoData.contentQuality === 'Vynikajúci' ? 'text-green-600' : seoData.contentQuality === 'Dobrý' ? 'text-blue-600' : 'text-orange-600'}`}>
+                    {seoData.contentQuality || 'Dobrý'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">H1 Tags:</span>
+                  <span className="text-sm text-gray-600">H1 značky:</span>
                   <span className="font-semibold text-[#112C3C]">{seoData.h1Count || 0}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">H2 Tags:</span>
+                  <span className="text-sm text-gray-600">H2 značky:</span>
                   <span className="font-semibold text-[#112C3C]">{seoData.h2Count || 0}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Images with Alt:</span>
+                  <span className="text-sm text-gray-600">Obrázky s Alt:</span>
                   <span className="font-semibold text-[#112C3C]">{seoData.imagesWithAlt || 0}/{seoData.imageCount || 0}</span>
                 </div>
                 {seoData.thinContent && (
                   <div className="bg-red-50 border-l-4 border-red-500 p-3 rounded">
-                    <p className="text-red-800 text-sm font-semibold">⚠️ Thin Content Detected</p>
-                    <p className="text-red-700 text-xs">Content is too short for good SEO performance</p>
+                    <p className="text-red-800 text-sm font-semibold">⚠️ Zistený tenký obsah</p>
+                    <p className="text-red-700 text-xs">Obsah je príliš krátky na dobrý výkon SEO.</p>
                   </div>
                 )}
               </div>
@@ -1129,43 +1129,43 @@ export default function WebsiteAuditModal({
                 <svg className="w-5 h-5 mr-2 text-[#3B82F6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
-                Technical SEO
+                Technické SEO
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">SSL Certificate:</span>
                   <span className={`font-semibold ${seoData.hasSSL ? 'text-green-600' : 'text-red-600'}`}>
-                    {seoData.hasSSL ? '✅ Secure' : '❌ Missing'}
+                    {seoData.hasSSL ? '✅ Bezpečný' : '❌ Chýba'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Robots.txt:</span>
                   <span className={`font-semibold ${seoData.hasRobotsTxt ? 'text-green-600' : 'text-red-600'}`}>
-                    {seoData.hasRobotsTxt ? '✅ Found' : '❌ Missing'}
+                    {seoData.hasRobotsTxt ? '✅ Nájdené' : '❌ Chýba'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">XML Sitemap:</span>
                   <span className={`font-semibold ${seoData.hasSitemap ? 'text-green-600' : 'text-red-600'}`}>
-                    {seoData.hasSitemap ? '✅ Found' : '❌ Missing'}
+                    {seoData.hasSitemap ? '✅ Nájdené' : '❌ Chýba'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Schema Markup:</span>
                   <span className={`font-semibold ${seoData.hasSchema ? 'text-green-600' : 'text-red-600'}`}>
-                    {seoData.hasSchema ? `✅ ${seoData.schemaQuality}` : '❌ Missing'}
+                    {seoData.hasSchema ? `✅ ${seoData.schemaQuality}` : '❌ Chýba'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Open Graph:</span>
                   <span className={`font-semibold ${seoData.hasOpenGraph ? 'text-green-600' : 'text-red-600'}`}>
-                    {seoData.hasOpenGraph ? '✅ Found' : '❌ Missing'}
+                    {seoData.hasOpenGraph ? '✅ Nájdené' : '❌ Chýba'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Favicon:</span>
                   <span className={`font-semibold ${seoData.hasFavicon ? 'text-green-600' : 'text-red-600'}`}>
-                    {seoData.hasFavicon ? '✅ Found' : '❌ Missing'}
+                    {seoData.hasFavicon ? '✅ Nájdené' : '❌ Chýba'}
                   </span>
                 </div>
               </div>
@@ -1180,7 +1180,7 @@ export default function WebsiteAuditModal({
                 <svg className="w-5 h-5 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
-                Critical Issues ({seoData.issues?.length || 0})
+                Kritické otázky ({seoData.issues?.length || 0})
               </h3>
               <div className="space-y-2 max-h-64 overflow-y-auto">
                 {seoData.issues && seoData.issues.length > 0 ? (
@@ -1197,7 +1197,7 @@ export default function WebsiteAuditModal({
                     <svg className="w-8 h-8 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <p className="font-semibold">No Critical Issues Found!</p>
+                    <p className="font-semibold">Neboli nájdené žiadne kritické problémy!</p>
                   </div>
                 )}
               </div>
@@ -1209,7 +1209,7 @@ export default function WebsiteAuditModal({
                 <svg className="w-5 h-5 mr-2 text-[#22C55E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
-                Recommendations ({seoData.recommendations?.length || 0})
+                Odporúčania ({seoData.recommendations?.length || 0})
               </h3>
               <div className="space-y-2 max-h-64 overflow-y-auto">
                 {seoData.recommendations && seoData.recommendations.length > 0 ? (
@@ -1223,7 +1223,7 @@ export default function WebsiteAuditModal({
                   ))
                 ) : (
                   <div className="text-center py-4 text-gray-500">
-                    <p>No recommendations available</p>
+                    <p>Žiadne odporúčania nie sú k dispozícii.</p>
                   </div>
                 )}
               </div>
@@ -1242,7 +1242,7 @@ export default function WebsiteAuditModal({
                 <svg className="w-5 h-5 mr-2 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
-                Technology Stack
+                Technologický stack
               </h3>
               <div className="flex flex-wrap gap-2">
                 {seoData.technologyStack.map((tech: string, index: number) => (
@@ -1253,8 +1253,8 @@ export default function WebsiteAuditModal({
               </div>
               {seoData.cdnDetected && (
                 <div className="mt-4 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                  <p className="text-blue-800 text-sm font-semibold">✅ CDN Detected</p>
-                  <p className="text-blue-700 text-xs">Your site uses a Content Delivery Network for better performance</p>
+                  <p className="text-blue-800 text-sm font-semibold">✅ CDN zistený</p>
+                  <p className="text-blue-700 text-xs">Váš web používa sieť na doručovanie obsahu pre lepší výkon.</p>
                 </div>
               )}
             </div>

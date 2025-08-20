@@ -36,10 +36,10 @@ const page = () => {
                         data-aos="zoom-in"
                         data-aos-duration="1000"
                     >
-                        News and insights <span className="text-secondary">from our exert</span>
+                        Správy a poznatky od <span className="text-secondary">našich odborníkov</span>
                     </h1>
                     <p className="text-lg text-[#4B5576] dark:text-[#9199B5] mt-5 max-w-[582px] mx-auto text-center">
-                        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.
+                    Od nových technológií po bežné najlepšie praktiky, poskytujeme odborné znalosti, praktické tipy a zamyslené komentáre prispôsobené pre váš rast a úspech.
                     </p>
                 </div>
             </section>

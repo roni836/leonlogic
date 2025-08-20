@@ -15,63 +15,63 @@ interface Step {
 
 const steps: Step[] = [
   {
-    title: 'What kind of website do you need?',
+    title: 'Aký druh webovej stránky potrebujete?',
     options: [
-      { label: 'Portfolio Website', description: 'Showcase your business.', price: 2500 },
-      { label: 'E-Commerce', description: 'Product management and online ordering', price: 1500 },
-      { label: 'E-Learning', description: 'Sell your knowledge with video courses.', price: 1200 },
-      { label: 'Online Booking', description: 'Ideal for accommodations, transportation or restaurants.', price: 1500 },
+      { label: 'Portfólio webstránka', description: 'Predstavte svoju firmu.', price: 2500 },
+      { label: 'E-Commerce', description: 'Správa produktov a online objednávky', price: 1500 },
+      { label: 'E-Learning', description: 'Predávajte svoje vedomosti pomocou video kurzov.', price: 1200 },
+      { label: 'Online Rezervácia', description: 'Ideálne pre ubytovanie, dopravu alebo reštaurácie.', price: 1500 },
     ],
   },
   {
-    title: 'How many pages do you need?',
+    title: 'Koľko stránok potrebujete?',
     options: [
-      { label: 'Landing Page', description: 'All content on one page.', price: 1200 },
-      { label: '0-5 Pages', description: 'Home page with up to 4 additional subpages.', price: 1500 },
-      { label: '0-10 Pages', description: 'Home page with up to 9 additional subpages.', price: 2000 },
+      { label: 'Landing Page', description: 'Všetok obsah na jednej stránke.', price: 1200 },
+      { label: '0-5 stránok', description: 'Domovská stránka + max. 4 podstránky.', price: 1500 },
+      { label: '0-10 stránok', description: 'Domovská stránka + max. 9 podstránok.', price: 2000 },
     ],
   },
   {
-    title: 'Select the features to be added',
+    title: 'Vyberte funkcie, ktoré chcete pridať',
     options: [
-      { label: 'Google Analytics', description: 'Track website traffic and performance.', price: 300 },
-      { label: 'Multi-language', description: 'Switch between languages. (translations not included)', price: 500 },
-      { label: 'Online Chat Box', description: 'Allow visitors to chat directly from your website.', price: 400 },
-      { label: 'Search Field', description: 'Quickly find pages, posts or products.' },
-      { label: 'Contact Form', description: 'Simple name, phone, email and message entry form.', price: 200 },
-      { label: 'Advanced Form', description: 'Form with special fields or features.', price: 400 },
+      { label: 'Google Analytics', description: 'Sledujte návštevnosť a výkon webu.', price: 300 },
+      { label: 'Viacjazyčnosť', description: 'Prepínanie medzi jazykmi. (preklady nie sú zahrnuté)', price: 500 },
+      { label: 'Online Chat Box', description: 'Umožnite návštevníkom chatovať priamo z webu.', price: 400 },
+      { label: 'Vyhľadávacie pole', description: 'Rýchle nájdenie stránok, príspevkov alebo produktov.' },
+      { label: 'Kontaktný formulár', description: 'Jednoduchý formulár: meno, telefón, email a správa.', price: 200 },
+      { label: 'Pokročilý formulár', description: 'Formulár so špeciálnymi poľami alebo funkciami.', price: 400 },
     ],
   },
   {
-    title: 'Get better Google search results',
+    title: 'Zlepšite výsledky vo vyhľadávaní Google',
     options: [
-      { label: 'Homepage SEO', description: 'Improves search rankings for homepage.', price: 300 },
-      { label: 'I don\'t need this service', description: 'Your website will not be easily searchable in Google.', price: 1500 },
+      { label: 'SEO pre domovskú stránku', description: 'Zlepšuje pozície vo vyhľadávaní pre hlavnú stránku.', price: 300 },
+      { label: 'Túto službu nepotrebujem', description: 'Vaša webstránka nebude jednoducho vyhľadateľná v Google.', price: 1500 },
     ],
   },
   {
-    title: 'You will probably need these...',
+    title: 'Pravdepodobne budete potrebovať aj toto...',
     options: [
-      { label: 'Privacy Policy', description: 'Ensures that user data is protected.', price: 200 },
-      { label: 'Cookie Policy', description: 'Tracks user preferences and browsing behavior.', price: 200 },
+      { label: 'Zásady ochrany osobných údajov', description: 'Zabezpečuje ochranu používateľských údajov.', price: 200 },
+      { label: 'Zásady používania cookies', description: 'Sleduje preferencie používateľov a správanie pri prehliadaní.', price: 200 },
     ],
   },
   {
-    title: 'When would you like to launch?',
+    title: 'Kedy by ste chceli spustiť webstránku?',
     options: [
-      { label: 'Delivery in 4-8 weeks', description: 'Standard delivery.', price: 100 },
-      { label: 'Delivery in 3-4 weeks', description: 'Expedited delivery.', price: 300 },
-      { label: 'Delivery in 1-2 weeks', description: 'Express delivery.', price: 500 },
+      { label: 'Dodanie za 4-8 týždňov', description: 'Štandardné dodanie.', price: 100 },
+      { label: 'Dodanie za 3-4 týždne', description: 'Zrýchlené dodanie.', price: 300 },
+      { label: 'Dodanie za 1-2 týždne', description: 'Expresné dodanie.', price: 500 },
     ],
   },
 ];
 
 const ecommerceAddons = [
-  { label: 'Card Pay', description: 'Secure, fast and easy way to pay online.', price: 300 },
-  { label: 'PDF Invoices', description: 'Automatically generate invoices for purchase orders.', price: 200 },
-  { label: 'Multicurrency Switcher', description: 'Change currency for global transactions.', price: 250 },
-  { label: 'Stock Manager', description: 'Easily manage product inventory.', price: 400 },
-  { label: 'Shipping', description: 'Customers can choose between DPD, Packeta or GLS.', price: 300 },
+  { label: 'Platba kartou', description: 'Bezpečný, rýchly a jednoduchý spôsob platby online.', price: 300 },
+  { label: 'PDF Faktúry', description: 'Automaticky generuje faktúry pre objednávky.', price: 200 },
+  { label: 'Prepínač mien', description: 'Možnosť zmeniť menu pre globálne transakcie.', price: 250 },
+  { label: 'Správca zásob', description: 'Jednoduchá správa skladových zásob.', price: 400 },
+  { label: 'Doprava', description: 'Zákazníci si môžu vybrať medzi DPD, Packeta alebo GLS.', price: 300 },
 ];
 
 export default function CalculatorModal({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -142,7 +142,7 @@ export default function CalculatorModal({ open, onClose }: { open: boolean; onCl
                 {/* Show add-ons if E-Commerce, E-Learning, or Online Booking is selected */}
                 {step === 0 && [1, 2, 3].includes(selected[0]) && (
                   <div className="mt-8">
-                    <h3 className="text-lg font-bold mb-4 text-primary dark:text-white">Choose add-ons for your online store</h3>
+                    <h3 className="text-lg font-bold mb-4 text-primary dark:text-white">Vyberte si doplnky pre svoj online obchod</h3>
                     <div className="flex flex-col gap-4">
                       {ecommerceAddons.map((addon, idx) => (
                         <label
@@ -174,31 +174,31 @@ export default function CalculatorModal({ open, onClose }: { open: boolean; onCl
               <div className="absolute left-0 bottom-0 w-full bg-white dark:bg-primary/80 rounded-b-3xl px-8 py-8 flex items-center justify-between shadow-[0_-2px_16px_0_rgba(0,0,0,0.04)] border-t border-[#e5e7eb] dark:border-[#9199B5]/20 z-20">
                 {step > 0 ? (
                   <button onClick={prevStep} disabled={step === 0} className="btn bg-gray-200 dark:bg-primary/30 text-primary dark:text-white font-semibold disabled:opacity-50">
-                    Back
+                    Späť
                   </button>
                 ) : <div />}
                 <div className="text-right">
-                  <div className="text-gray-500 text-sm mb-1">Estimated price (excl. VAT)</div>
+                  <div className="text-gray-500 text-sm mb-1">Odhadovaná cena (bez DPH)</div>
                   <div className="text-3xl font-bold text-primary dark:text-white">{price.toLocaleString('en-US')} €</div>
                 </div>
                 <button onClick={nextStep} className="btn">
-                  {step === steps.length - 1 ? 'Last Step' : 'Continue'}
+                  {step === steps.length - 1 ? 'Posledný krok' : 'Pokračovať'}
                 </button>
               </div>
             </>
           ) : (
             <form className="flex flex-col gap-4 mt-4">
-              <h2 className="text-2xl font-bold mb-2 text-primary dark:text-white">Get your free quote</h2>
-              <input className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" placeholder="Name *" required />
-              <input className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" placeholder="Company" />
+              <h2 className="text-2xl font-bold mb-2 text-primary dark:text-white">Získajte svoju bezplatnú cenovú ponuku</h2>
+              <input className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" placeholder="Meno *" required />
+              <input className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" placeholder="Spoločnosť" />
               <input className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" placeholder="Email *" required type="email" />
-              <input className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" placeholder="Phone" />
-              <textarea className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5 min-h-[100px]" placeholder="Message" />
+              <input className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5" placeholder="Telefón" />
+              <textarea className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5 min-h-[100px]" placeholder="Správa" />
               <label className="flex items-center gap-2 text-sm mt-2">
                 <input type="checkbox" required className="accent-secondary" />
-                Yes, I agree to the <Link href="/privacy-policy" className="underline text-secondary">Privacy Policy</Link>.
+                Áno, súhlasím s <Link href="/privacy-policy" className="underline text-secondary">Zásady ochrany osobných údajov</Link>.
               </label>
-              <button type="submit" className="btn w-full sm:w-auto sm:px-20 mt-5">Send Now</button>
+              <button type="submit" className="btn w-full sm:w-auto sm:px-20 mt-5">Odoslať teraz</button>
             </form>
           )}
           {/* Modal content ends here */}
