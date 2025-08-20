@@ -82,7 +82,7 @@ export default function HomeClient() {
                                             <EmailIcon className="h-6 w-6" />
                                         </span>
                                         <input
-                                            type="email"
+                                            type="text"
                                             placeholder="Zadajte váš email a začnite rásť"
                                             className="form-input border-2 border-[#E1E6F5] dark:text-white dark:border-[#9199B5] pe-14 ps-12 placeholder:text-primary dark:placeholder:text-white peer"
                                             required
