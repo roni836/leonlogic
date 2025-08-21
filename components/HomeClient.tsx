@@ -117,7 +117,7 @@ export default function HomeClient() {
                             />
                         </div>
                     </div>
-                    <div className="absolute -bottom-[170px] start-4 w-full max-w-xs rotate-2 rtl:-rotate-2 bg-success px-8 py-4 text-center md:-bottom-[200px] md:start-0 md:left-0 md:max-w-2xl md:px-32 lg:max-w-4xl 2xl:max-w-6xl">
+                    <div className="absolute -bottom-[170px] start-4 w-full max-w-md rotate-2 rtl:-rotate-2 bg-success px-8 py-4 text-center md:-bottom-[200px] md:start-0 md:left-0 md:max-w-2xl md:px-32 lg:max-w-4xl 2xl:max-w-6xl">
                         <Image
                             src="/assets/images/subtract.svg"
                             className="absolute -start-6 -top-7 z-1 max-w-[60px] md:-start-12 rtl:rotate-y-180 md:-top-16 md:max-w-none block dark:hidden"
