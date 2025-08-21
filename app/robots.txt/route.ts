@@ -1,10 +1,11 @@
-const URL = process.env.NEXT_PUBLIC_APP_URL || '';
+// const URL = process.env.NEXT_PUBLIC_APP_URL || '';
 
 function generateSiteMap(): string {
     return `User-agent: *
 Disallow:
 
-Sitemap: ${URL}/sitemap.xml`;
+Sitemap: https://leonlogic.com/sitemap.xml`;
+
 }
 
 export function GET(): Response {
