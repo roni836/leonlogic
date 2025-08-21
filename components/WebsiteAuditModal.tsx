@@ -110,43 +110,43 @@ export default function WebsiteAuditModal({
   const auditSteps: AuditStep[] = [
     {
       id: 1,
-      title: 'SEO Analysis',
-      description: 'Checking on-page SEO, meta tags, and search visibility',
+      title: 'Analýza SEO',
+      description: 'Kontrola on-page SEO, meta značiek a viditeľnosti vo vyhľadávaní',
       icon: <SearchIcon className="w-6 h-6" />,
       status: 'pending'
     },
     {
       id: 2,
-      title: 'Performance Check',
-      description: 'Analyzing page speed and Core Web Vitals',
+      title: 'Kontrola výkonu',
+      description: 'Analýza rýchlosti stránok a ukazovateľov Core Web Vitals',
       icon: <ThunderIcon className="w-6 h-6" />,
       status: 'pending'
     },
     {
       id: 3,
-      title: 'Mobile Optimization',
-      description: 'Testing mobile responsiveness and usability',
+      title: 'Mobilná optimalizácia',
+      description: 'Testovanie responzívnosti a používateľnosti na mobiloch',
       icon: <MobileAppIcon className="w-6 h-6" />,
       status: 'pending'
     },
     {
       id: 4,
-      title: 'User Experience',
-      description: 'Evaluating design, navigation, and conversion elements',
+      title: 'Používateľská skúsenosť',
+      description: 'Hodnotenie dizajnu, navigácie a konverzných prvkov',
       icon: <UiUxIcon className="w-6 h-6" />,
       status: 'pending'
     },
     {
       id: 5,
-      title: 'Technical Health',
-      description: 'Checking security, SSL, and technical infrastructure',
+      title: 'Technický stav',
+      description: 'Kontrola zabezpečenia, SSL a technickej infraštruktúry',
       icon: <ComputerIcon className="w-6 h-6" />,
       status: 'pending'
     },
     {
       id: 6,
-      title: 'Social Media Presence',
-      description: 'Analyzing social media integration and presence',
+      title: 'Prítomnosť na sociálnych sieťach',
+      description: 'Analýza integrácie a prítomnosti na sociálnych sieťach',
       icon: <GrowthIcon className="w-6 h-6" />,
       status: 'pending'
     }
