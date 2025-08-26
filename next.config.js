@@ -1,8 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-     images: {
-    domains: ['ustjsbjycfrgbgjtyljg.supabase.co'], // 👈 Add your Supabase domain here
-  },
-}
+  trailingSlash: false,
 
-module.exports = nextConfig
+  images: {
+    domains: ["ustjsbjycfrgbgjtyljg.supabase.co"], // Supabase domain
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "alt.leonlogic.com" }],
+        destination: "https://www.leonlogic.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;

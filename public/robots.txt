@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+
+# Host
+Host: https://www.leonlogic.com
+
+# Sitemaps
+Sitemap: https://www.leonlogic.com/sitemap.xml
