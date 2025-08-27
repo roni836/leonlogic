@@ -56,7 +56,7 @@ const Footer = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/service" className={`inline-flex p-2 md:p-1.5 ${pathName === '/service' || pathName === '/services-detail' ? 'text-secondary font-bold' : 'hover:text-secondary'
+                            <Link href="/sluzby" className={`inline-flex p-2 md:p-1.5 ${pathName === '/sluzby' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                 }`}>
                                 Služby
                             </Link>
@@ -68,13 +68,13 @@ const Footer = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/about-us" className={`inline-flex p-2 md:p-1.5 ${pathName === '/about-us' ? 'text-secondary font-bold' : 'hover:text-secondary'
+                            <Link href="/o-nas" className={`inline-flex p-2 md:p-1.5 ${pathName === '/o-nas' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                 }`}>
                                 O nás
                             </Link>
                         </li>
                         <li>
-                            <Link href="/contact-us" className={`inline-flex p-2 md:p-1.5 ${pathName === '/contact-us' ? 'text-secondary font-bold' : 'hover:text-secondary'
+                            <Link href="/kontakt" className={`inline-flex p-2 md:p-1.5 ${pathName === '/kontakt' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                 }`}>
                                 Kontakt
                             </Link>

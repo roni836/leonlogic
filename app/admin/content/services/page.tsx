@@ -289,7 +289,7 @@ function ServiceForm({ service, onSave, onCancel }: ServiceFormProps) {
                 value={formData.link_url}
                 onChange={(e) => setFormData({ ...formData, link_url: e.target.value })}
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
-                placeholder="/services-detail"
+                                                placeholder="/sluzby"
               />
             </div>
             <div>

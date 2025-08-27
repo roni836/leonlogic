@@ -173,7 +173,7 @@ export default function HomeClient() {
                             </p>
 
                             <Link
-                                href="/contact-us"
+                                href="/kontakt"
                                 className="inline-flex items-center gap-2.5 rounded-2xl bg-secondary px-5 py-4 font-bold uppercase duration-500 hover:bg-white dark:text-black"
                             >
                                 ZAČAŤ SPOLUPRÁCU

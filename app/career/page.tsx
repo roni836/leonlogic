@@ -155,7 +155,7 @@ const page = () => {
                             </p>
                         </div>
                         <div>
-                            <Link href="/contact-us" className="btn mt-5">
+                            <Link href="/kontakt" className="btn mt-5">
                                 Apply for job
                             </Link>
                         </div>

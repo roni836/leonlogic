@@ -12,7 +12,7 @@ const GetInTouch = () => {
                 </h2>
                 
                 <Link
-                    href="/contact-us"
+                    href="/kontakt"
                     className="bg-white rounded-[70px] uppercase text-success py-4 px-[30px] font-bold hover:bg-black hover:text-white duration-200 inline-flex"
                 >
                     KONTAKTOVAŤ NÁS

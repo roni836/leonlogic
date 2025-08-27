@@ -12,26 +12,26 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/libs/supabase';
 
 
-// export const metadata: Metadata = {
-//     title: 'Service | Leonlogic',
-//     description: 'Tailwind CSS Multipurpose Landing Templates',
-//     openGraph: {
-//         ...helper.openGraphData,
-//         title: 'Service | Leonlogic',
-//         description: 'Tailwind CSS Multipurpose Landing Templates',
-//         url: process.env.NEXT_PUBLIC_APP_URL + '/service',
-//         type: 'website',
-//     },
-//     twitter: {
-//         ...helper.twitterData,
-//         title: 'Service | Leonlogic',
-//         description: 'Tailwind CSS Multipurpose Landing Templates',
-//     },
-//     alternates: {
-//         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/service`,
-//         languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/service` },
-//     },
-// };
+export const metadata: Metadata = {
+    title: 'Služby | Leonlogic',
+    description: 'Tailwind CSS Multipurpose Landing Templates',
+    openGraph: {
+        ...helper.openGraphData,
+        title: 'Služby | Leonlogic',
+        description: 'Tailwind CSS Multipurpose Landing Templates',
+        url: process.env.NEXT_PUBLIC_APP_URL + '/sluzby',
+        type: 'website',
+    },
+    twitter: {
+        ...helper.twitterData,
+        title: 'Služby | Leonlogic',
+        description: 'Tailwind CSS Multipurpose Landing Templates',
+    },
+    alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_APP_URL}/sluzby`,
+        languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/sluzby` },
+    },
+};
 interface ServiceCategory {
     id: string;
     title: string;

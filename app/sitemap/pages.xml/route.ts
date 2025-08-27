@@ -9,11 +9,11 @@ function generateSiteMap(): string {
         <lastmod>${lastMod}</lastmod>
     </url>
     <url>
-        <loc>${URL}/service</loc>
+        <loc>${URL}/sluzby</loc>
         <lastmod>${lastMod}</lastmod>
     </url>
     <url>
-        <loc>${URL}/services-detail</loc>
+        <loc>${URL}/sluzby</loc>
         <lastmod>${lastMod}</lastmod>
     </url>
     <url>
@@ -25,7 +25,7 @@ function generateSiteMap(): string {
         <lastmod>${lastMod}</lastmod>
     </url>
     <url>
-        <loc>${URL}/about-us</loc>
+        <loc>${URL}/o-nas</loc>
         <lastmod>${lastMod}</lastmod>
     </url>
     <url>
@@ -33,7 +33,7 @@ function generateSiteMap(): string {
         <lastmod>${lastMod}</lastmod>
     </url>
     <url>
-        <loc>${URL}/contact-us</loc>
+        <loc>${URL}/kontakt</loc>
         <lastmod>${lastMod}</lastmod>
     </url>
     <url>

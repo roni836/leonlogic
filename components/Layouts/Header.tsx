@@ -215,7 +215,7 @@ const Header = () => {
                             >
                                 <button
                                     type="button"
-                                    className={`inline-flex px-1.5 py-4 lg:py-8 w-full items-center gap-1 ${pathName === '/service' || pathName === '/services-detail' ? 'text-secondary font-bold' : 'hover:text-secondary'}`}
+                                    className={`inline-flex px-1.5 py-4 lg:py-8 w-full items-center gap-1 ${pathName === '/sluzby' ? 'text-secondary font-bold' : 'hover:text-secondary'}`}
                                     onClick={() => setMobileServiceOpen((v) => !v)}
                                     aria-haspopup="true"
                                     aria-expanded={mobileServiceOpen}
@@ -258,8 +258,8 @@ const Header = () => {
                             </li>
                             <li onClick={toggleMenu}>
                                 <Link
-                                    href="/about-us"
-                                    className={`inline-flex px-1.5 py-4 lg:py-8 w-full ${pathName === '/about-us' ? 'text-secondary font-bold' : 'hover:text-secondary'
+                                    href="/o-nas"
+                                    className={`inline-flex px-1.5 py-4 lg:py-8 w-full ${pathName === '/o-nas' ? 'text-secondary font-bold' : 'hover:text-secondary'
                                         }`}
                                 >
                                     O nás

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         ...helper.openGraphData,
         title: 'About-Us | Leonlogic',
         description: 'Tailwind CSS Multipurpose Landing Templates',
-        url: process.env.NEXT_PUBLIC_APP_URL + '/about-us',
+        url: process.env.NEXT_PUBLIC_APP_URL + '/o-nas',
         type: 'website',
     },
     twitter: {
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
         description: 'Tailwind CSS Multipurpose Landing Templates',
     },
     alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_APP_URL}/about-us`,
-        languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/about-us` },
+        canonical: `${process.env.NEXT_PUBLIC_APP_URL}/o-nas`,
+        languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/o-nas` },
     },
 };
 
