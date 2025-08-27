@@ -66,8 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     }}
                 />
                 <meta name="robots" content="index, follow" />
+                <meta name="google-site-verification" content="h6lA2UBfs2cKyOhvGovNc9yLBqYnoNuA1rDh_iKnCtQ" />
                 {/* Meta Pixel (loads after hydration) */}
-        <Script id="fb-pixel" strategy="afterInteractive">{`
+                <Script id="fb-pixel" strategy="afterInteractive">{`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -81,31 +82,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           fbq('track', 'Lead');
         `}</Script>
 
-        {/* Google tag (gtag.js) */}
-        <Script
-          id="ga-lib"
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-49323CGTLX`}
-        />
-        <Script id="ga-init" strategy="afterInteractive">
-          {`
+                {/* Google tag (gtag.js) */}
+                <Script
+                    id="ga-lib"
+                    strategy="afterInteractive"
+                    src={`https://www.googletagmanager.com/gtag/js?id=G-49323CGTLX`}
+                />
+                <Script id="ga-init" strategy="afterInteractive">
+                    {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-49323CGTLX');
           `}
-        </Script>
+                </Script>
             </head>
             <body>
-                 <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src={`https://www.facebook.com/tr?id=1745661109653565&ev=PageView&noscript=1`}
-            alt=""
-          />
-        </noscript>
+                <noscript>
+                    <img
+                        height="1"
+                        width="1"
+                        style={{ display: 'none' }}
+                        src={`https://www.facebook.com/tr?id=1745661109653565&ev=PageView&noscript=1`}
+                        alt=""
+                    />
+                </noscript>
                 <Providers>
                     <App />
                     <ConditionalLayout>

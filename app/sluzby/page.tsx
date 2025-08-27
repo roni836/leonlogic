@@ -6,135 +6,44 @@ import PricingPlansChart from '@/components/PricingPlansChart';
 import ServiceCard from '@/components/ServiceCard';
 import ServicePageModal from '@/components/ServicePageModal';
 import Image from 'next/image';
-import helper from '@/libs/helper';
-import type { Metadata } from 'next';
 import { useEffect, useState } from 'react';
-import { supabase } from '@/libs/supabase';
-
-
-export const metadata: Metadata = {
-    title: 'Služby | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
-    openGraph: {
-        ...helper.openGraphData,
-        title: 'Služby | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
-        url: process.env.NEXT_PUBLIC_APP_URL + '/sluzby',
-        type: 'website',
-    },
-    twitter: {
-        ...helper.twitterData,
-        title: 'Služby | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
-    },
-    alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_APP_URL}/sluzby`,
-        languages: { 'x-default': `${process.env.NEXT_PUBLIC_APP_URL}/sluzby` },
-    },
-};
-interface ServiceCategory {
-    id: string;
-    title: string;
-    created_at: string;
-    updated_at: string;
-}
+import serviceData from '@/service.json';
 
 interface Service {
-    id: string;
-    title: string;
+    id: number;
+    category: string;
+    name: string;
+    slug: string;
+    title_tag: string;
+    meta_description: string;
+    url: string;
     description: string;
-    service_category_id: string;
-    service_categories?: ServiceCategory;
-    icon_path?: string;
-    icon_alt?: string;
-    link_url?: string;
-    slug?: string;
-    sort_order: number;
-    is_active: boolean;
-    created_at: string;
-    updated_at: string;
+    benefits: string[];
+    process: string[];
+    pricing: Array<{
+        type: string;
+        price_range: string;
+        features?: string[];
+        delivery_time?: string;
+        monthly_cost?: string;
+        duration?: string;
+        roi?: string;
+    }>;
+    faqs: Array<{
+        question: string;
+        answer: string;
+    }>;
 }
 
 const Page = () => {
-
     const [services, setServices] = useState<Service[]>([]);
     const [loading, setLoading] = useState(true);
 
-
     useEffect(() => {
-        fetchServices();
+        // Load services from service.json
+        setServices(serviceData.services);
+        setLoading(false);
     }, []);
-
-    const fetchServices = async () => {
-        try {
-            const { data, error } = await supabase
-                .from('services')
-                .select(
-                    `*,
-                        service_categories (
-                            id,
-                            title,
-                            created_at,
-                            updated_at
-                        )`
-                )
-                .order('sort_order', { ascending: true });
-
-            if (error) {
-                console.error('Error fetching services:', error);
-                return;
-            }
-
-            setServices(data || []);
-        } catch (err) {
-            console.error('Error:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // const services = [
-    //     {
-    //         src: '/assets/images/icon-mail.svg',
-    //         title: 'Email Marketing',
-    //         descrption: 'Our design services starts and ends best in class experience.',
-    //     },
-    //     {
-    //         src: '/assets/images/icon-instagram.svg',
-    //         title: 'Social Media',
-    //         descrption: 'Our design services starts and ends best in class experience.',
-    //     },
-    //     {
-    //         src: '/assets/images/icon-fb-ads.svg',
-    //         title: 'Google/FB Ads',
-    //         descrption: 'Our design services starts and ends best in class experience.',
-    //     },
-    //     {
-    //         src: '/assets/images/icon-content.svg',
-    //         title: 'Content Strategy',
-    //         descrption: 'Our design services starts and ends best in class experience.',
-    //     },
-    //     {
-    //         src: '/assets/images/icon-mail.svg',
-    //         title: 'Email Marketing',
-    //         descrption: 'Our design services starts and ends best in class experience.',
-    //     },
-    //     {
-    //         src: '/assets/images/icon-instagram.svg',
-    //         title: 'Social Media',
-    //         descrption: 'Our design services starts and ends best in class experience.',
-    //     },
-    //     {
-    //         src: '/assets/images/icon-fb-ads.svg',
-    //         title: 'Google/FB Ads',
-    //         descrption: 'Our design services starts and ends best in class experience.',
-    //     },
-    //     {
-    //         src: '/assets/images/icon-content.svg',
-    //         title: 'Content Strategy',
-    //         descrption: 'Our design services starts and ends best in class experience.',
-    //     },
-    // ];
 
     if (loading) {
         return (
@@ -143,7 +52,6 @@ const Page = () => {
             </div>
         );
     }
-
 
     return (
         <>
@@ -179,7 +87,42 @@ const Page = () => {
                 <div className="container">
                     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
                         {services.map((service, index) => {
-                            return <ServiceCard key={index} icon_path={service.icon_path} title={service.title} description={service.description} slug={service.slug} />;
+                            // Use existing icons or fallback to a default icon
+                            const getIconPath = (slug: string) => {
+                                const iconMap: { [key: string]: string } = {
+                                    'e-commerce': '/assets/images/icon-mail.svg',
+                                    'male-stredne-podniky': '/assets/images/icon-instagram.svg',
+                                    'enterprise-riesenia': '/assets/images/icon-fb-ads.svg',
+                                    'ai-chatboty': '/assets/images/icon-content.svg',
+                                    'ai-automatizacie': '/assets/images/icon-mail.svg',
+                                    'firemna-identita': '/assets/images/icon-instagram.svg',
+                                    'logo-dizajn': '/assets/images/icon-fb-ads.svg',
+                                    'digitalny-obsah-grafika': '/assets/images/icon-content.svg',
+                                    'webovy-dizajn': '/assets/images/icon-mail.svg',
+                                    'tlacove-sluzby': '/assets/images/icon-instagram.svg',
+                                    'tvorba-webstranok': '/assets/images/icon-fb-ads.svg',
+                                    'vyvoj-online-obchodov': '/assets/images/icon-content.svg',
+                                    'vyvoj-mobilnych-aplikacii': '/assets/images/icon-mail.svg',
+                                    'programovanie-na-mieru': '/assets/images/icon-instagram.svg',
+                                    'sprava-webovych-stranok': '/assets/images/icon-fb-ads.svg',
+                                    'seo-optimalizacia': '/assets/images/icon-content.svg',
+                                    'reklamne-kampane': '/assets/images/icon-mail.svg',
+                                    'cenove-porovnavace': '/assets/images/icon-instagram.svg',
+                                    'socialne-siete': '/assets/images/icon-fb-ads.svg',
+                                    'influencer-marketing': '/assets/images/icon-content.svg'
+                                };
+                                return iconMap[slug] || '/assets/images/icon-mail.svg';
+                            };
+
+                            return (
+                                <ServiceCard 
+                                    key={service.id} 
+                                    icon_path={getIconPath(service.slug)} 
+                                    title={service.name} 
+                                    description={service.description} 
+                                    slug={service.slug} 
+                                />
+                            );
                         })}
                     </div>
                 </div>
@@ -210,44 +153,6 @@ const Page = () => {
                 </div>
             </section>
 
-            {/* <section className="py-12 md:py-20 lg:py-[167px] overflow-hidden">
-                <div className="container">
-                    <div className="flex flex-col items-center gap-20 lg:flex-row lg:gap-[176px]">
-                        <div className="w-full max-w-[650px] flex-1" data-aos="fade-right" data-aos-duration="1000">
-                            <Image
-                                src="/assets/images/beautiful-themes.png"
-                                className="h-full w-full object-cover"
-                                alt="beautiful-themes"
-                                width={650}
-                                height={485}
-                            />
-                        </div>
-                        <div className="flex-none">
-                            <span className="rounded-[50px] bg-success-light/[0.08] dark:bg-secondary/[0.08] px-5 py-3 text-base font-bold text-success-light dark:text-secondary uppercase">
-                                Beautiful Themes
-                            </span>
-                            <h2 className="mt-[30px] text-3xl font-extrabold md:text-[40px] md:leading-[54px]">
-                                Loved From <span className="bg-[url('/assets/images/line1.svg')] bg-bottom-right bg-no-repeat">Customers</span>
-                            </h2>
-                            <p className="mt-5 max-w-[505px] text-base font-semibold text-gray dark:text-[#9199B5]">
-                                Notero loved from thoudsands customer worldwide and get trusted from big companies.
-                            </p>
-                            <div className="mt-8 flex items-center gap-4 sm:mt-[50px] sm:gap-[30px]">
-                                <div>
-                                    <h3 className="text-3xl font-extrabold text-success dark:text-white sm:text-[40px] sm:leading-[47px]">2.5M+</h3>
-                                    <p className="mt-2 text-base font-semibold text-gray dark:text-[#9199B5] sm:mt-5">Downloaded and Installation</p>
-                                </div>
-                                <div>
-                                    <h3 className="text-3xl font-extrabold text-success dark:text-white sm:text-[40px] sm:leading-[47px]">4.8/5</h3>
-                                    <p className="mt-2 text-base font-semibold text-gray dark:text-[#9199B5] sm:mt-5">Based on 1,258 reviews</p>
-                                </div>
-                            </div>
-                            <ServicePageModal />
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-
             <section className="py-10 md:py-16">
                 <ClientsFeedbackSlider />
             </section>
@@ -265,10 +170,6 @@ const Page = () => {
                     <FAQuestions />
                 </div>
             </section>
-
-            {/* <section className="py-12 md:py-16">
-                <PricingPlansChart />
-            </section> */}
         </>
     );
 };
