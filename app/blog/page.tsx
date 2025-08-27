@@ -3,6 +3,7 @@ import ClientsFeedbackSlider from '@/components/ClientsFeedbackSlider';
 import GetInTouch from '@/components/GetInTouch';
 import helper from '@/libs/helper';
 import type { Metadata } from 'next';
+import data from '@/blog.json';
 
 
 export const metadata: Metadata = {
@@ -26,7 +27,10 @@ export const metadata: Metadata = {
     },
 };
 
+
+
 const page = () => {
+    const posts = (data as any).posts;
     return (
         <>
             <section className="pt-32 pb-16 md:pt-52">
@@ -39,13 +43,13 @@ const page = () => {
                         Správy a poznatky od <span className="text-secondary">našich odborníkov</span>
                     </h1>
                     <p className="text-lg text-[#4B5576] dark:text-[#9199B5] mt-5 max-w-[582px] mx-auto text-center">
-                    Od nových technológií po bežné najlepšie praktiky, poskytujeme odborné znalosti, praktické tipy a zamyslené komentáre prispôsobené pre váš rast a úspech.
+                        Od nových technológií po bežné najlepšie praktiky, poskytujeme odborné znalosti, praktické tipy a zamyslené komentáre prispôsobené pre váš rast a úspech.
                     </p>
                 </div>
             </section>
 
             <section id="maindiv">
-                <BlogToggle/>
+                <BlogToggle posts={posts} />
             </section>
 
             <section className="py-10 md:py-16">
