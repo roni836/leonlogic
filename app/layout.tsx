@@ -6,14 +6,14 @@ import { Providers } from '@/store/Providers';
 import App from '@/App';
 import Header from '@/components/Layouts/Header';
 import Footer from '@/components/Layouts/Footer';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import helper from '@/libs/helper';
 import { Space_Grotesk } from 'next/font/google';
 import ConditionalLayout from '@/components/ConditionalLayout';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://www.leonlogic.com'),
     title: 'Leonlogic',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
@@ -24,14 +24,22 @@ export const metadata: Metadata = {
         icon: '/leonlogic-icon.svg',
     },
     robots: {
-        index: process.env.NEXT_PUBLIC_IS_PRODUCTION == 'true',
-        follow: process.env.NEXT_PUBLIC_IS_PRODUCTION == 'true',
+        index: true,
+        follow: true,
+        googleBot: { index: true, follow: true },
     },
 };
 
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "cover",
+};
+
 const spaceGrotesk = Space_Grotesk({
-    subsets: ['latin'],
-    variable: '--font-space_grotesk',
+  subsets: ["latin"],
+  variable: "--font-space_grotesk",
+  display: "swap",
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -45,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             '@context': 'https://schema.org',
                             '@type': 'Organization',
                             name: 'Leonlogic',
-                            url: process.env.NEXT_PUBLIC_APP_URL || '',
+                            url: process.env.NEXT_PUBLIC_APP_URL || 'https://www.leonlogic.com/',
                             id: `${process.env.NEXT_PUBLIC_APP_URL}#organization`,
                             logo: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.png`,
                             legalName: 'Leonlogic',
@@ -65,7 +73,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         }),
                     }}
                 />
-                <meta name="robots" content="index, follow" />
                 <meta name="google-site-verification" content="h6lA2UBfs2cKyOhvGovNc9yLBqYnoNuA1rDh_iKnCtQ" />
                 {/* Meta Pixel (loads after hydration) */}
                 <Script id="fb-pixel" strategy="afterInteractive">{`
