@@ -2,9 +2,13 @@
 
 function generateSiteMap(): string {
     return `User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /leonlogic-dashboard/
+Allow: /sluzby/
+Allow: /sluzby/*
 
-Sitemap: https://leonlogic.com/sitemap.xml`;
+Sitemap: https://leonlogic.com/sitemap.xml
+Sitemap: https://leonlogic.com/sitemap/services.xml`;
 
 }
 

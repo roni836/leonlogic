@@ -7,7 +7,7 @@ import helper from '@/libs/helper';
 import FAQuestions from '@/components/FAQuestions';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import servicesData from '@/service.json';
+import servicesData from '../../../service.json';
 
 type Pricing =
   | { type: string; price_range: string; features?: string[]; delivery_time?: string }
@@ -164,6 +164,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     keywords: `${service?.name}, ${service?.category}, Piešťany, Trnava, Slovensko, digitálna agentúra, leonlogic`,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       ...helper.openGraphData,
       title,
@@ -172,6 +183,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'article',
       locale: 'sk_SK',
       siteName: 'Leonlogic - Digitálna agentúra Piešťany',
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.png`,
+          width: 1200,
+          height: 630,
+          alt: service?.name,
+        },
+      ],
     },
     twitter: {
       ...helper.twitterData,

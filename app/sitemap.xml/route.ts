@@ -5,9 +5,13 @@ async function generateSiteMap() {
     try {
         return `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <sitemap>
-		<loc>${baseUrl}/sitemap/pages.xml</loc>
-		<lastmod>${lastMod}</lastmod>
-	</sitemap>
+        <loc>${baseUrl}/sitemap/pages.xml</loc>
+        <lastmod>${lastMod}</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>${baseUrl}/sitemap/services.xml</loc>
+        <lastmod>${lastMod}</lastmod>
+    </sitemap>
 </sitemapindex>`;
     } catch (error) {}
 }
