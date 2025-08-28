@@ -44,7 +44,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="sk">
             <head>
                 <script
                     type="application/ld+json"
