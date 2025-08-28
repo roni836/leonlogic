@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import HomeClient from '@/components/HomeClient';
 
 export const metadata: Metadata = {
-    title: 'Home | Leonlogic',
+    title: 'Leonlogic',
     description: 'Tailwind CSS Multipurpose Landing Templates',
     openGraph: {
         ...helper.openGraphData,

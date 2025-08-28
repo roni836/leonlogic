@@ -18,11 +18,7 @@ const nextConfig = {
     ]
   },
   // Enable compression
-  compress: true,
-  // Optimize bundle
-  experimental: {
-    optimizeCss: true
-  }
+  compress: true
 }
 
 module.exports = nextConfig
