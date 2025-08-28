@@ -111,7 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         width="1"
                         style={{ display: 'none' }}
                         src={`https://www.facebook.com/tr?id=1745661109653565&ev=PageView&noscript=1`}
-                        alt=""
+                        alt="body"
                     />
                 </noscript>
                 <Providers>

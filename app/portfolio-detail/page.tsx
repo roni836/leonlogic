@@ -120,7 +120,7 @@ const page = () => {
             <section>
                 <div className="container">
                     <div className="rounded-2xl overflow-hidden">
-                        <Image src="/assets/images/project-img.jpg" alt="" width={1536} height={500} />
+                        <Image src="/assets/images/project-img.jpg" alt="portfolio" width={1536} height={500} />
                     </div>
                 </div>
             </section>
