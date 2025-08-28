@@ -152,6 +152,9 @@ export function generateStaticParams(): { slug: string }[] {
   return (services ?? []).map((s) => ({ slug: s.slug }));
 }
 
+// Enable ISR (Incremental Static Regeneration) for better performance
+export const revalidate = 3600; // Revalidate every hour
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params; // ✅ await
   const service = getServiceBySlug(slug);

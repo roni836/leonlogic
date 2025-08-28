@@ -5,6 +5,9 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 import data from '@/blog.json';
 
+// Enable ISR for blog listing page
+export const revalidate = 1800; // Revalidate every 30 minutes
+
 
 export const metadata: Metadata = {
     title: 'Blog | Leonlogic',

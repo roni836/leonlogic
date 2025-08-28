@@ -16,6 +16,9 @@ export async function generateStaticParams() {
     return (data as any).posts.map((p: Post) => ({ slug: p.slug }));
 }
 
+// Enable ISR for blog posts
+export const revalidate = 1800; // Revalidate every 30 minutes
+
 export async function generateMetadata(
     { params }: { params: Promise<{ slug: string }> },
     _parent: ResolvingMetadata

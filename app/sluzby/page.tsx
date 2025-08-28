@@ -9,6 +9,9 @@ import { Metadata } from 'next';
 import serviceData from '@/service.json';
 import helper from '@/libs/helper';
 
+// Enable ISR for services listing page
+export const revalidate = 3600; // Revalidate every hour
+
 interface Service {
     id: number;
     category: string;

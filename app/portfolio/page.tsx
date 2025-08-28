@@ -8,6 +8,9 @@ import Image from 'next/image';
 import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
+// Enable ISR for portfolio page
+export const revalidate = 7200; // Revalidate every 2 hours
+
 export const metadata: Metadata = {
     title: 'Portfólio LeonLogic – úspešné projekty webov a marketingu',
     description: 'Pozrite si naše portfólio – reálne výsledky a projekty v oblasti webdizajnu, SEO, obsahu a digitálneho marketingu. LeonLogic prináša kreatívne riešenia s merateľným dopadom.',
