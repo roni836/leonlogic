@@ -17,19 +17,21 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'About-Us | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'O nás – LeonLogic: digitálna agentúra pre moderné firmy',
+    description: 'LeonLogic je digitálna agentúra, ktorá spája stratégiu, technológie a kreativitu. Naším cieľom je pomôcť firmám rásť prostredníctvom webových riešení, SEO a inovatívneho marketingu.',
+    keywords: [
+        'o nás LeonLogic, digitálna agentúra Slovensko, tím odborníkov SEO, moderný marketing'],
     openGraph: {
         ...helper.openGraphData,
-        title: 'About-Us | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'O nás – LeonLogic: digitálna agentúra pre moderné firmy',
+        description: 'LeonLogic je digitálna agentúra, ktorá spája stratégiu, technológie a kreativitu. Naším cieľom je pomôcť firmám rásť prostredníctvom webových riešení, SEO a inovatívneho marketingu.',
         url: process.env.NEXT_PUBLIC_APP_URL + '/o-nas',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'About-Us | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'O nás – LeonLogic: digitálna agentúra pre moderné firmy',
+        description: 'LeonLogic je digitálna agentúra, ktorá spája stratégiu, technológie a kreativitu. Naším cieľom je pomôcť firmám rásť prostredníctvom webových riešení, SEO a inovatívneho marketingu.',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/o-nas`,
