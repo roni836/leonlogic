@@ -71,9 +71,9 @@ export default function HomeClient() {
                                 <br />
                                  <span className="bg-[url('/assets/images/line.svg')] bg-bottom-left bg-no-repeat">audit </span> webu
                             </h1>
-                            <p className="mb-7 max-w-[590px] text-lg text-[#4B5576] dark:text-[#9199B5]">
+                            <h2 className="mb-7 max-w-[590px] text-lg text-[#4B5576] dark:text-[#9199B5]">
                               Zistite, ako zlepšiť výkonnosť vášho webu a SEO. Analýza trvá 3 minúty, výsledky dostanete okamžite.
-                            </p>
+                            </h2>
 
                             <div className="mb-2.5 w-full max-w-[350px]">
                                 <form onSubmit={handleEmailSubmit}>
