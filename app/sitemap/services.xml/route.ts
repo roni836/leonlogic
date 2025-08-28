@@ -1,4 +1,4 @@
-const URL = process.env.NEXT_PUBLIC_APP_URL || '';
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com';
 const lastMod = new Date().toISOString();
 
 import servicesData from '../../../service.json';
@@ -8,12 +8,12 @@ function generateServiceSiteMap(): string {
     
     const serviceUrls = services.map(service => `
     <url>
-        <loc>${URL}/sluzby/${service.slug}</loc>
+        <loc>${baseUrl}/sluzby/${service.slug}</loc>
         <lastmod>${lastMod}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <image:image>
-            <image:loc>${URL}/assets/images/logo.png</image:loc>
+            <image:loc>${baseUrl}/assets/images/logo.png</image:loc>
             <image:title>${service.name}</image:title>
             <image:caption>${service.meta_description}</image:caption>
         </image:image>

@@ -156,14 +156,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params; // ✅ await
   const service = getServiceBySlug(slug);
 
+  // Fix: Use fallback URL if env var is missing
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com';
   const title = service?.title_tag ?? 'Služba';
   const description = service?.meta_description ?? '';
-  const url = `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${slug}`;
+  const url = `${baseUrl}/sluzby/${slug}`;
 
   return {
     title,
     description,
     keywords: `${service?.name}, ${service?.category}, Piešťany, Trnava, Slovensko, digitálna agentúra, leonlogic`,
+    authors: [{ name: 'Leonlogic Team' }],
+    creator: 'Leonlogic',
+    publisher: 'Leonlogic',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    verification: {
+      google: 'h6lA2UBfs2cKyOhvGovNc9yLBqYnoNuA1rDh_iKnCtQ',
+      yandex: 'your-yandex-verification-code',
+    },
+    category: 'Digital Agency Services',
+    classification: 'Business Services',
     robots: {
       index: true,
       follow: true,
@@ -185,7 +201,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: 'Leonlogic - Digitálna agentúra Piešťany',
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.png`,
+          // Fix: Use absolute URL with fallback
+          url: `${baseUrl}/assets/images/logo.png`,
           width: 1200,
           height: 630,
           alt: service?.name,
@@ -240,20 +257,21 @@ export default async function Page({ params }: PageProps) {
       };
     });
   // JSON-LD
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com';
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Domov', item: process.env.NEXT_PUBLIC_APP_URL },
-          { '@type': 'ListItem', position: 2, name: 'Služby', item: `${process.env.NEXT_PUBLIC_APP_URL}/sluzby` },
-          { '@type': 'ListItem', position: 3, name: service.name, item: `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}` },
+          { '@type': 'ListItem', position: 1, name: 'Domov', item: baseUrl },
+          { '@type': 'ListItem', position: 2, name: 'Služby', item: `${baseUrl}/sluzby` },
+          { '@type': 'ListItem', position: 3, name: service.name, item: `${baseUrl}/sluzby/${service.slug}` },
         ],
       },
       {
         '@type': 'Service',
-        '@id': `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}#service`,
+        '@id': `${baseUrl}/sluzby/${service.slug}#service`,
         name: service.name,
         alternateName: service.title_tag,
         description: service.meta_description || service.description,
@@ -287,9 +305,9 @@ export default async function Page({ params }: PageProps) {
         ]),
         provider: {
           '@type': 'Organization',
-          '@id': `${process.env.NEXT_PUBLIC_APP_URL}#organization`,
+          '@id': `${baseUrl}#organization`,
           name: 'Leonlogic',
-          url: process.env.NEXT_PUBLIC_APP_URL,
+          url: baseUrl,
           description: `Digitálna agentúra špecializujúca sa na ${service.category.toLowerCase()} riešenia`,
           address: {
             '@type': 'PostalAddress',
@@ -304,7 +322,7 @@ export default async function Page({ params }: PageProps) {
           description: `Cenové možnosti pre službu ${service.name} od digitálnej agentúry Leonlogic`,
           itemListElement: service.pricing.map((p, index) => ({
             '@type': 'Offer',
-            '@id': `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}#offer-${index + 1}`,
+            '@id': `${baseUrl}/sluzby/${service.slug}#offer-${index + 1}`,
             name: p.type,
             description: Array.isArray((p as any).features) ? (p as any).features.join(', ') : '',
             itemOffered: {
@@ -320,7 +338,7 @@ export default async function Page({ params }: PageProps) {
             seller: {
               '@type': 'Organization',
               name: 'Leonlogic',
-              url: process.env.NEXT_PUBLIC_APP_URL
+              url: baseUrl
             },
             areaServed: 'Slovakia'
           })),
@@ -347,24 +365,24 @@ export default async function Page({ params }: PageProps) {
       },
       {
         '@type': 'FAQPage',
-        '@id': `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}#faq`,
+        '@id': `${baseUrl}/sluzby/${service.slug}#faq`,
         name: `Často kladené otázky - ${service.name}`,
         description: `Odpovede na najčastejšie otázky o službe ${service.name} od digitálnej agentúry Leonlogic.`,
         inLanguage: 'sk',
         mainEntity: service.faqs.map((f, index) => ({
           '@type': 'Question',
-          '@id': `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}#faq-${index + 1}`,
+          '@id': `${baseUrl}/sluzby/${service.slug}#faq-${index + 1}`,
           name: f.question,
           inLanguage: 'sk',
           acceptedAnswer: {
             '@type': 'Answer',
-            '@id': `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}#answer-${index + 1}`,
+            '@id': `${baseUrl}/sluzby/${service.slug}#answer-${index + 1}`,
             text: f.answer,
             inLanguage: 'sk',
             author: {
               '@type': 'Organization',
               name: 'Leonlogic',
-              url: process.env.NEXT_PUBLIC_APP_URL
+              url: baseUrl
             },
             dateCreated: '2024-01-01',
             dateModified: '2024-01-01'
@@ -373,22 +391,22 @@ export default async function Page({ params }: PageProps) {
         author: {
           '@type': 'Organization',
           name: 'Leonlogic',
-          url: process.env.NEXT_PUBLIC_APP_URL,
+          url: baseUrl,
           description: `Digitálna agentúra špecializujúca sa na ${service.category.toLowerCase()} riešenia`
         },
         publisher: {
           '@type': 'Organization',
           name: 'Leonlogic',
-          url: process.env.NEXT_PUBLIC_APP_URL
+          url: baseUrl
         }
       },
       {
         '@type': 'HowTo',
-        '@id': `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}#howto`,
+        '@id': `${baseUrl}/sluzby/${service.slug}#howto`,
         name: `Ako prebieha ${service.name}?`,
         description: `Podrobný proces pre službu ${service.name} od digitálnej agentúry Leonlogic`,
         inLanguage: 'sk',
-        image: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.png`,
+        image: `${baseUrl}/assets/images/logo.png`,
         totalTime: 'P1M',
         estimatedCost: {
           '@type': 'MonetaryAmount',
@@ -422,19 +440,19 @@ export default async function Page({ params }: PageProps) {
             position: index + 1,
             name: title?.trim() || step,
             text: description?.trim() || `Krok ${index + 1} procesu ${service.name}`,
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/sluzby/${service.slug}#step-${index + 1}`,
-            image: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.png`
+            url: `${baseUrl}/sluzby/${service.slug}#step-${index + 1}`,
+            image: `${baseUrl}/assets/images/logo.png`
           };
         }),
         author: {
           '@type': 'Organization',
           name: 'Leonlogic',
-          url: process.env.NEXT_PUBLIC_APP_URL
+          url: baseUrl
         },
         publisher: {
           '@type': 'Organization',
           name: 'Leonlogic',
-          url: process.env.NEXT_PUBLIC_APP_URL
+          url: baseUrl
         }
       },
     ],
@@ -534,6 +552,7 @@ export default async function Page({ params }: PageProps) {
                   alt="marketing"
                   width={650}
                   height={522}
+                  priority={true}
                 />
               </div>
             </div>

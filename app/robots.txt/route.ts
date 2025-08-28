@@ -1,4 +1,4 @@
-// const URL = process.env.NEXT_PUBLIC_APP_URL || '';
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com';
 
 function generateSiteMap(): string {
     return `User-agent: *
@@ -7,9 +7,8 @@ Disallow: /leonlogic-dashboard/
 Allow: /sluzby/
 Allow: /sluzby/*
 
-Sitemap: https://leonlogic.com/sitemap.xml
-Sitemap: https://leonlogic.com/sitemap/services.xml`;
-
+Sitemap: ${baseUrl}/sitemap.xml
+Sitemap: ${baseUrl}/sitemap/services.xml`;
 }
 
 export function GET(): Response {
