@@ -1,4 +1,3 @@
-"use client";
 import ClientsFeedbackSlider from '@/components/ClientsFeedbackSlider';
 import FAQuestions from '@/components/FAQuestions';
 import NoteManagementAccodian from '@/components/NoteManagementAccodian';
@@ -6,8 +5,9 @@ import PricingPlansChart from '@/components/PricingPlansChart';
 import ServiceCard from '@/components/ServiceCard';
 import ServicePageModal from '@/components/ServicePageModal';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { Metadata } from 'next';
 import serviceData from '@/service.json';
+import helper from '@/libs/helper';
 
 interface Service {
     id: number;
@@ -35,23 +35,200 @@ interface Service {
     }>;
 }
 
+export const metadata: Metadata = {
+  title: 'Digitálne služby Slovensko | Web development, SEO, Marketing | Leonlogic',
+  description: 'Komplexné digitálne služby na Slovensku. Web development, SEO optimalizácia, digitálny marketing, e-commerce riešenia. Profesionálna digitálna agentúra Piešťany.',
+  keywords: 'digitálne služby, web development, SEO, digitálny marketing, e-commerce, Piešťany, Trnava, Slovensko, leonlogic',
+  authors: [{ name: 'Leonlogic Team' }],
+  creator: 'Leonlogic',
+  publisher: 'Leonlogic',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  verification: {
+    google: 'h6lA2UBfs2cKyOhvGovNc9yLBqYnoNuA1rDh_iKnCtQ',
+    yandex: 'your-yandex-verification-code',
+  },
+  category: 'Digital Agency Services',
+  classification: 'Business Services',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    ...helper.openGraphData,
+    title: 'Digitálne služby Slovensko | Web development, SEO, Marketing | Leonlogic',
+    description: 'Komplexné digitálne služby na Slovensku. Web development, SEO optimalizácia, digitálny marketing, e-commerce riešenia. Profesionálna digitálna agentúra Piešťany.',
+    url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com'}/sluzby`,
+    type: 'website',
+    locale: 'sk_SK',
+    siteName: 'Leonlogic - Digitálna agentúra Piešťany',
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com'}/assets/images/logo.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Digitálne služby Leonlogic',
+      },
+    ],
+  },
+  twitter: {
+    ...helper.twitterData,
+    title: 'Digitálne služby Slovensko | Web development, SEO, Marketing | Leonlogic',
+    description: 'Komplexné digitálne služby na Slovensku. Web development, SEO optimalizácia, digitálny marketing, e-commerce riešenia.',
+    card: 'summary_large_image',
+  },
+  alternates: {
+    canonical: `${process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com'}/sluzby`,
+    languages: {
+      'x-default': `${process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com'}/sluzby`,
+      'sk': `${process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com'}/sluzby`,
+      'sk-SK': `${process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com'}/sluzby`
+    },
+  },
+  other: {
+    'content-language': 'sk',
+    'geo.region': 'SK-TA',
+    'geo.placename': 'Piešťany',
+    'provider': 'Leonlogic',
+    'area-served': 'Slovakia',
+    'ai-content-declaration': 'human-authored',
+    'content-type': 'services-listing-page',
+    'business-context': 'digital-agency-slovakia',
+    'expertise-level': 'professional',
+    'target-audience': 'slovak-businesses',
+  },
+};
+
 const Page = () => {
-    const [services, setServices] = useState<Service[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        // Load services from service.json
-        setServices(serviceData.services);
-        setLoading(false);
-    }, []);
-
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center h-64">
-                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600"></div>
-            </div>
-        );
-    }
+    const services = serviceData.services;
+    
+    // JSON-LD structured data for services listing page
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com';
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: 'Domov', item: baseUrl },
+                    { '@type': 'ListItem', position: 2, name: 'Služby', item: `${baseUrl}/sluzby` },
+                ],
+            },
+            {
+                '@type': 'ItemList',
+                '@id': `${baseUrl}/sluzby#services-list`,
+                name: 'Digitálne služby Leonlogic',
+                description: 'Komplexné digitálne služby na Slovensku - web development, SEO, digitálny marketing, e-commerce riešenia',
+                inLanguage: 'sk',
+                numberOfItems: services.length,
+                itemListElement: services.map((service, index) => ({
+                    '@type': 'ListItem',
+                    position: index + 1,
+                    item: {
+                        '@type': 'Service',
+                        '@id': `${baseUrl}/sluzby/${service.slug}#service`,
+                        name: service.name,
+                        alternateName: service.title_tag,
+                        description: service.meta_description || service.description,
+                        inLanguage: 'sk',
+                        serviceType: service.category,
+                        category: service.category,
+                        url: `${baseUrl}/sluzby/${service.slug}`,
+                        areaServed: [
+                            {
+                                '@type': 'Country',
+                                name: 'Slovakia'
+                            },
+                            {
+                                '@type': 'AdministrativeArea',
+                                name: 'Trnava Region'
+                            }
+                        ],
+                        provider: {
+                            '@type': 'Organization',
+                            '@id': `${baseUrl}#organization`,
+                            name: 'Leonlogic',
+                            url: baseUrl,
+                            description: 'Digitálna agentúra Piešťany',
+                            address: {
+                                '@type': 'PostalAddress',
+                                addressLocality: 'Piešťany',
+                                addressRegion: 'Trnava',
+                                addressCountry: 'SK'
+                            }
+                        }
+                    }
+                })),
+                author: {
+                    '@type': 'Organization',
+                    name: 'Leonlogic',
+                    url: baseUrl
+                },
+                publisher: {
+                    '@type': 'Organization',
+                    name: 'Leonlogic',
+                    url: baseUrl
+                }
+            },
+            {
+                '@type': 'Organization',
+                '@id': `${baseUrl}#organization`,
+                name: 'Leonlogic',
+                url: baseUrl,
+                description: 'Digitálna agentúra špecializujúca sa na komplexné digitálne služby',
+                logo: `${baseUrl}/assets/images/logo.png`,
+                address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Piešťany',
+                    addressRegion: 'Trnava',
+                    addressCountry: 'SK'
+                },
+                contactPoint: {
+                    '@type': 'ContactPoint',
+                    contactType: 'customer service',
+                    areaServed: 'SK',
+                    availableLanguage: ['sk', 'en']
+                },
+                sameAs: [
+                    'https://www.facebook.com/leonlogic',
+                    'https://www.linkedin.com/company/leonlogic'
+                ],
+                hasOfferCatalog: {
+                    '@type': 'OfferCatalog',
+                    name: 'Digitálne služby',
+                    description: 'Komplexné digitálne služby pre slovenské firmy',
+                    itemListElement: services.map((service, index) => ({
+                        '@type': 'Offer',
+                        '@id': `${baseUrl}/sluzby/${service.slug}#offer`,
+                        name: service.name,
+                        description: service.meta_description || service.description,
+                        itemOffered: {
+                            '@type': 'Service',
+                            name: service.name,
+                            description: service.meta_description || service.description,
+                            category: service.category
+                        },
+                        seller: {
+                            '@type': 'Organization',
+                            name: 'Leonlogic',
+                            url: baseUrl
+                        },
+                        areaServed: 'Slovakia'
+                    }))
+                }
+            }
+        ],
+    };
 
     return (
         <>
@@ -170,6 +347,12 @@ const Page = () => {
                     <FAQuestions />
                 </div>
             </section>
+
+            {/* JSON-LD */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
         </>
     );
 };
