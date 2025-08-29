@@ -143,9 +143,9 @@ const Footer = () => {
             <div className="bg-white dark:bg-primary py-3">
                 <div className="container">
                     <div className="flex flex-col items-center gap-4 text-center font-semibold text-gray dark:text-[#9199B5] md:flex-row md:text-left">
-                        <a href="/zasady-pouzivanie-suborov-cookie" className="hover:text-secondary md:order-2 md:ms-auto">
+                        <Link href="/zasady-pouzivanie-suborov-cookie" className="hover:text-secondary md:order-2 md:ms-auto">
                             Zásady používania súborov cookies
-                        </a>
+                        </Link>
                         <p>
                             <Link href="/vseobecne-obchodne-podmienky" className="hover:text-secondary">
                                 Podmienky

@@ -8,6 +8,7 @@ import Image from 'next/image';
 import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 import portfolioData from '@/portfolio.json';
+import Link from 'next/link';
 
 // Enable ISR for portfolio page
 export const revalidate = 7200; // Revalidate every 2 hours
@@ -135,7 +136,7 @@ const page = () => {
                             <p className="font-semibold text-[#4B5576] mt-5 md:mt-10">
                                CyberX vyrába elektrické šmykové nakladače, ktoré nahrádzajú hlučné dieselové nakladače. Navrhli sme pre nich logo, ktoré odráža ich prístup k modernej technológii a čistej energií.
                             </p>
-                            <a
+                            <Link
                                 href="/kontakt"
                                 className="bg-secondary p-5 text-success text-sm font-bold mt-5 md:mt-10 rounded-2xl inline-flex gap-2.5 items-center group hover:bg-black hover:text-white duration-200 uppercase"
                             >
@@ -143,7 +144,7 @@ const page = () => {
                                 <span>
                                     <RightArrowIcon />
                                 </span>
-                            </a>
+                            </Link>
                         </div>
                         <div className="pt-16 max-w-[400px] lg:rtl:mr-auto lg:ltr:ml-auto relative z-1" data-aos="fade-up" data-aos-duration="1000">
                             <Image

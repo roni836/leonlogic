@@ -39,7 +39,7 @@ const page = () => {
 
                         <h2 className="text-[22px] font-bold leading-8 mt-12">1. Úvod</h2>
                         <p className="text-gray dark:text-[#9199B5] mt-5">
-                            Naša webová stránka <a href="https://leonlogic.com" className="underline">https://leonlogic.com</a> (ďalej len „webová stránka") používa súbory cookie a ďalšie
+                            Naša webová stránka <a href="https://leonlogic.com" className="underline">https://leonlogic.com</a> (ďalej len „webová stránka`) používa súbory cookie a ďalšie
                             súvisiace technológie. Súbory cookie umiestňujú aj tretie strany, ktoré sme zapojili.
                             V tomto dokumente vás informujeme o používaní súborov cookie na našich webových stránkach.
                         </p>

@@ -45,7 +45,7 @@ const page = () => {
                             Spoločnosť <strong>OREM VENTURES s.r.o.</strong> so sídlom Kostolná 299/27, 991 26 Nenince,
                             IČO: 52514901, DIČ: 2121045058, zapísaná v Obchodnom registri Okresného súdu
                             Banská Bystrica, oddiel Sro, vložka č. 36898/S, pôsobiaca pod obchodným názvom
-                            <strong> Leonlogic </strong> (ďalej aj „Prevádzkovateľ") je prevádzkovateľom informačných systémov,
+                            <strong> Leonlogic </strong> (ďalej aj „Prevádzkovateľ) je prevádzkovateľom informačných systémov,
                             v ktorých táto spoločnosť spracúva Vaše osobné údaje ako osobné údaje dotknutej osoby.
                             Prevádzkovateľ postupuje pri spracovaní osobných údajov v súlade s právnym poriadkom
                             Slovenskej republiky, pričom v maximálnej miere dbá na súkromie dotknutých osôb a na ochranu osobných údajov, ktoré spracúva.

@@ -49,8 +49,8 @@ const page = () => {
                             1.1 Spoločnosť OREM VENTURES s.r.o. so sídlom Kostolná 299/27, 991 26 Nenince,
                             IČO: 52514901, DIČ: 2121045058, zapísaná v Obchodnom registri Okresného súdu
                             Banská Bystrica, oddiel Sro, vložka č. 36898/S, pôsobiaca pod obchodným názvom
-                            Leonlogic (ďalej len „Spoločnosť") vydáva tieto Všeobecné obchodné podmienky pri
-                            poskytovaní služieb (ďalej len „VOP" alebo „Podmienky"). Leonlogic je obchodná
+                            Leonlogic (ďalej len „Spoločnosť`) vydáva tieto Všeobecné obchodné podmienky pri
+                            poskytovaní služieb (ďalej len „VOP` alebo „Podmienky`). Leonlogic je obchodná
                             značka pod ktorou Spoločnosť poskytuje digitálne služby.
                         </p>
                         <p className="text-gray dark:text-[#9199B5] mt-5">
