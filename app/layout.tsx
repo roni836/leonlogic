@@ -108,6 +108,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-49323CGTLX');
           `}
                 </Script>
+
+                {/* CookieYes banner */}
+                <Script
+                    id="cookieyes"
+                    src="https://cdn-cookieyes.com/client_data/e44befaa48c41f5e053721d0/script.js"
+                    strategy="beforeInteractive"
+                />
             </head>
             <body>
                 <noscript>

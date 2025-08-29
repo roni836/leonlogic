@@ -63,9 +63,9 @@ export default function BlogToggle({ posts }: { posts: Post[] }) {
                                     <Link
                                         href={`/blog/${post.slug}`}
                                         className="font-bold text-success hover:text-success-light dark:text-secondary dark:hover:text-success-light duration-200"
-                                        aria-label={`Read more: ${post.title}`}
+                                        aria-label={`Prečítať viac: ${post.title}`}
                                     >
-                                        Read More
+                                        Prečítať viac
                                     </Link>
                                 </div>
                                 <div className="sm:max-w-[375px] w-full">
