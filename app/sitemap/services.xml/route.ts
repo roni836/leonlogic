@@ -13,7 +13,7 @@ function generateServiceSiteMap(): string {
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <image:image>
-            <image:loc>${baseUrl}/assets/images/logo.png</image:loc>
+            <image:loc>${baseUrl}/assets/images/logo.webp</image:loc>
             <image:title>${service.name}</image:title>
             <image:caption>${service.meta_description}</image:caption>
         </image:image>

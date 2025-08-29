@@ -42,7 +42,7 @@ const page = () => {
                     <div className="grid lg:grid-cols-3 items-center gap-12">
                         <div className="relative">
                             <div className="rounded-2xl overflow-hidden relative z-1">
-                                <Image src="/assets/images/digital-1.png" width={480} height={473} className="w-full" alt="digital 1" />
+                                <Image src="/assets/images/digital-1.webp" width={480} height={473} className="w-full" alt="digital 1" />
                             </div>
                             <span className="absolute bg-[#D2FFF7]/50 dark:bg-[#D2FFF7]/20 md:w-[591px] h-[580px] bottom-[70px] start-32 rounded-full blur-[100px]"></span>
                             <span className="absolute -end-10 -top-12 hidden lg:block">
@@ -92,7 +92,7 @@ const page = () => {
                         </div>
                         <div className="relative">
                             <div className="rounded-2xl overflow-hidden relative z-1">
-                                <Image src="/assets/images/digital-2.png" width={480} height={473} className="min-w-full" alt="digital 2" />
+                                <Image src="/assets/images/digital-2.webp" width={480} height={473} className="min-w-full" alt="digital 2" />
                             </div>
                             <span className="absolute bg-[#FFD4E9]/50 dark:bg-[#FFD4E9]/20 md:w-[591px] h-[580px] top-24 end-12 rounded-full blur-[100px]"></span>
                             <span className="absolute bottom-24 -start-16 hidden lg:block">

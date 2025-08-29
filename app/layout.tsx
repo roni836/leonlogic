@@ -15,7 +15,7 @@ import Script from 'next/script';
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://www.leonlogic.com'),
     title: 'LeonLogic – Digitálna agentúra pre SEO, web a marketing',
-    description: 'LeonLogic je digitálna agentúra pre moderné firmy. Ponúkame tvorbu webov, SEO optimalizáciu, obsahový marketing, správu sociálnych sietí a e-shop riešenia. Pomáhame vám rásť s merateľnými výsledkami.',
+    description: 'Profesionálna tvorba webstránok a e-shopov. Automatizácie s AI, programovanie na mieru a komplexné digitálne riešenia pre firmy.',
     openGraph: {
         ...helper.openGraphData,
         type: 'website',
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             name: 'Leonlogic',
                             url: process.env.NEXT_PUBLIC_APP_URL || 'https://www.leonlogic.com/',
                             id: `${process.env.NEXT_PUBLIC_APP_URL}#organization`,
-                            logo: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.png`,
+                            logo: `${process.env.NEXT_PUBLIC_APP_URL}/assets/images/logo.webp`,
                             legalName: 'Leonlogic',
                             sameAs: [process.env.NEXT_PUBLIC_APP_URL || ''],
                         }),

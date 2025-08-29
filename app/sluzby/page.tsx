@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     siteName: 'Leonlogic - Digitálna agentúra Piešťany',
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com'}/assets/images/logo.png`,
+        url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://leonlogic.com'}/assets/images/logo.webp`,
         width: 1200,
         height: 630,
         alt: 'Digitálne služby Leonlogic',
@@ -189,7 +189,7 @@ const Page = () => {
                 name: 'Leonlogic',
                 url: baseUrl,
                 description: 'Digitálna agentúra špecializujúca sa na komplexné digitálne služby',
-                logo: `${baseUrl}/assets/images/logo.png`,
+                logo: `${baseUrl}/assets/images/logo.webp`,
                 address: {
                     '@type': 'PostalAddress',
                     addressLocality: 'Piešťany',

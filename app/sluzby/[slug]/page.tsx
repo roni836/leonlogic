@@ -205,7 +205,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: [
         {
           // Fix: Use absolute URL with fallback
-          url: `${baseUrl}/assets/images/logo.png`,
+          url: `${baseUrl}/assets/images/logo.webp`,
           width: 1200,
           height: 630,
           alt: service?.name,
@@ -409,7 +409,7 @@ export default async function Page({ params }: PageProps) {
         name: `Ako prebieha ${service.name}?`,
         description: `Podrobný proces pre službu ${service.name} od digitálnej agentúry Leonlogic`,
         inLanguage: 'sk',
-        image: `${baseUrl}/assets/images/logo.png`,
+        image: `${baseUrl}/assets/images/logo.webp`,
         totalTime: 'P1M',
         estimatedCost: {
           '@type': 'MonetaryAmount',
@@ -444,7 +444,7 @@ export default async function Page({ params }: PageProps) {
             name: title?.trim() || step,
             text: description?.trim() || `Krok ${index + 1} procesu ${service.name}`,
             url: `${baseUrl}/sluzby/${service.slug}#step-${index + 1}`,
-            image: `${baseUrl}/assets/images/logo.png`
+            image: `${baseUrl}/assets/images/logo.webp`
           };
         }),
         author: {

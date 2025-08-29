@@ -18,38 +18,38 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ['business', 'productivity', 'utilities'],
     icons: [
       {
-        src: `${baseUrl}/assets/images/logo.png`,
+        src: `${baseUrl}/assets/images/logo.webp`,
         sizes: '192x192',
         type: 'image/png',
         purpose: 'maskable',
       },
       {
-        src: `${baseUrl}/assets/images/logo.png`,
+        src: `${baseUrl}/assets/images/logo.webp`,
         sizes: '512x512',
         type: 'image/png',
         purpose: 'maskable',
       },
       {
-        src: `${baseUrl}/assets/images/logo.png`,
+        src: `${baseUrl}/assets/images/logo.webp`,
         sizes: '192x192',
         type: 'image/png',
       },
       {
-        src: `${baseUrl}/assets/images/logo.png`,
+        src: `${baseUrl}/assets/images/logo.webp`,
         sizes: '512x512',
         type: 'image/png',
       },
     ],
     screenshots: [
       {
-        src: `${baseUrl}/assets/images/logo.png`,
+        src: `${baseUrl}/assets/images/logo.webp`,
         sizes: '1280x720',
         type: 'image/png',
         form_factor: 'wide',
         label: 'Leonlogic - Digitálna agentúra',
       },
       {
-        src: `${baseUrl}/assets/images/logo.png`,
+        src: `${baseUrl}/assets/images/logo.webp`,
         sizes: '750x1334',
         type: 'image/png',
         form_factor: 'narrow',
@@ -64,7 +64,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: '/sluzby',
         icons: [
           {
-            src: `${baseUrl}/assets/images/logo.png`,
+            src: `${baseUrl}/assets/images/logo.webp`,
             sizes: '96x96',
           },
         ],
@@ -76,7 +76,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: '/kontakt',
         icons: [
           {
-            src: `${baseUrl}/assets/images/logo.png`,
+            src: `${baseUrl}/assets/images/logo.webp`,
             sizes: '96x96',
           },
         ],

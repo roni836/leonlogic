@@ -44,7 +44,7 @@ export default function HomeClient() {
                         </div>
                         <div className="hidden lg:block" data-aos="fade-left" data-aos-duration="1000">
                             <Image
-                                src="/assets/images/banner-img.png"
+                                src="/assets/images/banner-img.webp"
                                 className="block dark:hidden rtl:rotate-y-180"
                                 alt="banner img"
                                 width={827}
