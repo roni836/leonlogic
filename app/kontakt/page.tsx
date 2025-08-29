@@ -11,19 +11,19 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Contact-Us | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'Kontaktujte nás – LeonLogic digitálna agentúra',
+    description: 'Máte otázky alebo záujem o spoluprácu? Kontaktujte digitálnu agentúru LeonLogic. Sme tu pre vás – SEO, webové riešenia, marketing a e-shop projekty.',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Contact-Us | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Kontaktujte nás – LeonLogic digitálna agentúra',
+        description: 'Máte otázky alebo záujem o spoluprácu? Kontaktujte digitálnu agentúru LeonLogic. Sme tu pre vás – SEO, webové riešenia, marketing a e-shop projekty.',
         url: process.env.NEXT_PUBLIC_APP_URL + '/kontakt',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Contact-Us | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Kontaktujte nás – LeonLogic digitálna agentúra',
+        description: 'Máte otázky alebo záujem o spoluprácu? Kontaktujte digitálnu agentúru LeonLogic. Sme tu pre vás – SEO, webové riešenia, marketing a e-shop projekty.',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/kontakt`,

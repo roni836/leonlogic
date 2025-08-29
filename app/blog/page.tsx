@@ -10,19 +10,19 @@ export const revalidate = 1800; // Revalidate every 30 minutes
 
 
 export const metadata: Metadata = {
-    title: 'Blog | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'Blog – LeonLogic: tipy pre SEO, marketing a webové riešenia',
+    description: 'Čítajte náš blog o SEO, digitálnom marketingu, tvorbe webov a e-shop riešení. LeonLogic prináša aktuálne tipy, stratégie a návody pre rast vášho biznisu.',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Blog | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Blog – LeonLogic: tipy pre SEO, marketing a webové riešenia',
+        description: 'Čítajte náš blog o SEO, digitálnom marketingu, tvorbe webov a e-shop riešení. LeonLogic prináša aktuálne tipy, stratégie a návody pre rast vášho biznisu.',
         url: process.env.NEXT_PUBLIC_APP_URL + '/blog',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Blog | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Blog – LeonLogic: tipy pre SEO, marketing a webové riešenia',
+        description: 'Čítajte náš blog o SEO, digitálnom marketingu, tvorbe webov a e-shop riešení. LeonLogic prináša aktuálne tipy, stratégie a návody pre rast vášho biznisu.',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/blog`,

@@ -21,19 +21,19 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Portfolio-Detail | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'Projekt [Názov projektu] – LeonLogic: SEO, web a marketing riešenia',
+    description: 'Pozrite si detail projektu [Názov projektu], kde sme pre klienta realizovali [služba – napr. SEO optimalizáciu, webdizajn, e-shop riešenie]. Výsledkom bol [krátky výsledok – napr. zvýšenie návštevnosti o 120%].',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Portfolio-Detail | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Projekt [Názov projektu] – LeonLogic: SEO, web a marketing riešenia',
+        description: 'Pozrite si detail projektu [Názov projektu], kde sme pre klienta realizovali [služba – napr. SEO optimalizáciu, webdizajn, e-shop riešenie]. Výsledkom bol [krátky výsledok – napr. zvýšenie návštevnosti o 120%].',
         url: process.env.NEXT_PUBLIC_APP_URL + '/portfolio-detail',
         type: 'article',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Portfolio-Detail | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Projekt [Názov projektu] – LeonLogic: SEO, web a marketing riešenia',
+        description: 'Pozrite si detail projektu [Názov projektu], kde sme pre klienta realizovali [služba – napr. SEO optimalizáciu, webdizajn, e-shop riešenie]. Výsledkom bol [krátky výsledok – napr. zvýšenie návštevnosti o 120%].',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/portfolio-detail`,

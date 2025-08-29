@@ -5,19 +5,19 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Privacy-Policy | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'Ochrana osobných údajov – LeonLogic digitálna agentúra',
+    description: 'Zásady ochrany osobných údajov spoločnosti LeonLogic. Ako spracúvame, uchovávame a chránime vaše dáta v súlade s GDPR a slovenskou legislatívou.',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Privacy-Policy | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Ochrana osobných údajov – LeonLogic digitálna agentúra',
+        description: 'Zásady ochrany osobných údajov spoločnosti LeonLogic. Ako spracúvame, uchovávame a chránime vaše dáta v súlade s GDPR a slovenskou legislatívou.',
         url: process.env.NEXT_PUBLIC_APP_URL + '/privacy-policy',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Privacy-Policy | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Ochrana osobných údajov – LeonLogic digitálna agentúra',
+        description: 'Zásady ochrany osobných údajov spoločnosti LeonLogic. Ako spracúvame, uchovávame a chránime vaše dáta v súlade s GDPR a slovenskou legislatívou.',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/privacy-policy`,

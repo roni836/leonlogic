@@ -14,8 +14,8 @@ import Script from 'next/script';
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://www.leonlogic.com'),
-    title: 'Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'LeonLogic – Digitálna agentúra pre SEO, web a marketing',
+    description: 'LeonLogic je digitálna agentúra pre moderné firmy. Ponúkame tvorbu webov, SEO optimalizáciu, obsahový marketing, správu sociálnych sietí a e-shop riešenia. Pomáhame vám rásť s merateľnými výsledkami.',
     openGraph: {
         ...helper.openGraphData,
         type: 'website',

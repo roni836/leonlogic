@@ -7,19 +7,19 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Team | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'Náš tím – LeonLogic: odborníci na SEO, web a marketing',
+    description: 'Spoznajte tím digitálnej agentúry LeonLogic. Naši odborníci na SEO, webové riešenia, marketing a e-commerce vám pomôžu dosiahnuť rast a úspech.',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Team | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Náš tím – LeonLogic: odborníci na SEO, web a marketing',
+        description: 'Spoznajte tím digitálnej agentúry LeonLogic. Naši odborníci na SEO, webové riešenia, marketing a e-commerce vám pomôžu dosiahnuť rast a úspech.',
         url: process.env.NEXT_PUBLIC_APP_URL + '/team',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Team | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Náš tím – LeonLogic: odborníci na SEO, web a marketing',
+        description: 'Spoznajte tím digitálnej agentúry LeonLogic. Naši odborníci na SEO, webové riešenia, marketing a e-commerce vám pomôžu dosiahnuť rast a úspech.',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/team`,

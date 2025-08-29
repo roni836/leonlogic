@@ -5,19 +5,19 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Terms-And-Conditions | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'Obchodné podmienky – LeonLogic digitálna agentúra',
+    description: 'Prečítajte si obchodné podmienky spoločnosti LeonLogic. Podmienky používania webu, právne informácie, ochrana údajov a povinnosti klientov.',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Terms-And-Conditions | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Obchodné podmienky – LeonLogic digitálna agentúra',
+        description: 'Prečítajte si obchodné podmienky spoločnosti LeonLogic. Podmienky používania webu, právne informácie, ochrana údajov a povinnosti klientov.',
         url: process.env.NEXT_PUBLIC_APP_URL + '/terms-and-conditions',
         type: 'article',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Terms-And-Conditions | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Obchodné podmienky – LeonLogic digitálna agentúra',
+        description: 'Prečítajte si obchodné podmienky spoločnosti LeonLogic. Podmienky používania webu, právne informácie, ochrana údajov a povinnosti klientov.',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/terms-and-conditions`,

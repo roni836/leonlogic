@@ -29,8 +29,8 @@ export async function generateMetadata(
 
     if (!post) {
         return {
-            title: 'Blog | Greco',
-            description: 'Tailwind CSS Multipurpose Landing Templates'
+            title: 'Blog – LeonLogic: tipy pre SEO, marketing a webové riešenia',
+            description: 'Čítajte náš blog o SEO, digitálnom marketingu, tvorbe webov a e-shop riešení. LeonLogic prináša aktuálne tipy, stratégie a návody pre rast vášho biznisu.'
         };
     }
 

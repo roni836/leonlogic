@@ -19,19 +19,19 @@ import helper from '@/libs/helper';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Career | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'Kariéra v LeonLogic – pridaj sa k nášmu tímu',
+    description: 'Hľadáte prácu v digitálnej agentúre? Pridajte sa k LeonLogic. Ponúkame kariérne príležitosti v oblasti SEO, webových riešení, marketingu a e-commerce.',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Career | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Kariéra v LeonLogic – pridaj sa k nášmu tímu',
+        description: 'Hľadáte prácu v digitálnej agentúre? Pridajte sa k LeonLogic. Ponúkame kariérne príležitosti v oblasti SEO, webových riešení, marketingu a e-commerce.',
         url: process.env.NEXT_PUBLIC_APP_URL + '/career',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Career | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'Kariéra v LeonLogic – pridaj sa k nášmu tímu',
+        description: 'Hľadáte prácu v digitálnej agentúre? Pridajte sa k LeonLogic. Ponúkame kariérne príležitosti v oblasti SEO, webových riešení, marketingu a e-commerce.',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/career`,

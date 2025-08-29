@@ -7,19 +7,19 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-    title: 'Faq | Leonlogic',
-    description: 'Tailwind CSS Multipurpose Landing Templates',
+    title: 'FAQ – LeonLogic: odpovede na najčastejšie otázky',
+    description: 'Máte otázky? V našom FAQ nájdete odpovede o SEO, webových riešeniach, digitálnom marketingu, e-shope a službách LeonLogic.',
     openGraph: {
         ...helper.openGraphData,
-        title: 'Faq | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'FAQ – LeonLogic: odpovede na najčastejšie otázky',
+        description: 'Máte otázky? V našom FAQ nájdete odpovede o SEO, webových riešeniach, digitálnom marketingu, e-shope a službách LeonLogic.',
         url: process.env.NEXT_PUBLIC_APP_URL + '/faq',
         type: 'website',
     },
     twitter: {
         ...helper.twitterData,
-        title: 'Faq | Leonlogic',
-        description: 'Tailwind CSS Multipurpose Landing Templates',
+        title: 'FAQ – LeonLogic: odpovede na najčastejšie otázky',
+        description: 'Máte otázky? V našom FAQ nájdete odpovede o SEO, webových riešeniach, digitálnom marketingu, e-shope a službách LeonLogic.',
     },
     alternates: {
         canonical: `${process.env.NEXT_PUBLIC_APP_URL}/faq`,
