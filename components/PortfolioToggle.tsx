@@ -2,10 +2,56 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
-const PortfolioToggle = () => {
+interface PortfolioItem {
+    id: number;
+    slug: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    category: string;
+    tags: string[];
+    client: string;
+    duration: string;
+    technologies: string[];
+    challenges: string;
+    solution: string;
+    results: string;
+    image: string;
+    mobileImage: string;
+    gallery: string[];
+    features: string[];
+    testimonial: {
+        text: string;
+        author: string;
+        position: string;
+    };
+    publishedAt: string;
+    status: string;
+}
+
+interface PortfolioToggleProps {
+    portfolioData: PortfolioItem[];
+}
+
+const PortfolioToggle = ({ portfolioData }: PortfolioToggleProps) => {
     const [activeTab, setActiveTab] = useState<string>('all');
+
+    // Get unique categories from portfolio data
+    const categories = useMemo(() => {
+        const uniqueCategories = Array.from(new Set(portfolioData.map(item => item.category)));
+        return uniqueCategories;
+    }, [portfolioData]);
+
+    // Filter projects based on active tab
+    const filteredProjects = useMemo(() => {
+        if (activeTab === 'all') {
+            return portfolioData;
+        }
+        return portfolioData.filter(project => project.category === activeTab);
+    }, [portfolioData, activeTab]);
+
     return (
         <div className="container">
             <div className="overflow-x-auto">
@@ -15,69 +61,33 @@ const PortfolioToggle = () => {
                             All projects
                         </button>
                     </li>
-                    <li className={`filter ${activeTab === 'ui/ux design' ? 'active' : ''}`} data-filter="ui/ux design">
-                        <button
-                            type="button"
-                            onClick={() => setActiveTab('ui/ux design')}
-                            className="btn text-gray rounded-2xl bg-[#9199B5]/10 dark:text-[#9199B5]"
-                        >
-                            ui/ux design
-                        </button>
-                    </li>
-                    <li className={`filter ${activeTab === 'branding' ? 'active' : ''}`} data-filter="branding">
-                        <button
-                            type="button"
-                            onClick={() => setActiveTab('branding')}
-                            className="btn text-gray rounded-2xl bg-[#9199B5]/10 dark:text-[#9199B5]"
-                        >
-                            branding
-                        </button>
-                    </li>
-                    <li className={`filter ${activeTab === 'website' ? 'active' : ''}`} data-filter="website">
-                        <button type="button" onClick={() => setActiveTab('website')} className="btn text-gray rounded-2xl bg-[#9199B5]/10 dark:text-[#9199B5]">
-                            website
-                        </button>
-                    </li>
-                    <li className={`filter ${activeTab === 'mobile app' ? 'active' : ''}`} data-filter="mobile app">
-                        <button
-                            type="button"
-                            onClick={() => setActiveTab('mobile app')}
-                            className="btn text-gray rounded-2xl bg-[#9199B5]/10 dark:text-[#9199B5]"
-                        >
-                            mobile app
-                        </button>
-                    </li>
+                    {categories.map((category) => (
+                        <li key={category} className={`filter ${activeTab === category ? 'active' : ''}`} data-filter={category}>
+                            <button
+                                type="button"
+                                onClick={() => setActiveTab(category)}
+                                className="btn text-gray rounded-2xl bg-[#9199B5]/10 dark:text-[#9199B5]"
+                            >
+                                {category}
+                            </button>
+                        </li>
+                    ))}
                 </ul>
             </div>
             <div className="projects grid gap-7 sm:grid-cols-2 pt-12">
-                <div className={`project ${activeTab === 'all' || activeTab === 'ui/ux design' ? 'block' : 'hidden'}`}>
-                    <div className="project">
-                        <Link href="/portfolio-detail" className="overflow-hidden rounded-2xl block" aria-label="Email">
-                            <Image src="/assets/images/project1.jpg" className="h-full w-full object-cover hover:scale-110 duration-300" alt="project1" width={754} height={521} />
+                {filteredProjects.map((project) => (
+                    <div key={project.id} className="project">
+                        <Link href={`/portfolio/${project.slug}`} className="overflow-hidden rounded-2xl block" aria-label={project.title}>
+                            <Image 
+                                src={project.image} 
+                                className="h-full w-full object-cover hover:scale-110 duration-300" 
+                                alt={project.title} 
+                                width={754} 
+                                height={521} 
+                            />
                         </Link>
                     </div>
-                </div>
-                <div className={`project ${activeTab === 'all' || activeTab === 'branding' ? 'block' : 'hidden'}`}>
-                    <div className="project">
-                        <Link href="/portfolio-detail" className="overflow-hidden rounded-2xl block" aria-label="Email">
-                            <Image src="/assets/images/project2.jpg" className="h-full w-full object-cover hover:scale-110 duration-300" alt="project2" width={754} height={521} />
-                        </Link>
-                    </div>
-                </div>
-                <div className={`project ${activeTab === 'all' || activeTab === 'website' ? 'block' : 'hidden'}`}>
-                    <div className="project">
-                        <Link href="/portfolio-detail" className="overflow-hidden rounded-2xl block" aria-label="Email">
-                            <Image src="/assets/images/project3.jpg" className="h-full w-full object-cover hover:scale-110 duration-300" alt="project3" width={754} height={401} />
-                        </Link>
-                    </div>
-                </div>
-                <div className={`project ${activeTab === 'all' || activeTab === 'mobile app' ? 'block' : 'hidden'}`}>
-                    <div className="project">
-                        <Link href="/portfolio-detail" className="overflow-hidden rounded-2xl block" aria-label="Email">
-                            <Image src="/assets/images/project4.jpg" className="h-full w-full object-cover hover:scale-110 duration-300" alt="project4" width={754} height={401} />
-                        </Link>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
     );

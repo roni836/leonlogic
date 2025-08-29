@@ -7,6 +7,7 @@ import SpecialistsDevelopers from '@/components/SpecialistsDevelopers';
 import Image from 'next/image';
 import helper from '@/libs/helper';
 import type { Metadata } from 'next';
+import portfolioData from '@/portfolio.json';
 
 // Enable ISR for portfolio page
 export const revalidate = 7200; // Revalidate every 2 hours
@@ -106,7 +107,7 @@ const page = () => {
             </section>
 
             <section id="portfolio-section">
-                <PortfolioToggle />
+                <PortfolioToggle portfolioData={portfolioData} />
             </section>
 
             <section className="mt-8">

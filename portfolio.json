@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "slug": "ecommerce-redesign",
+    "title": "E-commerce Website Redesign",
+    "subtitle": "Modern E-commerce Platform for Fashion Retailer",
+    "description": "Complete redesign and development of an e-commerce platform for a leading fashion retailer. The project included user experience optimization, mobile responsiveness, and integration with multiple payment gateways.",
+    "category": "website",
+    "tags": ["E-commerce", "UI/UX Design", "Web Development"],
+    "client": "Fashion Retailer",
+    "duration": "3 months",
+    "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+    "challenges": "Migrating from legacy system while maintaining zero downtime",
+    "solution": "Implemented a phased migration approach with parallel systems",
+    "results": "40% increase in conversion rate, 60% improvement in page load speed",
+    "image": "/assets/images/project1.jpg",
+    "mobileImage": "/assets/images/mobile.png",
+    "gallery": [
+      "/assets/images/project1.jpg",
+      "/assets/images/project2.jpg",
+      "/assets/images/project3.jpg"
+    ],
+    "features": [
+      "Responsive design",
+      "Advanced search and filtering",
+      "Multiple payment options",
+      "Inventory management",
+      "Analytics dashboard"
+    ],
+    "testimonial": {
+      "text": "The new e-commerce platform exceeded our expectations. Sales increased significantly and customer satisfaction improved dramatically.",
+      "author": "John Smith",
+      "position": "CEO, Fashion Retailer"
+    },
+    "publishedAt": "2024-01-15",
+    "status": "completed"
+  },
+  {
+    "id": 2,
+    "slug": "mobile-app-development",
+    "title": "Food Delivery Mobile App",
+    "subtitle": "Cross-platform Mobile Application",
+    "description": "Developed a comprehensive food delivery mobile application with real-time tracking, payment integration, and restaurant management features.",
+    "category": "mobile app",
+    "tags": ["Mobile Development", "React Native", "Food Delivery"],
+    "client": "FoodTech Startup",
+    "duration": "4 months",
+    "technologies": ["React Native", "Firebase", "Google Maps API", "Stripe"],
+    "challenges": "Implementing real-time location tracking and order management",
+    "solution": "Used Firebase Realtime Database and Google Maps for seamless tracking",
+    "results": "50,000+ downloads, 4.8 star rating, 85% user retention",
+    "image": "/assets/images/project4.jpg",
+    "mobileImage": "/assets/images/mobile.png",
+    "gallery": [
+      "/assets/images/project4.jpg",
+      "/assets/images/project1.jpg",
+      "/assets/images/project2.jpg"
+    ],
+    "features": [
+      "Real-time order tracking",
+      "Multiple payment methods",
+      "Restaurant ratings and reviews",
+      "Push notifications",
+      "Offline mode support"
+    ],
+    "testimonial": {
+      "text": "The app has revolutionized our food delivery business. Customer satisfaction and order volume have increased significantly.",
+      "author": "Sarah Johnson",
+      "position": "Founder, FoodTech Startup"
+    },
+    "publishedAt": "2024-02-20",
+    "status": "completed"
+  },
+  {
+    "id": 3,
+    "slug": "brand-identity-design",
+    "title": "Corporate Brand Identity",
+    "subtitle": "Complete Brand Redesign for Tech Company",
+    "description": "Comprehensive brand identity redesign including logo, color palette, typography, and brand guidelines for a growing technology company.",
+    "category": "branding",
+    "tags": ["Brand Identity", "Logo Design", "Corporate Branding"],
+    "client": "TechCorp Solutions",
+    "duration": "2 months",
+    "technologies": ["Adobe Creative Suite", "Figma", "Brand Guidelines"],
+    "challenges": "Creating a modern brand that appeals to both B2B and B2C audiences",
+    "solution": "Developed a flexible brand system with multiple applications",
+    "results": "Increased brand recognition by 70%, improved market positioning",
+    "image": "/assets/images/project2.jpg",
+    "mobileImage": "/assets/images/mobile.png",
+    "gallery": [
+      "/assets/images/project2.jpg",
+      "/assets/images/project3.jpg",
+      "/assets/images/project1.jpg"
+    ],
+    "features": [
+      "Logo design and variations",
+      "Color palette and typography",
+      "Brand guidelines document",
+      "Marketing materials",
+      "Digital asset library"
+    ],
+    "testimonial": {
+      "text": "The new brand identity perfectly captures our company's vision and has helped us stand out in a competitive market.",
+      "author": "Michael Brown",
+      "position": "Marketing Director, TechCorp Solutions"
+    },
+    "publishedAt": "2024-03-10",
+    "status": "completed"
+  },
+  {
+    "id": 4,
+    "slug": "ux-design-system",
+    "title": "Design System & UX Optimization",
+    "subtitle": "Comprehensive UX Design System",
+    "description": "Created a comprehensive design system and optimized user experience for a SaaS platform, improving usability and consistency across all touchpoints.",
+    "category": "ui/ux design",
+    "tags": ["UX Design", "Design System", "SaaS Platform"],
+    "client": "SaaS Platform",
+    "duration": "3 months",
+    "technologies": ["Figma", "Adobe XD", "Prototyping Tools"],
+    "challenges": "Standardizing design across multiple product teams",
+    "solution": "Developed a comprehensive design system with component library",
+    "results": "30% reduction in design time, 25% improvement in user satisfaction",
+    "image": "/assets/images/project3.jpg",
+    "mobileImage": "/assets/images/mobile.png",
+    "gallery": [
+      "/assets/images/project3.jpg",
+      "/assets/images/project4.jpg",
+      "/assets/images/project1.jpg"
+    ],
+    "features": [
+      "Component library",
+      "Design tokens",
+      "Interactive prototypes",
+      "User research insights",
+      "Accessibility guidelines"
+    ],
+    "testimonial": {
+      "text": "The design system has streamlined our development process and improved the overall user experience significantly.",
+      "author": "Emily Davis",
+      "position": "Product Manager, SaaS Platform"
+    },
+    "publishedAt": "2024-04-05",
+    "status": "completed"
+  }
+]
