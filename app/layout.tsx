@@ -20,9 +20,6 @@ export const metadata: Metadata = {
         ...helper.openGraphData,
         type: 'website',
     },
-    icons: {
-        icon: '/leonlogic-icon.svg',
-    },
     robots: {
         index: true,
         follow: true,
@@ -37,9 +34,9 @@ export const viewport: Viewport = {
 };
 
 const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space_grotesk",
-  display: "swap",
+    subsets: ["latin"],
+    variable: "--font-space_grotesk",
+    display: "swap",
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -74,6 +71,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     }}
                 />
                 <meta name="google-site-verification" content="h6lA2UBfs2cKyOhvGovNc9yLBqYnoNuA1rDh_iKnCtQ" />
+                <meta name="apple-mobile-web-app-title" content="Leonlogic" />
+                {/* Favicon & cross-device icons */}
+                <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+                <link rel="icon" type="image/png" href="/icon0.svg" />
+
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
+
+                <link rel="shortcut icon" href="/favicon.ico" />
                 {/* Meta Pixel (loads after hydration) */}
                 <Script id="fb-pixel" strategy="afterInteractive">{`
           !function(f,b,e,v,n,t,s)
