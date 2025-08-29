@@ -1,0 +1,127 @@
+{
+  "site": {
+    "baseUrl": "https://www.leonlogic.com",
+    "defaultOgImage": "/assets/images/blog-1.jpg",
+    "twitterHandle": "@leonlogic"
+  },
+  "posts": [
+    {
+      "id": "p-001",
+      "slug": "vyhody-spoluprace-s-digitalnou-agenturou",
+      "title": "Výhody spolupráce s digitálnou agentúrou",
+      "excerpt": "Rozhodnutie medzi digitálnou agentúrou a interným tímom môže výrazne ovplyvniť úspech vášho marketingu. Pozrite si komplexný prehľad výhod a nevýhod oboch prístupov.",
+      "contentHtml": [
+        "<p>Ak firma plánuje posilniť svoju prítomnosť vo virtuálnom priestore, rozšíriť povedomie o značke či zvýšiť predaje, marketing je neoddeliteľnou súčasťou stratégie. Čím dynamickejšia je trhová konkurencia, tým väčší zmysel dáva premýšľať nad tým, aký spôsob spravovania marketingu zvoliť.</p>",
+        
+        "<h3 class='text-2xl font-bold text-[#1B1F2F] dark:text-white mt-10 mb-6'>Aké výhody poskytuje digitálna agentúra?</h3>",
+        "<p>Pri spolupráci s agentúrou získate tím odborníkov, ktorí v tom jednoducho žijú. Každý člen tímu sa venuje úzkej špecializácii – SEO, výkonnostná reklama, obsahová stratégia, dizajn či analytika – a ovláda najnovšie trendy i nástroje.</p>",
+        
+        "<div class='bg-[#9199B5]/[0.08] rounded-2xl p-6 mt-8 mb-8'>",
+        "<h4 class='text-xl font-semibold text-[#1B1F2F] dark:text-white mb-4'>Medzi hlavné benefity patrí:</h4>",
+        "<ul class='list-disc list-inside space-y-3 text-lg text-[#4B5576] dark:text-[#9199B5]'>",
+        "<li><strong class='text-[#1B1F2F] dark:text-white'>Širšie know-how:</strong> Agentúry majú prehľad o najlepších praktikách naprieč rôznymi segmentami</li>",
+        "<li><strong class='text-[#1B1F2F] dark:text-white'>Prístup k nástrojom:</strong> Väčšina z nich pracuje s profesionálnym softvérom, ktorý by bol pre jednotlivca či malý tím finančne nedostupný</li>",
+        "<li><strong class='text-[#1B1F2F] dark:text-white'>Flexibilita:</strong> V prípade potreby je možné prispôsobiť rozsah a intenzitu práce podľa aktuálnych kampaní či sezónnych zmien</li>",
+        "<li><strong class='text-[#1B1F2F] dark:text-white'>Focus na jadro podnikania:</strong> Interné kapacity zamestnancov sa môžu sústrediť na to, čo vedia najlepšie</li>",
+        "</ul>",
+        "</div>",
+        
+        "<h4 class='text-lg font-semibold text-[#1B1F2F] dark:text-white mt-8 mb-4'>Kto najčastejšie vyhľadáva agentúrnu spoluprácu?</h4>",
+        "<p>Nie je nezvyčajné, že menšie firmy využívajú agentúry ako okamžitú pomoc pri štarte digitálnych aktivít, alebo keď potrebujú „nakopnúť existujúci marketing. Väčším podnikom agentúry efektívne vypomáhajú s implementáciou špecializovaných projektov.</p>",
+        
+        "<h3 class='text-2xl font-bold text-[#1B1F2F] dark:text-white mt-12 mb-6'>Prečo niekedy voľba padne na interný marketingový tím?</h3>",
+        "<p>Silný interný tím rozumie vášmu podnikaniu do hĺbky. Vie si veľmi rýchlo overiť, čo funguje, má neustály kontakt s produktom a neprehliadne žiadny detail zo života vašej firmy.</p>",
+        
+        "<div class='bg-[#0168FF]/[0.06] rounded-2xl p-6 mt-8 mb-8'>",
+        "<h4 class='text-xl font-semibold text-[#1B1F2F] dark:text-white mb-4'>Čo prináša interný tím navyše?</h4>",
+        "<ul class='list-disc list-inside space-y-3 text-lg text-[#4B5576] dark:text-[#9199B5]'>",
+        "<li><strong class='text-[#0168FF]'>Lepšie pochopenie firemných hodnôt:</strong> Zamestnanci vedia, aké sú špecifiká značky, kultúra a očakávania zákazníkov</li>",
+        "<li><strong class='text-[#0168FF]'>Priama komunikácia:</strong> Tím je flexibilný, nie je potrebné zložito komunikovať požiadavky externe</li>",
+        "<li><strong class='text-[#0168FF]'>Hlboká integrácia:</strong> Marketing úzko spolupracuje s produktovým oddelením, predajom či zákazníckou podporou</li>",
+        "<li><strong class='text-[#0168FF]'>Identifikácia s cieľmi firmy:</strong> Tím sa často s firmou stotožňuje na úrovni, ktorú externá agentúra dosiahne len zriedka</li>",
+        "</ul>",
+        "</div>",
+        
+        "<h3 class='text-2xl font-bold text-[#1B1F2F] dark:text-white mt-12 mb-6'>Kritéria, ktoré pomôžu rozhodnúť</h3>",
+        "<p>Pri výbere tej správnej možnosti odporúčam zvážiť niekoľko oblastí. Odpovede na tieto otázky vám pomôžu lepšie sa zorientovať.</p>",
+        
+        "<div class='overflow-x-auto mt-8 mb-8'>",
+        "<table class='w-full border-collapse border border-[#E5E7EB] dark:border-[#374151] rounded-lg'>",
+        "<thead class='bg-[#F9FAFB] dark:bg-[#1F2937]'>",
+        "<tr>",
+        "<th class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-left font-semibold text-[#1B1F2F] dark:text-white'>Kritérium</th>",
+        "<th class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-left font-semibold text-[#1B1F2F] dark:text-white'>Externá agentúra</th>",
+        "<th class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-left font-semibold text-[#1B1F2F] dark:text-white'>Interný tím</th>",
+        "</tr>",
+        "</thead>",
+        "<tbody>",
+        "<tr><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Náklady</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Platíte za služby a výstupy</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Platy, benefity, školenia</td></tr>",
+        "<tr><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Know-how</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Prístup k top odborníkom</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Odbornosť závisí od ľudí</td></tr>",
+        "<tr><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Flexibilita</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Rýchle škálovanie projektov</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Zväčšenie tímu = nábor</td></tr>",
+        "<tr><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Dostupnosť nástrojov</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Profesionálne technológie</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Závisí od rozpočtu</td></tr>",
+        "<tr><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Znalosť firmy</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Vonkajší pohľad</td><td class='border border-[#E5E7EB] dark:border-[#374151] px-4 py-3 text-[#4B5576] dark:text-[#9199B5]'>Hlboká interná znalosť</td></tr>",
+        "</tbody>",
+        "</table>",
+        "</div>",
+        
+        "<h3 class='text-2xl font-bold text-[#1B1F2F] dark:text-white mt-12 mb-6'>Kombinácia agentúry a interného tímu</h3>",
+        "<p>Nemusí to byť len „alebo/alebo. V mnohých prípadoch práve kombinácia interných zamestnancov a agentúrnej expertízy prináša najlepšie výsledky.</p>",
+        
+        "<div class='flex mt-8 mb-8'><div class='bg-[#10B981] dark:bg-[#0168FF] w-1 rounded-md'></div><div class='bg-[#10B981]/[0.04] dark:bg-[#0168FF]/[0.04] rounded-2xl max-w-full relative p-6 ml-4'><p class='text-lg text-[#10B981] dark:text-[#0168FF] font-medium'>Toto riešenie prispieva ku kontinuite, šetrí čas a financie. Zároveň otvára priestor pre získanie objektívneho pohľadu zvonku – agentúra často prinesie nečakané impulzy a skúsenosti.</p></div></div>",
+        
+        "<h4 class='text-lg font-semibold text-[#1B1F2F] dark:text-white mt-8 mb-4'>Typické modely spolupráce</h4>",
+        "<ul class='list-disc list-inside space-y-3 text-lg text-[#4B5576] dark:text-[#9199B5] mt-4'>",
+        "<li>Interný tím riadi stratégiu, agentúra zabezpečuje špecifické výkonné aktivity (PPC, výkonnostný marketing, SEO)</li>",
+        "<li>Agentúra pracuje ako kreatívny partner – návrh kampaní, vizuálna identita, pričom výrobu obsahu a komunikáciu s komunitou má na starosti interný špecialista</li>",
+        "<li>Firma outsourcuje len jednu konkrétnu špecializovanú službu, ktorú nevie efektívne zabezpečiť interne (napríklad analytiku/nastavenie meraní)</li>",
+        "</ul>",
+        
+        "<h3 class='text-2xl font-bold text-[#1B1F2F] dark:text-white mt-12 mb-6'>Najčastejšie chyby pri rozhodovaní</h3>",
+        "<p>Výber správnej stratégie môže ovplyvniť dlhodobé výsledky a efektivitu. Podniky, ktoré rozhodnutie podcenia, neraz čelia problémom ako je preplácanie služieb, nejasné zadanie, alebo slabý výkon marketingu.</p>",
+        
+        "<div class='bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-6 mt-8 mb-8'>",
+        "<h4 class='text-lg font-semibold text-red-800 dark:text-red-200 mb-3'>K chybám patrí:</h4>",
+        "<ul class='list-disc list-inside space-y-2 text-red-700 dark:text-red-300'>",
+        "<li>Prílišná dôvera „svojim ľuďom bez reálneho know-how, čo často vedie k stagnácii a nenaplneniu cieľov</li>",
+        "<li>Očakávanie, že agentúra vyrieši všetko na kľúč bez jasných inštrukcií a bez spolupráce s interným tímom</li>",
+        "<li>Nedostatočná kontrola výsledkov a zlá komunikácia pri oboch modeloch</li>",
+        "</ul>",
+        "</div>",
+        
+        "<h4 class='text-lg font-semibold text-[#1B1F2F] dark:text-white mt-8 mb-4'>Ako sa im vyvarovať?</h4>",
+        "<ul class='list-disc list-inside space-y-3 text-lg text-[#4B5576] dark:text-[#9199B5] mt-4'>",
+        "<li>Stanovte si presné ciele, merateľné KPIs a pravidelne ich vyhodnocujte</li>",
+        "<li>Pri agentúrnej spolupráci dbajte na detailné briefy a pravidelné statusy</li>",
+        "<li>Investujte do vzdelávania interných zamestnancov, tak aby marketing napredoval spolu s trhom</li>",
+        "<li>Nebojte sa zmeniť model, ak ten aktuálny nefunguje – nie vždy sa dá všetko vyriešiť len internými silami alebo iba agentúrou</li>",
+        "</ul>",
+        
+        "<h3 class='text-2xl font-bold text-[#1B1F2F] dark:text-white mt-12 mb-6'>Záver</h3>",
+        "<p>Niektoré firmy prechádzajú rôznymi fázami – počas rastu trebars využijú agentúru, neskôr investujú do vybudovania vlastného tímu. Oba prístupy majú hodnotu. Skutočný rozdiel často leží v tom, ako dobre si nastavíte očakávania a procesy a ako efektívne využijete potenciál toho, čo ste si vybrali.</p>",
+        
+        "<div class='bg-[#9199B5]/[0.08] rounded-2xl p-6 mt-8'>",
+        "<p class='text-lg text-[#1B1F2F] dark:text-white font-medium text-center'>Rozhodnutie medzi agentúrou a interným tímom nie je definitívne – dôležité je začať a postupne optimalizovať podľa výsledkov.</p>",
+        "</div>"
+      ],
+      "category": "Digitálny Marketing",
+      "tags": ["Digitálny Marketing", "Agentúra", "Podnikanie", "Stratégia", "Outsourcing"],
+      "dateISO": "2025-08-28T00:00:00.000Z",
+      "readTime": 8,
+       "coverImage": "/assets/images/blog-1.jpg",
+      "listImage": "/assets/images/blog-1.jpg",
+      "relatedImages": [
+        "/assets/images/related-digitalna-agentura1.jpg",
+        "/assets/images/related-digitalna-agentura2.jpg", 
+        "/assets/images/related-digitalna-agentura3.jpg",
+        "/assets/images/related-digitalna-agentura4.jpg"
+      ],
+      "meta": {
+        "title": "Výhody spolupráce s digitálnou agentúrou | Leonlogic",
+        "description": "Rozhodnutie medzi digitálnou agentúrou a interným tímom môže výrazne ovplyvniť úspech vášho marketingu. Komplexný prehľad výhod a nevýhod oboch prístupov pre slovenské firmy.",
+        "ogImage": "/assets/images/blog-digitalna-agentura.jpg",
+        "canonicalPath": "/blog/vyhody-spoluprace-s-digitalnou-agenturou",
+        "type": "article"
+      }
+    }
+  ]
+}
