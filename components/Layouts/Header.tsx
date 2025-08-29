@@ -1,5 +1,3 @@
-'use client';
-
 import { usePathname } from 'next/navigation';
 import { IRootState } from '@/store';
 import { toggleDirection, toggleTheme } from '@/store/themeConfigSlice';
