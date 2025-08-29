@@ -106,7 +106,7 @@ const Footer = () => {
                                 <span className="text-secondary">
                                     <EmailIcon className="h-6 w-6" />
                                 </span>
-                                <a href="mailto:appstore@gmail.com" className="hover:text-success-light">
+                                <a href="mailto:leonlogic@leonlogic.com" className="hover:text-success-light">
                                     leonlogic@leonlogic.com
                                 </a>
                             </li>
@@ -119,19 +119,19 @@ const Footer = () => {
                         </ul>
                         <ul className="flex items-center gap-5 text-white lg:ms-auto">
                             <li>
-                                <a href="#" className="inline-flex hover:text-secondary">
+                                <a href="https://www.instagram.com/leonlogic.studio" target="_blank" className="inline-flex hover:text-secondary">
                                     <span className="sr-only">instagram</span>
                                     <InstagramIcon className="h-6 w-6" />
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="inline-flex hover:text-secondary">
+                                <a href="https://x.com/LeonlogicStudio" target="_blank" className="inline-flex hover:text-secondary">
                                     <span className="sr-only">twitter</span>
                                     <TwitterIcon className="h-6 w-6" />
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="inline-flex hover:text-secondary">
+                                <a href="https://www.facebook.com/leonlogicagency" target="_blank" className="inline-flex hover:text-secondary">
                                     <span className="sr-only">facebook</span>
                                     <FacebookIcon className="h-6 w-6" />
                                 </a>
@@ -143,15 +143,15 @@ const Footer = () => {
             <div className="bg-white dark:bg-primary py-3">
                 <div className="container">
                     <div className="flex flex-col items-center gap-4 text-center font-semibold text-gray dark:text-[#9199B5] md:flex-row md:text-left">
-                        <a href="#" className="hover:text-secondary md:order-2 md:ms-auto">
+                        <a href="/zasady-pouzivanie-suborov-cookie" className="hover:text-secondary md:order-2 md:ms-auto">
                             Zásady používania súborov cookies
                         </a>
                         <p>
-                            <Link href="/terms-and-conditions" className="hover:text-secondary">
+                            <Link href="/vseobecne-obchodne-podmienky" className="hover:text-secondary">
                                 Podmienky
                             </Link>
                             <span className="px-2 text-gray-dark dark:text-[#9199B5]/[0.12]">|</span>
-                            <Link href="/privacy-policy" className="hover:text-secondary">
+                            <Link href="/zasady-ochrany-osobnych-udajov" className="hover:text-secondary">
                                 Ochrana súkromia
                             </Link>
                             <span className="px-2 text-gray-dark dark:text-[#9199B5]/[0.12]">|</span>©{new Date().getFullYear()} - Leonlogic - OREM VENTURES s.r.o., Všetky práva vyhradené.

@@ -395,7 +395,7 @@ export default function CalculatorPage() {
                   checked={formData.privacyConsent}
                   onChange={(e) => handleFormChange('privacyConsent', e.target.checked)}
                 />
-                Yes, I agree to the <Link href="/privacy-policy" className="underline text-secondary">Privacy Policy</Link>.
+                Yes, I agree to the <Link href="/zasady-ochrany-osobnych-udajov" className="underline text-secondary">Privacy Policy</Link>.
               </label>
               <button
                 type="submit"

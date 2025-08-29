@@ -196,7 +196,7 @@ export default function CalculatorModal({ open, onClose }: { open: boolean; onCl
               <textarea className="form-input rounded-2xl border-2 border-[#9199B5]/[0.12] p-5 min-h-[100px]" placeholder="Správa" />
               <label className="flex items-center gap-2 text-sm mt-2">
                 <input type="checkbox" required className="accent-secondary" />
-                Áno, súhlasím s <Link href="/privacy-policy" className="underline text-secondary">Zásady ochrany osobných údajov</Link>.
+                Áno, súhlasím s <Link href="/zasady-ochrany-osobnych-udajov" className="underline text-secondary">Zásady ochrany osobných údajov</Link>.
               </label>
               <button type="submit" className="btn w-full sm:w-auto sm:px-20 mt-5">Odoslať teraz</button>
             </form>
