@@ -127,19 +127,19 @@ const page = () => {
                             </svg>
                         </span>
                         <div className="lg:max-w-[455px] relative z-1 pt-12 lg:pt-0">
-                            <h2 className="text-3xl md:text-4xl font-bold dark:text-primary">Re-Design For The App Made Easy</h2>
+                            <h2 className="text-3xl md:text-4xl font-bold dark:text-primary">Dizajn loga pre CyberX</h2>
                             <div className="flex mt-5 md:mt-10 items-center gap-5">
-                                <span className="uppercase px-5 py-4 rounded-2xl text-sm font-bold text-[#4B5576] bg-[#E1E6F5]">User Research</span>
-                                <span className="uppercase px-5 py-4 rounded-2xl text-sm font-bold text-[#4B5576] bg-[#E1E6F5]">UX Design</span>
+                                <span className="uppercase px-5 py-4 rounded-2xl text-sm font-bold text-[#4B5576] bg-[#E1E6F5]">IDENTITA ZNAČKY</span>
+                                <span className="uppercase px-5 py-4 rounded-2xl text-sm font-bold text-[#4B5576] bg-[#E1E6F5]">DIZAJN LOGA</span>
                             </div>
                             <p className="font-semibold text-[#4B5576] mt-5 md:mt-10">
-                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                               CyberX vyrába elektrické šmykové nakladače, ktoré nahrádzajú hlučné dieselové nakladače. Navrhli sme pre nich logo, ktoré odráža ich prístup k modernej technológii a čistej energií.
                             </p>
                             <a
-                                href="#"
+                                href="/kontakt"
                                 className="bg-secondary p-5 text-success text-sm font-bold mt-5 md:mt-10 rounded-2xl inline-flex gap-2.5 items-center group hover:bg-black hover:text-white duration-200 uppercase"
                             >
-                                read case study
+                                KONTAKTUJTE NÁS 
                                 <span>
                                     <RightArrowIcon />
                                 </span>
@@ -147,7 +147,7 @@ const page = () => {
                         </div>
                         <div className="pt-16 max-w-[400px] lg:rtl:mr-auto lg:ltr:ml-auto relative z-1" data-aos="fade-up" data-aos-duration="1000">
                             <Image
-                                src="/assets/images/mobile.png"
+                                src="/assets/images/mobile.webp"
                                 className="w-full h-full object-cover rtl:rotate-y-180"
                                 alt="mobile"
                                 width={400}
