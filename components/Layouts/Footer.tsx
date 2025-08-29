@@ -154,7 +154,7 @@ const Footer = () => {
                             <Link href="/privacy-policy" className="hover:text-secondary">
                                 Ochrana súkromia
                             </Link>
-                            <span className="px-2 text-gray-dark dark:text-[#9199B5]/[0.12]">|</span>©{new Date().getFullYear()} - OREM VENTURES s.r.o., ©2025 - Leonlogic, Všetky práva vyhradené.
+                            <span className="px-2 text-gray-dark dark:text-[#9199B5]/[0.12]">|</span>©{new Date().getFullYear()} - Leonlogic - OREM VENTURES s.r.o., Všetky práva vyhradené.
                         </p>
                     </div>
                 </div>
